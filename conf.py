@@ -24,7 +24,7 @@ html_context = {
     # Change to the discourse instance you want to be able to link to
     "discourse_prefix": "https://discourse.ubuntu.com/t/",
     # Change to the GitHub info for your project
-    "github_url": "https://github.com/canonicaljimm",
+    "github_url": "https://github.com/canonical/jaas-documentation",
     "github_version": "main",
     "github_folder": "/",
     "github_filetype": "rst",
