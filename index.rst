@@ -52,7 +52,7 @@ In this documentation
 Project and community
 ---------------------
 
-Example Project is a member of the Ubuntu family. It’s an open source project that warmly welcomes community projects, contributions, suggestions, fixes and constructive feedback.
+JAAS is a member of the Ubuntu family. It’s an open source project that warmly welcomes community projects, contributions, suggestions, fixes and constructive feedback.
 
 * :ref:`Code of conduct <home>`
 * :ref:`Get support <home>`
