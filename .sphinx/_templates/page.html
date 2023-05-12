@@ -40,5 +40,22 @@
       </div>
     </div>
     {% endif %}
+    {% if resources_mattermost or resources_github_docs %}
+    <div class="relatedlinks-title-container">
+      <span class="relatedlinks-title">
+       Resources
+      </span>
+    </div>
+    <div class="relatedlinks-container">
+      <div class="relatedlinks">
+        {% if resources_github_docs %}
+          {{ related_links(resources_github_docs) }}
+        {% endif %}
+        {% if resources_mattermost %}
+          {{ related_links(resources_mattermost) }}
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
   </div>
 {% endblock right_sidebar %}
