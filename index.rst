@@ -56,7 +56,7 @@ JAAS is a member of the Ubuntu family. It’s an open source project that warmly
 
 * :ref:`Code of conduct <home>`
 * :ref:`Get support <home>`
-* :ref:`Join our online chat <home>`
+* `Join our online chat <https://chat.charmhub.io/charmhub/channels/jaas>`_
 * :ref:`Contribute <home>`
 
 
