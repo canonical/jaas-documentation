@@ -28,6 +28,9 @@ html_context = {
     "github_version": "main",
     "github_folder": "/",
     "github_filetype": "rst",
+    # "Resources" links:
+    "resources_mattermost": "[Join&nbsp;online&nbsp;chat](https://chat.charmhub.io/charmhub/channels/jaas)",
+    "resources_github_docs": "[Docs&nbsp;on&nbsp;GitHub](https://github.com/canonical/jaas-documentation)",
 }
 
 # -- General configuration ---------------------------------------------------
