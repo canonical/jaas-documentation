@@ -1,10 +1,6 @@
 JAAS: Security Scope
 ========================
-
-All communication to Juju controllers is handled via TLS.
-
 The scope of JAAS' security covers multiple aspects, including:
-
 
 Secure Communication
 ~~~~~~~~~~~~~~~~~~~~
