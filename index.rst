@@ -2,8 +2,8 @@
 
 .. _home:
 
-JAAS Documenation
-==========================
+JAAS Documentation
+==================
 
 **JAAS** provides a single location to manage your Juju infrastructure by using the 
 Dashboard or using the same Juju CLI commands to create a high-level overview and 
@@ -57,7 +57,7 @@ Example Project is a member of the Ubuntu family. It’s an open source project 
 * :ref:`Code of conduct <home>`
 * :ref:`Get support <home>`
 * :ref:`Join our online chat <home>`
-* :ref:`Contribute <home>`
+* :doc:`Contribute <contribute>`
 
 
 .. toctree::
