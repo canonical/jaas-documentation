@@ -10,17 +10,16 @@ Dashboard or using the same Juju CLI commands to create a high-level overview an
 the ability to drill-in to the details when you need it.
 
 **JAAS** is composed of the following components:
-- Candid - a macaroon-based authentication server, which is required so that all other components are able to agree who a particular user is
 
-- JIMM - Juju Intelligent Model Manager, which acts as a single point of contact for multiple Juju controllers
-
-- Juju controllers -  each controlling models in specific clouds or cloud regions.
-
-- Juju dashboard - providing a clear overview of your Juju real estate with the ability to drill down into details of your deploys
+- Candid - a macaroon-based authentication server, which can use a variety of identity providers to correctly identify users,
+- JIMM - Juju Intelligent Model Manager, which acts as a single point of contact for multiple Juju controllers,
+- Juju controllers -  each controlling models in specific clouds or cloud regions,
+- Juju dashboard - providing a clear overview of your Juju real estate with the ability to drill down into details of your deploys.
 
 **JAAS** is useful for customers that do not want to maintain their own controllers
-in public clouds taking advantage of our production JAAS giving them the ability to
-deploy their workloads in public clouds. JAAS is also useful for organisations 
+in public clouds. Canonical's JAAS enables users to deploy their workloads
+in public clouds without the extra complexity and costs associated with running their
+own Juju controllers. JAAS is also useful for organisations 
 running their own Juju infrastructure giving them a single point of contact for 
 their entire real estate and, in combination with the Juju Dashboard, giving
 them a clear overview of their infrastructure.

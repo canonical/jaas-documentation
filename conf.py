@@ -8,7 +8,7 @@ import sys
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "JAAS Documentation"
+project = "JAAS"
 author = "Canonical Group Ltd"
 copyright = "%s, %s" % ("2023", author)
 release = "1.0"
