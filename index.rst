@@ -2,8 +2,8 @@
 
 .. _home:
 
-JAAS Documenation
-==========================
+JAAS Documentation
+==================
 
 **JAAS** provides a single location to manage your Juju infrastructure by using the 
 Dashboard or using the same Juju CLI commands to create a high-level overview and 
@@ -52,12 +52,13 @@ In this documentation
 Project and community
 ---------------------
 
-JAAS is a member of the Ubuntu family. It’s an open source project that warmly welcomes community projects, contributions, suggestions, fixes and constructive feedback.
+JAAS is a member of the Ubuntu family and warmly welcomes community contributions, suggestions, fixes and constructive feedback.
 
-* :ref:`Code of conduct <home>`
-* :ref:`Get support <home>`
-* `Join our online chat <https://chat.charmhub.io/charmhub/channels/jaas>`_
-* :ref:`Contribute <home>`
+* `Code of conduct <https://ubuntu.com/community/ethos/code-of-conduct>`_
+* Join the `Mattermost community char <https://chat.charmhub.io/charmhub/channels/jaas>`_
+* Report a bug on `Lauchpad <https://bugs.launchpad.net/jaas-issue-tracking>`_
+* Contribute to the :doc:`documenation <contribute>`
+* Visit the `Canonical's careers page <https://canonical.com/careers>`_
 
 
 .. toctree::
@@ -68,3 +69,4 @@ JAAS is a member of the Ubuntu family. It’s an open source project that warmly
    how-to/index
    reference/index
    explanation/index
+
