@@ -1,5 +1,5 @@
 Group and access management
-================
+===========================
 
 Introduction
 ------------

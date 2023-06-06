@@ -27,11 +27,12 @@ Deploy Candid
 
 1. Bootstrap a controller: 
    ``juju bootstrap aws``
+
 2. Download the candid bundle from: 
    https://drive.google.com/file/d/1ZyZeI0jNacbXK-AgxzUT0IUEp9tQ85QH/view?usp=sharing
 
-3. Uncompress the file: 
-   ``tar xvf candid_v1.11.0.tar.xz ``
+3. Uncompress the file:
+   ``tar xvf candid_v1.11.0.tar.xz``
 
 4. Move to the candid folder: 
    ``cd candid``

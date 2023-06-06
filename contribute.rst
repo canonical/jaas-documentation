@@ -1,3 +1,4 @@
+:orphan:
 Contribute to this documentation
 ================================
 
@@ -17,7 +18,7 @@ standard of excellence. We want documentation to be the best it possibly can be.
 
 
 How do I contribute to this documentation?
------------------------------------------
+------------------------------------------
 
 Documentation is generated from a public github repository located `here <https://github.com/canonical/jaas-documentation>`_ where
 you will find instructions on how to build the documentation and also serve documentation for local testing.
