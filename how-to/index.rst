@@ -15,3 +15,4 @@ These how-to guides cover key operations and processes in JAAS.
    Candid LDAP integration <candid_ldap_integration>
    Candid Azure integration <candid_azure_integration>
    Candid ADFS integration <candid_adfs_integration>
+   Cross-Model Queries <cross_model_queries>
