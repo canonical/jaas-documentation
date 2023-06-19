@@ -47,7 +47,7 @@ extensions = [
     "sphinxext.opengraph",
 ]
 
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", ".sphinx"]
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", ".sphinx", "doc-cheat-sheet*"]
 
 rst_epilog = """
 .. include:: /reuse/links.txt
