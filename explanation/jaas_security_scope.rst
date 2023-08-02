@@ -1,5 +1,9 @@
 JAAS: Security Scope
 ========================
+
+.. warning::
+    This document has not been updated for JIMM.V2.
+
 The scope of JAAS' security covers multiple aspects, including:
 
 Secure Communication

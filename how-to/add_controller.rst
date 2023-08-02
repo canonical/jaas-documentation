@@ -1,6 +1,9 @@
 JAAS: Add controller to JIMM
 ============================
 
+.. warning::
+    This document has not been updated for JIMM.V2.
+
 Introduction
 ------------
 
