@@ -12,10 +12,6 @@ These juju controllers must be deployed with some specific options to ensure the
 correctly in the JAAS system. This document discusses how to bootstrap a juju controller
 such that it will work correctly in a JAAS system.
 
-This document is for juju 2.x controllers, juju 3 will introduce the juju-controller
-application in the controller model by default which will necessitate a (hopefully
-small) reworking of this procedure. 
-
 In this tutorial we will be bootstrapping a new juju controller in AWS and adding it to
 JIMM.
 
