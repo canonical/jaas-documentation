@@ -1,9 +1,6 @@
 JAAS: Add controller to JIMM
 ============================
 
-.. warning::
-    This document has not been updated for JIMM.V2.
-
 Introduction
 ------------
 
@@ -14,10 +11,6 @@ and regions.
 These juju controllers must be deployed with some specific options to ensure they work
 correctly in the JAAS system. This document discusses how to bootstrap a juju controller
 such that it will work correctly in a JAAS system.
-
-This document is for juju 2.x controllers, juju 3 will introduce the juju-controller
-application in the controller model by default which will necessitate a (hopefully
-small) reworking of this procedure. 
 
 In this tutorial we will be bootstrapping a new juju controller in AWS and adding it to
 JIMM.
@@ -69,9 +62,9 @@ Deploy controller
 
 2. Now we are ready to bootstrap a controller. Please note the constraints here are the ones used for production JAAS services and should be suitable for most loads. If it is anticipated that the JAAS system will have a different model profile then we encourage you to determine the appropriate constraints for your system: 
 
-    ``juju bootstrap --no-gui --bootstrap-constraints="root-disk=50G cores=8 mem=8G" --config identity-url=$CANDID --config allow-model-access=true --config public-dns-address=$DNS:443 $CLOUD/$REGION $NAME``
+    ``juju bootstrap --bootstrap-constraints="root-disk=50G cores=8 mem=8G" --config login-token-refresh-url=https://$JIMM/.well-known/jwks.json --config allow-model-access=true --config public-dns-address=$DNS:443 $CLOUD/$REGION $NAME``
 
-3. Next the controller should be put into HA mode: 
+3. Next the controller should be put into HA mode (optional): 
 
     ``juju enable-ha``
 
@@ -107,13 +100,13 @@ Deploy controller
 
     ``juju run-action --wait certbot/0 get-certificate  agree-tos=true aws-access-key-id=<Access key ID> aws-secret-access-key=<Secret access key> domains=<dns name specified in step 1 (jimm.canonical.example.com)> email=<Your email address>  plugin=dns-route53``
 
-13.  Install the jaas snap that you download here:
+13.  Install the jaas snap that you download here (note that this will eventually change to be accessible from https://snapcraft.io/jimmctl):
 
     https://drive.google.com/file/d/1LiOvVpVQ13V3x3l2PhgS2fTHDUtCEe7p/view?usp=sharing 
 
 14. To add the bootstrapped controller to JIMM we need to create a controller-information document. To do this, run the following command:
 
-    ``/snap/jaas/current/bin/jimmctl controller-info –public-address=$DNS:443 $NAME $NAME.yaml``
+    ``/snap/jaas/current/bin/jimmctl controller-info --public-address=$DNS:443 $NAME $NAME.yaml``
 
 15. Now we can switch to JIMM: 
     
