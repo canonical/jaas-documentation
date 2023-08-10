@@ -7,6 +7,8 @@ Introduction
 The :doc:`add_controller` doc is a full guide on how to setup a controller, provide it with a load balancer front-end and use the load-balancer to terminate TLS connections.
 This guide provides a simplified setup that shows how to get a controller up and running with JIMM without the need for a load-balancer and a DNS address.
 
+This guide is intended for testing and development purposes only as the Juju controller cannot be created in an HA (high availability) setup.
+
 Prerequisites
 -------------
 
