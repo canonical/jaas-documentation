@@ -10,6 +10,7 @@ These how-to guides cover key operations and processes in JAAS.
    Deploy JIMM <deploy_jimm>
    Deploy JIMM on K8S <deploy_jimm_k8s>
    Add controller <add_controller>
+   Add controller without DNS <add_controller_no_dns>
    Deploy Candid <deploy_candid>
    Deploy Candid on K8S <deploy_candid_k8s>
    Candid LDAP integration <candid_ldap_integration>
