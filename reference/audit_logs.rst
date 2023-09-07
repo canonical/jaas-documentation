@@ -18,13 +18,11 @@ Filtering audit logs is also possible along a variety of fields including but no
 user executing the request, model name and command.
 
 Finally, access to audit logs is, by default, only afforded to JIMM superuers i.e. administrators of JIMM.
-Read access to audit logs can be granted to other users via jimmctl, see :doc:`how_to:add_controller`
+Read access to audit logs can be granted to other users via jimmctl, see :doc:`/explanation/jaas_tags`
 
 Filter Logs
 -----------
 Querying for audit logs is most readily done via the jimmctl CLI tool.
-Because JIMM works using websockets, it is not possible to use http clients to make request, however it is possible to craft queries using tools like wscat.
-Most example will be done via jimmctl with an additional example using a websocket CLI tool.
 
 Basics
 ~~~~~~
@@ -38,32 +36,34 @@ will show you a list of all available filter options
 will return a list of audit logs. This can be filtered and paginated through as described below.
 
 Each audit log contains the following pieces of information:
-- time:             When the audit log was created.
-- conversation-id:  A unique id per websocket connection.
-- message-id:       An incrementing count for each message sent during a session
-- facade-name:      The name of the grouping of methods a call is intended for, a facade categorises methods.
-- facade-method:    The name of the method called
-- facade-version:   The version of the facade called, different client versions may use different facade version.
-- object-id:        A parameter used in some methods, indicates the object being acted upon.
-- user-tag:         The user making the request.
-- model:            The model a request is acting on, can be empty for controller level requests.
-- is-response:      Indicates whether this log is for a request or response message.
-- params:           Populated during requests with any request parameters
-- errors:           Populated during responses with any response errors.
+
+- **time**:             When the audit log was created.
+- **conversation-id**:  A unique id per websocket connection.
+- **message-id**:       An incrementing count for each message sent during a session
+- **facade-name**:      The name of the grouping of methods a call is intended for, a facade categorises methods.
+- **facade-method**:    The name of the method called
+- **facade-version**:   The version of the facade called, different client versions may use different facade version.
+- **object-id**:        A parameter used in some methods, indicates the object being acted upon.
+- **user-tag**:         The user making the request.
+- **model**:            The model a request is acting on, can be empty for controller level requests.
+- **is-response**:      Indicates whether this log is for a request or response message.
+- **params**:           Populated during requests with any request parameters
+- **errors**:           Populated during responses with any response errors.
 
 It's important to note that JIMM logs requests and responses separately for audit logs and understanding 
-how to associate a request with a response is very helpful. This can be done using the `conversation-id` and `message-id`.
+how to associate a request with a response is very helpful. This can be done using the `conversation-id` and `message-id` fields.
 When a client establishes a connection with JIMM and begins making requests, a unique `conversation-id` is generated for 
 the lifetime of that websocket connection and each request/response pair will have the same `message-id`, which itself will
-increment whenever a new request is made. Then observing the `is-response` field (a boolean), one can ascertain whether 
+increment whenever a new request is made. Then observing the `is-response` (boolean) and `errors` fields, one can ascertain whether 
 a call was successful.
 
 An example of a request and response audit log are below.
 The first is a request for a model status and the second is the response.
 Some interesting things to note:
-- The message-id is 2 because the first message is normally a login request.
+
+- The message-id is 2 because the first message (not shown) was a login request.
 - The response does not include the response payload (i.e. the application status), this information is not logged.
-- The request includes a "patterns" parameter that is set to null.
+- The request includes a "patterns" parameter that is set to null, this is specific to the `status` call.
 - The facade information is only included on the request.
 
 .. code:: yaml
@@ -115,6 +115,7 @@ Paging through the result set is also possible with the ``--offset`` flag.
 Get second page::
 
     jimmctl audit-events --offset 50
+
 Change the page size to 100 and get the third page::
 
     jimmctl audit-events --offset <(page_number-1)*100> --limit 100
@@ -223,7 +224,7 @@ Purge Logs
 
 It is also possible to manually purge audit-logs.
 
-This can again be done with the jimmctl CLI and, again, only JIMM admins have rights to purge audit logs. In this case,
+This can be done with the jimmctl CLI and again only JIMM admins have rights to purge audit logs. In this case,
 other users cannot be granted this permission.
 
 ``jimmctl purge-audit-logs <date>``
