@@ -37,7 +37,7 @@ To return a list of audit logs::
 
 The results can be filtered and paginated as described below.
 
-Each audit log contains the following pieces of information:
+Each audit log contains the following information:
 
 - **time [time]**:               When the audit log was created.
 - **conversation-id [string]**:  A unique id per websocket connection.
@@ -52,8 +52,8 @@ Each audit log contains the following pieces of information:
 - **params [map[string]]**:      Populated during requests with any request parameters.
 - **errors [map[string]]**:      Populated during responses with any response errors.
 
-It's important to note that JIMM logs requests and responses separately for audit logs and understanding 
-how to associate a request with a response is very helpful. This can be done using the `conversation-id` and `message-id` fields.
+It's important to note that JIMM logs requests and responses separately and understanding 
+how to associate a request with a response is a useful tool. This can be done using the `conversation-id` and `message-id` fields.
 When a client establishes a connection with JIMM and begins making requests, a unique `conversation-id` is generated for 
 the lifetime of that websocket connection and each request/response pair will have the same `message-id`, which itself will
 increment whenever a new request is made. Then observing the `is-response` and `errors` fields, one can ascertain whether 
