@@ -17,49 +17,54 @@ variable amount of time depending on your requirements and storage constraints.
 Filtering audit logs is also possible along a variety of fields including but not limited to the
 user executing the request, model name and command.
 
-Finally, access to audit logs is, by default, only afforded to JIMM superuers i.e. administrators of JIMM.
-Read access to audit logs can be granted to other users via jimmctl, see :doc:`/tutorial/group_management`
+Finally, access to audit logs is, by default, only afforded to JIMM superusers i.e. administrators of JIMM.
+Read access to audit logs can be granted to other users via ``jimmctl``, see :doc:`/tutorial/group_management`
 
 Filter Logs
 -----------
-Querying for audit logs is most readily done via the jimmctl CLI tool.
+Querying for audit logs is most readily done via ``jimmctl``.
 
 Basics
 ~~~~~~
 
-``jimmctl audit-events --help``
+To list all available filtering options::
 
-will show you a list of all available filter options
+    jimmctl audit-events --help
 
-``jimmctl audit-events``
+To return a list of audit logs::
 
-will return a list of audit logs. This can be filtered and paginated through as described below.
+    jimmctl audit-events
+
+The results can be filtered and paginated as described below.
 
 Each audit log contains the following pieces of information:
 
-- **time**:             When the audit log was created.
-- **conversation-id**:  A unique id per websocket connection.
-- **message-id**:       An incrementing count for each message sent during a session
-- **facade-name**:      The name of the grouping of methods a call is intended for, a facade categorises methods.
-- **facade-method**:    The name of the method called
-- **facade-version**:   The version of the facade called, different client versions may use different facade version.
-- **object-id**:        A parameter used in some methods, indicates the object being acted upon.
-- **user-tag**:         The user making the request.
-- **model**:            The model a request is acting on, can be empty for controller level requests.
-- **is-response**:      Indicates whether this log is for a request or response message.
-- **params**:           Populated during requests with any request parameters
-- **errors**:           Populated during responses with any response errors.
+- **time [time]**:               When the audit log was created.
+- **conversation-id [string]**:  A unique id per websocket connection.
+- **message-id [uin64]**:        An incrementing count for each message sent during a session.
+- **facade-name [string]**:      The name of the grouping of methods a call is intended for, a facade categorises methods.
+- **facade-method [string]**:    The name of the method called.
+- **facade-version [int]**:      The version of the facade called, different client versions may use different facade version.
+- **object-id [string]**:        A parameter used in some methods, indicates the object being acted upon.
+- **user-tag [string]**:         The user making the request.
+- **model [string]**:            The model a request is acting on, can be empty for controller level requests.
+- **is-response [boolean]**:     Indicates whether this log is for a request or response message.
+- **params [map[string]]**:      Populated during requests with any request parameters.
+- **errors [map[string]]**:      Populated during responses with any response errors.
 
 It's important to note that JIMM logs requests and responses separately for audit logs and understanding 
 how to associate a request with a response is very helpful. This can be done using the `conversation-id` and `message-id` fields.
 When a client establishes a connection with JIMM and begins making requests, a unique `conversation-id` is generated for 
 the lifetime of that websocket connection and each request/response pair will have the same `message-id`, which itself will
-increment whenever a new request is made. Then observing the `is-response` (boolean) and `errors` fields, one can ascertain whether 
+increment whenever a new request is made. Then observing the `is-response` and `errors` fields, one can ascertain whether 
 a call was successful.
+
+Example Audit Logs
+~~~~~~~~~~~~~~~~~~
 
 An example of a request and response audit log are below.
 The first is a request for a model status and the second is the response.
-Some interesting things to note:
+Note:
 
 - The message-id is 2 because the first message (not shown) was a login request.
 - The response does not include the response payload (i.e. the application status), this information is not logged.
@@ -101,6 +106,8 @@ Some interesting things to note:
 Pagination
 ~~~~~~~~~~
 
+Navigate through paginated result sets.
+
 ``--offset``
     offset the set of returned audit events
 ``--limit``
@@ -112,16 +119,18 @@ The size of each page can be increased to a maximum of 1000 using the
 
 Paging through the result set is also possible with the ``--offset`` flag.
 
-Get second page::
+For example::
 
     jimmctl audit-events --offset 50
 
-Change the page size to 100 and get the third page::
+To change the page size to 100 and get the third page::
 
     jimmctl audit-events --offset <(page_number-1)*100> --limit 100
 
 Time filters
 ~~~~~~~~~~~~
+
+Filter logs by time.
 
 ``--after``
     display events that happened after specified time
@@ -142,12 +151,14 @@ Examples::
 Method filter
 ~~~~~~~~~~~~~
 
+Filter logs by method call.
+
 ``--method``
     display events for a specific method call
 
-Each Juju/Jimmctl call invokes a specific method. This can be thought of as an HTTP handler.
+Each Juju/jimmctl call invokes a specific method. This can be thought of as an HTTP handler.
 Although a full list of all methods is not currently available, it is possible to filter audit events based
-on the method that was called. Some commonly interesting methods include Login, Deploy, DDestroyApplication, DestroyModels
+on the method that was called. Important methods include Login, Deploy, DestroyApplication, DestroyModels
 
 Note that method names are case sensitive.
 
@@ -157,6 +168,8 @@ Example::
 
 Model filter
 ~~~~~~~~~~~~
+
+Filter logs by the model they ran against.
 
 ``--model``
     display events for a specific model (model name is controller/model)
@@ -178,6 +191,8 @@ Example::
 User filter
 ~~~~~~~~~~~
 
+Filter logs by the user making the request.
+
 ``--user-tag``
     display events performed by authenticated user
 
@@ -194,6 +209,8 @@ Example::
 
 Order
 ~~~~~
+
+Change the order logs are returned.
 
 ``--reverse``
     reverse the order of logs, showing the most recent first
