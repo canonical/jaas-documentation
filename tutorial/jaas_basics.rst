@@ -291,7 +291,7 @@ To achieve this, you will need to download and install the `JAAS snap <https://d
 
 Once you have installed the snap run:
 
-``/snap/jaas/current/bin/jimmctl controller-info --public-address=aws-1.<your domain>:443 aws-1 aws-1.yaml``
+``/snap/jaas/current/bin/jimmctl controller-info --public-address=aws-1.canonical.domain.com:443 aws-1 aws-1.yaml``
 
 to get the controller information in YAML format. Then to finally add the controller to JIMM 
 switch to the JIMM controller:
@@ -305,7 +305,7 @@ and run:
 
 To see the registered controller, head over to your domain in the browser:
 
-``jimm.<your domain>``
+``jimm.canonical.domain.com``
 
 And login using the credentials you provided the Candid earlier.
 
