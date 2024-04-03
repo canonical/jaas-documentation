@@ -13,6 +13,8 @@ myst:
 # Markdown/MyST cheat sheet
 
 This file contains the syntax for commonly used Markdown and MyST markup.
+Open it in your text editor to quickly copy and paste the markup you need.
+
 Also see the [MyST documentation](https://myst-parser.readthedocs.io/en/latest/index.html) for detailed information, and the [Canonical Documentation Style Guide](https://docs.ubuntu.com/styleguide/en) for general style conventions.
 
 ## H2 heading
@@ -51,15 +53,15 @@ code:
   - example: true
 ```
 
-(_a_section_target)=
+(a_section_target_myst)=
 ## Links
 
 - [Canonical website](https://canonical.com/)
 - https:/<span></span>/canonical.com/
-- {ref}`a_section_target`
-- {ref}`Link text <a_section_target>`
-- {doc}`doc-cheat-sheet`
-- {doc}`Link text <doc-cheat-sheet>`
+- {ref}`a_section_target_myst`
+- {ref}`Link text <a_section_target_myst>`
+- {doc}`index`
+- {doc}`Link text <index>`
 
 
 ## Navigation
