@@ -21,7 +21,7 @@ Deploy JIMM
 -----------
 
 1. Bootstrap a controller: juju bootstrap aws
-2. Download the jimm bundle from: https://drive.google.com/file/d/19IFY7m-GW1AdKUzKdKbUO_bSE6zv8tNH/view?usp=sharing 
+2. Download the jimm bundle from `here <https://drive.google.com/file/d/19IFY7m-GW1AdKUzKdKbUO_bSE6zv8tNH/view?usp=sharing>`_
 3. Uncompress the file: ``tar xvf jimm.tar.xz``
 4. Move to the jimm folder: ``cd jimm``
 5. Deploy the bundle: ``juju deploy  ./bundle.yaml --overlay ./overlay-certbot.yaml``
