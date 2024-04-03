@@ -10,6 +10,9 @@ build:
   os: ubuntu-22.04
   tools:
     python: "3.11"
+  jobs:
+    post_checkout:
+      - python3 .sphinx/build_requirements.py
 
 # Build documentation in the docs/ directory with Sphinx
 sphinx:
@@ -19,9 +22,9 @@ sphinx:
 
 # If using Sphinx, optionally build your docs in additional formats such as PDF
 formats:
-  - pdf
+   - pdf
 
 # Optionally declare the Python requirements required to build your docs
 python:
-  install:
-    - requirements: .sphinx/requirements.txt
+   install:
+   - requirements: .sphinx/requirements.txt
