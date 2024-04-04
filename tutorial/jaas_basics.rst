@@ -362,6 +362,7 @@ you will want to install the ``kubectl`` snap:
 
 and fetch the config file from the newly deployed cluster:
 
+.. wokeignore:rule=master
 ``juju scp kubernetes-master/0:config ~/.kube/config``
 
 You can verify everything is configured correctly and see the cluster by running:
