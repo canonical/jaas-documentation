@@ -5,6 +5,7 @@ APIs
 aws
 balancer
 Candid
+Candid's
 certbot
 Charmhub
 CLI
@@ -27,8 +28,8 @@ IAM
 IdP
 installable
 JAAS
-jimm
 JIMM
+JIMM's
 JSON
 juju
 Juju
