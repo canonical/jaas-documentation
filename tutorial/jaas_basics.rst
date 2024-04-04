@@ -77,7 +77,7 @@ the public IP of the ``haproxy/0`` unit:
 
 ``juju status  --format json | jq '.applications.haproxy.units["haproxy/0"]["public-address"]'``
 
-Now you will need to go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home#Dashboard>`_,
+Now you will need to go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home>`_,
 navigate to the hosted zone for the canonical.domain.com subdomain and select `Create record`. We 
 will add an **A** record for candid.canonical.domain.com with the value of the IP of the ``haproxy/0`` 
 unit we obtained in the previous step.
@@ -124,7 +124,7 @@ As you can see we set up Candid to know about two users: user1 and user2 with co
 passwords ``s3cre7Pa55w0rd1`` and ``s3cre7Pa55w0rd2``, which you will use to log in.
 
 Now we have deployed Candid and we can verify if it is working by opening a browser and going to 
-https://candid.canonical.domain.com/login and try logging in as either user1 or user2.
+``https://candid.canonical.domain.com/login`` and try logging in as either user1 or user2.
 
 JIMM
 ----
@@ -166,7 +166,7 @@ the ``haproxy/0`` unit:
 
 ``juju status  --format json | jq '.applications.haproxy.units["haproxy/0"]["public-address"]'``
 
-Now you will need to go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home#Dashboard>`_, 
+Now you will need to go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home>`_, 
 navigate to the hosted zone for the canonical.domain.com subdomain and select `Create record`. 
 We will add an **A** record for ``jimm.canonical.domain.com`` with the value of the IP of the 
 ``haproxy/0`` unit we obtained in the previous step. 

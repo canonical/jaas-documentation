@@ -26,7 +26,7 @@ Deploy JIMM
 4. Move to the JIMM folder: ``cd jimm``
 5. Deploy the bundle: ``juju deploy  ./bundle.yaml --overlay ./overlay-certbot.yaml``
 6. Once the bundle has been deployed, get the public IP of the ``haproxy/0`` unit: ``juju status  --format json | jq '.applications.haproxy.units["haproxy/0"]["public-address"]'``
-7. Go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home#Dashboard>`_
+7. Go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home>`_
 8. Add an **A** record for the deployed JIMM (e.g. ``jimm.canonical.example.com``) with the IP obtained in step 6.
 9. Obtain a valid certificate for the deployed candid by running: ``juju run-action --wait certbot/0 get-certificate  agree-tos=true aws-access-key-id=<Access key ID> aws-secret-access-key=<Secret access key> domains=<full dns of haproxy (e.g. jimm.canonical.example.com)> email=<Your email address>  plugin=dns-route53``
 10. Let JIMM know its DNS name (replace ``jimm.canonical.example.com`` with the DNS name you set up in step 8): ``juju config jimm dns-name=jimm.canonical.stimec.net``

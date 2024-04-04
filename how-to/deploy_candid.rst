@@ -42,7 +42,7 @@ Deploy Candid
 6. Once the bundle has been deployed, get the public IP of the ``haproxy/0`` unit: 
     ``juju status --format json | jq '.applications.haproxy.units["haproxy/0"]["public-address"]'``
 
-7. Go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home#Dashboard>`_.
+7. Go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home>`_.
 
 8. Add an A record for the deployed candid (e.g. ``candid.canonical.example.com``) with the IP obtained in step 6.
 

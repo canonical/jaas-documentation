@@ -94,7 +94,7 @@ Deploy controller
 
     ``juju status  --format json | jq '.applications.haproxy.units["haproxy/0"]["public-address"]'``
 
-10.  Go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home#Dashboard>`_.
+10.  Go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home>`_.
 
 11.  Add an A record for the deployed controller and the DNS name specified in step 1 with the IP obtained in step 9.
 

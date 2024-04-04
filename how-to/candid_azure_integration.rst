@@ -43,7 +43,7 @@ Once the deployment is finished, you will see the certbot and HAProxy units are 
 
 ``juju status  --format json | jq '.applications.haproxy.units["haproxy/0"]["public-address"]'``
 
-Now you will need to go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home#Dashboard>`_, navigate to the hosted zone for the ``canonical.<domain.com>`` subdomain and select Create record. We will add an A record for ``candid.canonical.<domain.com>`` with the value of the IP of the ``haproxy/0`` unit we obtained in the previous step.
+Now you will need to go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home>`_, navigate to the hosted zone for the ``canonical.<domain.com>`` subdomain and select Create record. We will add an A record for ``candid.canonical.<domain.com>`` with the value of the IP of the ``haproxy/0`` unit we obtained in the previous step.
 To obtain a valid certificate for Candid we will use an action of the certbot charm. Run:
 
 ``juju run-action --wait certbot/0 get-certificate  agree-tos=true aws-access-key-id=<access key id> aws-secret-access-key=<secret access key> domains=candid.canonical.<domain.com> email=<your email>  plugin=dns-route53``

@@ -129,7 +129,7 @@ Next we also need to configure ingress. Usually the Kubernetes cluster operator 
 ``juju config ingress tls-secret-name=<secret name>``
 
 and the ingress charm will get certificates from the Kubernetes secret and set up TLS for you.
-Now you test Candid by opening your browser and navigating to https://candid.<your domain>/login
+Now you test Candid by opening your browser and navigating to ``https://candid.<your domain>/login``
 
 Appendix
 --------
