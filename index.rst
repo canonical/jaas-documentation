@@ -55,8 +55,8 @@ JAAS is a member of the Ubuntu family and warmly welcomes community contribution
 
 * `Code of conduct <https://ubuntu.com/community/ethos/code-of-conduct>`_
 * Join the `Mattermost community char <https://chat.charmhub.io/charmhub/channels/jaas>`_
-* Report a bug on `Lauchpad <https://bugs.launchpad.net/jaas-issue-tracking>`_
-* Contribute to the :doc:`documenation <contribute>`
+* Report a bug on `Launchpad <https://bugs.launchpad.net/jaas-issue-tracking>`_
+* Contribute to the :doc:`documentation <contribute>`
 * Visit the `Canonical's careers page <https://canonical.com/careers>`_
 
 
