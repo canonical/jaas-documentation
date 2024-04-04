@@ -4,7 +4,7 @@ JAAS: Add controller to JIMM
 Introduction
 ------------
 
-JIMM gives a centralized view of all models in the system. However the work of managing 
+JIMM gives a centralised view of all models in the system. However the work of managing 
 the models is delegated to a set of standard  juju controllers deployed in various clouds
 and regions.
 
@@ -35,7 +35,7 @@ Deploy controller
 
 1. First we will prepare some parameters for the new controller and export environment variables that we will use in this tutorial. 
 
-    The **controller name** is the name given to the controller both on the local system and within JIMM. For visibility this often includes the name of the JAAS system, the cloud, the cloud-region and some kind of unique identifier, for example jaas-aws-us-east-1-001. 
+    The **controller name** is the name given to the controller both on the local system and within JIMM. For visibility this often includes the name of the JAAS system, the cloud, the cloud-region and some kind of unique identifier, for example ``jaas-aws-us-east-1-001``. 
 
     The **cloud** is the cloud in which the controller is being bootstrapped. 
 
@@ -43,7 +43,7 @@ Deploy controller
 
     The **DNS name** is the full DNS name that will be given to the controller, often it is wise to make the hostname the same as the controller name within a particular domain. 
 
-    The **Candid URL** is the URL of the candid server that is providing the centralized identity service for the JAAS system. 
+    The **Candid URL** is the URL of the candid server that is providing the centralised identity service for the JAAS system. 
 
     The **JIMM URL** is the URL of the JIMM system providing the JAAS service.
 
@@ -76,11 +76,9 @@ Deploy controller
 
     ``juju switch controller``
 
-5. Download the controller bundle from:
+5. Download the controller bundle from `here <https://drive.google.com/file/d/17GHATHXGg2GuIeIWGr0FvkguMRdv5vnH/view?usp=sharing>`_.
 
-    https://drive.google.com/file/d/17GHATHXGg2GuIeIWGr0FvkguMRdv5vnH/view?usp=sharing
-
-6. Uncompress the file: 
+6. Extract the file: 
 
     ``tar xvf controller.tar.xz``
 
@@ -92,7 +90,7 @@ Deploy controller
 
     ``juju deploy  ./bundle.yaml --overlay ./overlay-certbot.yaml --map-machines=existing``
 
-9. Once the bundle has been deployed, get the public ip of the haproxy/0 unit: 
+9. Once the bundle has been deployed, get the public IP of the ``haproxy/0`` unit: 
 
     ``juju status  --format json | jq '.applications.haproxy.units["haproxy/0"]["public-address"]'``
 
@@ -104,9 +102,7 @@ Deploy controller
 
     ``juju run-action --wait certbot/0 get-certificate  agree-tos=true aws-access-key-id=<Access key ID> aws-secret-access-key=<Secret access key> domains=<dns name specified in step 1 (jimm.canonical.example.com)> email=<Your email address>  plugin=dns-route53``
 
-13.  Install the jaas snap that you download here:
-
-    https://drive.google.com/file/d/1LiOvVpVQ13V3x3l2PhgS2fTHDUtCEe7p/view?usp=sharing 
+13.  Install the JAAS snap that you download from `here <https://drive.google.com/file/d/1LiOvVpVQ13V3x3l2PhgS2fTHDUtCEe7p/view?usp=sharing>`_.
 
 14. To add the bootstrapped controller to JIMM we need to create a controller-information document. To do this, run the following command:
 
