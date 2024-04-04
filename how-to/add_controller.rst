@@ -41,7 +41,7 @@ Deploy controller
 
     The **cloud region** is the region in which the controller is being bootstrapped. 
 
-    The **DNS name** is the full DNS name that will be given to the controller, often it is wise to make the hostname the same as the controller name within a particular domain. 
+    The **DNS name** is the full DNS name that will be given to the controller, often it is wise to make the host name the same as the controller name within a particular domain. 
 
     The **Candid URL** is the URL of the candid server that is providing the centralised identity service for the JAAS system. 
 
