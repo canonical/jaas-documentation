@@ -1,4 +1,4 @@
-JAAS Documenation
+JAAS Documentation
 ==========================
 
 This directory holds the JAAS documentation:
