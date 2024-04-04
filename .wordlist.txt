@@ -5,6 +5,7 @@ APIs
 APIs
 aws
 balancer
+certbot
 Charmhub
 CLI
 CLI
@@ -20,7 +21,7 @@ Furo
 Git
 GitHub
 Grafana
-haproxy
+HAProxy
 https
 IAM
 installable
@@ -44,12 +45,14 @@ MyST
 namespace
 namespaces
 NodePort
+ntp
 observability
 OEM
 OLM
 OpenLDAP
 Permalink
 Permalink
+PostgreSQL
 pre
 Quickstart
 ReadMe
