@@ -4,6 +4,11 @@
    {% include "footer.html" %}
 {% endblock footer %}
 
+{% block body -%}
+   {% include "header.html" %}
+   {{ super() }}
+{%- endblock body %}
+
 {% if meta and ((meta.discourse and discourse_prefix) or meta.relatedlinks) %}
    {% set furo_hide_toc_orig = furo_hide_toc %}
    {% set furo_hide_toc=false %}
@@ -11,7 +16,7 @@
 
 {% block right_sidebar %}
 <div class="toc-sticky toc-scroll">
-   {% if not furo_hide_toc_orig %}
+    {% if not furo_hide_toc_orig %}
     <div class="toc-title-container">
       <span class="toc-title">
        {{ _("Contents") }}
@@ -22,24 +27,24 @@
         {{ toc }}
       </div>
     </div>
-    {% endif %}
-    {% if meta and ((meta.discourse and discourse_prefix) or meta.relatedlinks) %}
-    <div class="relatedlinks-title-container">
-      <span class="relatedlinks-title">
-       Related links
-      </span>
-    </div>
-    <div class="relatedlinks-container">
-      <div class="relatedlinks">
-        {% if meta.discourse and discourse_prefix %}
-          {{ discourse_links(meta.discourse) }}
-        {% endif %}
-        {% if meta.relatedlinks %}
-          {{ related_links(meta.relatedlinks) }}
-        {% endif %}
-      </div>
-    </div>
-    {% endif %}
+   {% endif %}
+   {% if meta and ((meta.discourse and discourse_prefix) or meta.relatedlinks) %}
+   <div class="relatedlinks-title-container">
+     <span class="relatedlinks-title">
+      Related links
+     </span>
+   </div>
+   <div class="relatedlinks-container">
+     <div class="relatedlinks">
+       {% if meta.discourse and discourse_prefix %}
+         {{ discourse_links(meta.discourse) }}
+       {% endif %}
+       {% if meta.relatedlinks %}
+         {{ related_links(meta.relatedlinks) }}
+       {% endif %}
+     </div>
+   </div>
+   {% endif %}
     {% if resources_mattermost or resources_github_docs %}
     <div class="relatedlinks-title-container">
       <span class="relatedlinks-title">

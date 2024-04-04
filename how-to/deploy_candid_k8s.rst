@@ -4,14 +4,14 @@ JAAS: Deploy Candid on K8S
 Introduction
 ------------
 
-In this howto we will be deploying Candid on Kubernetes.  Candid provides a macaroon-based authentication service that is able to utilize many standard identity providers:
+In this topic we will be deploying Candid on Kubernetes.  Candid provides a macaroon-based authentication service that is able to utilise many standard identity providers:
 
 - UbuntuSSO
 - LDAP
 - Google OpenID Connect
 - ADFS OpenID Connect
 - Azure OpenID Connect 
-- Keystore (userpass or token)
+- Keystore (username/password or token)
 - Static identity provider (only used for testing)
   
 Prerequisites
@@ -25,7 +25,7 @@ For this tutorial you will need the following:
 - Basic knowledge of juju
 - A subdomain registered with Route 53. To learn how to set that up, please follow :doc:`route53`.
 - Access to a Kubernetes cluster
-- Access to a Postgresql database
+- Access to a PostgreSQL database
 
 Deploy a Kubernetes cluster
 ---------------------------
@@ -34,7 +34,7 @@ In case you do not already have access to a Kubernetes cluster, you can deploy o
 
 ``juju bootstrap aws k8s-controller``
 
-and then deploy the kubernetes-core bundle:
+and then deploy the ``kubernetes-core`` bundle:
 
 ``juju deploy kubernetes-core``
 
@@ -51,7 +51,7 @@ Use the following commands to configure and relate aws-integrator to various app
     juju relate aws-integrator kubernetes-control-plane
     juju relate aws-integrator kubernetes-worker
 
-Once all applications settle down and start fetch the config file that will let you use kubectl:
+Once all applications settle down and start fetch the config file that will let you use ``kubectl``:
 
 ``juju scp kubernetes-control-plane/0:config ~/.kube/config``
 
@@ -62,7 +62,7 @@ Once you have access to a K8s cluster, you can verify it by running:
 
 ``kubectl get nodes``
 
-and if that works add the kubernetes cluster as a cloud to your juju client:
+and if that works add the Kubernetes cluster as a cloud to your juju client:
 
 ``juju add-k8s myk8s``
 
@@ -78,7 +78,7 @@ Now we can deploy the Candid into the newly created model:
 
 ``juju deploy candid-k8s –channel edge``
 
-As Juju does not currently support exposing an application on a k8s cloud, we need to also deploy nginx-ingress-integrator charm. Run:
+As Juju does not currently support exposing an application on a k8s cloud, we need to also deploy ``nginx-ingress-integrator`` charm. Run:
 
 .. code:: console
     
@@ -86,7 +86,7 @@ As Juju does not currently support exposing an application on a k8s cloud, we ne
     juju trust ingress --scope=cluster
     juju relate ingress candid-k8s
 
-Once deployed go to the management console of your domain and create an A record for the deployed Candid (e.g. candidcanonical.example.com) with the IP of k8s worker nodes. 
+Once deployed go to the management console of your domain and create an A record for the deployed Candid (e.g. ``candidcanonical.example.com``) with the IP of k8s worker nodes. 
 
 Configure Candid
 ----------------
@@ -129,16 +129,18 @@ Next we also need to configure ingress. Usually the Kubernetes cluster operator 
 ``juju config ingress tls-secret-name=<secret name>``
 
 and the ingress charm will get certificates from the Kubernetes secret and set up TLS for you.
-Now you test Candid by opening your browser and navigating to https://candid.<your domain>/login
+Now you test Candid by opening your browser and navigating to ``https://candid.<your domain>/login``
 
 Appendix
 --------
 
-Don’t have a postgresql database
+Don’t have a PostgreSQL database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In case you do not have access to a Postgresql database you can use Amazon’s RDS to create one. Navigate to the RDS console and select “Create database”. Under “Engine type” select “PostgreSQL”, specify “Master username” and “Master password”. Also make sure to select “Public access” as “Yes”. You can customize all other options to your preference. Once the database is created, navigate to the database’s dashboard. There you will see the “Endpoint” adn “Port” strings, which you will need to connect to the database.  Use the following command to configure Candid:
+.. wokeignore:rule=master
+In case you do not have access to a PostgreSQL database you can use Amazon’s RDS to create one. Navigate to the RDS console and select “Create database”. Under “Engine type” select “PostgreSQL”, specify “Master username” and “Master password”. Also make sure to select “Public access” as “Yes”. You can customise all other options to your preference. Once the database is created, navigate to the database’s dashboard. There you will see the “Endpoint” and “Port” strings, which you will need to connect to the database.  Use the following command to configure Candid:
 
+.. wokeignore:rule=master
 ``juju config candid-k8s dns=’postgres://<master username>:<master password>@<database endpoint>:<database port>/<database name>``
 
 Don’t have certificates
@@ -165,7 +167,7 @@ Since the production Let’s Encrypt servers do some fancy rate limiting
 and we don’t want to exceed the limit, we will first test our setup with 
 the staging server.
 
-Create a fille stg-issuer.yaml with the following content:
+Create a file ``stg-issuer.yaml`` with the following content:
 
 .. code:: yaml
     
@@ -192,9 +194,9 @@ and run:
 
 ``kubectl apply -n candid -f stg-issuer.yaml``
 
-which will create a certificate issuer in candid’s namespace.
+which will create a certificate issuer in Candid’s namespace.
 
-The create stg-certs.yaml file with the following content:
+The create ``stg-certs.yaml`` file with the following content:
 
 .. code:: yaml 
 
@@ -223,8 +225,8 @@ and:
 
 ``kubectl describe secret letsencrypt-stg-certs -n candid``
 
-which will show a Kubernetes secret and in its data you should see a stored tls.crt and tls.key.
-If this all worked (and i have no doubt it did :) ), then we can proceed by creating a production issuer. Create a prod-issuer.yaml file with the following content:
+which will show a Kubernetes secret and in its data you should see a stored ``tls.crt`` and ``tls.key``.
+If this all worked (and i have no doubt it did :) ), then we can proceed by creating a production issuer. Create a ``prod-issuer.yaml`` file with the following content:
 
 .. code:: yaml
 
@@ -251,7 +253,7 @@ and run:
 
 ``kubectl apply -n candid -f prod-issuer.yaml``
 
-Then create a prod-certs.yaml file with the following content:
+Then create a ``prod-certs.yaml`` file with the following content:
 
 .. code:: yaml
 
@@ -272,11 +274,11 @@ and run:
 
 ``kubectl apply -n candid -f prod-certs.yaml``
 
-This will create a letsencrypt-certs secrets for you, which you can inspect by running:
+This will create a ``letsencrypt-certs`` secrets for you, which you can inspect by running:
 
 ``kubectl describe secret letsencrypt-certs -n candid``
 
-which will show the created secret and in its data you should see a stored tls.crt and tls.key.
+which will show the created secret and in its data you should see a stored ``tls.crt`` and ``tls.key``.
 To see the certificate data run:
 
 ``kubectl describe certificate -n candid candid-cert``

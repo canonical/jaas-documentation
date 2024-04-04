@@ -39,11 +39,11 @@ and wait for the deployment to finish. You can observe the deployment status by 
 
 ``juju status --watch 2s –color``
 
-Once the deployment is finished, you will see the certbot and haproxy units are in an error state. This is because we still need to obtain a valid certificate for Candid. First we will need to get the public IP of the haproxy/0 unit:
+Once the deployment is finished, you will see the certbot and HAProxy units are in an error state. This is because we still need to obtain a valid certificate for Candid. First we will need to get the public IP of the ``haproxy/0`` unit:
 
 ``juju status  --format json | jq '.applications.haproxy.units["haproxy/0"]["public-address"]'``
 
-Now you will need to go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home#Dashboard>`_, navigate to the hosted zone for the canonical.<domain.com> subdomain and select Create record. We will add an A record for candid.canonical.<domain.com> with the value of the IP of the haproxy/0 unit we obtained in the previous step.
+Now you will need to go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home>`_, navigate to the hosted zone for the canonical.<domain.com> subdomain and select Create record. We will add an A record for candid.canonical.<domain.com> with the value of the IP of the ``haproxy/0`` unit we obtained in the previous step.
 To obtain a valid certificate for Candid we will use an action of the certbot charm. Run:
 
 ``juju run-action --wait certbot/0 get-certificate  agree-tos=true aws-access-key-id=<access key id> aws-secret-access-key=<secret access key> domains=candid.canonical.<domain.com> email=<your email>  plugin=dns-route53``
@@ -91,7 +91,7 @@ Having installed OpenLDAP run:
 
 ``sudo dpkg-reconfigure slapd``
 
-Which will take you through the process of reconfiguring OpenLDAP.
+Which will take you through the process of re-configuring OpenLDAP.
 First, you will be presented with the following screen.
 
 .. image:: images/ldap_image2.png
@@ -101,9 +101,9 @@ When asked to enter then DNS domain name
 
 .. image:: images/ldap_image1.png
 
-enter “ldap.canonical.<domain.com>” replacing the “<domain.com>” part with the name of the domain you own.
+enter ``ldap.canonical.<domain.com>`` replacing the ``<domain.com>`` part with the name of the domain you own.
 
-In the next screen enter “canonical.<domain.com>” as the name of the organization again, replacing “domain.com” with the domain you own.
+In the next screen enter ``canonical.<domain.com>`` as the name of the organisation again, replacing “domain.com” with the domain you own.
 
 .. image:: images/ldap_image3.png
 
@@ -115,7 +115,7 @@ And re-enter the chosen administrator password.
 
 .. image:: images/ldap_image4.png
 
-When asked if you want the database removed when slapd is purged, it is safe to answer “No.” as this is there is no content in the database yet.
+When asked if you want the database removed when ``slapd`` is purged, it is safe to answer “No.” as this is there is no content in the database yet.
 
 .. image:: images/ldap_image7.png
 
@@ -143,12 +143,12 @@ Run:
 
 ``juju status  --format json | jq '.applications.ldap.units["ldap/0"]["public-address"]'``
 
-to obtain the public IP of the LDAP unit and use that IP to create an **A** record for the DNS ldap.canonical.<domain.com>.
+to obtain the public IP of the LDAP unit and use that IP to create an **A** record for the DNS ``ldap.canonical.<domain.com>``.
 Then we can run the get-certificate action on the certbot unit to obtain certificates;
 
 ``juju run-action –wait certbot/0 get-certificate agree-tos=true aws-access-key-id=<aws-secret-access-key-id> aws-secret-access-key=<aws-secret-access-key> domains=ldap.canonical.<domain.com> email=<your email> plugin=dns-route53``
 
-This will result in creation of .pem files specified by the certbot configuration.
+This will result in creation of ``.pem`` files specified by the certbot configuration.
 Now we can ssh back into the ldap unit:
 
 .. code:: console
@@ -157,7 +157,7 @@ Now we can ssh back into the ldap unit:
     cd /etc/ldap
 
 Next we need to configure OpenLDAP to use created certificates.
-We do that by creating a file certinfo.ldif with the following content
+We do that by creating a file ``certinfo.ldif`` with the following content
 
 .. code:: yaml
 
@@ -183,7 +183,7 @@ As we have manually deployed OpenLDAP, we need to allow access to its ports. To 
 Initial LDAP content
 ~~~~~~~~~~~~~~~~~~~~
 
-Next we create a file content.ldif with the following content:
+Next we create a file ``content.ldif`` with the following content:
 
 .. code:: yaml
 
@@ -202,7 +202,7 @@ And add that to OpenLDAP:
 Adding users
 ~~~~~~~~~~~~
 
-To add an LDAP user, we create a file names <username>.ldif with the following content:
+To add an LDAP user, we create a file names ``<username>.ldif`` with the following content:
 
 .. code:: yaml 
 
@@ -222,7 +222,7 @@ To add an LDAP user, we create a file names <username>.ldif with the following c
     loginShell: /bin/bash
     homeDirectory: /home/<username>
 
-And use ldapadd to add the user:
+And use ``ldapadd`` to add the user:
 
 ``ldapadd -x -D cn=admin,dc=canonical,dc=<domain>,dc=<com> -W -f ./<username>.ldif``
 
@@ -259,7 +259,7 @@ Once we have Candid deployed and LDAP configured all we need to do is let Candid
 Testing Candid with LDAP
 ------------------------
 
-To test Candid you can open your browser and go to https://candid.canonical.<domain.com>/login which will present you with the following page:
+To test Candid you can open your browser and go to ``https://candid.canonical.<domain.com>/login`` which will present you with the following page:
 
 .. image:: images/ldap_image6.png
 

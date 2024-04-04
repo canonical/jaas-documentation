@@ -1,136 +1,166 @@
 import sys
+import os
+
+sys.path.append('./')
+from custom_conf import *
+sys.path.append('.sphinx/')
+from build_requirements import *
 
 # Configuration file for the Sphinx documentation builder.
+# You should not do any modifications to this file. Put your custom
+# configuration into the custom_conf.py file.
+# If you need to change this file, contribute the changes upstream.
 #
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
-# -- Project information -----------------------------------------------------
-# https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
-
-project = "JAAS"
-author = "Canonical Group Ltd"
-copyright = "%s, %s" % ("2023", author)
-release = "1.0"
-
-# Open Graph configuration - defines what is displayed in the website preview
-ogp_site_url = "https://canonical-jimm.readthedocs-hosted.com/"
-ogp_site_name = project
-ogp_image = (
-    "https://assets.ubuntu.com/v1/253da317-image-document-ubuntudocs.svg"
-)
-
-html_context = {
-    # Change to the discourse instance you want to be able to link to
-    "discourse_prefix": "https://discourse.ubuntu.com/t/",
-    # Change to the GitHub info for your project
-    "github_url": "https://github.com/canonical/jaas-documentation",
-    "github_version": "main",
-    "github_folder": "/",
-    "github_filetype": "rst",
-    # "Resources" links:
-    "resources_mattermost": "[Join&nbsp;online&nbsp;chat](https://chat.charmhub.io/charmhub/channels/jaas)",
-    "resources_github_docs": "[Docs&nbsp;on&nbsp;GitHub](https://github.com/canonical/jaas-documentation)",
-}
-
-# -- General configuration ---------------------------------------------------
-# https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
+############################################################
+### Extensions
+############################################################
 
 extensions = [
-    "sphinx_design",
-    "sphinx_tabs.tabs",
-    "sphinx_reredirects",
-    "youtube-links",
-    "related-links",
-    "custom-rst-roles",
-    "sphinx_copybutton",
-    "sphinxext.opengraph",
+    'sphinx_design',
+    'sphinx_copybutton',
+    'sphinxcontrib.jquery',
 ]
 
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", ".sphinx", "doc-cheat-sheet*"]
+# Only add redirects extension if any redirects are specified.
+if AreRedirectsDefined():
+    extensions.append('sphinx_reredirects')
 
-rst_epilog = """
-.. include:: /reuse/links.txt
-"""
+# Only add myst extensions if any configuration is present.
+if IsMyStParserUsed():
+    extensions.append('myst_parser')
 
-# Links to ignore when checking links
-linkcheck_ignore = ["http://127.0.0.1:8000"]
+    # Additional MyST syntax
+    myst_enable_extensions = [
+        'substitution',
+        'deflist',
+        'linkify'
+    ]
+    myst_enable_extensions.extend(custom_myst_extensions)
 
-# -- Options for HTML output -------------------------------------------------
-# https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
+# Only add Open Graph extension if any configuration is present.
+if IsOpenGraphConfigured():
+    extensions.append('sphinxext.opengraph')
 
-# Find the current builder
-builder = "dirhtml"
-if "-b" in sys.argv:
-    builder = sys.argv[sys.argv.index("-b") + 1]
+extensions.extend(custom_extensions)
+extensions = DeduplicateExtensions(extensions)
 
-# Setting templates_path for epub makes the build fail
-if builder == "dirhtml" or builder == "html":
-    templates_path = [".sphinx/_templates"]
+### Configuration for extensions
 
-html_theme = "furo"
-html_last_updated_fmt = ""
-html_permalinks_icon = "¶"
-html_theme_options = {
-    "light_css_variables": {
-        "color-sidebar-background-border": "none",
-        "font-stack": "Ubuntu, -apple-system, Segoe UI, Roboto, Oxygen, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
-        "font-stack--monospace": "Ubuntu Mono, Consolas, Monaco, Courier, monospace",
-        "color-foreground-primary": "#111",
-        "color-foreground-secondary": "var(--color-foreground-primary)",
-        "color-foreground-muted": "#333",
-        "color-background-secondary": "#FFF",
-        "color-background-hover": "#f2f2f2",
-        "color-brand-primary": "#111",
-        "color-brand-content": "#06C",
-        "color-api-background": "#cdcdcd",
-        "color-inline-code-background": "rgba(0,0,0,.03)",
-        "color-sidebar-link-text": "#111",
-        "color-sidebar-item-background--current": "#ebebeb",
-        "color-sidebar-item-background--hover": "#f2f2f2",
-        "toc-font-size": "var(--font-size--small)",
-        "color-admonition-title-background--note": "var(--color-background-primary)",
-        "color-admonition-title-background--tip": "var(--color-background-primary)",
-        "color-admonition-title-background--important": "var(--color-background-primary)",
-        "color-admonition-title-background--caution": "var(--color-background-primary)",
-        "color-admonition-title--note": "#24598F",
-        "color-admonition-title--tip": "#24598F",
-        "color-admonition-title--important": "#C7162B",
-        "color-admonition-title--caution": "#F99B11",
-        "color-highlighted-background": "#EbEbEb",
-        "color-link-underline": "var(--color-background-primary)",
-        "color-link-underline--hover": "var(--color-background-primary)",
-        "color-version-popup": "#772953",
-    },
-    "dark_css_variables": {
-        "color-foreground-secondary": "var(--color-foreground-primary)",
-        "color-foreground-muted": "#CDCDCD",
-        "color-background-secondary": "var(--color-background-primary)",
-        "color-background-hover": "#666",
-        "color-brand-primary": "#fff",
-        "color-brand-content": "#06C",
-        "color-sidebar-link-text": "#f7f7f7",
-        "color-sidebar-item-background--current": "#666",
-        "color-sidebar-item-background--hover": "#333",
-        "color-admonition-background": "transparent",
-        "color-admonition-title-background--note": "var(--color-background-primary)",
-        "color-admonition-title-background--tip": "var(--color-background-primary)",
-        "color-admonition-title-background--important": "var(--color-background-primary)",
-        "color-admonition-title-background--caution": "var(--color-background-primary)",
-        "color-admonition-title--note": "#24598F",
-        "color-admonition-title--tip": "#24598F",
-        "color-admonition-title--important": "#C7162B",
-        "color-admonition-title--caution": "#F99B11",
-        "color-highlighted-background": "#666",
-        "color-link-underline": "var(--color-background-primary)",
-        "color-link-underline--hover": "var(--color-background-primary)",
-        "color-version-popup": "#F29879",
-    },
+# Used for related links
+if not 'discourse_prefix' in html_context and 'discourse' in html_context:
+    html_context['discourse_prefix'] = html_context['discourse'] + '/t/'
+
+# The URL prefix for the notfound extension depends on whether the documentation uses versions.
+# For documentation on documentation.ubuntu.com, we also must add the slug.
+url_version = ''
+url_lang = ''
+
+# Determine if the URL uses versions and language
+if 'READTHEDOCS_CANONICAL_URL' in os.environ and os.environ['READTHEDOCS_CANONICAL_URL']:
+    url_parts = os.environ['READTHEDOCS_CANONICAL_URL'].split('/')
+
+    if len(url_parts) >= 2 and 'READTHEDOCS_VERSION' in os.environ and os.environ['READTHEDOCS_VERSION'] == url_parts[-2]:
+        url_version = url_parts[-2] + '/'
+
+    if len(url_parts) >= 3 and 'READTHEDOCS_LANGUAGE' in os.environ and os.environ['READTHEDOCS_LANGUAGE'] == url_parts[-3]:
+        url_lang = url_parts[-3] + '/'
+
+# Set notfound_urls_prefix to the slug (if defined) and the version/language affix
+if slug:
+    notfound_urls_prefix = '/' + slug  + '/' + url_lang + url_version
+elif len(url_lang + url_version) > 0:
+    notfound_urls_prefix = '/' + url_lang + url_version
+else:
+    notfound_urls_prefix = ''
+
+notfound_context = {
+    'title': 'Page not found',
+    'body': '<p><strong>Sorry, but the documentation page that you are looking for was not found.</strong></p>\n\n<p>Documentation changes over time, and pages are moved around. We try to redirect you to the updated content where possible, but unfortunately, that didn\'t work this time (maybe because the content you were looking for does not exist in this version of the documentation).</p>\n<p>You can try to use the navigation to locate the content you\'re looking for, or search for a similar page.</p>\n',
 }
 
-html_static_path = [".sphinx/_static"]
-html_css_files = ["custom.css"]
+# Default image for OGP (to prevent font errors, see
+# https://github.com/canonical/sphinx-docs-starter-pack/pull/54 )
+if not 'ogp_image' in locals():
+    ogp_image = 'https://assets.ubuntu.com/v1/253da317-image-document-ubuntudocs.svg'
 
-# Set up redirects (https://documatt.gitlab.io/sphinx-reredirects/usage.html)
-# For example: "explanation/old-name.html": "../how-to/prettify.html",
-redirects = {}
+############################################################
+### General configuration
+############################################################
+
+exclude_patterns = [
+    '_build',
+    'Thumbs.db',
+    '.DS_Store',
+    '.sphinx',
+]
+exclude_patterns.extend(custom_excludes)
+
+rst_epilog = '''
+.. include:: /reuse/links.txt
+'''
+if 'custom_rst_epilog' in locals():
+    rst_epilog = custom_rst_epilog
+
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
+
+if not 'conf_py_path' in html_context and 'github_folder' in html_context:
+    html_context['conf_py_path'] = html_context['github_folder']
+
+# For ignoring specific links
+linkcheck_anchors_ignore_for_url = [
+    r'https://github\.com/.*'
+]
+linkcheck_anchors_ignore_for_url.extend(custom_linkcheck_anchors_ignore_for_url)
+
+# Tags cannot be added directly in custom_conf.py, so add them here
+for tag in custom_tags:
+    tags.add(tag)
+
+############################################################
+### Styling
+############################################################
+
+# Find the current builder
+builder = 'dirhtml'
+if '-b' in sys.argv:
+    builder = sys.argv[sys.argv.index('-b')+1]
+
+# Setting templates_path for epub makes the build fail
+if builder == 'dirhtml' or builder == 'html':
+    templates_path = ['.sphinx/_templates']
+    notfound_template = '404.html'
+
+# Theme configuration
+html_theme = 'furo'
+html_last_updated_fmt = ''
+html_permalinks_icon = '¶'
+
+if html_title == '':
+    html_theme_options = {
+        'sidebar_hide_name': True
+        }
+
+############################################################
+### Additional files
+############################################################
+
+html_static_path = ['.sphinx/_static']
+
+html_css_files = [
+    'custom.css',
+    'header.css',
+    'github_issue_links.css',
+    'furo_colors.css'
+]
+html_css_files.extend(custom_html_css_files)
+
+html_js_files = ['header-nav.js']
+if 'github_issues' in html_context and html_context['github_issues'] and not disable_feedback_button:
+    html_js_files.append('github_issue_links.js')
+html_js_files.extend(custom_html_js_files)
