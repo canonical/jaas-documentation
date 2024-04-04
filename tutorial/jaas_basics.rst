@@ -51,7 +51,7 @@ The first component we need to deploy is Candid, so let’s begin by creating a 
 
 ``juju add-model candid``
 
-To deploy Candid please download  this `tarball <https://drive.google.com/file/d/1ZyZeI0jNacbXK-AgxzUT0IUEp9tQ85QH/view?usp=sharing>`_, 
+To deploy Candid please download `this <https://drive.google.com/file/d/1ZyZeI0jNacbXK-AgxzUT0IUEp9tQ85QH/view?usp=sharing>`_ tarball, 
 which contains everything you will need. 
 
 Extract the tarball:
@@ -71,15 +71,15 @@ and wait for the deployment to finish. You can observe the deployment status by 
 
 ``juju status –watch 5s –color``
 
-Once the deployment is finished, you will see the certbot and haproxy units are in an error state. 
+Once the deployment is finished, you will see the certbot and HAProxy units are in an error state. 
 This is because we still need to obtain a valid certificate for Candid. First we will need to get  
-the public IP of the haproxy/0 unit:
+the public IP of the ``haproxy/0`` unit:
 
 ``juju status  --format json | jq '.applications.haproxy.units["haproxy/0"]["public-address"]'``
 
 Now you will need to go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home#Dashboard>`_,
 navigate to the hosted zone for the canonical.domain.com subdomain and select `Create record`. We 
-will add an **A** record for candid.canonical.domain.com with the value of the IP of the haproxy/0 
+will add an **A** record for candid.canonical.domain.com with the value of the IP of the ``haproxy/0`` 
 unit we obtained in the previous step.
 
 To obtain a valid certificate for Candid we will use an action of the certbot charm. Run:
@@ -121,7 +121,7 @@ identity provider with hard-coded usernames and passwords:
         - group1'
 
 As you can see we set up Candid to know about two users: user1 and user2 with corresponding 
-passwords s3cre7Pa55w0rd1 and s3cre7Pa55w0rd2, which you will use to log in.
+passwords ``s3cre7Pa55w0rd1`` and ``s3cre7Pa55w0rd2``, which you will use to log in.
 
 Now we have deployed Candid and we can verify if it is working by opening a browser and going to 
 https://candid.canonical.domain.com/login and try logging in as either user1 or user2.
@@ -136,7 +136,7 @@ Let’s add a new Juju model for jimm:
 
 ``juju add-model jimm``
 
-To deploy JIMM please download this tarball `<https://drive.google.com/file/d/19IFY7m-GW1AdKUzKdKbUO_bSE6zv8tNH/view?usp=sharing>`_ and extract it:
+To deploy JIMM please download `this <https://drive.google.com/file/d/19IFY7m-GW1AdKUzKdKbUO_bSE6zv8tNH/view?usp=sharing>`_ tarball and extract it:
 
 ``tar xvf jimm.tar.xz``
 
@@ -155,21 +155,21 @@ and wait for the deployment to finish. You can observe the deployment status by 
 
 Once the deployment is finished you will see that we have deployed 2 JIMM units, 2 postgresql units 
 and one HAProxy unit. The HAProxy will act as a load balancer redirecting clients to one of the 
-deployed JIMM units and both JIMM units will connect to the deployed postgresql cluster. We have 
-also deployed the ntp charm which will make sure the clocks on all units are synchronized and the 
+deployed JIMM units and both JIMM units will connect to the deployed PostgreSQL cluster. We have 
+also deployed the ntp charm which will make sure the clocks on all units are synchronised and the 
 certbot charm, which is related to the HAProxy unit and we will use the certbot charm to obtain 
 valid certificates.
 
-For now, you will see the certbot and haproxy units are in an error state. This is because we 
+For now, you will see the certbot and HAProxy units are in an error state. This is because we 
 still need to obtain a valid certificate for JIMM. First we will need to get the public IP of 
-the haproxy/0 unit:
+the ``haproxy/0`` unit:
 
 ``juju status  --format json | jq '.applications.haproxy.units["haproxy/0"]["public-address"]'``
 
 Now you will need to go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home#Dashboard>`_, 
 navigate to the hosted zone for the canonical.domain.com subdomain and select `Create record`. 
 We will add an **A** record for jimm.canonical.domain.com with the value of the IP of the 
-haproxy/0 unit we obtained in the previous step. 
+``haproxy/0`` unit we obtained in the previous step. 
 
 To obtain a valid certificate for JIMM we will use an action of the certbot charm. Run:
 
@@ -250,7 +250,7 @@ You can ensure you’re on the correct controller and model via:
 
 ``juju whoami``
 
-Download the controller tarball `<https://drive.google.com/file/d/17GHATHXGg2GuIeIWGr0FvkguMRdv5vnH/view?usp=sharing>`_ 
+Download the controller `tarball <https://drive.google.com/file/d/17GHATHXGg2GuIeIWGr0FvkguMRdv5vnH/view?usp=sharing>`_
 and extract it:
 
 ``tar xvf controller.tar.xz``
@@ -263,15 +263,15 @@ and deploy the controller bundle:
 
 ``juju deploy --map-machines=existing ./bundle.yaml --overlay ./overlay-certbot.yaml``
 
-Once the bundle is deployed you will again see that the haproxy and certbot units are in error 
+Once the bundle is deployed you will again see that the HAProxy and certbot units are in error 
 state since we have not yet obtained a valid certificate for the deployed controller.
 
-Run the following to obtain the public IP of the haproxy unit:
+Run the following to obtain the public IP of the HAProxy unit:
 
 ``juju status  --format json | jq '.applications.haproxy.units["haproxy/0"]["public-address"]'``
 
 
-Now you will need to go to the Route 53 dashboard again, navigate to the hosted zone for the canonical.domain.com subdomain and select Create record. We will add an A record for aws-1.canonical.domain.com with the value of the IP of the haproxy/0 unit we obtained in the previous step.
+Now you will need to go to the Route 53 dashboard again, navigate to the hosted zone for the canonical.domain.com subdomain and select Create record. We will add an A record for aws-1.canonical.domain.com with the value of the IP of the ``haproxy/0`` unit we obtained in the previous step.
 
 To obtain a valid certificate for the new controller we will use an action of the certbot charm. 
 Run:
