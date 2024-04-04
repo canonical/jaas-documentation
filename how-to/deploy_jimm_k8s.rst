@@ -78,7 +78,7 @@ As Juju does not currently support exposing an application on a k8s cloud, we ne
     juju trust ingress --scope=cluster
     juju relate ingress jimm-k8s
 
-Once deployed go to the management console of your domain and create an A record for the deployed JIMM (e.g. jimm.canonical.example.com) with the IP of k8s worker nodes. 
+Once deployed go to the management console of your domain and create an A record for the deployed JIMM (e.g. ``jimm.canonical.example.com``) with the IP of k8s worker nodes. 
 
 Configure JIMM
 --------------
@@ -99,7 +99,7 @@ Next we also need to configure ingress. Usually the Kubernetes cluster operator 
 
 and the ingress charm will get certificates from the Kubernetes secret and set up TLS for you.
 Now you can log in to the deployed JIMM
-juju login jimm.<your domain>
+juju login ``jimm.<your domain>``
 
 Appendix
 --------

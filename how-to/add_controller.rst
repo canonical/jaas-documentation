@@ -28,7 +28,7 @@ For this tutorial you will need the following:
 - AWS credentials
 - Basic knowledge of juju
 - A subdomain registered with Route 53. To learn how to set that up, please follow :doc:`route53`. In this tutorial we will assume that you have registered the canonical.example.com subdomain - please replace this with the appropriate subdomain that you have registered with Route 53.
-- Admin access to a JIMM controller (see this tutorial). For this tutorial we will assume this JIMM is located at jimm.canonical.example.com
+- Admin access to a JIMM controller (see this tutorial). For this tutorial we will assume this JIMM is located at ``jimm.canonical.example.com``
 
 Deploy controller
 -----------------

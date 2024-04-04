@@ -132,7 +132,7 @@ JIMM
 Next we will be deploying JIMM, which will allow us to control multiple Juju controllers from a 
 single point.
 
-Let’s add a new Juju model for jimm:
+Let’s add a new Juju model for JIMM:
 
 ``juju add-model jimm``
 
@@ -140,7 +140,7 @@ To deploy JIMM please download `this <https://drive.google.com/file/d/19IFY7m-GW
 
 ``tar xvf jimm.tar.xz``
 
-and move to the extracted jimm folder:
+and move to the extracted JIMM folder:
 
 ``cd jimm``
 
@@ -168,7 +168,7 @@ the ``haproxy/0`` unit:
 
 Now you will need to go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home#Dashboard>`_, 
 navigate to the hosted zone for the canonical.domain.com subdomain and select `Create record`. 
-We will add an **A** record for jimm.canonical.domain.com with the value of the IP of the 
+We will add an **A** record for ``jimm.canonical.domain.com`` with the value of the IP of the 
 ``haproxy/0`` unit we obtained in the previous step. 
 
 To obtain a valid certificate for JIMM we will use an action of the certbot charm. Run:
@@ -210,7 +210,7 @@ Trying to list models will now show no models:
 
 Now we will also configure JIMM to serve the Juju Dashboard. The tarball needed for that is 
 included in the ``jimm.tar.xz`` that you have previously downloaded and is located in the dashboard 
-folder. First switch to the jimm model:
+folder. First switch to the JIMM model:
 
 ``juju switch infrastructure:jimm``
 
@@ -378,7 +378,7 @@ To add simple storage for Kubernetes using NFS run:
 Dashboard
 ---------
 
-Now you can open a browser and navigate to https://jimm.canonical.domain.com/dashboard 
+Now you can open a browser and navigate to ``https://jimm.canonical.domain.com/dashboard`` 
 where you will find the Juju Dashboard. Again you will be asked to log in: log in as user1. 
 If you click on Models in the left pane, you will see the k8s model that we created for our 
 Kubernetes deploy. Click on k8s and you will see the entire Kubernetes cluster as deployed 

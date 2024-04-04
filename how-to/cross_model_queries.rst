@@ -64,7 +64,7 @@ Note we wrap the query in single quotes here, so that the parenthesis aren't int
 
 ``./jimmctl query-models 'select(.model.name=="test-2")' | jq``
 
-We currently have a MicroK8s controller registered from earlier, and as we can see, the model details for that model have been returned.::
+We currently have a `MicroK8s` controller registered from earlier, and as we can see, the model details for that model have been returned.::
 
     {
     "results": {
