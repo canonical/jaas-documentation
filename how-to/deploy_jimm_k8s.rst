@@ -93,7 +93,7 @@ Once deployed we need to configure JIMM. Run the following commands:
     juju config jimm-k8s dns-name=jimm.<your domain>
 
 
-Next we also need to configure ingress. Usually the Kubernetes cluster operator will set up a Kubernetes secret for you containing a certificate and key for JIMM’s FQDN (in case you need a certificate look at the next section) and give you the secret name. All you need to do next is:
+Next we also need to configure ingress. Usually the Kubernetes cluster operator will set up a Kubernetes secret for you containing a certificate and key for JIMM's FQDN (in case you need a certificate look at the next section) and give you the secret name. All you need to do next is:
 
 ``juju config ingress tls-secret-name=<secret name>``
 
@@ -114,7 +114,7 @@ In case you do not have access to a PostgreSQL database you can use Amazon’s R
 Don’t have certificates
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-In case the cluster operator did not set up a Kubernetes secret for you containing certificate and key for JIMM’s FQDN, you can use Let’s Encrypt and cert-manager to get the certificate.
+In case the cluster operator did not set up a Kubernetes secret for you containing certificate and key for JIMM's FQDN, you can use Let’s Encrypt and cert-manager to get the certificate.
 First, you will need to install helm:
 
 ``sudo snap install helm``
@@ -159,7 +159,7 @@ and run:
 
 ``kubectl apply -n jimm -f stg-issuer.yaml``
 
-which will create a certificate issuer in JIMM’s namespace.
+which will create a certificate issuer in JIMM's namespace.
 The create ``stg-certs.yaml`` file with the following content:
 
 .. code:: yaml
