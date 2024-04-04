@@ -101,9 +101,9 @@ When asked to enter then DNS domain name
 
 .. image:: images/ldap_image1.png
 
-enter “ldap.canonical.<domain.com>” replacing the “<domain.com>” part with the name of the domain you own.
+enter ``ldap.canonical.<domain.com>`` replacing the ``<domain.com>`` part with the name of the domain you own.
 
-In the next screen enter “canonical.<domain.com>” as the name of the organisation again, replacing “domain.com” with the domain you own.
+In the next screen enter ``canonical.<domain.com>`` as the name of the organisation again, replacing “domain.com” with the domain you own.
 
 .. image:: images/ldap_image3.png
 
@@ -143,7 +143,7 @@ Run:
 
 ``juju status  --format json | jq '.applications.ldap.units["ldap/0"]["public-address"]'``
 
-to obtain the public IP of the LDAP unit and use that IP to create an **A** record for the DNS ldap.canonical.<domain.com>.
+to obtain the public IP of the LDAP unit and use that IP to create an **A** record for the DNS ``ldap.canonical.<domain.com>``.
 Then we can run the get-certificate action on the certbot unit to obtain certificates;
 
 ``juju run-action –wait certbot/0 get-certificate agree-tos=true aws-access-key-id=<aws-secret-access-key-id> aws-secret-access-key=<aws-secret-access-key> domains=ldap.canonical.<domain.com> email=<your email> plugin=dns-route53``
@@ -259,7 +259,7 @@ Once we have Candid deployed and LDAP configured all we need to do is let Candid
 Testing Candid with LDAP
 ------------------------
 
-To test Candid you can open your browser and go to https://candid.canonical.<domain.com>/login which will present you with the following page:
+To test Candid you can open your browser and go to ``https://candid.canonical.<domain.com>/login`` which will present you with the following page:
 
 .. image:: images/ldap_image6.png
 
