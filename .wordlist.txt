@@ -9,6 +9,7 @@ certbot
 Charmhub
 CLI
 CLI
+config
 Diátaxis
 DNS
 DNS
@@ -44,6 +45,7 @@ Mattermost
 MyST
 namespace
 namespaces
+NFS
 NodePort
 ntp
 observability
