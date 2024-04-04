@@ -209,7 +209,7 @@ Trying to list models will now show no models:
 ``juju models``
 
 Now we will also configure JIMM to serve the Juju Dashboard. The tarball needed for that is 
-included in the jimm.tar.xz that you have previously downloaded and is located in the dashboard 
+included in the ``jimm.tar.xz`` that you have previously downloaded and is located in the dashboard 
 folder. First switch to the jimm model:
 
 ``juju switch infrastructure:jimm``
