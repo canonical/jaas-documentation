@@ -4,7 +4,7 @@ JAAS: Deploy JIMM
 Introduction
 ------------
 
-In this howto we will be deploying JIMM. JIMM - Juju Intelligent Model Manager provides
+In this how-to we will be deploying JIMM. JIMM - Juju Intelligent Model Manager provides
 the ability to manage multiple Juju models from a single point.
 
 Prerequisites
@@ -22,10 +22,10 @@ Deploy JIMM
 
 1. Bootstrap a controller: juju bootstrap aws
 2. Download the jimm bundle from `here <https://drive.google.com/file/d/19IFY7m-GW1AdKUzKdKbUO_bSE6zv8tNH/view?usp=sharing>`_
-3. Uncompress the file: ``tar xvf jimm.tar.xz``
+3. Extract the file: ``tar xvf jimm.tar.xz``
 4. Move to the jimm folder: ``cd jimm``
 5. Deploy the bundle: ``juju deploy  ./bundle.yaml --overlay ./overlay-certbot.yaml``
-6. Once the bundle has been deployed, get the public ip of the **haproxy/0** unit: ``juju status  --format json | jq '.applications.haproxy.units["haproxy/0"]["public-address"]'``
+6. Once the bundle has been deployed, get the public IP of the ``haproxy/0`` unit: ``juju status  --format json | jq '.applications.haproxy.units["haproxy/0"]["public-address"]'``
 7. Go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home#Dashboard>`_
 8. Add an **A** record for the deployed jimm (e.g. jimm.canonical.example.com) with the IP obtained in step 6.
 9. Obtain a valid certificate for the deployed candid by running: ``juju run-action --wait certbot/0 get-certificate  agree-tos=true aws-access-key-id=<Access key ID> aws-secret-access-key=<Secret access key> domains=<full dns of haproxy (e.g. jimm.canonical.example.com)> email=<Your email address>  plugin=dns-route53``
