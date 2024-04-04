@@ -35,6 +35,7 @@ JSON
 juju
 Juju
 Juju
+K8s
 Keystore
 Kubeflow
 Kubernetes
@@ -46,6 +47,7 @@ LTS
 Makefile
 Matrix
 Mattermost
+MicroK8s
 MyST
 namespace
 namespaces
