@@ -2,14 +2,14 @@ JAAS: Deploy Candid
 ===================
 
 Introduction
-In this tutorial we will be deploying Candid. Candid provides a macaroon-based authentication service that is able to utilize many standard identity providers:
+In this tutorial we will be deploying Candid. Candid provides a macaroon-based authentication service that is able to utilise many standard identity providers:
 
 - UbuntuSSO
 - LDAP
 - Google OpenID Connect
 - ADFS OpenID Connect
 - Azure OpenID Connect
-- Keystore (userpass or token)
+- Keystore (username/password or token)
 - Static identity provider (only used for testing)
 
 Prerequisites
@@ -28,29 +28,28 @@ Deploy Candid
 1. Bootstrap a controller: 
    ``juju bootstrap aws``
 
-2. Download the candid bundle from: 
-   https://drive.google.com/file/d/1ZyZeI0jNacbXK-AgxzUT0IUEp9tQ85QH/view?usp=sharing
+2. Download the candid bundle from `here <https://drive.google.com/file/d/1ZyZeI0jNacbXK-AgxzUT0IUEp9tQ85QH/view?usp=sharing>`_. 
 
-3. Uncompress the file:
+3. Extract the file:
    ``tar xvf candid_v1.11.0.tar.xz``
 
-4. Move to the candid folder: 
+4. Move to the ``candid`` folder: 
    ``cd candid``
 
 5. Deploy the bundle: 
    ``juju deploy ./bundle.yaml --overlay ./overlay-certbot.yaml``
 
-6. Once the bundle has been deployed, get the public ip of the haproxy/0 unit: 
+6. Once the bundle has been deployed, get the public IP of the ``haproxy/0`` unit: 
     ``juju status --format json | jq '.applications.haproxy.units["haproxy/0"]["public-address"]'``
 
-7. Go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home#Dashboard>`_.
+7. Go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home>`_.
 
-8. Add an A record for the deployed candid (e.g. candid.canonical.example.com) with the IP obtained in step 6.
+8. Add an A record for the deployed candid (e.g. ``candid.canonical.example.com``) with the IP obtained in step 6.
 
-9. Obtain a valid certificate for the deployed candid by running: 
+9. Obtain a valid certificate for the deployed Candid by running: 
     ``juju run-action --wait certbot/0 get-certificate  agree-tos=true aws-access-key-id=<Access key ID> aws-secret-access-key=<Secret access key> domains=<full dns of haproxy (e.g. candid.canonical.example.com)> email=<Your email address>  plugin=dns-route53``
 
-10. Let candid know its DNS name (replace candid.canonical.example.com with the DNS name you set up in step 8): 
+10. Let candid know its DNS name (replace ``candid.canonical.example.com`` with the DNS name you set up in step 8): 
     ``juju config candid location=https://candid.canonical.example.com``
 
 11. Now all that is left is to set up the identity providers. In this tutorial we will set up a static identity provider with hard-coded usernames and passwords: 
@@ -77,9 +76,9 @@ Deploy Candid
             - group3'
 
 Following these steps you have deployed Candid that uses a static identity provider 
-with two hardcoded users. **Please note that the static identity provider should not
+with two hard-coded users. **Please note that the static identity provider should not
 be used in production**.
 
 To verify that Candid is working correctly, open your browser and go to 
-https://<candid DNS>/login and try to log in as “user1” or “user2” using one of the 
-hardcoded passwords.
+``https://<candid DNS>/login`` and try to log in as ``user1`` or ``user2`` using one of the 
+hard-coded passwords.

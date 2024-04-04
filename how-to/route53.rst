@@ -32,7 +32,7 @@ canonical.example.com subdomain.
 4. Enter the name of the subdomain (example: canonical.example.com)
 5. For **Type**, choose **Public hosted zone**.
 6. Choose **Created hosted zone**.
-7. Route 53 will automatically assign four name servers to the newly created zone. To start using the hosted zone for the subdomain you must create a new name server (NS) record in for the domain (example.com): the name of the NS record must be the same as the name of the subdomain (from the example above: canonical.example.com) and for the value set the names of the name servers assigned to your hoste zone by Route 53.
+7. Route 53 will automatically assign four name servers to the newly created zone. To start using the hosted zone for the subdomain you must create a new name server (NS) record in for the domain (example.com): the name of the NS record must be the same as the name of the subdomain (from the example above: canonical.example.com) and for the value set the names of the name servers assigned to your hosted zone by Route 53.
 
 Now you have registered the canonical.example.com subdomain as a public hosted zone with Route 53. Record the Hosted zone ID, which you will need in the next step.
 
@@ -86,21 +86,21 @@ In order to be able to use certbot or any other tool that uses programmatic acce
 Using Certbot to obtain certificates
 ------------------------------------
 
-1. Bootstrap a juju controller (in aws, azure or gce)
-2. Deploy haproxy
+1. Bootstrap a juju controller (in ``aws``, ``azure`` or ``gce``)
+2. Deploy HAProxy
 3. Deploy certbot
-4. Add relation between haproxy and certbot by running: ``juju relate haproxy certbot``
-5. Set the **combined-path** configuration option to the default path for haproxy by running: ``juju config certbot combined-path=/var/lib/haproxy/default.pem``
+4. Add relation between ``haproxy`` and ``certbot`` by running: ``juju relate haproxy certbot``
+5. Set the **combined-path** configuration option to the default path for ``haproxy`` by running: ``juju config certbot combined-path=/var/lib/haproxy/default.pem``
 6. Wait for the deploy
-7. Check which unit of haproxy and certbot has been deployed. In the following steps we assume that these are **haproxy/0** and **certbot/0** units. Please replace those with appropriate values for your deployment in the following steps.
-8. Run the following command to get the public IP of the haproxy unit: ``juju status  --format json | jq '.applications.haproxy.units["haproxy/0"]["public-address"]``
+7. Check which unit of ``haproxy`` and ``certbot`` has been deployed. In the following steps we assume that these are ``haproxy/0`` and ``certbot/0`` units. Please replace those with appropriate values for your deployment in the following steps.
+8. Run the following command to get the public IP of the ``haproxy`` unit: ``juju status  --format json | jq '.applications.haproxy.units["haproxy/0"]["public-address"]``
 9. Go to the Route 53 dashboard
 10. Choose **Hosted zone** and then the zone you created.
 11. Choose **Create Record**
-12. In the **Record name** enter the desired dns name (e.g. demo) and in the value paste the public IP address of the haproxy unit, then choose **Create records**.
+12. In the **Record name** enter the desired DNS name (e.g. demo) and in the value paste the public IP address of the ``haproxy`` unit, then choose **Create records**.
 13. Run action on the certbot unit to obtain the certificate: ``juju run-action --wait certbot/0 get-certificate  agree-tos=true aws-access-key-id=<Access key ID> aws-secret-access-key=<Secret access key> domains=<full dns of haproxy (e.g. demo.canonical.example.com)> email=<Your email address>  plugin=dns-route53``
 
-The result of this should be a deployed haproxy with a valid certificate. In case of 
+The result of this should be a deployed ``haproxy`` with a valid certificate. In case of 
 errors, please re-check the configuration of your domain’s NS entries at the registrar’s
 page and on Route 53.
 

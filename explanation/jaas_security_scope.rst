@@ -19,7 +19,7 @@ Access control and authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 JAAS provides an abstraction layer of access control on top of Juju. JAAS does this by backing its users
 with an IdP (Identity Provider), this particular IdP is called Candid which handles the authentication 
-for JIMM (Juju Intelligent Model Manager, the backend to JAAS). Furthermore, JAAS is  capable of many 
+for JIMM (Juju Intelligent Model Manager, the back-end to JAAS). Furthermore, JAAS is  capable of many 
 authentication and authorisation types, ranging from users to agents. For authorisation, JAAS provides
 this by means of tags and ReBAC (Relation Based Access Control).
 

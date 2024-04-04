@@ -21,13 +21,13 @@ standard of excellence. We want documentation to be the best it possibly can be.
 How do I contribute to this documentation?
 ------------------------------------------
 
-Documentation is generated from a public github repository located `here <https://github.com/canonical/jaas-documentation>`_ where
+Documentation is generated from a public GitHub repository located `here <https://github.com/canonical/jaas-documentation>`_ where
 you will find instructions on how to build the documentation and also serve documentation for local testing.
 
 We welcome all pull requests with documentation changes. To make the process easier, you will find and "Edit on GitHub" link in the
 footer of every page.
 
-For this documentation we use Sphinx and reStructuredText (reST), which is the default plaintext markup language used by Sphinx.
+For this documentation we use Sphinx and reStructuredText (reST), which is the default plain text markup language used by Sphinx.
 Here are some useful resources on reStructuredText:
 
 - `Sphinx reStructuredText Primer <https://tinyurl.com/rstprimer>`_
