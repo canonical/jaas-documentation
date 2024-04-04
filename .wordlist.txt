@@ -38,6 +38,7 @@ Kubernetes
 Launchpad
 ldap
 LDAP
+LDAP
 LTS
 Makefile
 Matrix
@@ -52,6 +53,7 @@ observability
 OEM
 OLM
 OpenLDAP
+OpenLDAP
 Permalink
 Permalink
 PostgreSQL
@@ -65,6 +67,7 @@ reStructuredText
 reStructuredText
 roadmap
 RTD
+SSH
 subdirectories
 subfolders
 subtree
