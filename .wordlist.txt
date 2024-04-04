@@ -5,6 +5,7 @@ APIs
 APIs
 aws
 balancer
+Candid
 certbot
 Charmhub
 CLI
@@ -18,6 +19,7 @@ EBS
 EKS
 enablement
 favicon
+FQDN
 Furo
 Git
 GitHub
@@ -33,6 +35,7 @@ JSON
 juju
 Juju
 Juju
+Keystore
 Kubeflow
 Kubernetes
 Launchpad
@@ -47,11 +50,13 @@ MyST
 namespace
 namespaces
 NFS
+Nginx
 NodePort
 ntp
 observability
 OEM
 OLM
+OpenID
 OpenLDAP
 OpenLDAP
 Permalink
@@ -73,6 +78,7 @@ subfolders
 subtree
 TLS
 Ubuntu
+UbuntuSSO
 UI
 UI
 UUID
