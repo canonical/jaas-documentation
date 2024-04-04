@@ -4,7 +4,7 @@ JAAS: Candid ADFS Integration
 Introduction
 ------------
 
-This how-to will teach you how to set up an AFDS identity provider for Candid.
+This how-to will teach you how to set up an ADFS identity provider for Candid.
 
 Prerequisites
 -------------
