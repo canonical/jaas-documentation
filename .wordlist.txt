@@ -74,6 +74,7 @@ reStructuredText
 reStructuredText
 roadmap
 RTD
+Skype
 SSH
 subdirectories
 subfolders
@@ -83,7 +84,9 @@ Ubuntu
 UbuntuSSO
 UI
 UI
+URI
 UUID
 VM
 webhook
+Xbox
 YAML
