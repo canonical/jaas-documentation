@@ -153,7 +153,7 @@ and wait for the deployment to finish. You can observe the deployment status by 
 ``juju status -watch 2s``
 
 
-Once the deployment is finished you will see that we have deployed 2 JIMM units, 2 postgresql units 
+Once the deployment is finished you will see that we have deployed 2 JIMM units, 2 PostgreSQL units 
 and one HAProxy unit. The HAProxy will act as a load balancer redirecting clients to one of the 
 deployed JIMM units and both JIMM units will connect to the deployed PostgreSQL cluster. We have 
 also deployed the ntp charm which will make sure the clocks on all units are synchronised and the 
@@ -340,14 +340,14 @@ your Juju client to the controller via:
 ``juju update-credentials aws --controller jimm.<your domain>``
 
 
-Now let’s make this tutorial fun and deploy kubernetes using JAAS. First, we want to add a new 
-model for our kubernetes deploy:
+Now let’s make this tutorial fun and deploy Kubernetes using JAAS. First, we want to add a new 
+model for our Kubernetes deploy:
 
 ``juju add-model k8s``
 
 
 Since we only have one controller in AWS, the new model will also be added in AWS. Juju makes 
-it really easy to deploy kubernetes, run the following command: 
+it really easy to deploy Kubernetes, run the following command: 
 
 ``juju deploy charmed-kubernetes``
 
@@ -355,8 +355,8 @@ and then we wait:
 
 ``juju status --wait 4s --color``
 
-Once the deploy finishes that is it - we have a functioning kubernetes cluster. To start using it 
-you will want to install the kubectl snap:
+Once the deploy finishes that is it - we have a functioning Kubernetes cluster. To start using it 
+you will want to install the ``kubectl`` snap:
 
 ``sudo snap install kubectl --classic``
 
@@ -381,11 +381,11 @@ Dashboard
 Now you can open a browser and navigate to https://jimm.canonical.domain.com/dashboard 
 where you will find the Juju Dashboard. Again you will be asked to log in: log in as user1. 
 If you click on Models in the left pane, you will see the k8s model that we created for our 
-kubernetes deploy. Click on k8s and you will see the entire kubernetes cluster as deployed 
+Kubernetes deploy. Click on k8s and you will see the entire Kubernetes cluster as deployed 
 by Juju. You can select individual applications to see details.
 
 Conclusion
 ----------
 
 Following this tutorial you have deployed the JAAS system and used it to deploy a simple 
-kubernetes cluster that you can use to deploy further workloads.
+Kubernetes cluster that you can use to deploy further workloads.
