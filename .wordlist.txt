@@ -28,6 +28,7 @@ Grafana
 HAProxy
 https
 IAM
+IdP
 installable
 JAAS
 jimm
@@ -69,6 +70,7 @@ pre
 Quickstart
 ReadMe
 ReadMe
+ReBAC
 reST
 reST
 reStructuredText
