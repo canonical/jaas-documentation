@@ -39,11 +39,11 @@ and wait for the deployment to finish. You can observe the deployment status by 
 
 ``juju status --watch 2s –color``
 
-Once the deployment is finished, you will see the certbot and haproxy units are in an error state. This is because we still need to obtain a valid certificate for Candid. First we will need to get the public IP of the haproxy/0 unit:
+Once the deployment is finished, you will see the certbot and HAProxy units are in an error state. This is because we still need to obtain a valid certificate for Candid. First we will need to get the public IP of the ``haproxy/0`` unit:
 
 ``juju status  --format json | jq '.applications.haproxy.units["haproxy/0"]["public-address"]'``
 
-Now you will need to go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home#Dashboard>`_, navigate to the hosted zone for the canonical.<domain.com> subdomain and select Create record. We will add an A record for candid.canonical.<domain.com> with the value of the IP of the haproxy/0 unit we obtained in the previous step.
+Now you will need to go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home#Dashboard>`_, navigate to the hosted zone for the ``canonical.<domain.com>`` subdomain and select Create record. We will add an A record for ``candid.canonical.<domain.com>`` with the value of the IP of the ``haproxy/0`` unit we obtained in the previous step.
 To obtain a valid certificate for Candid we will use an action of the certbot charm. Run:
 
 ``juju run-action --wait certbot/0 get-certificate  agree-tos=true aws-access-key-id=<access key id> aws-secret-access-key=<secret access key> domains=candid.canonical.<domain.com> email=<your email>  plugin=dns-route53``
@@ -66,8 +66,8 @@ To do that open your browser and go to the Azure portal Find App Registration as
 
 .. image:: images/azure_image3.png
 
-where you will enter the application name and choose “Accounts in any organizational directory (Any Azure AD directory - Multitenant) and personal Microsoft accounts (e.g. Skype, Xbox)” when specifying who can access this API.
-for the Redirect URI choose “Web” and enter “https://candid.canonical.<domain.com>/login/azure/callback” as the callback URI.
+where you will enter the application name and choose “Accounts in any organisational directory (Any Azure AD directory - Multi-tenant) and personal Microsoft accounts (e.g. Skype, Xbox)” when specifying who can access this API.
+for the Redirect URI choose “Web” and enter ``https://candid.canonical.<domain.com>/login/azure/callback`` as the callback URI.
 After clicking “Register” you will be taken to the App Registration page, where you will find the “Application (client) ID”, which you need to copy. Then select “Certificates & secrets” in the management menu, because we will need to create a new secret.
 
 .. image:: images/azure_image2.png
@@ -87,7 +87,7 @@ Next we need to add Azure as an identity provider to Candid, with the applicatio
     client-id: <client id>
     client-secret: <client secret>
 
-Then we can test Candid by opening your browser and going to “https://candid.canonical.<domain.com>/login”, which will present you with a page allowing you to login with Azure.
+Then we can test Candid by opening your browser and going to ``https://candid.canonical.<domain.com>/login``, which will present you with a page allowing you to login with Azure.
 
 .. image:: images/azure_image1.png
 
