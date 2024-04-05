@@ -8,7 +8,7 @@ Explanation
    JAAS tags <jaas_tags>
    JAAS security <jaas_security_scope>
 
-- Candid - authentication server
+- `Candid`_ - authentication server
 
 - JIMM - Juju Intelligent Model Manager
 
