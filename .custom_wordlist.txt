@@ -82,3 +82,6 @@ VM
 webhook
 Xbox
 YAML
+Terraform
+OAuth
+OAuth2
