@@ -25,7 +25,7 @@ The diagram below shows an overall picture of JAAS architecture.
 .. image:: images/jaas.png
 
 As in the diagram JAAS consists of two main components: *Juju Intelligent Model Manager (JIMM)*
-and *ReBAC* Authorization. Basically, JIMM implements a number of Juju facades and behaves as a
+and *ReBAC* Authorisation. Basically, JIMM implements a number of Juju facades and behaves as a
 *Juju Controller*, which under the hood proxies operations to underlying controllers. This enables
 other tools like Juju Dashboard or Juju CLI that expect a Juju Controller to communicate with, to
 seamlessly work with JIMM.
