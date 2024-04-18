@@ -41,5 +41,12 @@ After JIMM has been deployed, you need to configure it with your Juju-operated c
    :maxdepth: 1
 
    Add controller <add_controller>
-   Cross-Model Queries <cross_model_queries>
    Set up Route53 <route53>
+
+Terraform
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+   Using Terraform <use_terraform>
