@@ -54,6 +54,7 @@ NodePort
 ntp
 observability
 OEM
+OIDC
 OLM
 OpenID
 OpenLDAP
