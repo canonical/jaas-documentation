@@ -5,6 +5,7 @@ Explanation
 .. toctree::
    :maxdepth: 1
 
+   JAAS overview <jaas_overview>
    JAAS tags <jaas_tags>
    JAAS security <jaas_security_scope>
 
