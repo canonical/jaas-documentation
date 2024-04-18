@@ -8,7 +8,7 @@ JIMM provides audit logging functionality, tracking all requests/responses into 
 This gives administrators of JIMM the ability to audit changes at a very granular level.
 
 All requests to controllers and models are logged and can enable an analysis into why the state
-of the underyling Juju estate has changed.
+of the underlying Juju estate has changed.
 
 Audit logs are currently enabled by default without any config to disable their collection.
 The logging retention period is configurable and allows for audit logs to be stored for a
@@ -39,23 +39,23 @@ The results can be filtered and paginated as described below.
 
 Each audit log contains the following information:
 
-- **time [time]**:               When the audit log was created.
-- **conversation-id [string]**:  A unique id per websocket connection.
-- **message-id [uin64]**:        An incrementing count for each message sent during a session.
-- **facade-name [string]**:      The name of the grouping of methods a call is intended for, a facade categorises methods.
-- **facade-method [string]**:    The name of the method called.
-- **facade-version [int]**:      The version of the facade called, different client versions may use different facade version.
-- **object-id [string]**:        A parameter used in some methods, indicates the object being acted upon.
-- **user-tag [string]**:         The user making the request.
-- **model [string]**:            The model a request is acting on, can be empty for controller level requests.
-- **is-response [boolean]**:     Indicates whether this log is for a request or response message.
-- **params [map[string]]**:      Populated during requests with any request parameters.
-- **errors [map[string]]**:      Populated during responses with any response errors.
+- ``time`` [``time``]:               When the audit log was created.
+- ``conversation-id`` [``string``]:  A unique id per Websocket connection.
+- ``message-id`` [``uint64``]:       An incremental count for each message sent during a session.
+- ``facade-name`` [``string``]:      The name of the grouping of methods a call is intended for, a facade categorises methods.
+- ``facade-method`` [``string``]:    The name of the method called.
+- ``facade-version`` [``int``]:      The version of the facade called, different client versions may use different facade version.
+- ``object-id`` [``string``]:        A parameter used in some methods, indicates the object being acted upon.
+- ``user-tag`` [``string``]:         The user making the request.
+- ``model`` [``string``]:            The model a request is acting on, can be empty for controller level requests.
+- ``is-response`` [``boolean``]:     Indicates whether this log is for a request or response message.
+- ``params`` [``map[string]``]:      Populated during requests with any request parameters.
+- ``errors`` [``map[string]``]:      Populated during responses with any response errors.
 
 It's important to note that JIMM logs requests and responses separately and understanding 
 how to associate a request with a response is a useful tool. This can be done using the `conversation-id` and `message-id` fields.
 When a client establishes a connection with JIMM and begins making requests, a unique `conversation-id` is generated for 
-the lifetime of that websocket connection and each request/response pair will have the same `message-id`, which itself will
+the lifetime of that Websocket connection and each request/response pair will have the same `message-id`, which itself will
 increment whenever a new request is made. Then observing the `is-response` and `errors` fields, one can ascertain whether 
 a call was successful.
 
@@ -156,9 +156,9 @@ Filter logs by method call.
 ``--method``
     display events for a specific method call
 
-Each Juju/jimmctl call invokes a specific method. This can be thought of as an HTTP handler.
+Each ``juju``/``jimmctl`` call invokes a specific method. This can be thought of as an HTTP handler.
 Although a full list of all methods is not currently available, it is possible to filter audit events based
-on the method that was called. Important methods include Login, Deploy, DestroyApplication, DestroyModels
+on the method that was called. Important methods include ``Login``, ``Deploy``, ``DestroyApplication``, ``DestroyModels``.
 
 Note that method names are case sensitive.
 
@@ -241,7 +241,7 @@ Purge Logs
 
 It is also possible to manually purge audit-logs.
 
-This can be done with the jimmctl CLI and again only JIMM admins have rights to purge audit logs. In this case,
+This can be done with the ``jimmctl`` CLI and again only JIMM admins have rights to purge audit logs. In this case,
 other users cannot be granted this permission.
 
 ``jimmctl purge-audit-logs <date>``
@@ -249,7 +249,7 @@ other users cannot be granted this permission.
 This command will purge audit logs from the database before the given date.
 Note that the date format is flexible, accepting both a date or date and time.
 
-Note that ommiting the date will assume zero for the time, i.e. the start of that day.
+Note that omitting the date will assume zero for the time, i.e. the start of that day.
 
 Examples::
 
