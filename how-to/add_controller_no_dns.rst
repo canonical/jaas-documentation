@@ -7,7 +7,7 @@ Introduction
 The :doc:`add_controller` doc is a full guide on how to setup a controller, provide it with a load balancer front-end and use the load-balancer to terminate TLS connections.
 This guide provides a simplified setup that shows how to get a controller up and running with JIMM without the need for a load-balancer and a DNS address.
 
-This guide is intended for testing and development purposes only as the Juju controller cannot be created in an HA (high availability) setup.
+This guide is intended for testing and development purposes only as the Juju controller cannot be created in an HA (high-availability) setup.
 
 Prerequisites
 -------------
@@ -16,27 +16,27 @@ For this tutorial you will need the following:
 
 - AWS credentials
 - Basic knowledge of juju
-- Admin access to a JIMM controller (see this tutorial). For this tutorial we will assume this JIMM is located at jimm.canonical.example.com
+- Admin access to a JIMM controller (see this tutorial). For this tutorial we will assume this JIMM is located at ``jimm.canonical.example.com``.
 
 Deploy controller
 -----------------
 
 1. First we will prepare some parameters for the new controller and export environment variables that we will use in this tutorial. 
 
-    The **controller name** is the name given to the controller both on the local system and within JIMM. For visibility this often includes the name of the JAAS system, the cloud, the cloud-region and some kind of unique identifier, for example jaas-aws-us-east-1-001. 
+    The **controller name** is the name given to the controller both on the local system and within JIMM. For visibility this often includes the name of the JAAS system, the cloud, the cloud-region and some kind of unique identifier, for example ``jaas-aws-us-east-1-001``. 
 
     The **cloud** is the cloud in which the controller is being bootstrapped. 
 
     The **cloud region** is the region in which the controller is being bootstrapped. 
 
-    The **Candid URL** is the URL of the candid server that is providing the centralized identity service for the JAAS system. 
+    The **Candid URL** is the URL of the candid server that is providing the centralised identity service for the JAAS system. 
 
     The **JIMM URL** is the URL of the JIMM system providing the JAAS service.
 
     +----------------------+----------------------+
     | Parameter            | Environment variable |
     +======================+======================+
-    | Controller nam       | $NAME                |
+    | Controller name      | $NAME                |
     +----------------------+----------------------+
     | Cloud                | $CLOUD               |
     +----------------------+----------------------+
@@ -56,12 +56,10 @@ Deploy controller
 
     ``juju switch controller``
 
-4.  Install the jaas snap that you download here (note that this will eventually change to be accessible from https://snapcraft.io/jimmctl):
-
-    https://drive.google.com/file/d/1LiOvVpVQ13V3x3l2PhgS2fTHDUtCEe7p/view?usp=sharing 
+4.  Install the JAAS snap that you download from `here <https://drive.google.com/file/d/1LiOvVpVQ13V3x3l2PhgS2fTHDUtCEe7p/view?usp=sharing>`_ (note that this will eventually change to be accessible from ``https://snapcraft.io/jimmctl``). 
 
 5. To add the bootstrapped controller to JIMM we need to create a controller-information document. To do this, run the following command:
-    The "--local" flag allows you to skip providing the DNS address of your Juju controller.
+    The ``--local`` flag allows you to skip providing the DNS address of your Juju controller.
 
     ``/snap/jaas/current/bin/jimmctl controller-info --local $NAME $NAME.yaml``
 
@@ -73,4 +71,6 @@ Deploy controller
     
     ``/snap/jaas/current/bin/jimmctl add-controller $NAME.yaml``
     
-Following these steps you added an AWS controller to your JIMM. You should now be able to add models in AWS: juju add-model test aws
+Following these steps you added an AWS controller to your JIMM. You should now be able to add models in AWS: 
+
+    ``juju add-model test aws``

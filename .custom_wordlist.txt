@@ -2,6 +2,7 @@ addons
 ADFS
 API
 APIs
+auditability
 aws
 balancer
 Candid
@@ -52,8 +53,11 @@ NFS
 Nginx
 NodePort
 ntp
+OAuth
+OAuth2
 observability
 OEM
+OIDC
 OLM
 OpenID
 OpenLDAP
@@ -72,6 +76,7 @@ SSH
 subdirectories
 subfolders
 subtree
+Terraform
 TLS
 Ubuntu
 UbuntuSSO
@@ -80,8 +85,6 @@ URI
 UUID
 VM
 webhook
+Websocket
 Xbox
 YAML
-Terraform
-OAuth
-OAuth2
