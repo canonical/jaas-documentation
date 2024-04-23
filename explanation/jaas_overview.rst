@@ -39,7 +39,7 @@ As in the diagram JAAS consists of the following components:
 - Database (PostgreSQL)
 - Secure storage (Vault)
 
-Basically, JIMM implements a number of Juju facades and behaves as a *Juju Controller*,
+JIMM implements a number of Juju facades and behaves as a *Juju Controller*,
 which under the hood proxies operations to underlying controllers. This enables
 other tools, like the Juju Dashboard or Juju CLI, that communicate with a 
 Juju Controller to work seamlessly with JIMM.
