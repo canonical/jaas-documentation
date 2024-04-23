@@ -41,8 +41,8 @@ As in the diagram JAAS consists of the following components:
 
 Basically, JIMM implements a number of Juju facades and behaves as a *Juju Controller*,
 which under the hood proxies operations to underlying controllers. This enables
-other tools like Juju Dashboard or Juju CLI that expect a Juju Controller to
-communicate with, to seamlessly work with JIMM.
+other tools, like the Juju Dashboard or Juju CLI, that communicate with a 
+Juju Controller to work seamlessly with JIMM.
 
 For authentication of users or service accounts, JAAS requires an *OIDC Provider*
 (Hydra) that handles the standard OAuth flows including browser flow, device flow,
