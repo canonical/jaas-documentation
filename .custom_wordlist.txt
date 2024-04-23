@@ -59,6 +59,7 @@ observability
 OEM
 OIDC
 OLM
+OpenFGA
 OpenID
 OpenLDAP
 Permalink
