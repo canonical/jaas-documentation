@@ -13,10 +13,10 @@ To detail what JAAS is, let's look at what JAAS provides:
   giving them a single point of contact for their entire real estate and, in combination
   with the Juju Dashboard, giving them a clear overview of their infrastructure.
 
-- **JAAS** enables SREs and developers to access models via identities from an externel IdP
+- **JAAS** enables site reliability engineers and developers to access models via identities from an external IdP
   and is not limited to local users.
 
-- **JAAS** enables SREs and developers to manage access control across all of their
+- **JAAS** enables site reliability engineers and developers to manage access control across all of their
   controllers, models, applications and application offers from a single place, as opposed
   to having to go through each Juju controller manually and updating permissions specifically
   for individual local users on each controller.
