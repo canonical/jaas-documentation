@@ -72,7 +72,7 @@ Now create a file called ``main.tf`` with the following content:
         }
 
         provider "juju" {
-            controller_addresses = "<address of your controller>"
+            controller_addresses = "<address of your controller>" # (e.g., "jimm:443")
 
             client_id     = "<clientID>"
             client_secret = "<clientSecret>"
