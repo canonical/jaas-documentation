@@ -94,7 +94,7 @@ Deploy controller
 
     ``juju status  --format json | jq '.applications.haproxy.units["haproxy/0"]["public-address"]'``
 
-10.  Go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home>`_.
+10.  Go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home>`__.
 
 11.  Add an A record for the deployed controller and the DNS name specified in step 1 with the IP obtained in step 9.
 
@@ -102,7 +102,7 @@ Deploy controller
 
     ``juju run-action --wait certbot/0 get-certificate  agree-tos=true aws-access-key-id=<Access key ID> aws-secret-access-key=<Secret access key> domains=<dns name specified in step 1 (jimm.canonical.example.com)> email=<Your email address>  plugin=dns-route53``
 
-13.  Install the JAAS snap that you download from `here <https://drive.google.com/file/d/1LiOvVpVQ13V3x3l2PhgS2fTHDUtCEe7p/view?usp=sharing>`_.
+13.  Install the JAAS snap that you download from `here <https://drive.google.com/file/d/1LiOvVpVQ13V3x3l2PhgS2fTHDUtCEe7p/view?usp=sharing>`__.
 
 14. To add the bootstrapped controller to JIMM we need to create a controller-information document. To do this, run the following command:
 
