@@ -72,7 +72,7 @@ Deploy controller
 
     ``juju switch controller``
 
-5. Download the controller bundle from `here <https://drive.google.com/file/d/17GHATHXGg2GuIeIWGr0FvkguMRdv5vnH/view?usp=sharing>`_.
+5. Download the controller bundle from `here <https://drive.google.com/file/d/17GHATHXGg2GuIeIWGr0FvkguMRdv5vnH/view?usp=sharing>`__.
 
 6. Extract the file: 
 
@@ -90,7 +90,7 @@ Deploy controller
 
     ``juju status  --format json | jq '.applications.haproxy.units["haproxy/0"]["public-address"]'``
 
-10.  Go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home>`_.
+10.  Go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home>`__.
 
 11.  Add an A record for the deployed controller and the DNS name specified in step 1 with the IP obtained in step 9.
 
