@@ -29,7 +29,5 @@ footer of every page.
 
 For this documentation we use Sphinx and reStructuredText (reST), which is the default plain text markup language used by Sphinx.
 Here are some useful resources on reStructuredText:
-
-.. wokeignore:rule=master
-- `Sphinx reStructuredText Primer <https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html>`_
+- `Sphinx reStructuredText Primer <https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html>`_ :none:`wokeignore:rule=master,`
 - `reStructuredText style guide <https://canonical-documentation-with-sphinx-and-readthedocscom.readthedocs-hosted.com/style-guide/>`_ 
