@@ -112,9 +112,7 @@ Don’t have a PostgreSQL database
 
 In case you do not have access to a PostgreSQL database you can use Amazon’s RDS to create one. Navigate to the RDS console and select “Create database”. Under “Engine type” select “PostgreSQL”, specify “Master username” and “Master password”. Also make sure to select “Public access” as “Yes”. You can customise all other options to your preference. Once the database is created, navigate to the database’s dashboard. There you will see the “Endpoint” and “Port” strings, which you will need to connect to the database.  Use the following command to configure JIMM: :none:`wokeignore:rule=master,`
 
-.. code-block:: none
-
-    juju config jimm-k8s dns=’postgres://<master username>:<master password>@<database endpoint>:<database port>/<database name> :none:`wokeignore:rule=master,`
+    ``juju config jimm-k8s dns=postgres://<master username>:<master password>@<database endpoint>:<database port>/<database name>`` :none:`wokeignore:rule=master,`
 
 Don’t have certificates
 ~~~~~~~~~~~~~~~~~~~~~~~
