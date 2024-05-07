@@ -171,6 +171,7 @@ custom_required_modules = []
 custom_excludes = [
     'doc-cheat-sheet*',
     'README.md',
+    'starter-guide.rst',
     ]
 
 # Add CSS files (located in .sphinx/_static/)

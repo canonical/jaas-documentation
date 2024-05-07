@@ -53,7 +53,7 @@ The first component we need to deploy is Candid, so let’s begin by creating a 
 
 ``juju add-model candid``
 
-To deploy Candid please download `this <https://drive.google.com/file/d/1ZyZeI0jNacbXK-AgxzUT0IUEp9tQ85QH/view?usp=sharing>`_ tarball, 
+To deploy Candid please download `this <https://drive.google.com/file/d/1ZyZeI0jNacbXK-AgxzUT0IUEp9tQ85QH/view?usp=sharing>`__ tarball, 
 which contains everything you will need. 
 
 Extract the tarball:
@@ -138,7 +138,7 @@ Let’s add a new Juju model for JIMM:
 
 ``juju add-model jimm``
 
-To deploy JIMM please download `this <https://drive.google.com/file/d/19IFY7m-GW1AdKUzKdKbUO_bSE6zv8tNH/view?usp=sharing>`_ tarball and extract it:
+To deploy JIMM please download `this <https://drive.google.com/file/d/19IFY7m-GW1AdKUzKdKbUO_bSE6zv8tNH/view?usp=sharing>`__ tarball and extract it:
 
 ``tar xvf jimm.tar.xz``
 
@@ -364,8 +364,9 @@ you will want to install the ``kubectl`` snap:
 
 and fetch the config file from the newly deployed cluster:
 
-.. wokeignore:rule=master
-``juju scp kubernetes-master/0:config ~/.kube/config``
+..code-block:: none
+
+    juju scp kubernetes-master/0:config ~/.kube/config :none:`wokeignore:rule=master,`
 
 You can verify everything is configured correctly and see the cluster by running:
 
