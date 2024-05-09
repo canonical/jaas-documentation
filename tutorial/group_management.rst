@@ -16,7 +16,6 @@ Prerequisites
 
 For this tutorial you will need the following:
 
-- Deployed JAAS system (JIMM and Candid) with a few valid users (see :doc:`../how-to/deploy_jimm` and :doc:`../how-to/deploy_candid`)
 - At least one controller connected to JIMM  (see :doc:`../how-to/add_controller`)
 - ``jimmctl`` command (either built from source or installed via a snap)
 
