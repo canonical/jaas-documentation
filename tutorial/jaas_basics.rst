@@ -2,7 +2,7 @@ JAAS Basics
 ===========
 
 .. warning::
-        This document has not been updated to JIMM.V2.
+        This document has not been updated to JIMM.V3.
 
 Introduction
 ------------

@@ -11,7 +11,6 @@ the ability to drill-in to the details when you need it.
 
 **JAAS** is composed of the following components:
 
-- Candid - a macaroon-based authentication server, which can use a variety of identity providers to correctly identify users,
 - JIMM - Juju Intelligent Model Manager, which acts as a single point of contact for multiple Juju controllers,
 - Juju controllers -  each controlling models in specific clouds or cloud regions,
 - Juju dashboard - providing a clear overview of your Juju real estate with the ability to drill down into details of your deploys.

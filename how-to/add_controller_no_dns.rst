@@ -1,6 +1,10 @@
 JAAS: Add controller to JIMM without DNS
 ========================================
 
+.. warning::
+    This document has not been updated for JIMM.V3.
+
+
 Introduction
 ------------
 
