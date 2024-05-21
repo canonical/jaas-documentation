@@ -9,6 +9,12 @@ The following document describes missing JAAS documentation as well as any docs 
 - Auth doc explaining JIMM's authentication and authorization.
 - How to enable/deploy/use the dashboard.
 - JAAS Limitations - potentially (As an example, cross-controller relations don't work with JAAS currently)
+- Relating JIMM and COS stack - general observability.
+- What versions of Juju controllers and CLI does JIMM support.
+- Managing access rights via jimmctl 
+- How to migrate existing Juju controllers and models to JAAS.
+- How to bootstrap JAAS with an admin user and create user permissions.
+- How to migrate models between Juju controllers in JAAS.
 
 ## Docs requiring changes
 - how-to/add_controller (possibly merge add_controller_no_dns into the original)
