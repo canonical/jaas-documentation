@@ -71,7 +71,7 @@ and when this process finishes we can add a new model for JIMM:
 
 Now we can deploy the JIMM into the newly created model:
 
-``juju deploy jimm-k8s –channel edge``
+``juju deploy jimm-k8s --channel edge``
 
 As Juju does not currently support exposing an application on a k8s cloud, we need to also deploy ``nginx-ingress-integrator`` charm. Run:
 
@@ -107,14 +107,14 @@ juju login ``jimm.<your domain>``
 Appendix
 --------
 
-Don’t have a PostgreSQL database
+Don't have a PostgreSQL database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In case you do not have access to a PostgreSQL database you can use Amazon's RDS to create one. Navigate to the RDS console and select "Create database". Under "Engine type" select "PostgreSQL", specify "Master username" and "Master password". Also make sure to select "Public access" as "Yes". You can customise all other options to your preference. Once the database is created, navigate to the database's dashboard. There you will see the "Endpoint" and "Port" strings, which you will need to connect to the database.  Use the following command to configure JIMM: :none:`wokeignore:rule=master,`
 
     ``juju config jimm-k8s dns=postgres://<master username>:<master password>@<database endpoint>:<database port>/<database name>`` :none:`wokeignore:rule=master,`
 
-Don’t have certificates
+Don't have certificates
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 In case the cluster operator did not set up a Kubernetes secret for you containing certificate and key for JIMM's FQDN, you can use Let’s Encrypt and cert-manager to get the certificate.
