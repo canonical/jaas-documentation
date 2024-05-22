@@ -19,11 +19,13 @@ Setup Multipass (Optional)
 --------------------------
 Multipass is a tool to launch Ubuntu VMs from Windows, Linux and MacOS. The remainder of this guide can be run from within a multipass VM to avoid affecting the host machine.
 
-Start by running the following commands to install and start a Multipass VM, the optional section will define the VM's memory/cpu/disk usage.
+Start by running the following commands to install and start a Multipass VM, the optional section will define the VM's memory/CPU/disk usage.
 
-$ sudo snap install multipass
-$ multipass launch jammy --name jimm-deploy [-m 12g -c 4 -d 40G]
-$ multipass shell jimm-deploy
+.. code:: bash
+
+    sudo snap install multipass
+    multipass launch jammy --name jimm-deploy [-m 12g -c 4 -d 40G]
+    multipass shell jimm-deploy
 
 Setup Juju & MicroK8s
 ---------------------
@@ -42,38 +44,38 @@ Now we can install our dependencies, note that Juju 3+ only works with a strictl
     sudo snap install juju --channel=3.5/stable
 
 Once you have the Juju CLI installed, you will need to bootstrap a Juju controller to your cloud. 
-We will be using microk8s as our cloud. The Juju documentation has detailed instructions on how to bootstrap a controller
+We will be using Microk8s as our cloud. The Juju documentation has detailed instructions on how to bootstrap a controller
 for various clouds and machine types.
 
-To begin, run the following commands to setup microk8s.
+To begin, run the following commands to setup Microk8s.
 
 .. code:: bash
 
     # Add the 'ubuntu' user to the MicroK8s group:
-    $ sudo usermod -a -G snap_microk8s ubuntu
+    sudo usermod -a -G snap_microk8s ubuntu
     # Give the 'ubuntu' user permissions to read the ~/.kube directory:
-    $ sudo chown -f -R ubuntu ~/.kube
+    sudo chown -f -R ubuntu ~/.kube
     # Create the 'microk8s' group:
-    $ newgrp snap_microk8s
+    newgrp snap_microk8s
     # Enable the necessary MicroK8s addons:
-    $ sudo microk8s enable hostpath-storage dns ingress
+    sudo microk8s enable hostpath-storage dns ingress
     # Setup the metallb add-on for the identity bundle later
-    $ sudo microk8s enable metallb:10.64.140.43-10.64.140.100
+    sudo microk8s enable metallb:10.64.140.43-10.64.140.100
     # Set up a short alias for the Kubernetes CLI:
-    $ sudo snap alias microk8s.kubectl kubectl
+    sudo snap alias microk8s.kubectl kubectl
 
 Next, bootstrap your Juju controller.
 
 .. code:: bash
 
     # Since the Juju package is strictly confined, you also need to manually create a path:
-    $ mkdir -p ~/.local/share
-    $ juju bootstrap microk8s jimm-demo-controller
+    mkdir -p ~/.local/share
+    juju bootstrap microk8s jimm-demo-controller
 
 Deploy the identity-bundle
 --------------------------
 For this tutorial we will use Canonical's identity bundle to provide authentication. JIMM uses OAuth 2.0, a provider agnostic way of handling authentication.
-Although any compliant identity provider could be used with JIMM, we recommend the use Canonical's identity platform for the best compatability.
+Although any compliant identity provider could be used with JIMM, we recommend the use Canonical's identity platform for the best compatibility.
 Canonical's identity bundle uses Ory Hydra/Kratos to provide an OAuth server and user management, respectively.
 
 Now we will create a Juju model for the identity platform and deploy the bundle.
@@ -109,9 +111,9 @@ Deploy JIMM
 Now we will deploy JIMM and its dependencies into a new model. Let's first explore however what JIMM's dependencies are and what they are used for.
 
 - OpenFGA: The OpenFGA charm provides authorization, defining who is allowed to access what.
-- Postgresql: Postgresql is JIMM's database of choice and stores persistent state. This Postgres instance is used by both JIMM and OpenFGA.
+- PostgreSQL: PostgreSQL is JIMM's database of choice and stores persistent state. This Postgres instance is used by both JIMM and OpenFGA.
 - Vault: The Vault charm is used for storing sensitive user secrets. JIMM can be configured to store in plain-text in Postgres but this is not recommended for a production environment.
-- Ingress: There are various charms that provide ingress into a k8s cluster. JIMM supports `traefik-k8s <https://charmhub.io/traefik-k8s>`__ and `nginx-ingress-integrator <https://charmhub.io/nginx-ingress-integrator>`__, this tutorial will use the latter.
+- Ingress: There are various charms that provide ingress into a K8s cluster. JIMM supports `traefik-k8s <https://charmhub.io/traefik-k8s>`__ and `nginx-ingress-integrator <https://charmhub.io/nginx-ingress-integrator>`__, this tutorial will use the latter.
 
 .. note::
     In a production environment you may want to structure your deployment slightly differently.  
@@ -136,7 +138,7 @@ Let's begin by creating a new model for JIMM and deploying the necessary applica
     juju relate jimm:vault vault
     juju relate openfga:database postgresql
     
-At this point only OpenFGA and Postgresql should be in an active state.
+At this point only OpenFGA and PostgreSQL should be in an active state.
 JIMM, Vault and the ingress should all be in a blocked state. Next we will relate JIMM to the cross-model offers we created previously.
 
 .. code:: bash
@@ -150,7 +152,7 @@ Initialise Vault
 ----------------
 The Vault charm has documentation on how to initiliaze it `here <https://charmhub.io/vault-k8s/docs/h-getting-started?channel=1.15/beta>`__. But an abridged version of the steps are provided here.
 
-Install the Vault CLI client and the yq tool.
+Install the Vault CLI client and the ``yq`` tool.
 
 .. code:: bash
 
@@ -159,9 +161,9 @@ Install the Vault CLI client and the yq tool.
 
 To communicate with the Vault server we now need to setup 3 environment variables:
 
-- VAULT_ADDR
-- VAULT_TOKEN
-- VAULT_CAPATH
+- ``VAULT_ADDR``
+- ``VAULT_TOKEN``
+- ``VAULT_CAPATH``
 
 Run the following commands to setup the first two variables that will enable communication with Vault.
 
@@ -182,7 +184,7 @@ The output should resemble the following
 
 .. code::
 
-        Key                Value
+    Key                Value
     ---                -----
     Seal Type          shamir
     Initialized        false
@@ -218,26 +220,6 @@ Finally, save the root token and unseal key to disk for use later. The unseal ke
 
 We are now ready to move onto the next step.
 
-.. 
-    Configure OpenFGA Authorization Model
-    -------------------------------------
-    In this step we will configure the authorization model.
-
-    Create a file called auth_model.json with the following contents:
-
-    .. code:: yaml
-
-        model: >
-          {
-           include content from authorisation_model.yaml from somewhere.
-          }
-
-    run the action ``juju run jimm/leader create-authorization-model --params auth_model.yaml --wait 1m``
-
-    This step is intentionally left out as the auth model should not have to be created by the user if the 
-    approach in https://github.com/canonical/jimm/pull/1212 is adopted.
-    Currently a WIP.
-
 Configure JIMM
 --------------
 
@@ -259,7 +241,7 @@ Run the following commands:
     juju config jimm final-redirect-url="http://test-jimm.localhost/auth/whoami"
 
 Note that the public and private key pairs must be generated by the `go macaroon bakery repo <https://github.com/go-macaroon-bakery/macaroon-bakery>`__.
-To do this briefly run the following command, ensuring you have the `go` tool installed:
+To do this briefly run the following command, ensuring you have the ``go`` tool installed:
 
 .. code:: bash
 
@@ -283,7 +265,22 @@ Using Your JIMM Deployment
 
 Now that you have JIMM running you can browse our additional guides to start adding controllers and workloads.
 
-- Setup your initial JIMM admin and configure permissiosn.
+- Setup your initial JIMM admin and configure permissions.
 - Learn how to add a new controller to JIMM.
 - Learn how to migrate models from existing controllers to JIMM.
-- Understand the difference between the Juju, JAAS and Jimmctl CLI tools.
+- Understand the difference between the ``juju``, ``jaas`` and ``jimmctl`` CLI tools.
+
+Cleanup
+-------
+
+To remove the Juju controller you initially created and all models with associated applications, run the following command:
+
+.. code::
+
+    juju destroy-controller --destroy-all-models --destroy-storage --no-prompt jimm-demo-controller
+
+And to cleanup the Multipass VM if one was used:
+
+.. code::
+
+    multipass delete --purge jimm-deploy
