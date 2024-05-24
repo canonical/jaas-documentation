@@ -146,7 +146,15 @@ JIMM, Vault and the ingress should all be in a blocked state. Next we will relat
     juju relate jimm admin/iam.hydra
     juju relate jimm admin/iam.self-signed-certificates
 
-Move onto the next step to initialise Vault.
+Before we move on we will deploy our own self-signed-certificates operator in order to eventually use JIMM with HTTPS.
+We are doing this step afterwards to avoid issues that occur when performing the relations before the ingress is ready.
+
+.. code:: bash
+    
+    juju deploy self-signed-certificates jimm-cert
+    juju relate ingress jimm-cert
+
+Now move onto the next step to initialise Vault.
 
 Initialise Vault
 ----------------
@@ -231,7 +239,8 @@ Run the following commands:
     
     # The UUID value is used internally to represent the JIMM controller in OpenFGA relations/tuples.
     # Changes to the UUID value after deployment will likely result in broken permissions.
-    juju config jimm uuid=1234
+    # Use a randomly generated UUID.
+    juju config jimm uuid=3f4d142b-732e-4e99-80e7-5899b7e67e59
     # The address to reach JIMM, this will configure ingress and is also used for OAuth flows/redirects.
     juju config jimm dns-name=test-jimm.localhost
     # A private and public key for macaroon based authentication with Juju controllers.
@@ -270,6 +279,18 @@ These values are only used internally between JIMM and Juju controllers.
 
 At this point you can run ``juju status`` and you should observe JIMM is active.  
 Navigate to ``http://test-jimm.localhost/debug/info`` to verify your JIMM deployment.
+
+Finally we will obtain the ca-certificate generated to ensure that we can connect to JIMM with HTTPS. 
+This is necessary for the Juju CLI to work properly
+
+.. code:: bash
+    juju run jimm-cert/0 get-ca-certificate --quiet | yq .ca-certificate | sudo tee /usr/local/share/ca-certificates/jimm-test.crt
+    sudo update-ca-certificates
+
+Verify that you can securely connect to JIMM with the following command:
+
+.. code:: bash
+    curl https://jimm.test.localhost/debug/info
 
 Using Your JIMM Deployment
 --------------------------
