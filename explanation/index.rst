@@ -8,8 +8,7 @@ Explanation
    JAAS overview <jaas_overview>
    JAAS tags <jaas_tags>
    JAAS security <jaas_security_scope>
-
-- `Candid`_ - authentication server
+   CLI Tools <cli_tools>
 
 - JIMM - Juju Intelligent Model Manager
 
