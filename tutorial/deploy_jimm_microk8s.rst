@@ -92,10 +92,8 @@ Watch the deployment by running:
     juju status --watch 1s
 
 Eventually all application should reach an ``active`` state except for the ``kratos-external-idp-integrator`` application. This application allows you to connect your identity platform
-to an external identity provider like Google, GitHub, Microsoft, etc. This is necessary because the identity provider only acts as an identity broker.
-
-We recommend using the following `how-to <https://charmhub.io/topics/canonical-identity-platform/how-to/integrate-external-identity-provider>`__ and choosing your preferred identity provider.
-Note that you can temporarily skip this step and return to it later, JIMM can still run without integrating the identity bundle to an external identity provider but login to JIMM will not work.
+to an external identity provider like Google, GitHub, Microsoft, etc. This is necessary because the identity provider only acts as an identity broker. A summary on how to set this up is
+provided in the next step.
 
 Now run the following commands to create offers that will be consumed in the next step.
 
@@ -105,6 +103,48 @@ Now run the following commands to create offers that will be consumed in the nex
     juju offer self-signed-certificates:send-ca-cert
 
 Running ``juju status`` should now two offers that we will use from a different model in the next step.
+
+Setup External IdP
+------------------
+We recommend using the following `how-to <https://charmhub.io/topics/canonical-identity-platform/how-to/integrate-external-identity-provider>`__ 
+and choosing your preferred identity provider.
+
+.. note::
+    You can temporarily skip this step and return to it later, JIMM can still run without integrating 
+    the identity bundle to an external identity provider but login to JIMM will not work.
+
+Setting up an IdP to point to your local environment can be tricky depending on the provider used. Below are some tips to make this work.
+
+When setting up certain providers, e.g. Google, security restrictions limit what redirect URLs can be used. Some restrictions include, 
+
+- The redirect URL must be ``https``.
+- The redirect URL must be a top level domain ``.com``.
+- The redirect URL cannot be an IP address.
+
+The redirect URL is the URL that your browser is returned to after you have signed in at the identity provider. When using Canonical's 
+identity bundle, the redirect URL after login will be something like ``https://<kratos-public-url>/self-service/methods/oidc/callback/<provider-id>``
+as described in the above how-to. Although the URL is ``https``, it is an IP address. 
+This address needs to be registered in your identity provider as an approved redirect URI/URL. 
+
+If your preferred identity provider does not accept an IP address, we recommend using a tool like ``https://nip.io/``, 
+a DNS resolver service that can map any IP address to a hostname.  
+
+| This service can map hostnames of the form ``<anything>[.-]<IP Address>.nip.io`` to return simply ``<IP Address>``.
+| E.g. ``magic.127.0.0.1.nip.io`` resolves to ``127.0.0.1``. This service is very useful when working with an IdP locally for testing.
+
+.. note::
+    The same effect can be obtained by editing your ``/etc/hosts`` file but this would require changes on your host system
+    and within various containers. 
+
+To utilise nip.io, get the address of your traefik-public instance and set the ``external_hostname`` config option as below,
+
+.. code:: bash
+
+    TRAEFIK_PUBLIC=$(juju status traefik-public --format yaml | yq .applications.traefik-public.address)
+    juju config traefik-public external_hostname="kratos.$TRAEFIK_PUBLIC.nip.io"
+
+This has now changed the URL that the identity provider shares to related applications like JIMM. JIMM and your browser will still be able
+to resolve this hostname and the IP will only be reachable from your local system.
 
 Deploy JIMM
 -----------
@@ -284,12 +324,14 @@ Finally we will obtain the ca-certificate generated to ensure that we can connec
 This is necessary for the Juju CLI to work properly
 
 .. code:: bash
+
     juju run jimm-cert/0 get-ca-certificate --quiet | yq .ca-certificate | sudo tee /usr/local/share/ca-certificates/jimm-test.crt
     sudo update-ca-certificates
 
 Verify that you can securely connect to JIMM with the following command:
 
 .. code:: bash
+
     curl https://jimm.test.localhost/debug/info
 
 Using Your JIMM Deployment
