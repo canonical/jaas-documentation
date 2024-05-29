@@ -6,7 +6,7 @@ The following document describes missing JAAS documentation as well as any docs 
 - ~~Deploy JAAS tutorial~~ (completed in deploy_jimm_microk8s.rst)
 - JAAS architecture
 - ~~Explain the difference between Juju, JAAS and jimmctl CLI tools.~~ (completed in cli_tools.rst)
-- Auth doc explaining JIMM's authentication and authorization.
+- Auth doc explaining JIMM's authentication and authorisation.
 - How to enable/deploy/use the dashboard.
 - JAAS Limitations - potentially (As an example, cross-controller relations don't work with JAAS currently)
 - Relating JIMM and COS stack - general observability.
