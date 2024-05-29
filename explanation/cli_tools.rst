@@ -20,9 +20,9 @@ Summary
      - A plugin to add more commands to the Juju CLI
      - A tool for admins of the JIMM server
    * - Installation Link
-     - `juju <https://snapcraft.io/juju>`__
-     - `jaas <https://snapcraft.io/jaas>`__
-     - `jimmctl <https://snapcraft.io/jimmctl>`__
+     - `Snap package <https://snapcraft.io/juju>`__
+     - `Snap package <https://snapcraft.io/jaas>`__
+     - `Snap package <https://snapcraft.io/jimmctl>`__
    * - Use
      - ``juju <command>``
      - ``juju jaas -h`` and ``juju <command>``
@@ -52,7 +52,7 @@ However, JIMM offers some extra functionality and that is where ``jaas`` comes i
 
 The ``jaas`` CLI tool acts as a plugin for the Juju CLI. It is distributed as `a Snap <https://snapcraft.io/jaas>`__.  
 When you install both the Juju and JAAS snaps, they automatically connect via 
-Snapcraft's `content-interface <https://snapcraft.io/docs/content-interface>`__ enabling new commands on the Juju CLI.
+`content-interface <https://snapcraft.io/docs/content-interface>`__ enabling new commands on the Juju CLI.
 
 To view a list of all the newly available commands run ``juju jaas -h``.
 
