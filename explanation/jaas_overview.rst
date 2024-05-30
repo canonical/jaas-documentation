@@ -3,6 +3,7 @@ JAAS Overview
 
 What is JAAS?
 -------------
+
 To detail what JAAS is, let's look at what JAAS provides:
 
 - **JAAS** provides a single location to manage your Juju infrastructure by using the 

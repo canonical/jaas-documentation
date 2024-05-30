@@ -3,9 +3,9 @@ Understanding ``juju`` vs ``jaas`` vs ``jimmctl``
 
 This document aims to explain the differences between the various CLI tools you may encounter when using Juju and JAAS.
 
-=======
+
 Summary
-=======
+-------
 
 .. list-table::
    :widths: 25 25 25 25
@@ -28,8 +28,9 @@ Summary
      - ``juju jaas -h`` and ``juju <command>``
      - ``jimmctl <command>``
 
+
 ``juju``
-========
+--------
 
 The Juju ecosystem introduces the Juju CLI as the first way a user can interact with their Juju environment.
 
@@ -41,8 +42,9 @@ A full list of the Juju CLI commands is available `here <https://juju.is/docs/ju
 The Juju CLI shares the same name as the Juju project so it's helpful to understand via context or via the explicit use of 
 ``juju`` when we are talking about the Juju CLI versus the Juju project.
 
+
 ``jaas``
-========
+--------
 
 The JAAS ecosystem introduces the JIMM controller. A special controller that sits in front of your Juju controllers 
 and acts as an authorisation gateway and aggregator.
@@ -58,8 +60,9 @@ To view a list of all the newly available commands run ``juju jaas -h``.
 
 These commands are intended to be used by all users of JAAS, giving you more capability with Juju.  
 
+
 ``jimmctl``
-===========
+-----------
 
 As mentioned above, at the centre of the JAAS ecosystem is the JIMM controller. The ``jimmctl`` CLI tool is intended for administrators
 of JIMM, to be used to debug permission issues, add controllers, access audit logs, etc.
