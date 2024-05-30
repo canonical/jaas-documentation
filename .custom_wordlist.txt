@@ -22,6 +22,7 @@ FQDN
 Furo
 Git
 GitHub
+Google
 Grafana
 HAProxy
 https
@@ -49,6 +50,7 @@ Matrix
 Mattermost
 MicroK
 MicroK8s
+Microsoft
 Multipass
 MyST
 namespace

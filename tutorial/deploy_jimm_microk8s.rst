@@ -136,7 +136,7 @@ a DNS resolver service that can map any IP address to a hostname.
     The same effect can be obtained by editing your ``/etc/hosts`` file but this would require changes on your host system
     and within various containers. 
 
-To utilise nip.io, get the address of your traefik-public instance and set the ``external_hostname`` config option as below,
+To utilise ``nip.io``, get the address of your ``traefik-public`` instance and set the ``external_hostname`` config option as below,
 
 .. code:: bash
 
