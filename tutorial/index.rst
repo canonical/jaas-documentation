@@ -8,4 +8,4 @@ This is a collection of tutorials covering JAAS.
 
    JAAS Basics <jaas_basics>
    Group and access management <group_management>
-   Deploy JIMM on MicroK8s <deploy_jimm_microk8s>
+   Deploy JAAS on MicroK8s <deploy_jaas_microk8s>

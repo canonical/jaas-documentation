@@ -141,7 +141,7 @@ To utilise ``nip.io``, get the address of your ``traefik-public`` instance and s
 .. code:: bash
 
     TRAEFIK_PUBLIC=$(juju status traefik-public --format yaml | yq .applications.traefik-public.address)
-    juju config traefik-public external_hostname="kratos.$TRAEFIK_PUBLIC.nip.io"
+    juju config traefik-public external_hostname="iam.$TRAEFIK_PUBLIC.nip.io"
 
 This has now changed the URL that the identity provider shares to related applications like JIMM. JIMM and your browser will still be able
 to resolve this hostname and the IP will only be reachable from your local system.
@@ -152,7 +152,7 @@ Now we will deploy JIMM and its dependencies into a new model. Let's first explo
 
 - OpenFGA: The OpenFGA charm provides authorisation, defining who is allowed to access what.
 - PostgreSQL: PostgreSQL is JIMM's database of choice and stores persistent state. This PostgreSQL instance is used by both JIMM and OpenFGA.
-- Vault: The Vault charm is used for storing sensitive user secrets. JIMM can be configured to store in plain-text in PostgreSQL but this is not recommended for a production environment.
+- Vault: The Vault charm is used for storing sensitive user secrets. JIMM can be configured to store data in plain-text in PostgreSQL but this is not recommended for a production environment.
 - Ingress: There are various charms that provide ingress into a K8s cluster. JIMM supports `Traefik Ingress <https://charmhub.io/traefik-k8s>`__ and `Nginx Ingress Integrator <https://charmhub.io/nginx-ingress-integrator>`__, this tutorial will use the latter.
 
 .. note::
@@ -259,7 +259,12 @@ Run the following command to unseal Vault and export the unseal token and root k
 
 Now run ``juju status`` again and confirm your Vault unit is in an active state.
 
-Finally, save the root token and unseal key to disk for use later. The unseal key is especially important if your PC is restarted as Vault will become resealed and the unseal key will be needed again.
+Finally, save the root token and unseal key for later use.
+
+.. note::
+
+    The unseal key is especially important. If your PC is restarted or any of the vault pods are recreated, then Vault will 
+    become resealed and the unseal key will be needed again.
 
 .. code:: bash
 
@@ -332,17 +337,100 @@ Verify that you can securely connect to JIMM with the following command:
 
 .. code:: bash
 
-    curl https://jimm.test.localhost/debug/info
+    curl https://test-jimm.localhost/debug/info
+
+Verify that you can login to your new controller with the Juju CLI.
+You should be presented with a message to login.
+
+.. code:: bash
+
+    juju login test-jimm.localhost:443 -c jimm-k8s
+    # Please visit https://iam.10.64.140.46.nip.io/iam-hydra/oauth2/device/verify and enter code <code> to log in.
 
 Using Your JIMM Deployment
 --------------------------
 
-Now that you have JIMM running you can browse our additional guides to start adding controllers and workloads.
+Now that you have JIMM running you can browse our additional guides to setup an admin user, add controllers and migrate existing workloads.
 
 - Setup your initial JIMM admin and configure permissions.
-- Learn how to add a new controller to JIMM.
+- :doc:`Learn how to add a new controller to JIMM.<../how-to/add_controller>`
 - Learn how to migrate models from existing controllers to JIMM.
 - Understand the difference between the ``juju``, ``jaas`` and ``jimmctl`` CLI tools.
+
+Common Issues
+-------------
+
+The following are some common issues that may arise especially after a reboot of your local machine.
+
+------------------------------
+JIMM shows invalid certificate
+------------------------------
+Try ``curl https://jimm-test.localhost/debug/info``, if you receive an SSL certificate error then it's likely that the K8s ingress is no longer
+serving the correct TLS certificate. The following command can help verify this.
+
+.. code:: bash
+
+    openssl s_client -showcerts -servername test-jimm.localhost -connect test-jimm.localhost:443 </dev/null
+
+If the certificates CN (Common Name) is "Kubernetes Ingress Controller Fake Certificate" then the self-signed certificate is missing.
+Run the following to fix the issue.
+
+.. code:: bash
+
+    juju remove-relation ingress jimm-cert
+
+Wait for the relation to be removed by observing the output from ``juju status --relations --watch 2s``.
+
+.. code:: bash
+
+    juju relate ingress jimm-cert
+
+Try ``curl`` the server again the certificate issue should be resolved.
+
+----------------------------
+JIMM is not serving requests
+----------------------------
+
+If JIMM is not responding to requests, run the following commands to check the logs.
+
+.. code:: bash
+
+    microk8s kubectl exec -it -n jimm jimm-0 -c jimm -- /charm/bin/pebble logs
+
+This will present the server logs and debug further.
+
+-------------------------------------------------
+JIMM can't communicate with the identity platform
+-------------------------------------------------
+
+If JIMM's logs show an error similar to the following,
+
+.. code::
+    
+    {"level":"error","ts":"2024-05-31T07:00:03.827Z","msg":"failed to create oidc provider","error":"Get \"https://iam.10.64.140.43.nip.io/iam-hydra/.well-known/openid-configuration\": tls: failed to verify certificate: x509: certificate is not valid for any names, but wanted to match iam.10.64.140.43.nip.io"}
+    {"level":"error","ts":"2024-05-31T07:00:03.827Z","msg":"failed to setup authentication service","error":"failed to create oidc provider"}
+    {"level":"error","ts":"2024-05-31T07:00:03.827Z","msg":"shutdown","error":"failed to setup authentication service"}
+
+then it is likely that the IP address for the ``traefik-public`` and ``traefik-admin`` services in the ``iam`` model have changed.
+
+Run the following to verify this,
+
+.. code:: bash
+
+    juju switch iam
+    juju status
+    juju config traefik-public external_hostname
+    juju status --format yaml | yq .applications.traefik-public.address
+
+If you have used the ``nip.io`` service to setup hostnames, you may find that the address and IP no longer match.
+
+Update the ``external_hostname`` config of ``traefik-public`` to the correct hostname and update your approved redirect URIs/URLs in your identity provider.
+Assuming use of the ``nip.io`` service, we can simply rerun the steps used previously.
+
+.. code:: bash
+
+    TRAEFIK_PUBLIC=$(juju status traefik-public --format yaml | yq .applications.traefik-public.address)
+    juju config traefik-public external_hostname="iam.$TRAEFIK_PUBLIC.nip.io"
 
 Cleanup
 -------

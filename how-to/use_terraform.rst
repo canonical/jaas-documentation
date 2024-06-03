@@ -60,7 +60,7 @@ and:
 
 Now create a file called ``main.tf`` with the following content:
 
-    .. code::
+    .. code:: terraform
 
         terraform {
             required_providers {

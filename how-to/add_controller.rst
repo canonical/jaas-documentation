@@ -1,119 +1,129 @@
 JAAS: Add controller to JIMM
 ============================
 
-.. warning::
-    This document has not been updated for JIMM.V3.
-
 
 Introduction
 ------------
 
 JIMM gives a centralised view of all models in the system. However the work of managing 
-the models is delegated to a set of standard  juju controllers deployed in various clouds
+the models is delegated to a set of Juju controllers deployed in various clouds
 and regions.
 
-These juju controllers must be deployed with some specific options to ensure they work
-correctly in the JAAS system. This document discusses how to bootstrap a juju controller
+These Juju controllers must be deployed with some specific options to ensure they work
+correctly in the JAAS system. This document discusses how to bootstrap a Juju controller
 such that it will work correctly in a JAAS system.
 
-In this tutorial we will be bootstrapping a new juju controller in AWS and adding it to
-JIMM.
+In this how-to we will show how to add Juju controllers deployed in both MicroK8s and LXD to 
+a JIMM controller.
 
 Prerequisites
 -------------
 
 For this tutorial you will need the following:
 
-- A valid registered domain (regardless of the registrar)
-- AWS credentials
-- Basic knowledge of juju
-- A subdomain registered with Route 53. To learn how to set that up, please follow :doc:`route53`. In this tutorial we will assume that you have registered the canonical.example.com subdomain - please replace this with the appropriate subdomain that you have registered with Route 53.
-- Admin access to a JIMM controller (see this tutorial). For this tutorial we will assume this JIMM is located at ``jimm.canonical.example.com``
-
-Deploy controller
------------------
-
-1. First we will prepare some parameters for the new controller and export environment variables that we will use in this tutorial. 
-
-    The **controller name** is the name given to the controller both on the local system and within JIMM. For visibility this often includes the name of the JAAS system, the cloud, the cloud-region and some kind of unique identifier, for example ``jaas-aws-us-east-1-001``. 
-
-    The **cloud** is the cloud in which the controller is being bootstrapped. 
-
-    The **cloud region** is the region in which the controller is being bootstrapped. 
-
-    The **DNS name** is the full DNS name that will be given to the controller, often it is wise to make the host name the same as the controller name within a particular domain. 
-
-    The **Candid URL** is the URL of the candid server that is providing the centralised identity service for the JAAS system. 
-
-    The **JIMM URL** is the URL of the JIMM system providing the JAAS service.
-
-    +----------------------+----------------------+
-    | Parameter            | Environment variable |
-    +======================+======================+
-    | Controller name      | $NAME                |
-    +----------------------+----------------------+
-    | Cloud                | $CLOUD               |
-    +----------------------+----------------------+
-    | Cloud Region         | $REGION              |
-    +----------------------+----------------------+
-    | DNS name             | $DNS                 |
-    +----------------------+----------------------+
-    | Candid URL           | $CANDID              |
-    +----------------------+----------------------+
-    | JIMM URL             | $JIMM                |
-    +----------------------+----------------------+
+- Basic knowledge of Juju
+- A JIMM controller deployed in MicroK8s, see :doc:`the tutorial <../tutorial/deploy_jaas_microk8s>`.
+- Administrator permission on the JIMM controller, see ``todo``.
 
 
-2. Now we are ready to bootstrap a controller. Please note the constraints here are the ones used for production JAAS services and should be suitable for most loads. If it is anticipated that the JAAS system will have a different model profile then we encourage you to determine the appropriate constraints for your system: 
+Prelude
+-------
 
-    ``juju bootstrap --bootstrap-constraints="root-disk=50G cores=8 mem=8G" --config login-token-refresh-url=https://$JIMM/.well-known/jwks.json --config allow-model-access=true --config public-dns-address=$DNS:443 $CLOUD/$REGION $NAME``
+In order for a Juju controller to trust a JIMM controller, the ``login-token-refresh-url`` config option must 
+be specified when bootstrapping the Juju controller.
 
-3. Next the controller should be put into HA mode (optional): 
+This config option is set to a specific URL path that serves JIMM's public key, which is used to verify signed 
+requests when they reach the Juju controller.
 
-    ``juju enable-ha``
+MicroK8s Controller
+-------------------
 
-4. The we switch to the controller model: 
+The following section provides guidance on how to connect a controller bootstrapped on MicroK8s to your JIMM running in MicroK8s.
 
-    ``juju switch controller``
+We will name this controller ``workload-microk8s`` as it will be running our workloads
+as opposed to our original controller which only deploys JAAS.
 
-5. Download the controller bundle from `here <https://drive.google.com/file/d/17GHATHXGg2GuIeIWGr0FvkguMRdv5vnH/view?usp=sharing>`__.
+.. code:: bash
 
-6. Extract the file: 
+    juju bootstrap microk8s workload-microk8s --config login-token-refresh-url=http://jimm-endpoints.jimm.svc.cluster.local:8080/.well-known/jwks.json
 
-    ``tar xvf controller.tar.xz``
-
-7. Move to the controller folder: 
-
-    ``cd controller``
-
-8. Deploy the bundle: 
-
-    ``juju deploy  ./bundle.yaml --overlay ./overlay-certbot.yaml --map-machines=existing``
-
-9. Once the bundle has been deployed, get the public IP of the ``haproxy/0`` unit: 
-
-    ``juju status  --format json | jq '.applications.haproxy.units["haproxy/0"]["public-address"]'``
-
-10.  Go to the `Route 53 dashboard <https://us-east-1.console.aws.amazon.com/route53/v2/home>`__.
-
-11.  Add an A record for the deployed controller and the DNS name specified in step 1 with the IP obtained in step 9.
-
-12.  Obtain a valid certificate for the deployed candid by running: 
-
-    ``juju run-action --wait certbot/0 get-certificate  agree-tos=true aws-access-key-id=<Access key ID> aws-secret-access-key=<Secret access key> domains=<dns name specified in step 1 (jimm.canonical.example.com)> email=<Your email address>  plugin=dns-route53``
-
-13.  Install the JAAS snap that you download from `here <https://drive.google.com/file/d/1LiOvVpVQ13V3x3l2PhgS2fTHDUtCEe7p/view?usp=sharing>`_.
-
-14. To add the bootstrapped controller to JIMM we need to create a controller-information document. To do this, run the following command:
-
-    ``/snap/jaas/current/bin/jimmctl controller-info --public-address=$DNS:443 $NAME $NAME.yaml``
-
-15. Now we can switch to JIMM: 
+.. note::
     
-    ``juju switch $JIMM``
+    The hostname comes from Kubernetes DNS functionality. See more `here <https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#a-aaaa-records>`__. 
 
-16. And add the controller to JIMM with the command: 
-    
-    ``/snap/jaas/current/bin/jimmctl add-controller $NAME.yaml``
-    
-Following these steps you added an AWS controller to your JIMM. You should now be able to add models in AWS: juju add-model test aws
+Once this process is complete we will switch back to JIMM and add the controller to JIMM.
+
+.. code:: bash
+
+    juju switch jimm
+    jimmctl controller-info workload-microk8s ~/snap/jimmctl/common/k8s-controller-info.yaml --local --tls-hostname juju-apiserver
+    jimmctl add-controller ~/snap/jimmctl/common/k8s-controller-info.yaml
+
+The ``controller-info`` command creates a YAML file with information about the controller and with the add-controller command we
+pass this information to JIMM, which then connects to the new controller.
+
+.. note::
+
+    | A Juju server's default certificate contains a `SAN <https://en.wikipedia.org/wiki/Subject_Alternative_Name>`__ for the name ``juju-apiserver``.
+    | This is why we specify the ``--tls-hostname juju-apiserver`` flag when running the controller-info command.
+
+
+The use of the ``--local`` flag avoids the need to provide a public DNS address and ``--tls-hostname`` provides the expected
+hostname used in TLS, a useful way of handling TLS issues during local development. These config options are normally not needed
+in a production environment.
+
+
+LXD Controller
+--------------
+
+The following section provides guidance on how to connect a controller bootstrapped on LXD to your JIMM running in MicroK8s.
+
+The steps will be similar to those for adding a MicroK8s hosted controller but because we are traversing from the isolated network
+of the container through to LXD's network, there will be additional steps.
+
+Run the following commands to bootstrap a LXD based controller:
+
+.. code:: bash
+
+    CLOUDINIT_FILE="cloudinit-tweak.temp.yaml"
+    CONTROLLER_NAME="workload-lxd"
+    CLOUDINIT_TEMPLATE=$'cloudinit-userdata: |
+    preruncmd:
+        - echo "%s    test-jimm.localhost" >> /etc/hosts
+    ca-certs:
+        trusted:
+        - |\n%s'
+    printf "$CLOUDINIT_TEMPLATE" "$(lxc network get lxdbr0 ipv4.address | cut -f1 -d/)" "$(cat /usr/local/share/ca-certificates/jimm-test.crt | sed -e 's/^/\t  /')" > "${CLOUDINIT_FILE}"
+    juju bootstrap lxd "${CONTROLLER_NAME}" --config "${CLOUDINIT_FILE}" --config login-token-refresh-url=https://test-jimm.localhost/.well-known/jwks.json --debug 
+
+The set of commands will do the following:
+
+- Create a Cloud-init template, Cloud-init provisions the LXD container that Juju will use.
+- The Cloud-init script will create an entry in ``/etc/hosts`` to point ``test-jimm.localhost`` to the LXD bridge address in order to route this request to your host network.
+- The Cloud-init script will add the CA cert in ``/usr/local/share/ca-certificates/jimm-test.crt`` to the machine. If you've placed JIMM's CA cert elsewhere, please update this file location.
+- Finally the bash script will bootstrap Juju and configure it to communicate with JIMM.
+
+Next, we will create a network relay to forward traffic from our host network through to the Juju server running in a LXC container.
+
+.. note::
+    The network relay relies on the ``socat`` application running in the background.  
+    The application will need to be run again between system reboots.
+
+.. code:: bash
+
+    JUJU_ADDRESS=$(juju show-controller workload-lxd --format yaml | yq .workload-lxd.details.api-endpoints.[0])
+    socat tcp-listen:8001,reuseaddr,fork tcp:$JUJU_ADDRESS
+
+To test the relay is working run the following command which should return a HTTP 400 response code.
+
+.. code:: bash
+
+    curl -ki https://localhost:8001
+
+Finally, we can connect our new controller to JIMM.
+
+.. code:: bash
+
+    juju switch jimm
+    jimmctl controller-info workload-lxd ~/snap/jimmctl/common/lxd-controller-info.yaml --local --tls-hostname juju-apiserver
+    jimmctl add-controller ~/snap/jimmctl/common/lxd-controller-info.yaml

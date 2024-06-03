@@ -44,7 +44,7 @@ A controller tag has the following format:
     controller-<controller name>
 
 Cloud
-----------
+-----
 
 A cloud tag has the following format:
 
