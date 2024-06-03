@@ -24,6 +24,7 @@ After JIMM has been deployed, you need to configure it with your Juju-operated c
    :maxdepth: 1
 
    Add controller <add_controller>
+   Bootstrap permissions <bootstrap_permissions>
    Set up Route53 <route53>
 
 Terraform
