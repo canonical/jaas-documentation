@@ -259,11 +259,12 @@ Run the following command to unseal Vault and export the unseal token and root k
 
 Now run ``juju status`` again and confirm your Vault unit is in an active state.
 
-Finally, save the root token and unseal key to disk for use later.
+Finally, save the root token and unseal key for later use.
 
 .. note::
 
-    The unseal key is especially important. If your PC is restarted, Vault will become resealed and the unseal key will be needed again.
+    The unseal key is especially important. If your PC is restarted or any of the vault pods are recreated, then Vault will 
+    become resealed and the unseal key will be needed again.
 
 .. code:: bash
 
@@ -344,7 +345,7 @@ You should be presented with a message to login.
 .. code:: bash
 
     juju login test-jimm.localhost:443 -c jimm-k8s
-    #Please visit https://iam.10.64.140.46.nip.io/iam-hydra/oauth2/device/verify and enter code <code> to log in.
+    # Please visit https://iam.10.64.140.46.nip.io/iam-hydra/oauth2/device/verify and enter code <code> to log in.
 
 Using Your JIMM Deployment
 --------------------------
@@ -361,9 +362,9 @@ Common Issues
 
 The following are some common issues that may arise especially after a reboot of your local machine.
 
--------------------------------------
-JIMM server shows invalid certificate
--------------------------------------
+------------------------------
+JIMM shows invalid certificate
+------------------------------
 Try ``curl https://jimm-test.localhost/debug/info``, if you receive an SSL certificate error then it's likely that the K8s ingress is no longer
 serving the correct TLS certificate. The following command can help verify this.
 
@@ -390,7 +391,7 @@ Try ``curl`` the server again the certificate issue should be resolved.
 JIMM is not serving requests
 ----------------------------
 
-If the JIMM server is not responding to requests run the following commands to check the logs.
+If JIMM is not responding to requests, run the following commands to check the logs.
 
 .. code:: bash
 
@@ -402,7 +403,7 @@ This will present the server logs and debug further.
 JIMM can't communicate with the identity platform
 -------------------------------------------------
 
-If the JIMM server logs show an error similar to the following,
+If JIMM's logs show an error similar to the following,
 
 .. code::
     
