@@ -23,9 +23,7 @@ After JIMM has been deployed, you need to configure it with your Juju-operated c
 .. toctree::
    :maxdepth: 1
 
-   Add controller New <add_controller_copy>
    Add controller <add_controller>
-   Add controller without DNS <add_controller_no_dns>
    Set up Route53 <route53>
 
 Terraform

@@ -352,7 +352,7 @@ Using Your JIMM Deployment
 Now that you have JIMM running you can browse our additional guides to setup an admin user, add controllers and migrate existing workloads.
 
 - Setup your initial JIMM admin and configure permissions.
-- Learn how to add a new controller to JIMM.
+- :doc:`Learn how to add a new controller to JIMM.<../how-to/add_controller>`
 - Learn how to migrate models from existing controllers to JIMM.
 - Understand the difference between the ``juju``, ``jaas`` and ``jimmctl`` CLI tools.
 
