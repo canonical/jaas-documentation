@@ -9,7 +9,7 @@ Prerequisites
 For this how-to you will need the following:
 
 - A basic understanding of JAAS tags, see our :doc:`explanation doc<../explanation/jaas_tags>`.
-- A running JAAS environment, see :doc:`our tutorial <../tutorial/deploy_jimm_microk8s>`.
+- A running JAAS environment, see :doc:`our tutorial <../tutorial/deploy_jaas_microk8s>`.
 - An understanding of Juju permissions, see the `Juju docs <https://juju.is/docs/juju/user-permissions>`__.
 
 Creating an admin user
