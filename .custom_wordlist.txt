@@ -10,6 +10,7 @@ Candid's
 certbot
 Charmhub
 CLI
+CN
 config
 Diátaxis
 DNS
@@ -28,6 +29,7 @@ HAProxy
 https
 IAM
 IdP
+init
 installable
 JAAS
 JIMM
@@ -44,6 +46,9 @@ Launchpad
 ldap
 LDAP
 LTS
+LXC
+LXD
+LXD's
 MacOS
 Makefile
 Matrix
@@ -83,6 +88,7 @@ RTD
 Skype
 Snapcraft
 SSH
+SSL
 subdirectories
 subfolders
 subtree
@@ -93,6 +99,7 @@ Ubuntu
 UbuntuSSO
 UI
 URI
+URIs
 UUID
 VM
 VM's

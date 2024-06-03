@@ -22,7 +22,7 @@ Prerequisites
 For this tutorial you will need the following:
 
 - Basic knowledge of juju
-- A JIMM controller deployed in Microk8s, see :doc:`the tutorial <../tutorial/deploy_jaas_microk8s>`.
+- A JIMM controller deployed in MicroK8s, see :doc:`the tutorial <../tutorial/deploy_jaas_microk8s>`.
 - Administrator permission on the JIMM controller, see ``todo``.
 
 
@@ -39,7 +39,7 @@ MicroK8s Controller
 -------------------
 
 Bootstrap a new Juju controller in MicroK8s. We will name this controller ``workload-microk8s`` as it will be running our workloads
-as opposed to our original controlle which only deploys JAAS.
+as opposed to our original controller which only deploys JAAS.
 
 .. code:: bash
 
