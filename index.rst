@@ -47,6 +47,13 @@ In this documentation
 
 ---------
 
+Where to begin
+--------------
+
+We recommend starting with our tutorial on :doc:`deploying JAAS to MicroK8s<./tutorial/deploy_jaas_microk8s>`.
+
+This will guide you through the deployment of JAAS and links to further docs on how to manage your environment.
+
 Project and community
 ---------------------
 
