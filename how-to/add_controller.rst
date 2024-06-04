@@ -23,7 +23,7 @@ For this tutorial you will need the following:
 
 - Basic knowledge of Juju
 - A JIMM controller deployed in MicroK8s, see :doc:`the tutorial <../tutorial/deploy_jaas_microk8s>`.
-- Administrator permission on the JIMM controller, see ``todo``.
+- Administrator permission on the JIMM controller, see :doc:`bootstrapping permissions <./bootstrap_permissions>`.
 
 
 Prelude
