@@ -58,7 +58,7 @@ To begin, run the following commands to setup MicroK8s.
     # Create the 'microk8s' group:
     newgrp snap_microk8s
     # Enable the necessary MicroK8s addons:
-    sudo microk8s enable hostpath-storage dns ingress
+    sudo microk8s enable hostpath-storage dns ingress host-access
     # Setup the metallb add-on for the identity bundle later
     sudo microk8s enable metallb:10.64.140.43-10.64.140.100
     # Set up a short alias for the Kubernetes CLI:
@@ -352,10 +352,10 @@ Using Your JIMM Deployment
 
 Now that you have JIMM running you can browse our additional guides to setup an admin user, add controllers and migrate existing workloads.
 
-- Setup your initial JIMM admin and configure permissions.
+- :doc:`Setup your initial JIMM admin and configure permissions<../how-to/bootstrap_permissions>`.
 - :doc:`Learn how to add a new controller to JIMM.<../how-to/add_controller>`
-- Learn how to migrate models from existing controllers to JIMM.
-- Understand the difference between the ``juju``, ``jaas`` and ``jimmctl`` CLI tools.
+- :doc:`Learn how to migrate models from existing controllers to JIMM <../how-to/migrate_models>`.
+- :doc:`Understand the difference between the available CLI tools <../explanation/cli_tools>`.
 
 Common Issues
 -------------
