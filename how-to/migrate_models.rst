@@ -8,7 +8,7 @@ Prerequisites
 -------------
 
 - A standalone Juju controller with a model (optionally with a running application).
-- A basic understanding of Juju model migrations, see the `docs <https://juju.is/docs/juju/manage-models#heading--migrate-a-workload-model-to-another-controller>`__.
+- A basic understanding of Juju model migrations, see the `docs <https://juju.is/docs/juju/manage-models>`__.
 - A running JAAS, see the :doc:`tutorial <../tutorial/deploy_jaas_microk8s>`.
 - Administrator permissions for JAAS, so our :doc:`how-to <./bootstrap_permissions>`.
 
