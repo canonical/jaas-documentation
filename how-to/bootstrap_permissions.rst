@@ -20,7 +20,7 @@ In order to create an initial admin user we must use the config option ``control
 The format for ``controller-admins`` is a space separated list of email addresses or service accounts. This means
 that entries can be of the form ``name@domain.com`` or ``client-id@serviceaccount``.
 
-Run the following command replacing the contents with your email address to configure your user as an JIMM admin.
+Run the following command replacing the contents with your email address to configure your user as a JIMM admin.
 
 .. code:: bash
 
@@ -28,7 +28,13 @@ Run the following command replacing the contents with your email address to conf
 
 Now you can verify that you have admin access to JIMM using ``jimmctl``.
 
-The following commands are particularly useful.
+If you do not have ``jimmctl`` installed, you can do so with the following command:
+
+.. code:: bash
+
+    sudo snap install jimmctl --channel=3/stable
+
+The following commands are particularly useful for interacting with controllers.
 
 .. code:: bash
 
@@ -59,7 +65,7 @@ The following example will create a model and grant a fictional user read access
     juju add-model permission-test
     juju grant foo@canonical.com read permission-test
 
-This allows other users to see your model provided they have logged into JIMM.
+This allows user ``foo@canonical.com`` to see your model provided they have logged into JIMM.
 
 2. Using ``jimmctl``
 
@@ -78,4 +84,7 @@ Admins of JIMM can use ``jimmctl`` to view permissions on a more granular level 
     # View members of a group
     jimmctl auth relation list --target group-my-group
 
-More details on group management are available in our :doc:`group and access management tutorial<../tutorial/group_management>`.
+The purpose of the prefixes ``user-`` and ``group-`` is to distinguish the type of the object.
+More information is available in our doc on :doc:`JAAS tags <../explanation/jaas_tags>`
+
+And more information on group management is available in our :doc:`group and access management tutorial<../tutorial/group_management>`.
