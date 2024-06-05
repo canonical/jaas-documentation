@@ -4,6 +4,8 @@ JAAS: Model Migration
 In many scenarios it is necessary to migrate models from existing Juju controllers
 to an environment that includes JAAS.
 
+This process also allows you to migrate a model away from JAAS.
+
 Prerequisites
 -------------
 
@@ -88,4 +90,4 @@ identities for all users.
 
 At this point you can grant other users access to the model.
 
-
+Migrating the model back to the original controller is also possible using the same migrate command as used in step 2.
