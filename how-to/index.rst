@@ -18,13 +18,14 @@ Here are instructions on how to deploy JIMM.
 JIMM Configuration
 ------------------
 
-After JIMM has been deployed, you need to configure it with your Juju-operated cluster.
+After JIMM has been deployed, you need to configure it with your Juju operated cluster.
 
 .. toctree::
    :maxdepth: 1
 
-   Add controller to JIMM <add_controller>
    Bootstrap permissions <bootstrap_permissions>
+   Add a controller to JIMM <add_controller>
+   Migrate models <migrate_models>
    Set up Route53 <route53>
 
 Terraform

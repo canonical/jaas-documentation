@@ -78,9 +78,6 @@ LXD Controller
 
 The following section provides guidance on how to connect a controller bootstrapped on LXD to your JIMM running in MicroK8s.
 
-The steps will be similar to those for adding a MicroK8s hosted controller but because we are traversing from the isolated network
-of the container through to LXD's network, there will be additional steps.
-
 Run the following commands to bootstrap a LXD based controller:
 
 .. code:: bash
@@ -103,24 +100,11 @@ The set of commands will do the following:
 - The Cloud-init script will add the CA cert in ``/usr/local/share/ca-certificates/jimm-test.crt`` to the machine. If you've placed JIMM's CA cert elsewhere, please update this file location.
 - Finally the bash script will bootstrap Juju and configure it to communicate with JIMM.
 
-Next, we will create a network relay to forward traffic from our host network through to the Juju server running in a LXC container.
+Next, it is helpful to understand that we are traversing from the isolated network of the container through to 
+the host's network and to the LXD container where our Juju controller resides. This is possible thanks to the ``host-access``
+add-on in MicroK8s which allows containers to access the host network through a fixed IP address.
 
-.. note::
-    The network relay relies on the ``socat`` application running in the background.  
-    The application will need to be run again between system reboots.
-
-.. code:: bash
-
-    JUJU_ADDRESS=$(juju show-controller workload-lxd --format yaml | yq .workload-lxd.details.api-endpoints.[0])
-    socat tcp-listen:8001,reuseaddr,fork tcp:$JUJU_ADDRESS
-
-To test the relay is working run the following command which should return a HTTP 400 response code.
-
-.. code:: bash
-
-    curl -ki https://localhost:8001
-
-Finally, we can connect our new controller to JIMM.
+Connect our new controller to JIMM.
 
 .. code:: bash
 
