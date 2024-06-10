@@ -37,12 +37,12 @@ Once a Juju controller that is configured to communicate with JIMM has been crea
 
 Once you have identified which models to migrate, we will begin the process of model migration.
 
-We will assume a model called ``my-model`` is currently hosted on a controller called ``prod-controller`` and moving to a new controller 
+We will assume a model called ``my-model`` is currently hosted on a controller called ``my-controller`` and moving to a new controller 
 called ``workload-lxd`` (``workload-lxd`` should be connected to JIMM).
 
 .. code:: bash
 
-    juju switch prod-controller:my-model
+    juju switch my-controller:my-model
     juju migrate my-model workload-lxd
     juju status --watch 2s
     # Wait for model migration to complete.
@@ -54,8 +54,22 @@ At this point we should see the model has been migrated.
 3. Import the model into JIMM
 -----------------------------
 
-Finally we will import the model into JIMM using ``jimmctl``. 
-We first need the model UUID then we can import the model.
+Finally we will import the model into JIMM using ``jimmctl``.
+
+First we must check that we have a cloud-credential for the cloud where the desired model is running.
+This is simply a pre-check performed when importing a model to ensure that the user has credentials for the cloud.
+
+Check with the following,
+
+.. code:: bash
+
+    juju switch jimm
+    juju list-credentials --controller
+
+If you do not see a cloud-credential for the desired cloud, you can add one by following the instructs on
+`managing cloud-credentials <https://juju.is/docs/juju/manage-credentials>`__. 
+
+We then need the model UUID to import the model.
 
 .. code:: bash
 
