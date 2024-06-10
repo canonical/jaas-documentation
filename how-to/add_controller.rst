@@ -90,7 +90,7 @@ Run the following commands to bootstrap a LXD based controller:
     ca-certs:
         trusted:
         - |\n%s'
-    printf "$CLOUDINIT_TEMPLATE" "$(lxc network get lxdbr0 ipv4.address | cut -f1 -d/)" "$(cat /usr/local/share/ca-certificates/jimm-test.crt | sed -e 's/^/\t  /')" > "${CLOUDINIT_FILE}"
+    printf "$CLOUDINIT_TEMPLATE" "$(lxc network get lxdbr0 ipv4.address | cut -f1 -d/)" "$(cat /usr/local/share/ca-certificates/jimm-test.crt | sed -e 's/^/      /')" > "${CLOUDINIT_FILE}"
     juju bootstrap lxd "${CONTROLLER_NAME}" --config "${CLOUDINIT_FILE}" --config login-token-refresh-url=https://test-jimm.localhost/.well-known/jwks.json --debug 
 
 The set of commands will do the following:

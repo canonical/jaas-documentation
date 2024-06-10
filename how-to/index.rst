@@ -25,7 +25,8 @@ After JIMM has been deployed, you need to configure it with your Juju operated c
 
    Bootstrap permissions <bootstrap_permissions>
    Add a controller to JIMM <add_controller>
-   Migrate models <migrate_models>
+   Migrate models to JAAS <migrate_models>
+   Migrate models internally <migrate_models_internal>
    Set up Route53 <route53>
 
 Terraform

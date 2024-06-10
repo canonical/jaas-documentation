@@ -1,8 +1,7 @@
 JAAS: Model Migration
 =====================
 
-In many scenarios it is necessary to migrate models from existing Juju controllers
-to an environment that includes JAAS.
+In many scenarios it is necessary to migrate models to and from an environment that includes JAAS.
 
 Prerequisites
 -------------
@@ -10,7 +9,7 @@ Prerequisites
 - A standalone Juju controller with a model (optionally with a running application).
 - A basic understanding of Juju model migrations, see the `docs <https://juju.is/docs/juju/manage-models>`__.
 - A running JAAS, see the :doc:`tutorial <../tutorial/deploy_jaas_microk8s>`.
-- Administrator permissions for JAAS, so our :doc:`how-to <./bootstrap_permissions>`.
+- Administrator permissions for JAAS, see our :doc:`how-to <./bootstrap_permissions>`.
 
 1. Create a new Juju controller
 -------------------------------
@@ -23,7 +22,7 @@ at a running JIMM instance. Use the following command to check if your controlle
     juju switch <controller-name>
     juju controller-config login-token-refresh-url
 
-An empty value indicates that a new controller is necessary.
+If the value is empty, the bootstrapping of a new controller with this configuration value is required.
 
 In order to use models with JAAS, the models must be running on a Juju controller that is properly configured. The
 necessary config values cannot be set after bootstrap time, so any existing models must be migrated to a new controller.
@@ -86,6 +85,7 @@ With that the model should now be visible in JIMM. The purpose of the ``--owner`
 the new model owner should be. Models created on Juju controllers use local users while JIMM requires external
 identities for all users.
 
-At this point you can grant other users access to the model.
+At this point you can grant other users access to the model. See Juju documentation for `more info <https://juju.is/docs/juju/user-permissions>`__.
 
-
+Migrating the model back to the original controller is also possible using the same migrate command as used in step 2. 
+Switch to the ``workload-lxd`` controller where the model now lives and run the same steps to migrate back to ``my-controller``.
