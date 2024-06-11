@@ -7,3 +7,4 @@ Reference
    :maxdepth: 1
 
    Audit Logs <audit_logs>
+   Supported Versions <supported_versions>
