@@ -7,4 +7,4 @@ Reference
    :maxdepth: 1
 
    Audit Logs <audit_logs>
-   Supported Versions <supported_versions>
+   Supported Juju Versions <juju_required_version>

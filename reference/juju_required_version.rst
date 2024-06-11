@@ -1,4 +1,4 @@
-JAAS Supported Versions
+Supported Juju Versions
 =======================
 
 The following sections describe which version of the Juju CLI or controller is required for different scenarios.
@@ -29,9 +29,3 @@ Additionally, JAAS will also support the last LTS release from Juju's previous m
 support Juju 2.9.x.
 
 More information on Juju's roadmap and release information can be found `here <https://juju.is/docs/juju/roadmap>`__.
-
-.. 
-    Bug and security fixes
-    ----------------------
-
-    This section is TBD.
