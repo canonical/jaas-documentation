@@ -22,10 +22,14 @@ Add controllers to JAAS
 
 JAAS supports communicating with Juju controllers of various versions.
 
-JAAS is versioned with the same major version number as Juju. This means JAAS will always support Juju controllers 
-with the same major version as itself. E.g. JAAS v3 should be used with Juju 3.x controllers.
+JAAS supports Juju controllers with a minimum version **3.4**.
 
-Additionally, JAAS will also support the last LTS release from Juju's previous major release E.g. JAAS v3 will also
-support Juju 2.9.x.
+Controllers with a lower version do not have the necessary configuration options to work with JAAS.
+
+Going forward, JAAS is versioned with the same major version number as Juju. This means JAAS will always
+support Juju controllers with the same major version as itself. E.g. JAAS v3 should be used with Juju 3.x controllers.
+
+Additionally, JAAS will also support the last LTS release from Juju's previous major release E.g. JAAS v4 will also
+support the final Juju 3.x minor version.
 
 More information on Juju's roadmap and release information can be found `here <https://juju.is/docs/juju/roadmap>`__.
