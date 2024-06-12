@@ -37,6 +37,7 @@ JIMM's
 JSON
 juju
 Juju
+Juju's
 K8s
 Keystore
 Kratos
