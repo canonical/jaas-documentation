@@ -1,1 +1,2 @@
 .. _Canonical website: https://canonical.com/
+.. _Canonical identity platform: https://charmhub.io/topics/canonical-identity-platform
