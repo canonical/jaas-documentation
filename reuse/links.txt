@@ -1,2 +1,1 @@
 .. _Canonical website: https://canonical.com/
-.. _Candid: https://github.com/canonical/candid

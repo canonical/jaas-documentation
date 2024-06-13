@@ -22,12 +22,11 @@ For this tutorial you will need the following:
 Group management
 ----------------
 
-For this part of the tutorial we will assume your Candid has been configured
-to contain the following users:
+For this part of the tutorial we will assume the following users exist in an organisation:
 
-- ``alice``
-- ``adam``
-- ``eve``
+- ``alice@canonical.com``
+- ``adam@canonical.com``
+- ``eve@canonical.com``
 
 Next, let us create three groups for these users. Run: 
 
@@ -43,11 +42,11 @@ To add users to groups, let's run:
 
 .. code:: console
 
-    jimmctl auth add relation user-alice member group-A
-    jimmctl auth add relation user-adam member group-B
-    jimmctl auth add relation user-eve member group-C
+    jimmctl auth add relation user-alice@canonical.com member group-A
+    jimmctl auth add relation user-adam@canonical.com member group-B
+    jimmctl auth add relation user-eve@canonical.com member group-C
 
-which will add ``alice`` to group ``A``, ``adam`` to group ``B`` and ``eve`` to group ``C``.
+which will add Alice to group ``A``, Adam to group ``B`` and Eve to group ``C``.
 You will notice that we refer to user and group by their *JAAS tags* (for 
 explanation see :doc:`../explanation/jaas_tags`).
 
@@ -110,19 +109,19 @@ explanation see :doc:`../explanation/jaas_tags`).
 For this tutorial we will assume:
 
 - that you have followed the previous part of the tutorial and have
-    - three users ``alice``, ``adam`` and ``eve``
+    - three users ``alice@canonical.com``, ``adam@canonical.com`` and ``eve@canonical.com``
     - two groups ``A`` and ``B`` set up during part one of this tutorial
 - that you have added controller ``test-ctl-1`` to JIMM
 - that you have added a model ``test-model-1`` on the same controller
 - that you have deployed PostgreSQL in this model and created and application offer names ``postgresql-db``
 
-First let us make user ``eve`` an administrator of controller ``test-ctl-1``. Since
-``eve`` is not member of any group, we will add a direct relation between the 
+First let us make user ``eve@canonical.com`` an administrator of controller ``test-ctl-1``. Since
+``eve@canonical.com`` is not member of any group, we will add a direct relation between the 
 user and the controller by running: 
 
 .. code:: console
 
-    jimmctl auth relation add user-eve administrator controller-test-ctl-1
+    jimmctl auth relation add user-eve@canonical.com administrator controller-test-ctl-1
 
 Now let us make group ``A`` writer on the ``test-model-1`` model. Having write access
 to a model means users are able to deploy applications in the model and
@@ -140,29 +139,29 @@ application offer by running:
     jimmctl auth relation add group-B#members consumer applicationoffer-test-ctl-1/test-model-1.postgresql-db
 
 
-Now let us check if ``adam`` has consume access to the application offer
+Now let us check if ``adam@canonical.com`` has consume access to the application offer
 by running: 
 
 .. code:: console
 
-    jimmctl auth relation check user-adam consumer applicationoffer-test-ctl-1/test-model-1.postgresql-db
+    jimmctl auth relation check user-adam@canonical.com consumer applicationoffer-test-ctl-1/test-model-1.postgresql-db
 
-We should get a positive answer since ``adam`` is member of group ``B`` and 
+We should get a positive answer since ``adam@canonical.com`` is member of group ``B`` and 
 we have granted members of group ``B`` consume access to the application offer.
 
 To remove group ``B``'s access to the application offer we can run:
 
 .. code:: console
 
-    jimmctl auth relation remove user-adam consumer applicationoffer-test-ctl-1/test-model-1.postgresql-db
+    jimmctl auth relation remove user-adam@canonical.com consumer applicationoffer-test-ctl-1/test-model-1.postgresql-db
 
 Running: 
 
 .. code:: console
 
-    jimmctl auth relation check user-adam consumer applicationoffer-test-ctl-1/test-model-1.postgresql-db
+    jimmctl auth relation check user-adam@canonical.com consumer applicationoffer-test-ctl-1/test-model-1.postgresql-db
  
-we will see user ``adam`` no longer has access to the application offer.
+we will see user ``adam@canonical.com`` no longer has access to the application offer.
 
 Conclusion 
 ----------

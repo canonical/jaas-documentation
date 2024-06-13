@@ -18,9 +18,9 @@ additionally acting as the IdP (Identity Provider) for said tokens.
 Access control and authentication
 ---------------------------------
 JAAS provides an abstraction layer of access control on top of Juju. JAAS does this by backing its users
-with an IdP (Identity Provider), this particular IdP is called Candid which handles the authentication 
-for JIMM (Juju Intelligent Model Manager, the back-end to JAAS). Furthermore, JAAS is  capable of many 
-authentication and authorisation types, ranging from users to agents. For authorisation, JAAS provides
+with an IdP (Identity Provider), many identity providers exist e.g. cloud providers like Google and Microsft can be used
+as an IdP. We recommend the `Canonical identity platform <https://charmhub.io/topics/canonical-identity-platform>`__
+as the preferred IdP for JAAS. The IdP will handle user authentication on behalf of JAAS. For authorisation, JAAS provides
 this by means of tags and ReBAC (Relation Based Access Control).
 
 Auditing and logging
