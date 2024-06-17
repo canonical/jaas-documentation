@@ -18,8 +18,7 @@ A user tag has the following format:
 
     user-<username>
 
-where ``username`` uniquely identifies a user including the domain specified
-by Candid.
+where ``username`` uniquely identifies a user including the domain.
 
 Group
 -----

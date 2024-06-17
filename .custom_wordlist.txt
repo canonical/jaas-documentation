@@ -5,8 +5,6 @@ APIs
 auditability
 aws
 balancer
-Candid
-Candid's
 certbot
 Charmhub
 CLI

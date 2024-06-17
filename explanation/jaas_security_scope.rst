@@ -1,9 +1,6 @@
 JAAS: Security Scope
 ========================
 
-.. warning::
-    This document has not been updated for JIMM.V2.
-
 The scope of JAAS' security covers multiple aspects, including:
 
 Secure Communication
@@ -18,10 +15,10 @@ additionally acting as the IdP (Identity Provider) for said tokens.
 Access control and authentication
 ---------------------------------
 JAAS provides an abstraction layer of access control on top of Juju. JAAS does this by backing its users
-with an IdP (Identity Provider), this particular IdP is called Candid which handles the authentication 
-for JIMM (Juju Intelligent Model Manager, the back-end to JAAS). Furthermore, JAAS is  capable of many 
-authentication and authorisation types, ranging from users to agents. For authorisation, JAAS provides
-this by means of tags and ReBAC (Relation Based Access Control).
+with an IdP (Identity Provider). Various identity providers can be used for this purpose (e.g. Google or Microsoft). 
+We recommend the `Canonical identity platform`_ as the preferred IdP for JAAS. The IdP will handle user 
+authentication on behalf of JAAS using OAuth 2.0 and OIDC. For authorisation, JAAS provides this by means
+of tags and ReBAC (Relation-Based Access Control).
 
 Auditing and logging
 --------------------
