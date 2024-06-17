@@ -7,8 +7,8 @@ What is JAAS?
 To detail what JAAS is, let's look at what JAAS provides:
 
 - **JAAS** provides a single location to manage your Juju infrastructure by using the 
-  Dashboard or using the same Juju CLI commands to create a high-level overview and 
-  the ability to drill-in to the details when you need it. 
+  Dashboard or using the same Juju CLI commands to create a high-level overview of your deployments 
+  with the ability to drill into the details when you need it. 
 
 - **JAAS** is  useful for organisations running their own Juju infrastructure 
   giving them a single point of contact for their entire real estate and, in combination
@@ -29,8 +29,8 @@ To detail what JAAS is, let's look at what JAAS provides:
 - **JAAS** can query across multiple models at once, giving deeper insights into your estate.
 
 
-Architecture
-------------
+JAAS Components
+---------------
 
 The diagram below shows an overall picture of JAAS architecture.
 
@@ -44,14 +44,14 @@ The diagram below shows an overall picture of JAAS architecture.
 
 .. image:: images/jaas.png
 
-As in the diagram JAAS consists of the following components:
+JAAS consists of the following components:
 
 - Juju Intelligent Model Manager (JIMM)
 - ReBAC authorisation (OpenFGA)
 - Database (PostgreSQL)
 - Secure storage (Vault)
 
-JIMM implements a number of Juju facades and behaves as a *Juju Controller*,
+JIMM is an API server that implements a number of Juju facades (i.e. endpoints) and behaves as a *Juju Controller*,
 which under the hood proxies operations to underlying controllers. This enables
 other tools, like the Juju Dashboard or Juju CLI, that communicate with a 
 Juju Controller to work seamlessly with JIMM.
@@ -59,3 +59,5 @@ Juju Controller to work seamlessly with JIMM.
 For authentication of users or service accounts, JAAS requires an *OIDC Provider*
 (Hydra) that handles the standard OAuth2.0 flows including browser flow, device flow,
 and client credentials.
+
+For more information on the architecture on JAAS and its scalability, check out our :doc:`architecture <./jaas_architecture>` doc.

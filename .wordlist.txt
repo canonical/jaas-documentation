@@ -41,6 +41,8 @@ ReadMe
 reST
 reStructuredText
 RTD
+scalability
+stateful
 subdirectories
 subfolders
 subtree
@@ -48,4 +50,5 @@ Ubuntu
 UI
 UUID
 VM
+websocket
 YAML
