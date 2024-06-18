@@ -29,6 +29,10 @@ Stateless
 - JIMM: The JIMM API server.
 - OpenFGA: The OpenFGA API server.
 
+.. note::
+    Although we've put JIMM here as a stateless service, it is partially stateful.
+    See the section on communication for more info. 
+
 Stateful
 ^^^^^^^^
 
@@ -46,3 +50,7 @@ Communication
 
 Communication between clients and JIMM takes place via a websocket based API. This is identical to Juju's communication model
 and enables the same Juju CLI to transparently communicate with a JIMM controller as if it were a Juju controller.
+
+This websocket API makes Juju and JIMM, partially stateful. Once a websocket session is established, authentication is performed
+and the session can be used to make further requests. The nature of this model means that once a connection is established to a
+specific unit of JIMM, that connection cannot be moved without first re-establishing some state.
