@@ -1,5 +1,5 @@
-JAAS: Add controller to JIMM
-============================
+JAAS: Add a controller
+======================
 
 
 Introduction

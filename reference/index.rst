@@ -1,7 +1,7 @@
 Reference
 =========
 
-**Technical information** - specifications, APIs, architecture
+**Technical information** - specifications, APIs, and reference docs.
 
 .. toctree::
    :maxdepth: 1
