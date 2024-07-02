@@ -78,7 +78,7 @@ For example, if a ``user`` named ``alice@canonical.com`` has the ``member`` rela
     relation: member
     target:   group:foo
 
-This reads as: "an entity of type *user*, named *alice@canonical.com*, has *member* relationship to an entity of type *group*, named *foo*.
+This reads as: "an entity of type ``user``, named ``alice@canonical.com``, has ``member`` relationship to an entity of type ``group``, named ``foo``.
 
 
 Manipulating tuples
@@ -94,7 +94,7 @@ To manipulate the tuples (i.e. add/remove relations between different resources)
     jimmctl auth relation add user-alice@canonical.com member group-foo
 
 
-To check if a specific tuple exists, you use the ``check`` subcommand:
+To check if a specific tuple exists, you use the ``relation check`` command:
 
 .. code:: bash
 
