@@ -5,15 +5,15 @@ An important precursor to understanding JAAS, is Juju, the open source orchestra
 
 Read more about Juju over at `their docs <https://juju.is>`__.
 
-JIMM Concepts
+JAAS Concepts
 -------------
 .. toctree::
    :maxdepth: 1
 
-   JAAS overview <jaas_overview>
-   JAAS architecture <jaas_architecture>
-   JAAS tags <jaas_tags>
-   JAAS security <jaas_security_scope>
+   Overview <jaas_overview>
+   Architecture <jaas_architecture>
+   Tags <jaas_tags>
+   Security <jaas_security_scope>
    CLI Tools <cli_tools>
 
 
