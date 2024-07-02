@@ -29,7 +29,7 @@ Authentication Methods
 
 JAAS offers multiple OAuth 2.0 flows (a sequence of steps to login). Each of which is referred to as a **grant type**.
 
-**Authorization Code grant**: This flow is the most common and used primarily by web applications. You will encounter this flow with JAAS when using
+**Authorisation Code grant**: This flow is the most common and used primarily by web applications. You will encounter this flow with JAAS when using
 the Juju dashboard. The login process will redirect your browser to JAAS' identity provider and ask you to login before redirecting you
 to the dashboard. At this point you have been authenticated and can use your resources through the graphical interface.
 

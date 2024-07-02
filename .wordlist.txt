@@ -1,5 +1,4 @@
 addons
-authorization
 API
 APIs
 balancer

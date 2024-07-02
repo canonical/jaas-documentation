@@ -20,7 +20,7 @@ We recommend the `Canonical identity platform`_ as the preferred IdP for JAAS. T
 authentication on behalf of JAAS using OAuth 2.0 and OIDC. For authorisation, JAAS provides this by means
 of tags and ReBAC (Relation-Based Access Control).
 
-See the following pages for more details on how JAAS provides :doc:`authentication <./authentication>` and authorization.
+See the following pages for more details on how JAAS provides :doc:`authentication <./authentication>` and authorisation.
 
 Auditing and logging
 --------------------
