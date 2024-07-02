@@ -1,4 +1,4 @@
-JAAS tags
+JAAS Tags
 =========
 
 Introduction

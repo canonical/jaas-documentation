@@ -1,5 +1,5 @@
-JAAS: Security Scope
-========================
+JAAS Security Scope
+===================
 
 The scope of JAAS' security covers multiple aspects, including:
 
@@ -19,6 +19,8 @@ with an IdP (Identity Provider). Various identity providers can be used for this
 We recommend the `Canonical identity platform`_ as the preferred IdP for JAAS. The IdP will handle user 
 authentication on behalf of JAAS using OAuth 2.0 and OIDC. For authorisation, JAAS provides this by means
 of tags and ReBAC (Relation-Based Access Control).
+
+See the following pages for more details on how JAAS provides :doc:`authentication <./authentication>` and authorisation.
 
 Auditing and logging
 --------------------
