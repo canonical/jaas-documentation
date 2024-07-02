@@ -42,9 +42,9 @@ To add users to groups, let's run:
 
 .. code:: console
 
-    jimmctl auth add relation user-alice@canonical.com member group-A
-    jimmctl auth add relation user-adam@canonical.com member group-B
-    jimmctl auth add relation user-eve@canonical.com member group-C
+    jimmctl auth relation add user-alice@canonical.com member group-A
+    jimmctl auth relation add user-adam@canonical.com member group-B
+    jimmctl auth relation add user-eve@canonical.com member group-C
 
 which will add Alice to group ``A``, Adam to group ``B`` and Eve to group ``C``.
 You will notice that we refer to user and group by their *JAAS tags* (for 
