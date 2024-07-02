@@ -1,4 +1,5 @@
 addons
+authorization
 API
 APIs
 balancer
@@ -35,6 +36,7 @@ observability
 OEM
 OLM
 Permalink
+performant
 pre
 Quickstart
 ReadMe

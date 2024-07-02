@@ -10,10 +10,9 @@ JIMM Concepts
 .. toctree::
    :maxdepth: 1
 
-   JAAS overview <jaas_overview>
-   JAAS architecture <jaas_architecture>
-   JAAS tags <jaas_tags>
-   JAAS security <jaas_security_scope>
+   Overview <jaas_overview>
+   Architecture <jaas_architecture>
+   Tags <jaas_tags>
+   Security <jaas_security_scope>
+   Authentication <authentication>
    CLI Tools <cli_tools>
-
-
