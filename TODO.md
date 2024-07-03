@@ -3,7 +3,6 @@
 The following document describes missing JAAS documentation as well as any docs that need to be modernized.
 
 ## Missing Docs
-- Auth doc explaining JIMM's authentication and authorisation.
 - How to enable/deploy/use the dashboard.
 - JAAS Limitations - potentially?
 - Relating JIMM and COS stack - general observability.
