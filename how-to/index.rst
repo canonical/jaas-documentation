@@ -22,4 +22,4 @@ Terraform
 .. toctree::
    :maxdepth: 1
 
-   Using Terraform <use_terraform>
+   Use Terraform <use_terraform>

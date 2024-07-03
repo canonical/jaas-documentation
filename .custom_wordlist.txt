@@ -66,6 +66,7 @@ ntp
 OAuth
 OAuth2
 OAuth2.0
+Okta
 observability
 OEM
 OIDC

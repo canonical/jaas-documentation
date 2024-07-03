@@ -12,9 +12,8 @@ JAAS Concepts
 
    Overview <jaas_overview>
    Architecture <jaas_architecture>
-   Authorisation <jaas_authorisation>
    Tags <jaas_tags>
    Security <jaas_security_scope>
+   Authentication <authentication>
+   Authorisation <jaas_authorisation>
    CLI Tools <cli_tools>
-
-
