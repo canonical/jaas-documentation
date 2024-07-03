@@ -4,7 +4,7 @@ JAAS: Authorisation Model
 JAAS uses a Relationship-Based Access Control (ReBAC) scheme for authorisation purposes. This document illustrates the underlying authorisation model used by JAAS.
 
 .. hint::
-    For an explanation on Relationship-Based Access Control (ReBAC) check out :doc:`this <../explanation/jaas_authorisation>` explanation topic.
+    For an explanation on Relationship-Based Access Control (ReBAC) check out :doc:`this <../explanation/authorisation>` explanation topic.
 
 .. hint::
     As a reference on manipulating authorisation data, check out :doc:`this <./authorisation_data>` reference topic.
