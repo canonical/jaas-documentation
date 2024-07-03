@@ -8,3 +8,5 @@ Reference
 
    Audit Logs <audit_logs>
    Supported Juju Versions <juju_required_version>
+   Authorisation Model <authorisation_model>
+   Authorisation Data <authorisation_data>

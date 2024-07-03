@@ -5,7 +5,7 @@ An important precursor to understanding JAAS, is Juju, the open source orchestra
 
 Read more about Juju over at `their docs <https://juju.is>`__.
 
-JIMM Concepts
+JAAS Concepts
 -------------
 .. toctree::
    :maxdepth: 1
@@ -15,4 +15,5 @@ JIMM Concepts
    Tags <jaas_tags>
    Security <jaas_security_scope>
    Authentication <authentication>
+   Authorisation <authorisation>
    CLI Tools <cli_tools>
