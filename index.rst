@@ -54,10 +54,10 @@ Project and community
 JAAS is a member of the Ubuntu family and warmly welcomes community contributions, suggestions, fixes and constructive feedback.
 
 * `Code of conduct <https://ubuntu.com/community/ethos/code-of-conduct>`_
-* Join the `Mattermost community char <https://chat.charmhub.io/charmhub/channels/jaas>`_
+* Join the `Mattermost community chat <https://chat.charmhub.io/charmhub/channels/jaas>`_
 * Report a bug on `Launchpad <https://bugs.launchpad.net/jaas-issue-tracking>`_
 * Contribute to the :doc:`documentation <contribute>`
-* Visit the `Canonical's careers page <https://canonical.com/careers>`_
+* Visit `Canonical's careers page <https://canonical.com/careers>`_
 
 
 .. toctree::
