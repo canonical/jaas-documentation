@@ -91,7 +91,7 @@ html_context = {
     'github_url': 'https://github.com/canonical/jaas-documentation',
 
     # Change to the branch for this version of the documentation
-    'github_version': 'main',
+    'github_version': 'v3',
 
     # Change to the folder that contains the documentation
     # (usually "/" or "/docs/")
