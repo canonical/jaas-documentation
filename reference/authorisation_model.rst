@@ -65,13 +65,13 @@ Here is the directed graph illustration of the above model. In this figure, purp
 Valid Relations
 ---------------
 
-Below we break down, by resource type, the relations from the auth model. By describing what level of access each relation provides so that you can
+Below we break down, by resource type, the relations from the authorisation model. By describing what level of access each relation provides so that you can
 determine how much access to provide to users and groups.
 
 Below, only permissions which are assignable to users or groups are described. Relations like `controller` are used internally to indicate
 that, for example, a controller admin is also an admin of any models. 
 
-You can use the `jimmctl` CLI to manipulate relations as mentioned above or via the `Juju Terraform Provider <https://registry.terraform.io/providers/juju/juju/latest/docs>`_ 
+You can use the ``jimmctl`` CLI to manipulate relations as mentioned above or via the `Juju Terraform Provider <https://registry.terraform.io/providers/juju/juju/latest/docs>`_ 
 using the JAAS specific resources.
 
 .. hint::
