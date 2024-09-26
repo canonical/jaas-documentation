@@ -50,9 +50,9 @@ In this documentation
 Where to begin
 --------------
 
-We recommend starting with our tutorial on :doc:`deploying JAAS to MicroK8s<./tutorial/deploy_jaas_microk8s>`.
+We recommend starting with our :doc:`JAAS overview<./explanation/jaas_overview>` and then our tutorial on :doc:`deploying JAAS to MicroK8s<./tutorial/deploy_jaas_microk8s>`.
 
-This will guide you through the deployment of JAAS and links to further docs on how to manage your environment.
+This will help you understand the architecture of JAAS then guide you through its deployment with links to further docs on how to manage your environment.
 
 Project and community
 ---------------------
