@@ -14,19 +14,23 @@ Prerequisites
 
 - A running `COS-Lite`_ bundle. 
   You can follow the `Getting started on MicroK8s <https://charmhub.io/topics/canonical-observability-stack/tutorials/install-microk8s>`__
-  tutorial to get you started. Make sure to follow the section **Deploy the COS Lite** bundle with overlays sections.
+  tutorial to get you started. Make sure to follow the section **Deploy the COS Lite bundle with overlays** section to create offers.
 - A running JAAS. Please refer to the deployment :doc:`tutorial<../tutorial/deploy_jaas_microk8s>`.
 
+.. hint::
+    `Juju offers <https://juju.is/docs/juju/manage-offers>`__ are a way of sharing software as a service between models.
+    Make sure you deploy COS and setup offers so that you can relate to it across models.
+ 
 It is generally recommended to keep the observability stack separate from any observed applications to separate failure domains. 
-This document assumes that JAAS and the COS bundles are deployed to different models.
+This document assumes that JAAS and the COS bundle are deployed to different models.
 
 This how-to assumes that Vault and PostgreSQL are deployed alongside JIMM and OpenFGA. Depending on your approach, this may not be true.
-Additionally this how-to assumes the names of the deployed applications, these might differ in your environment.
+Additionally this how-to assumes the names of the deployed applications, which might differ in your environment.
 
 Integration approaches
 ----------------------
 
-There are 2 possible  integration approaches depending on your networking / deployment setup setup:
+There are 2 possible  integration approaches depending on your networking / deployment setup:
 
 1. If you are able to send metrics and logs directly to the observability platform components follow 
    the `Integrate JAAS with COS-Lite`_ section
