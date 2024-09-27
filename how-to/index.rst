@@ -23,3 +23,11 @@ Terraform
    :maxdepth: 1
 
    Use Terraform <use_terraform>
+
+Observability
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+   Integrate with the Canonical Observability Stack <integrate_with_cos>
