@@ -4,6 +4,7 @@ API
 APIs
 auditability
 aws
+Backend
 balancer
 certbot
 Charmhub
@@ -71,6 +72,7 @@ observability
 OEM
 OIDC
 OLM
+OpenAPI
 OpenFGA
 OpenID
 OpenLDAP
