@@ -9,7 +9,7 @@ The OpenAPI spec can be found at this endpoint for your deployment: `https://<ji
 
 Authentication
 --------------
-These endpoints are meant to be called from a web browser, therefore the authentication is handle via Cookies.
+These endpoints are meant to be called from a web browser, therefore the authentication is handled via Cookies.
 
 JAAS Implementation
 -------------------

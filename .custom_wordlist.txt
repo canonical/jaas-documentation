@@ -31,9 +31,11 @@ IdP
 init
 installable
 JAAS
+jimm
 JIMM
 JIMM's
 JSON
+json
 juju
 Juju
 Juju's
@@ -83,6 +85,7 @@ pre
 Quickstart
 RBAC
 ReadMe
+rebac
 ReBAC
 reST
 reStructuredText
