@@ -5,7 +5,7 @@ The following sections briefly describe the functionalities offered by the ReBAC
 
 OpenAPI specification
 ---------------------
-The OpenAPI spec can be found at this `repository <https://github.com/canonical/openfga-admin-openapi-spec>`__
+The OpenAPI spec can be found at this endpoint for your deployment: `https://<jimm-deployment>/v1/rebac/swagger.json`
 
 Authentication
 --------------
