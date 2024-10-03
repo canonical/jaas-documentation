@@ -93,6 +93,7 @@ reStructuredText
 roadmap
 RSA
 RTD
+SHA
 Skype
 Snapcraft
 SSH
