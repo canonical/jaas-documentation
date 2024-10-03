@@ -4,6 +4,7 @@ auth
 authenticy
 API
 APIs
+backend
 balancer
 Charmhub
 cryptographic
@@ -15,6 +16,7 @@ EBS
 EKS
 enablement
 favicon
+filesystem
 Furo
 Git
 GitHub

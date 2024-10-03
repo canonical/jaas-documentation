@@ -1,114 +1,98 @@
-JAAS Security
-=============
+JAAS Security Overview
+=======================
 
-This document is an overview of JAAS specifically covering areas pertaining to security and/or sensitive data.
+This document provides an overview of JAAS security measures, focusing on areas related to 
+sensitive data storage, transmission, and cryptographic technologies.
 
-In each section we explain how the information is stored/transmitted and any cryptographic
-technologies used.
-
-Cloud-Credentials
+Cloud Credentials
 -----------------
 
-Cloud-credentials are the API keys Juju/JAAS needs in order to provision cloud infrastructure.
-These keys are uploaded to and stored by JAAS. Whenever a a model is created, the key is uploaded to 
-the Juju controller and used to manage cloud resources.
+Cloud credentials are API keys used by Juju/JAAS to provision cloud infrastructure. 
+These credentials are securely uploaded to and stored by JAAS. 
+When a model is created, the key is passed to the Juju controller to manage cloud resources.
 
-User provided cloud credentials are stored securely and safely within a secret `vault <https://www.vaultproject.io/>`__. 
-It is  essential to handle these secrets securely to prevent unauthorised access and data breaches
-to the user's cloud.
+User-provided cloud credentials are stored securely in a `Vault <https://www.vaultproject.io/>`__, 
+a tool for managing secrets. Ensuring the secure handling of these credentials is essential 
+to prevent unauthorised access or data breaches.
 
-The use of Vault ensures that credentials are encrypted at rest and provides tools to avoid unauthorised
-access.
+Vault encrypts credentials at rest and provides mechanisms to prevent unauthorised access.
 
 JAAS - Juju Communication
 --------------------------
 
-JAAS acts as a central auth gateway between users and Juju controllers.
-Juju controllers explicitly trust JAAS by setting the ``login-token-refresh-url`` at bootstrap
-time. See our :doc:`how-to <../how-to/add_controller>` for more info on how to setup a new
-Juju controller for JAAS.
+JAAS acts as an authentication gateway between users and Juju controllers. 
+Juju controllers trust JAAS by setting the ``login-token-refresh-url`` during bootstrap.
+More information on setting up a Juju controller for JAAS can be found in our :doc:`how-to guide <../how-to/add_controller>`.
 
-Trust between Juju controllers and JAAS is established through the use of asymmetric cryptography
-and `JSON Web Tokens <https://jwt.io/introduction>`__ (JWT). 
+Trust between Juju controllers and JAAS is established through asymmetric cryptography 
+and `JSON Web Tokens (JWTs) <https://jwt.io/introduction>`__.
 
 .. hint::
+    While JWTs are also used for user sessions, the tokens exchanged between JAAS and Juju controllers are separate from user tokens.
 
-    To avoid confusion, note that JWTs are also used elsewhere in JAAS particularly in user sessions. 
-    Although solving a similar problem, the tokens used between JAAS and Juju and those issued to users
-    are two separate systems.
+The ``login-token-refresh-url`` points to a 
+`JSON Web Key Set (JWKS) <https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-key-sets>`__
+endpoint, containing public keys used to verify tokens issued by JAAS.
 
-The ``login-token-refresh-url`` config option points to a
-`JSON Web Key Set <https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-key-sets>`__ 
-(JWKS) endpoint. This endpoint contains a set of public keys used to verify the authenticy of tokens
-issued by JAAS.
+When JAAS makes requests to a Juju controller, a JWT is issued that encodes user information 
+and permissions, securely delegating authentication and authorisation from the controller to JAAS.
 
-Whenever a request is made by JAAS to a Juju controller, a JWT is issued that encodes the user's
-information and permissions. This mechanism allows the authorisation and authentication to be securely
-delegated from the Juju controller to JAAS.
+**Details**:
 
-Specific details are below:
+- **JWKS endpoint**: ``<jimm-url>/.well-known/jwks.json``
+- **Key Type/Size**: RSA 4096 bits
+- **Signing Algorithm**: RS256
 
-- **JWKS endpoint:** ``<jimm-url>/.well-known/jwks.json``
-- **Key Type/Size:** RSA 4096 bits
-- **Signing Algorithm:** RS256
+The following Go packages are used:
 
-The following Go packages are used to create the JWKS and JWTs.
-
-- ``github.com.com/lestrrat-go/jwx/v2/jwa>``
-- ``github.com/lestrrat-go/jwx/v2/jwt>``
-- ``github.com/lestrrat-go/jwx/v2/jwk>``
+- ``github.com/lestrrat-go/jwx/v2/jwa``
+- ``github.com/lestrrat-go/jwx/v2/jwt``
+- ``github.com/lestrrat-go/jwx/v2/jwk``
 
 User Sessions
 -------------
 
-CLI Based Sessions
+CLI-Based Sessions
 ^^^^^^^^^^^^^^^^^^
 
-When authenticating the Juju CLI to JAAS the user goes through an OAuth login flow (see `Device Code Flow`_).
-After login, the CLI is issued a JWT i.e. a session token. This avoids making the user login repeatedly.
+When authenticating the Juju CLI to JAAS, users go through an OAuth login flow, 
+after which the CLI is issued a JWT session token. This token is stored on the 
+filesystem and sent with each request, eliminating the need for repeated logins.
 
-.. hint::
-  These JWTs use the same technology as the tokens used in communications between JAAS and Juju controllers but
-  they are not the same tokens.
+While Juju controller tokens use asymmetric cryptography, session tokens for 
+users are signed using symmetric cryptography (i.e., a shared secret) with a 
+cryptographic hash function.
 
-The session token is eventually stored on the file-system and sent on each request.
+JWTs for CLI sessions contain the user's email address, so they must be secured 
+to prevent information leakage and malicious account use.
 
-Whereas the tokens issued to Juju controllers use asymmetric cryptography, tokens issued to users are signed with
-symmetric cryptography. Session tokens are signed using a cryptographic hash function and a shared secret. 
-Since there is no need for external parties to verify sessions, only JAAS, who holds the shared secret can verify
-the session token. 
+**Details**:
 
-Note that the JWT contains the user's email and should be secured to avoid a a possible leak of personal information
-(in addition to possible malicious use of an account).
+- **Key Size**: >=512 bits
+- **Signing Algorithm**: HS256
 
-Specific details are below:
+The following Go packages are used:
 
-- **Key Size:** >=512 bits
-- **Signing Algorithm:** HS256
-
-The following Go packages are used for creating JWTs:
-
-- ``github.com/lestrrat-go/jwx/v2/jwt>``
-- ``github.com/lestrrat-go/jwx/v2/jwa>``
+- ``github.com/lestrrat-go/jwx/v2/jwt``
+- ``github.com/lestrrat-go/jwx/v2/jwa``
 
 Browser Cookies
 ^^^^^^^^^^^^^^^
 
-When using JAAS from the Juju dashboard, a different type of session is created. In this scenario cookies are
-used as browsers offer better built in support for cookies.
+In the Juju dashboard, session management is handled using cookies, which store 
+cryptographically encoded values that allow the server to retrieve session data.
 
-After login is completed, the browser is issued with a session cookie. The cookie's stores a cryptographically
-encoded value that allows the server to retrieve the session data.
+**Details**:
 
-Specific details are below:
+- **Key Size**: >=512 bits
+- **Signing Algorithm**: ``HMAC-SHA256``
 
-- **Key Size:** >=512 bits
-- **Signing Algorithm:** ``HMAC-SHA256`` (the same as HS256 but HS256 is normally used in the context of JWTs)
+Unlike the CLI session tokens, browser session cookies only store an encoded 
+session ID rather than personal user information like email addresses.
+While they do not store user information, they must still be kept safe to prevent 
+malicious account use.
 
-Note that the browser session cookie does not contain any information beyond an encoded session ID that is
-used to lookup the user information. This is in contrast with the CLI session token which contains the user's email.
-
-The following Go libraries are used to handle browser sessions:
+The following Go packages are used:
 
 - ``github.com/gorilla/sessions``
 - ``github.com/antonlindstrom/pgstore``
@@ -116,13 +100,10 @@ The following Go libraries are used to handle browser sessions:
 OIDC Authentication
 -------------------
 
-JAAS employs OAuth 2.0 and OpenID Connect (OIDC) for user authentication, 
-see `here <https://developer.okta.com/docs/concepts/oauth-openid/>`__
-for an overview on these concepts.
+JAAS uses OAuth 2.0 and OpenID Connect (OIDC) for user authentication. 
+You can learn more from this `overview <https://developer.okta.com/docs/concepts/oauth-openid/>`__.
 
-Below we outline the various login flows used in JAAS.
-
-The following Go packages are used to implement this functionality:
+The following Go packages are used:
 
 - ``golang.org/x/oauth2``
 - ``golang.org/x/oauth2/clientcredentials``
@@ -131,53 +112,28 @@ The following Go packages are used to implement this functionality:
 Authorisation Code Flow
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-When performing login via a browser, users go through the authorisation code flow.
-This is best described by various diagrams such as 
-`this <https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow>`__.
+In a browser-based login, users follow the `authorisation code flow <https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow>`__.
+Upon successful login, the access and refresh tokens are stored on the backend, 
+and a session cookie is issued to the user's browser.
 
-In this flow the user's browser is redirected to the identity provider where they are
-asked to login before being redirected back to the original application.
-
-Because JAAS is a server side app, the access token and refresh token are stored
-by the back-end application and a session cookie is issued to the browser as described in 
-`Browser Cookies`_.
-
-To protect against `CSRF attacks <https://auth0.com/docs/secure/attack-protection/state-parameters>`__
-the back-end application issues a random nonce used in the ``state`` parameter of the OAuth
-flow. This prevents a malicious attacker from forging a request to login as another user.
+To protect against `CSRF attacks <https://auth0.com/docs/secure/attack-protection/state-parameters>`__,
+the backend issues a random nonce in the ``state`` parameter of the OAuth flow.
 
 Device Code Flow
 ^^^^^^^^^^^^^^^^
 
-When performing login via the device flow, the Juju CLI will:
-
-1. Request from JAAS a URL and random code which the user can use to login.
-2. The CLI will then wait for a response from JAAS.
-3. JAAS polls the identity server, which in turn is waiting for the user to complete their login.
-
-A diagram depicting this login flow can be found 
-`here <https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow>`__.
+For CLI logins, the `device code flow <https://auth0.com/docs/get-started/authentication-and-authorization-flow/device-authorization-flow>`__
+is used, where the Juju CLI prompts the user to log in via a browser. The backend stores access 
+and refresh tokens, and the CLI receives a session token.
 
 This process does not rely on browser redirects and so is not susceptible to traditional browser vulnerabilities.
-Both the access token and refresh token are obtained and stored by the back-end server
-and the CLI application is issued with a session token as described in `CLI Based Sessions`_.
 
 Client Credential Flow
 ^^^^^^^^^^^^^^^^^^^^^^
 
-When there is a need to perform login by a machine rather than a physical user, OAuth handles this through
-the use of a client credential flow.
-
-A diagram depicting this login flow can be found 
-`here <https://auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow>`__.
-
-This process is reserved for scenarios where machine to machine authentication is required. A good example
-of this is includes the use of the Juju Terraform Provider where the client-credential flow is employed.
-
-In the link above, the client application communicates with the identity provider to retrieve an access token
-that is then used with the API server. This design is shifted in JAAS. The client application instead sends
-its application credentials to JAAS which then forwards the information to the identity provider. JAAS
-effectively acts as a proxy between the client application and the identity provider.
+For machine-to-machine authentication, the 
+`client credentials flow <https://auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow>`__
+is used. However, in JAAS, the client application sends its credentials to JAAS, which proxies them to the identity provider.
 
 This scheme simplifies authentication for client applications but is only possible since JAAS is a trusted
 application in the system.
@@ -228,64 +184,50 @@ Specific details are below:
 TLS Communication
 -----------------
 
-In this section we will cover the use of TLS between components of JAAS.
-
-TLS encryption is handled by the Go standard library packages:
-
-- ``crypto/tls``
-- ``crypto/x509``
+TLS encryption is enforced between various components in JAAS, using Go's standard 
+library (``crypto/tls`` and ``crypto/x509``). The minimum supported version is TLS v1.2.
 
 Client - JAAS
 ^^^^^^^^^^^^^
 
-The Juju client package enforces the use of TLS when connecting to a controller.
-This extends to both the Juju CLI and the Juju Terraform Provider.
-
-The minimum supported version is TLS v1.2
+The GO Juju client enforces TLS for all connections to JAAS, including the 
+Juju CLI and Juju Terraform Provider.
 
 JAAS - Juju Controllers
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-JAAS enforces the use of TLS when connecting to a Juju controller.
-
-The minimum supported version is TLS v1.2
+JAAS enforces TLS when connecting to Juju controllers.
 
 JAAS - OpenFGA
 ^^^^^^^^^^^^^^
 
-JAAS does not currently enforce TLS when communicating with OpenFGA.
-
-TLS is not currently supported with the OpenFGA charm operator.
+TLS is not currently enforced between JAAS and OpenFGA due to a lack of TLS support in the OpenFGA charm operator.
 
 JAAS - Vault
 ^^^^^^^^^^^^
 
-JAAS assumes that Vault is reachable with TLS but does not enforce this.
-By default the Vault charm employs the use of TLS.
-
-The minimum supported version is TLS v1.2.
+JAAS assumes TLS is used to communicate with Vault. 
+The Vault charm uses TLS by default.
 
 JAAS - PostgreSQL
 ^^^^^^^^^^^^^^^^^
 
-JAAS does not currently enforce TLS when communicating with PostgreSQL.
-But this can be achieved when using the PostgreSQL charm.
-
-The minimum supported version is TLS v1.2.
+JAAS does not enforce TLS when communicating with PostgreSQL, but 
+it can be enabled when using the PostgreSQL charm.
+TLS is not enabled by default.
 
 CORS
 ----
 
-CORS or Cross-Origin Resource Sharing is a browser security feature designed to prevent
-malicious use of your online credentials. Read more on CORS 
+CORS or Cross-Origin Resource Sharing is a browser security feature designed to prevent 
+malicious use of your online credentials. Read more about CORS 
 `here <https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#what_requests_use_cors>`__.
 
-JAAS supports the use of CORS headers specifically for the purposes of the Juju
-dashboard. The dashboard requires the ability to send cross-origin requests from the domain
-where it is hosted to the domain where JAAS is hosted. More information on how to setup
-CORS to securely handle these requests will be available in a future how-to.
+JAAS supports the use of CORS headers specifically for the Juju dashboard. The dashboard
+requires the ability to send cross-origin requests from the domain where it is hosted to
+the domain where JAAS is hosted. More information on how to set up CORS to securely handle
+these requests will be available in a future how-to guide.
 
-The following Go package is used to validate CORS requests/headers:
+The following Go package is used to validate CORS requests:
 
 - ``github.com/rs/cors``
-
