@@ -11,6 +11,7 @@ CLI
 CN
 config
 CORS
+CSRF
 Diátaxis
 DNS
 dropdown

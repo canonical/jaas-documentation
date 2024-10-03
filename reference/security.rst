@@ -54,9 +54,9 @@ Specific details are below:
 
 The following Go packages are used to create the JWKS and JWTs.
 
-- `<github.com.com/lestrrat-go/jwx/v2/jwa>`__
-- `<github.com/lestrrat-go/jwx/v2/jwt>`__
-- `<github.com/lestrrat-go/jwx/v2/jwk>`__
+- ``github.com.com/lestrrat-go/jwx/v2/jwa>``
+- ``github.com/lestrrat-go/jwx/v2/jwt>``
+- ``github.com/lestrrat-go/jwx/v2/jwk>``
 
 User Sessions
 -------------
@@ -88,8 +88,8 @@ Specific details are below:
 
 The following Go packages are used for creating JWTs:
 
-- `<github.com/lestrrat-go/jwx/v2/jwt>`__
-- `<github.com/lestrrat-go/jwx/v2/jwa>`__
+- ``github.com/lestrrat-go/jwx/v2/jwt>``
+- ``github.com/lestrrat-go/jwx/v2/jwa>``
 
 Browser Cookies
 ^^^^^^^^^^^^^^^
@@ -103,15 +103,15 @@ encoded value that allows the server to retrieve the session data.
 Specific details are below:
 
 - **Key Size:** >=512 bits
-- **Signing Algorithm:** HMAC-SHA256 (the same as HS256 but HS256 is normally used in the context of JWTs)
+- **Signing Algorithm:** ``HMAC-SHA256`` (the same as HS256 but HS256 is normally used in the context of JWTs)
 
 Note that the browser session cookie does not contain any information beyond an encoded session ID that is
 used to lookup the user information. This is in contrast with the CLI session token which contains the user's email.
 
 The following Go libraries are used to handle browser sessions:
 
-- `<github.com/gorilla/sessions>`__
-- `<github.com/antonlindstrom/pgstore>`__
+- ``github.com/gorilla/sessions``
+- ``github.com/antonlindstrom/pgstore``
 
 OIDC Authentication
 -------------------
@@ -124,9 +124,9 @@ Below we outline the various login flows used in JAAS.
 
 The following Go packages are used to implement this functionality:
 
-- `<golang.org/x/oauth2>`__
-- `<golang.org/x/oauth2/clientcredentials>`__
-- `<github.com/coreos/go-oidc/v3/oidc>`__
+- ``golang.org/x/oauth2``
+- ``golang.org/x/oauth2/clientcredentials``
+- ``github.com/coreos/go-oidc/v3/oidc``
 
 Authorisation Code Flow
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -159,7 +159,7 @@ A diagram depicting this login flow can be found
 `here <https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow>`__.
 
 This process does not rely on browser redirects and so is not susceptible to traditional browser vulnerabilities.
-Both the access token and refresh token are obtained and stored by the backend server
+Both the access token and refresh token are obtained and stored by the back-end server
 and the CLI application is issued with a session token as described in `CLI Based Sessions`_.
 
 Client Credential Flow
@@ -202,7 +202,7 @@ packages are used by the underlying macaroon package for these operations:
 
 - ``crypto/hmac``
 - ``crypto/sha256``
-- `<golang.org/x/crypto/nacl/secretbox>`__
+- ``golang.org/x/crypto/nacl/secretbox``
 
 Additionally, the higher-level `Macaroon Bakery package <https://github.com/go-macaroon-bakery/macaroon-bakery>`__
 is used to interface with macaroons and introduces public key cryptography to perform similar operations
@@ -211,8 +211,8 @@ as mentioned above. This allows services to trust macaroons generated externally
 These operations are performed using ``Ed25519`` and ``XSalsa20-Poly1305``. The following Go packages are 
 used by the underlying macaroon bakery package for these operations:
 
-- `<golang.org/x/crypto/nacl/box>`__
-- `<golang.org/x/crypto/curve25519>`__
+- ``golang.org/x/crypto/nacl/box``
+- ``golang.org/x/crypto/curve25519``
 
 When a Juju controller is connected to JAAS, the ``login-token-refresh-url`` is used to determine where 
 the JAAS macaroon public key is located. This public key is used when Juju controllers issue macaroons 
@@ -287,5 +287,5 @@ CORS to securely handle these requests will be available in a future how-to.
 
 The following Go package is used to validate CORS requests/headers:
 
-- `<github.com/rs/cors>`__
+- ``github.com/rs/cors``
 
