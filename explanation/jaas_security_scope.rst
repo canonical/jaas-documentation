@@ -1,6 +1,11 @@
 JAAS Security Scope
 ===================
 
+..
+   TODO (Kian):
+   Much of this document's content is now covered in the security doc in reference/security and reused where possible.
+   We should consider what parts of this doc to remove and where to better put the parts that we keep.
+
 The scope of JAAS' security covers multiple aspects, including:
 
 Secure Communication

@@ -1,7 +1,15 @@
 Reference
 =========
 
-**Technical information** - specifications, APIs, and reference docs.
+**Technical information** - security, APIs, and reference docs.
+
+Security
+--------
+
+.. toctree::
+   :maxdepth: 1
+
+   JAAS Security <security>
 
 .. toctree::
    :maxdepth: 1

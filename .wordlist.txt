@@ -1,9 +1,13 @@
 addmodel
 addons
+auth
+authenticy
 API
 APIs
 balancer
 Charmhub
+cryptographic
+cryptographically
 CLI
 Diátaxis
 dropdown
