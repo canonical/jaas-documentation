@@ -27,8 +27,7 @@ JAAS implements a subset of the operations described in the OpenAPI spec.
  Status Entities         Notes
  ====== ================ =========================================================================
    ✅   ``entitlements``     
-   ✅   ``capabilities``     
-   ✅   ``capabilities``     
+   ✅   ``capabilities`` 
    ✅   ``groups``     
    ✅   ``resources``     
    🟡   ``identities``    no support for creation, update and deletion.
