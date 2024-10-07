@@ -1,11 +1,18 @@
 ReBAC Admin Backend
 =======================
 
-The following sections briefly describe the functionalities offered by the ReBAC Admin Backend.
+The ReBAC Admin API is a REST API that provides various endpoints to query or 
+manipulate relationships in JAAS ReBAC authorisation model.
+
+.. hint::
+    For an explanation on Relationship-Based Access Control (ReBAC) check out :doc:`this <../explanation/authorisation>` explanation topic.
+
+.. hint::
+    As a reference on JAAS authorisation model, check out :doc:`this <../reference/authorisation_model>` reference topic.
 
 OpenAPI specification
 ---------------------
-The OpenAPI spec can be found at this endpoint for your deployment: `https://<jimm-deployment>/v1/rebac/swagger.json`
+The OpenAPI spec can be found at this ``https://<jimm-deployment>/rebac/v1/swagger.json``
 
 Authentication
 --------------
@@ -14,19 +21,16 @@ These endpoints are meant to be called from a web browser, therefore the authent
 JAAS Implementation
 -------------------
 
-We implement a subset of the operations described in the OpenAPI spec. 
+JAAS implements a subset of the operations described in the OpenAPI spec. 
 
- ====== ============= =========================================================================
- Status Entities      Notes
- ====== ============= =========================================================================
-   ✅   capabilities     
-   ✅   entitlements     
-   ✅   capabilities     
-   ✅   groups     
-   ✅   resources     
-   🟡   identities    no support for creation, update and deletion.
-   ❌   roles         no support for roles.
- ====== ============= =========================================================================
-
-
-
+ ====== ================ =========================================================================
+ Status Entities         Notes
+ ====== ================ =========================================================================
+   ✅   ``entitlements``     
+   ✅   ``capabilities``     
+   ✅   ``capabilities``     
+   ✅   ``groups``     
+   ✅   ``resources``     
+   🟡   ``identities``    no support for creation, update and deletion.
+   ❌   ``roles``         no support for roles.
+ ====== ================ =========================================================================
