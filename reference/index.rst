@@ -10,3 +10,4 @@ Reference
    Supported Juju Versions <juju_required_version>
    Authorisation Model <authorisation_model>
    Authorisation Data <authorisation_data>
+   ReBAC Admin Backend <rebac_admin_backend>
