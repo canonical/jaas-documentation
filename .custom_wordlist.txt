@@ -11,6 +11,8 @@ Charmhub
 CLI
 CN
 config
+CORS
+CSRF
 Diátaxis
 DNS
 dropdown
@@ -25,6 +27,7 @@ GitHub
 Google
 Grafana
 HAProxy
+HMAC
 https
 IAM
 IdP
@@ -37,6 +40,9 @@ JSON
 juju
 Juju
 Juju's
+JWKS
+JWT
+JWTs
 K8s
 Keystore
 Kratos
@@ -87,7 +93,9 @@ ReBAC
 reST
 reStructuredText
 roadmap
+RSA
 RTD
+SHA
 Skype
 Snapcraft
 SSH
@@ -110,4 +118,5 @@ VMs
 webhook
 Websocket
 Xbox
+XSRF
 YAML

@@ -1,9 +1,14 @@
 addmodel
 addons
+auth
+authenticy
 API
 APIs
+backend
 balancer
 Charmhub
+cryptographic
+cryptographically
 CLI
 Diátaxis
 dropdown
@@ -11,6 +16,7 @@ EBS
 EKS
 enablement
 favicon
+filesystem
 Furo
 Git
 GitHub
