@@ -13,9 +13,9 @@ Juju 3.x is required for the support of Juju secrets.
 Using JAAS
 ----------
 
-In order to interact with JAAS as a user, you must use a Juju CLI with a minimum version of **3.5.1**.
+In order to interact with JAAS as a user, you must use a Juju CLI with a minimum version of **3.5.4**.
 
-JAAS performs login using OIDC, a feature introduced to the Juju CLI in 3.5.1 and above.
+Previous versions of the Juju CLI do not include the necessary functionality to authenticate with JAAS.
 
 Add controllers to JAAS
 -----------------------
