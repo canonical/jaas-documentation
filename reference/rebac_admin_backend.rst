@@ -32,5 +32,5 @@ JAAS implements a subset of the operations described in the OpenAPI spec.
    ✅   ``resources``     
    🟡   ``identities``     no support for creation, update and deletion.
    ❌   ``roles``          no support for roles.
-   ❌   ``authentication`` no support for authentication.
+   ❌   ``authentication`` no support for authentication providers.
  ====== ================== =========================================================================
