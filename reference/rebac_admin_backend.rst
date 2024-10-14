@@ -23,13 +23,14 @@ JAAS Implementation
 
 JAAS implements a subset of the operations described in the OpenAPI spec. 
 
- ====== ================ =========================================================================
- Status Entities         Notes
- ====== ================ =========================================================================
+ ====== ================== =========================================================================
+ Status Entities           Notes
+ ====== ================== =========================================================================
    ✅   ``entitlements``     
    ✅   ``capabilities`` 
    ✅   ``groups``     
    ✅   ``resources``     
-   🟡   ``identities``    no support for creation, update and deletion.
-   ❌   ``roles``         no support for roles.
- ====== ================ =========================================================================
+   🟡   ``identities``     no support for creation, update and deletion.
+   ❌   ``roles``          no support for roles.
+   ❌   ``authentication`` no support for identity provider management.
+ ====== ================== =========================================================================
