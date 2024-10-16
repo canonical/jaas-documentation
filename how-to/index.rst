@@ -39,3 +39,4 @@ Security
    :maxdepth: 1
 
    Harden JIMM deployment <security_hardening>
+   Setup Ingress with TLS <setup_ingress_with_tls>
