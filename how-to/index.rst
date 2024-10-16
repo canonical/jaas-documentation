@@ -31,3 +31,12 @@ Observability
    :maxdepth: 1
 
    Integrate with the Canonical Observability Stack <integrate_with_cos>
+
+Security
+--------
+
+.. toctree::
+   :maxdepth: 1
+
+   Harden JIMM deployment <security_hardening>
+   Setup Ingress with TLS <setup_ingress_with_tls>
