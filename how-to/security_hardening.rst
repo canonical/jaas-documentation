@@ -5,10 +5,18 @@ document details how you can harden the security of your JAAS deployment.
 
 CORS
 ----
+Cross-Origin Resource Sharing (`CORS <https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS>`__) 
+is an HTTP-header based mechanism that allows a server to indicate any origins (domain, scheme, or port) 
+other than its own from which a browser should permit loading resources. CORS also relies on 
+a mechanism by which browsers make a "preflight" request to the server hosting the cross-origin 
+resource, in order to check that the server will permit the actual request. In that preflight, 
+the browser sends headers that indicate the HTTP method and headers that will be used in the 
+actual request.
+
 To set CORS on JIMM, use the configuration option "cors-allowed-origins".
 
-LEGO & NGINX Ingress Integrator
--------------------------------
+Ingress TLS
+-----------
 The NGINX Ingress Integrator is a a charm responsible for creating Kubernetes ingress rules, 
 these rules can be hardened via TLS and the charm provides a means to do so. See `here <https://charmhub.io/nginx-ingress-integrator>`__.
 
