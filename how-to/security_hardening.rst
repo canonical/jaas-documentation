@@ -20,7 +20,7 @@ To set CORS on JIMM, use the configuration option ``cors-allowed-origins``.
 
 Ingress TLS
 -----------
-Please refer :doc:`here <../how-to/setup_ingress_with_tls>`.
+Please refer :doc:`here <./setup_ingress_with_tls>`.
 
 Identity Provider
 -----------------
@@ -53,8 +53,7 @@ When adding a Juju controller to JIMM, the self-signed certificate of the contro
 JIMM.
 
 .. hint::  
-    Checkout :doc:`this <../how-to/add_controller>` topic for adding controllers to JAAS. 
-
+    Checkout :doc:`this <./add_controller>` topic for adding controllers to JAAS. 
 
 PostgreSQL
 ----------

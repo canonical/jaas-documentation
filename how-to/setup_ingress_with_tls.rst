@@ -1,6 +1,6 @@
 JAAS: Setup Ingress with TLS
 ============================
-The NGINX Ingress Integrator is a a charm responsible for creating Kubernetes ingress rules, 
+The NGINX Ingress Integrator is a charm responsible for creating Kubernetes ingress rules, 
 these rules can be hardened via TLS and the charm provides a means to do so. See `here <https://charmhub.io/nginx-ingress-integrator>`__.
 
 Our LEGO charms provide certificates for charms from a desired ACME server and can be integrated
