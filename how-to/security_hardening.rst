@@ -59,7 +59,6 @@ TLS is enabled by default when communicating with controllers.
 When adding a Juju controller to JIMM, the self signed certificate of the controller is given to
 JIMM.
 
-
 PostgreSQL
 ----------
 JIMM uses PostgreSQL as its persistent storage layer. The communication between PostgreSQL can be encrypted
