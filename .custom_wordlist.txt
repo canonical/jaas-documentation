@@ -12,7 +12,6 @@ CLI
 CN
 config
 CORS
-cors
 CSRF
 Diátaxis
 DNS
@@ -32,8 +31,6 @@ HMAC
 https
 IAM
 IdP
-integrator
-Integrator
 init
 installable
 JAAS

@@ -38,4 +38,4 @@ Security
 .. toctree::
    :maxdepth: 1
 
-   Harden your JIMM deployment <security_hardening>
+   Harden JIMM deployment <security_hardening>
