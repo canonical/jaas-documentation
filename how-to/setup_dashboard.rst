@@ -6,7 +6,7 @@ Juju dashboard is a web UI that is intended to supplement the CLI experience wit
 This how-to provides you with instructions on how to setup Juju Dashboard for your JAAS deployment.
 
 .. hint::
-    To explore Juju Dashboard features you can go `here <https://juju.is/docs/juju/the-juju-dashboard>`_
+    To explore Juju Dashboard features you can go `here <https://juju.is/docs/juju/the-juju-dashboard>`_.
 
 
 Prerequisites
@@ -29,7 +29,7 @@ First deploy the Juju Dashboard charm.
 Then you need to expose your dashboard through an ingress.
 
 .. hint::
-    You can follow `this guide <../setup_ingress_with_tls>`_
+    You can follow :doc:`this guide <../setup_ingress_with_tls>`.
 
 .. code:: bash
 
