@@ -29,7 +29,7 @@ First deploy the Juju Dashboard charm.
 Then you need to expose your dashboard through an ingress.
 
 .. hint::
-    You can follow `this guide <../setup_ingress_with_tls>`_.
+    You can follow `this guide <../setup_ingress_with_tls>`_
 
 .. code:: bash
 
