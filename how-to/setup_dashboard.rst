@@ -1,11 +1,11 @@
 JAAS: Setup Juju dashboard
 ==========================
 
-Juju Dashboard aims to expose Juju environments, providing at-scale management, status 
-and collaboration features not found in the Juju CLI. 
+Juju dashboard is a web UI that is intended to supplement the CLI experience with aggregate views and at a glance health checks.
+This how-to provides you with instructions on how to setup Juju Dashboard for your JAAS deployment.
 
 .. hint::
-    To explore Juju Dashboard feature you can go `here <https://juju.is/docs/juju/the-juju-dashboard>`_
+    To explore Juju Dashboard features you can go `here <https://juju.is/docs/juju/the-juju-dashboard>`_
 
 
 Prerequisites
@@ -25,14 +25,16 @@ First deploy the Juju Dashboard charm.
     juju integrate dashboard jimm-app
 
 Then you need to expose your dashboard through an ingress.
-You can follow `this guide <setup_ingress_with_tls>`_.
+
+.. hint::
+    You can follow `this guide <setup_ingress_with_tls>`_.
 
 .. code:: bash
     juju deploy nginx-ingress-integrator dashboard-ingress
     juju integrate dashboard dashboard-ingress
     juju config dashboard-ingress service-hostname="<https://hostname>""
 
-You would access the dashboard from ``https://hostname``
+You will visit your dashboard at ``https://hostname``.
 
 Now you need to configure JIMM to accept requests coming from ``https://hostname``.
 .. code:: bash
