@@ -26,6 +26,10 @@ Run the following command replacing the contents with your email address to conf
 
     juju config jimm controller-admins="username@domain.com"
 
+.. hint::
+
+     See also: `Charmhub | jimm-k8s-operator > Configs > controller-admin <https://charmhub.io/juju-jimm-k8s/configurations#controller-admins>`__.
+
 Now you can verify that you have admin access to JIMM using ``jimmctl``.
 
 If you do not have ``jimmctl`` installed, you can do so with the following command:
