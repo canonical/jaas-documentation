@@ -34,6 +34,7 @@ IdP
 init
 installable
 JAAS
+jimm
 JIMM
 JIMM's
 JSON

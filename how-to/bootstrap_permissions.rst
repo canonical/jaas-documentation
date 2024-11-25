@@ -28,7 +28,7 @@ Run the following command replacing the contents with your email address to conf
 
 .. hint::
 
-     See also: `Charmhub | jimm-k8s-operator > Configs > controller-admin <https://charmhub.io/juju-jimm-k8s/configurations#controller-admins>`__.
+     See also: `Charmhub | juju-jimm-k8s > Configurations > controller-admin <https://charmhub.io/juju-jimm-k8s/configurations#controller-admins>`__.
 
 Now you can verify that you have admin access to JIMM using ``jimmctl``.
 
