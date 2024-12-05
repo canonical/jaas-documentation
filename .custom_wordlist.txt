@@ -1,5 +1,6 @@
 addons
 ADFS
+alice
 API
 APIs
 auditability
@@ -35,8 +36,11 @@ init
 installable
 JAAS
 jimm
+jimmctl
+Jimmctl
 JIMM
 JIMM's
+json
 JSON
 juju
 Juju
@@ -44,6 +48,7 @@ Juju's
 JWKS
 JWT
 JWTs
+JQ
 K8s
 Keystore
 Kratos
@@ -52,6 +57,7 @@ Kubernetes
 Launchpad
 ldap
 LDAP
+loginer
 LTS
 LXC
 LXD
@@ -64,13 +70,18 @@ MicroK
 MicroK8s
 Microsoft
 Multipass
+MyController
+MyGroup
+MyTeam
 MyST
 namespace
 namespaces
 NFS
+nginx
 Nginx
 NodePort
 ntp
+objectname
 OAuth
 OAuth2
 OAuth2.0
@@ -104,6 +115,8 @@ SSL
 subdirectories
 subfolders
 subtree
+Subcommands
+TeamA
 Terraform
 TLS
 Traefik
@@ -112,7 +125,12 @@ UbuntuSSO
 UI
 URI
 URIs
+urls
+userset
+uuid
 UUID
+uuids
+UUIDs
 VM
 VM's
 VMs
@@ -120,4 +138,5 @@ webhook
 Websocket
 Xbox
 XSRF
+yaml
 YAML

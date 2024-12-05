@@ -10,12 +10,30 @@ Security
    :maxdepth: 1
 
    JAAS Security <security>
+   Audit Logs <audit_logs>
+
+Authorisation
+-------------
 
 .. toctree::
    :maxdepth: 1
 
-   Audit Logs <audit_logs>
-   Supported Juju Versions <juju_required_version>
    Authorisation Model <authorisation_model>
    Authorisation Data <authorisation_data>
    ReBAC Admin Backend <rebac_admin_backend>
+
+Support
+-------
+
+.. toctree::
+   :maxdepth: 1
+
+   Supported Juju Versions <juju_required_version>
+
+CLI Reference
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+   Jimmctl Reference <jimmctl>
