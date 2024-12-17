@@ -223,7 +223,7 @@ Flag               Default Usage
 Details
 -------
 
-The auth command enables users to manage authorisation model used by JIMM.
+The auth command enables user access management.
 
 Subcommands
 -----------
