@@ -223,7 +223,7 @@ Flag               Default Usage
 Details
 -------
 
-The auth command enables users to manage authorisation model used by JIMM.
+The auth command enables user access management.
 
 Subcommands
 -----------
@@ -1581,17 +1581,18 @@ Examples
 
 ::
 
-   jimmctl migrate mycontroller 2cb433a6-04eb-4ec4-9567-90426d20a004 
    jimmctl migrate mycontroller 2cb433a6-04eb-4ec4-9567-90426d20a004 fd469983-27c2-423b-bebf-84f616fb036b ...
+   jimmctl migrate mycontroller user@domain.com/model-a user@domain.com/model-b ...
+   jimmctl migrate mycontroller user@domain.com/model-a fd469983-27c2-423b-bebf-84f616fb036b ...
 
 .. _details-28:
 
 Details
 -------
 
-The migrate command migrates a model(s) to a new controller. Specify a model-uuid to migrate and the destination controller name.
+The migrate commands migrates a model, or many models between two controllers registered within JIMM.
 
-Note that multiple models can be targeted for migration by supplying multiple model uuids.
+You may specify a model name (of the form owner/name) or model UUID.
 
 MODEL-STATUS
 ============
