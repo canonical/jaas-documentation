@@ -18,44 +18,48 @@ JAAS authorisation model reshapes the `Juju permission model <https://juju.is/do
 .. code:: text
 
     model
-        schema 1.1
+  schema 1.1
 
-    type applicationoffer
+    type user
+
+    type role
     relations
-        define administrator: [user, user:*, group#member] or administrator from model
-        define consumer: [user, user:*, group#member] or administrator
-        define model: [model]
-        define reader: [user, user:*, group#member] or consumer
-
-
-    type cloud
-    relations
-        define administrator: [user, user:*, group#member] or administrator from controller
-        define can_addmodel: [user, user:*, group#member] or administrator
-        define controller: [controller]
-
-    type controller
-    relations
-        define administrator: [user, user:*, group#member] or administrator from controller
-        define audit_log_viewer: [user, user:*, group#member] or administrator
-        define controller: [controller]
+        define assignee: [user, user:*, group#member]
 
     type group
     relations
         define member: [user, user:*, group#member]
 
+    type controller
+    relations
+        define controller: [controller]
+        define administrator: [user, user:*, group#member, role#assignee] or administrator from controller
+        define audit_log_viewer: [user, user:*, group#member, role#assignee] or administrator
+
     type model
     relations
-        define administrator: [user, user:*, group#member] or administrator from controller
         define controller: [controller]
-        define reader: [user, user:*, group#member] or writer
-        define writer: [user, user:*, group#member] or administrator
+        define administrator: [user, user:*, group#member, role#assignee] or administrator from controller
+        define reader: [user, user:*, group#member, role#assignee] or writer
+        define writer: [user, user:*, group#member, role#assignee] or administrator
+
+    type applicationoffer
+    relations
+        define model: [model]
+        define administrator: [user, user:*, group#member, role#assignee] or administrator from model
+        define consumer: [user, user:*, group#member, role#assignee] or administrator
+        define reader: [user, user:*, group#member, role#assignee] or consumer
+
+    type cloud
+    relations
+        define controller: [controller]
+        define administrator: [user, user:*, group#member, role#assignee] or administrator from controller
+        define can_addmodel: [user, user:*, group#member, role#assignee] or administrator
 
     type serviceaccount
     relations
-        define administrator: [user, user:*, group#member]
+        define administrator: [user, user:*, group#member, role#assignee]
 
-    type user
 
 Here is the directed graph illustration of the above model. In this figure, purple and green nodes represent entity types and relations, respectively. The dashed lines show the internal indirect relationships among relations defined on the entity type.
 
@@ -125,6 +129,14 @@ Relations      Abilities
 reader         View the content of a model without changing it. Can use any of the read commands.
 writer         Deploy and manage applications on the model.
 administrator  You can do anything that it is possible to do at the level of a model. This grants permissions to all resources that inherit from model access. 
+=============  =========
+
+Role
+^^^^
+=============  =========
+Relations      Abilities
+=============  =========
+assignee       Assigned to a specific role within the role.
 =============  =========
 
 Service Account
