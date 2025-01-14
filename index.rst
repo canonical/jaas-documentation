@@ -5,23 +5,27 @@
 JAAS Documentation
 ==================
 
-**JAAS** provides a single location to manage your Juju infrastructure by using the 
-Dashboard or using the same Juju CLI commands to create a high-level overview and 
-the ability to drill-in to the details when you need it.
+JAAS is an enterprise layer on top of `Juju <https://canonical-juju.readthedocs-hosted.com/en/latest/>`__.
 
-**JAAS** is composed of the following components:
+JAAS provides:
 
-- JIMM - Juju Intelligent Model Manager, which acts as a single point of contact for multiple Juju controllers,
-- Juju controllers -  each controlling models in specific clouds or cloud regions,
-- Juju dashboard - providing a clear overview of your Juju real estate with the ability to drill down into details of your deploys.
+- The Juju Infinite Model Manager, JIMM (and its `backing charm <https://charmhub.io/juju-jimm-k8s>`__):  A Juju enterprise-level controller. 
+  
+- JIMM-specific extensions to existing Juju machinery, including
+  
+  * the `Juju CLI <https://canonical-juju.readthedocs-hosted.com/en/latest/user/reference/juju-cli/>`__ (enhanced with `jimmctl`, for JIMM admins, and `jaas`, for regular JIMM users),
+    
+  * the `Juju dashboard <https://canonical-juju.readthedocs-hosted.com/en/latest/user/reference/juju-dashboard/>`__ (and its `backing charm <https://charmhub.io/juju-dashboard>`__), and
+    
+  * the `Terraform Provider for Juju <https://canonical-terraform-provider-juju.readthedocs-hosted.com/en/latest/>`__.
 
-**JAAS** is useful for customers that do not want to maintain their own controllers
-in public clouds. Canonical's JAAS enables users to deploy their workloads
-in public clouds without the extra complexity and costs associated with running their
-own Juju controllers. JAAS is also useful for organisations 
-running their own Juju infrastructure giving them a single point of contact for 
-their entire real estate and, in combination with the Juju Dashboard, giving
-them a clear overview of their infrastructure.
+When you use an existing Juju on Kubernetes controller to deploy JIMM and its dependencies, and then connect your Juju controllers to JIMM, you gain the ability to:
+
+- use OIDC authentication for integration with your existing identity provider for federated login, service accounts and other features offered by identity providers;  
+- use ReBAC for authorisation;
+- use the Juju CLI, Juju Dashboard, and the Terraform Provider for Juju to interact with multiple Juju controllers from a single point of contact. 
+
+If you want to take Juju to the enterprise level, you need JAAS.
 
 ---------
 

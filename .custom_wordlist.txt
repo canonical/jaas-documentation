@@ -34,6 +34,7 @@ IAM
 IdP
 init
 installable
+jaas
 JAAS
 jimm
 jimmctl
