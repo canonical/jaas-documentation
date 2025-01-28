@@ -130,7 +130,8 @@ redirects = {}
 linkcheck_ignore = [
     'http://127.0.0.1:8000',
     'http://test-jimm.localhost/debug/info',
-    'https://matrix.to/#/#jimm:ubuntu.com'
+    'https://matrix.to/#/#jimm:ubuntu.com',
+    'https://jwt.io/introduction' # This link works but returns a 500 from automation.
     ]
 
 # Pages on which to ignore anchors
