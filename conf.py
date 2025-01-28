@@ -127,6 +127,8 @@ for tag in custom_tags:
 ### Styling
 ############################################################
 
+highlight_language = 'none'
+
 # Find the current builder
 builder = 'dirhtml'
 if '-b' in sys.argv:
