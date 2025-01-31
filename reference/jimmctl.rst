@@ -1,34 +1,8 @@
-Jimmctl Reference
-#################
+jimmctl Reference
+#####################
 
-Index
-=====
-
-0.  `add-cloud-to-controller <#add-cloud-to-controller>`__
-1.  `add-controller <#add-controller>`__
-2.  `audit-events <#audit-events>`__
-3.  `auth <#auth>`__
-4.  `controller-info <#controller-info>`__
-5.  `controllers <#controllers>`__
-6.  `grant-audit-log-access <#grant-audit-log-access>`__
-7.  `import-cloud-credentials <#import-cloud-credentials>`__
-8.  `import-model <#import-model>`__
-9.  `list-audit-events <#list-audit-events>`__
-10. `list-controllers <#list-controllers>`__
-11. `migrate <#migrate>`__
-12. `model-status <#model-status>`__
-13. `purge-audit-logs <#purge-audit-logs>`__
-14. `query-models <#query-models>`__
-15. `remove-cloud-from-controller <#remove-cloud-from-controller>`__
-16. `remove-controller <#remove-controller>`__
-17. `revoke-audit-log-access <#revoke-audit-log-access>`__
-18. `set-controller-deprecated <#set-controller-deprecated>`__
-19. `update-migrated-model <#update-migrated-model>`__
-
---------------
-
-ADD-CLOUD-TO-CONTROLLER
-=======================
+jimmctl add-cloud-to-controller
+===============================
 
 Summary
 -------
@@ -72,8 +46,8 @@ The add-cloud-to-controller command adds the specified cloud to a specific contr
 
 One can specify a cloud definition via a yaml file passed with the –cloud flag. If the flag is missing, the command will assume the cloud definition is already known and will error otherwise.
 
-ADD-CONTROLLER
-==============
+jimmctl add-controller
+======================
 
 .. _summary-1:
 
@@ -121,8 +95,8 @@ Details
 
 The add-controller command adds a controller to jimm.
 
-AUDIT-EVENTS
-============
+jimmctl audit-events
+====================
 
 **Aliases:** audit-events
 
@@ -189,8 +163,8 @@ Details
 
 The list-audit-events command displays matching audit events.
 
-AUTH
-====
+jimmctl auth
+============
 
 .. _summary-3:
 
@@ -223,7 +197,7 @@ Flag               Default Usage
 Details
 -------
 
-The auth command enables users to manage authorisation model used by JIMM.
+The auth command enables user access management.
 
 Subcommands
 -----------
@@ -232,8 +206,8 @@ Subcommands
 - `relation <#auth-relation>`__
 - `role <#auth-role>`__
 
-AUTH GROUP
-==========
+jimmctl auth group
+==================
 
 .. _summary-4:
 
@@ -278,8 +252,8 @@ Subcommands
 - `remove <#auth-group-remove>`__
 - `rename <#auth-group-rename>`__
 
-AUTH GROUP ADD
-==============
+jimmctl auth group add
+======================
 
 .. _summary-5:
 
@@ -326,8 +300,8 @@ Details
 
 The add command adds group to jimm.
 
-AUTH GROUP LIST
-===============
+jimmctl auth group list
+=======================
 
 .. _summary-6:
 
@@ -378,8 +352,8 @@ Details
 
 The list command lists all groups in jimm.
 
-AUTH GROUP REMOVE
-=================
+jimmctl auth group remove
+=========================
 
 .. _summary-7:
 
@@ -428,8 +402,8 @@ Details
 
 The remove command removes a group in jimm.
 
-AUTH GROUP RENAME
-=================
+jimmctl auth group rename
+=========================
 
 .. _summary-8:
 
@@ -472,8 +446,8 @@ Details
 
 The rename command renames a group in jimm.
 
-AUTH RELATION
-=============
+jimmctl auth relation
+=====================
 
 .. _summary-9:
 
@@ -518,8 +492,8 @@ Subcommands
 - `list <#auth-relation-list>`__
 - `remove <#auth-relation-remove>`__
 
-AUTH RELATION ADD
-=================
+jimmctl auth relation add
+=========================
 
 .. _summary-10:
 
@@ -619,8 +593,8 @@ Additionally, if the object is a group, a userset can be applied by adding #memb
 
    group-TeamA#member administrator controller-MyController
 
-AUTH RELATION CHECK
-===================
+jimmctl auth relation check
+===========================
 
 .. _summary-11:
 
@@ -667,8 +641,8 @@ Details
 
 Verifies the access between resources.
 
-AUTH RELATION LIST
-==================
+jimmctl auth relation list
+==========================
 
 .. _summary-12:
 
@@ -737,8 +711,8 @@ Details
 
 List relations known to jimm. Using the “target”, “relation” and “object” flags, only those relations matching the filter will be returned.
 
-AUTH RELATION REMOVE
-====================
+jimmctl auth relation remove
+============================
 
 .. _summary-13:
 
@@ -838,8 +812,8 @@ Additionally, if the object is a group, a userset can be applied by adding #memb
 
    group-TeamA#member administrator controller-MyController
 
-AUTH ROLE
-=========
+jimmctl auth role
+=================
 
 .. _summary-14:
 
@@ -884,8 +858,8 @@ Subcommands
 - `remove <#auth-role-remove>`__
 - `rename <#auth-role-rename>`__
 
-AUTH ROLE ADD
-=============
+jimmctl auth role add
+=====================
 
 .. _summary-15:
 
@@ -932,8 +906,8 @@ Details
 
 The add command adds role to jimm.
 
-AUTH ROLE LIST
-==============
+jimmctl auth role list
+======================
 
 .. _summary-16:
 
@@ -984,8 +958,8 @@ Details
 
 The list command lists all roles in jimm.
 
-AUTH ROLE REMOVE
-================
+jimmctl auth role remove
+========================
 
 .. _summary-17:
 
@@ -1034,8 +1008,8 @@ Details
 
 The remove command removes a role in jimm.
 
-AUTH ROLE RENAME
-================
+jimmctl auth role rename
+========================
 
 .. _summary-18:
 
@@ -1078,8 +1052,8 @@ Details
 
 The rename command renames a role in jimm.
 
-CONTROLLER-INFO
-===============
+jimmctl controller-info
+=======================
 
 .. _summary-19:
 
@@ -1131,8 +1105,8 @@ If a public address is specified, the output controller information will contain
 
 Use the –local flag if the server is not configured with a public address.
 
-CONTROLLERS
-===========
+jimmctl controllers
+===================
 
 **Aliases:** list-controllers
 
@@ -1182,8 +1156,8 @@ Details
 
 The list-controllers command displays controller information for all controllers known to JIMM.
 
-DOCUMENTATION
-=============
+jimmctl documentation
+=====================
 
 .. _summary-21:
 
@@ -1258,8 +1232,8 @@ Details
 
 This command generates a markdown formatted document with all the commands, their descriptions, arguments, and examples.
 
-GRANT-AUDIT-LOG-ACCESS
-======================
+jimmctl grant-audit-log-access
+==============================
 
 .. _summary-22:
 
@@ -1302,8 +1276,8 @@ Details
 
 Grants a user access to read audit logs.
 
-HELP
-====
+jimmctl help
+============
 
 .. _summary-23:
 
@@ -1326,8 +1300,8 @@ Details
 
 See also: topics
 
-IMPORT-CLOUD-CREDENTIALS
-========================
+jimmctl import-cloud-credentials
+================================
 
 .. _summary-24:
 
@@ -1372,8 +1346,8 @@ The import-cloud-credentials imports a set of cloud credentials loaded from a fi
 
 { “\_id”: <cloud-credential-id>, “type”: <credential-type>, “attributes”: { <key1>: <value1>, … } }
 
-IMPORT-MODEL
-============
+jimmctl import-model
+====================
 
 .. _summary-25:
 
@@ -1423,8 +1397,8 @@ When importing, it is necessary for JIMM to contain a set of cloud credentials t
 
 The –owner command is necessary when importing a model created by a local user and it will switch the model owner to the desired external user.
 
-LIST-AUDIT-EVENTS
-=================
+jimmctl list-audit-events
+=========================
 
 **Aliases:** audit-events
 
@@ -1491,8 +1465,8 @@ Details
 
 The list-audit-events command displays matching audit events.
 
-LIST-CONTROLLERS
-================
+jimmctl list-controllers
+========================
 
 **Aliases:** list-controllers
 
@@ -1542,8 +1516,8 @@ Details
 
 The list-controllers command displays controller information for all controllers known to JIMM.
 
-MIGRATE
-=======
+jimmctl migrate
+===============
 
 .. _summary-28:
 
@@ -1581,20 +1555,21 @@ Examples
 
 ::
 
-   jimmctl migrate mycontroller 2cb433a6-04eb-4ec4-9567-90426d20a004 
    jimmctl migrate mycontroller 2cb433a6-04eb-4ec4-9567-90426d20a004 fd469983-27c2-423b-bebf-84f616fb036b ...
+   jimmctl migrate mycontroller user@domain.com/model-a user@domain.com/model-b ...
+   jimmctl migrate mycontroller user@domain.com/model-a fd469983-27c2-423b-bebf-84f616fb036b ...
 
 .. _details-28:
 
 Details
 -------
 
-The migrate command migrates a model(s) to a new controller. Specify a model-uuid to migrate and the destination controller name.
+The migrate commands migrates a model, or many models between two controllers registered within JIMM.
 
-Note that multiple models can be targeted for migration by supplying multiple model uuids.
+You may specify a model name (of the form owner/name) or model UUID.
 
-MODEL-STATUS
-============
+jimmctl model-status
+====================
 
 .. _summary-29:
 
@@ -1642,8 +1617,8 @@ Details
 
 The model-status command displays full model status.
 
-PURGE-AUDIT-LOGS
-================
+jimmctl purge-audit-logs
+========================
 
 .. _summary-30:
 
@@ -1694,8 +1669,8 @@ The purge-audit-logs purges logs from the database before the given date.
 
 The provided date must be formatted as an ISO8601 date string.
 
-QUERY-MODELS
-============
+jimmctl query-models
+====================
 
 .. _summary-31:
 
@@ -1746,8 +1721,8 @@ The query runs against the output of “juju status –format json”, as such y
 
 The queries expect a JQ query string.
 
-REMOVE-CLOUD-FROM-CONTROLLER
-============================
+jimmctl remove-cloud-from-controller
+====================================
 
 .. _summary-32:
 
@@ -1794,8 +1769,8 @@ Details
 
 The remove-cloud-from-controller command removes the specified cloud from the specified controller in jimm.
 
-REMOVE-CONTROLLER
-=================
+jimmctl remove-controller
+=========================
 
 .. _summary-33:
 
@@ -1845,8 +1820,8 @@ Details
 
 The remove-controller command removes a controller from jimm.
 
-REVOKE-AUDIT-LOG-ACCESS
-=======================
+jimmctl revoke-audit-log-access
+===============================
 
 .. _summary-34:
 
@@ -1889,8 +1864,8 @@ Details
 
 The revoke-audit-log-access revokes user access to audit logs.
 
-SET-CONTROLLER-DEPRECATED
-=========================
+jimmctl set-controller-deprecated
+=================================
 
 .. _summary-35:
 
@@ -1937,8 +1912,8 @@ Details
 
 The set-controller-deprecated sets the deprecated status of a controller.
 
-UPDATE-MIGRATED-MODEL
-=====================
+jimmctl update-migrated-model
+=============================
 
 .. _summary-36:
 
