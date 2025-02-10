@@ -13,8 +13,11 @@ CLI
 CN
 config
 CORS
+CPUs
 CSRF
 Diátaxis
+Dev
+dev
 DNS
 dropdown
 EBS
@@ -132,6 +135,7 @@ uuid
 UUID
 uuids
 UUIDs
+vm
 VM
 VM's
 VMs

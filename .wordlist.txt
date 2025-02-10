@@ -10,6 +10,7 @@ Charmhub
 cryptographic
 cryptographically
 CLI
+Dev
 Diátaxis
 dropdown
 EBS
