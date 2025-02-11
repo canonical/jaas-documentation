@@ -1,4 +1,4 @@
-jimmctl Reference
+``jimmctl`` Reference
 #####################
 
 jimmctl add-cloud-to-controller
