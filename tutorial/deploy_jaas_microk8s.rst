@@ -10,74 +10,43 @@ This tutorial will teach you about JIMM and Juju as well as a bit about Canonica
 
 Prerequisites
 -------------
+- A workstation, e.g., a laptop, that has sufficient resources to launch a virtual machine with 4 CPUs, 8 GB RAM, and 50 GB disk space.
 
-For this tutorial you will need the following:
 
-- An Ubuntu machine.
+Set up an isolated test environment
+-----------------------------------
 
-Setup Multipass (Optional)
---------------------------
-Multipass is a tool to launch Ubuntu VMs from Windows, Linux and MacOS. The remainder of this guide can be run from within a Multipass VM to avoid affecting the host machine.
+Set up an isolated test environment with Multipass and the `charm-dev` blueprint, which will provide all the necessary tools and configuration for the tutorial (a localhost machine cloud and Kubernetes cloud, Juju, etc.). 
 
-Start by running the following commands to install and start a Multipass VM, the optional section will define the VM's memory/CPU/disk usage.
+On your machine, install Multipass and use it to set up an Ubuntu virtual machine (VM) called `my-juju-vm` from the `charm-dev` blueprint. 
+
+.. note::
+    See more: `Set things up (automatically) <https://canonical-juju.readthedocs-hosted.com/en/latest/user/howto/manage-your-deployment/manage-your-deployment-environment/#manage-your-deployment-environment>`__  
+
+    Note: This document also contains a manual path, using which you can set things up without the Multipass VM or the `charm-dev` blueprint. However, please note that the manual path may yield slightly different results that may impact your experience of this tutorial. 
+    For best results we strongly recommend the automatic path, or else suggest that you follow the manual path in a way that stays very close to `the definition of the charm-dev blueprint <https://github.com/canonical/multipass-blueprints/blob/e270a76093aad7b178ce0df5b7aa00e9dfd9b054/v1/charm-dev.yaml>`__.
+
+Open a shell in the VM:
 
 .. code:: bash
+    
+    multipass shell my-juju-vm
 
-    sudo snap install multipass
-    multipass launch jammy --name jimm-deploy [-m 12g -c 4 -d 40G]
-    multipass shell jimm-deploy
+Make sure MicroK8s is correctly set up:
 
-Install some handy tools.
+.. code:: bash
+    
+    # enable necessary add-ons
+    sudo microk8s dns ingress host-access
+
+Then install some handy tools to query and extract info from json and yaml:
 
 .. code:: bash
 
     sudo apt install jq
     sudo snap install yq
 
-Setup Juju & MicroK8s
----------------------
-Now we can install our dependencies, note that Juju 3+ only works with a strictly confined MicroK8s Snap.
-
-.. note::
-    JIMM supports talking to many different Juju controller versions. However changes to the Juju CLI to support authentication with JIMM 
-    have only been added in Juju 3.5. For this reason, ensure you are running the Juju CLI with version 3.5 for the best experience.
-
-.. note::
-    JIMM can be deployed by any Juju controller that supports Juju secrets, i.e. Juju 3+
-
-.. code:: bash
-
-    sudo snap install microk8s --channel=1.28-strict/stable
-    sudo snap install juju --channel=3.5/stable
-
-Once you have the Juju CLI installed, you will need to bootstrap a Juju controller to your cloud. 
-We will be using MicroK8s as our cloud. The Juju documentation has detailed instructions on how to bootstrap a controller
-for various clouds and machine types.
-
-To begin, run the following commands to setup MicroK8s.
-
-.. code:: bash
-
-    # Add the 'ubuntu' user to the MicroK8s group:
-    sudo usermod -a -G snap_microk8s ubuntu
-    # Give the 'ubuntu' user permissions to read the ~/.kube directory:
-    sudo chown -f -R ubuntu ~/.kube
-    # Create the 'microk8s' group:
-    newgrp snap_microk8s
-    # Enable the necessary MicroK8s addons:
-    sudo microk8s enable hostpath-storage dns ingress host-access
-    # Setup the metallb add-on for the identity bundle later
-    sudo microk8s enable metallb:10.64.140.43-10.64.140.100
-    # Set up a short alias for the Kubernetes CLI:
-    sudo snap alias microk8s.kubectl kubectl
-
-Next, bootstrap your Juju controller.
-
-.. code:: bash
-
-    # Since the Juju package is strictly confined, you also need to manually create a path:
-    mkdir -p ~/.local/share
-    juju bootstrap microk8s jimm-demo-controller
+You are now all set and ready to deploy JAAS.
 
 Deploy the identity-bundle
 --------------------------
