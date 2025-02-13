@@ -23,6 +23,9 @@ extensions = [
     'sphinx_design',
     'sphinx_copybutton',
     'sphinxcontrib.jquery',
+    # Make it possible to link to related RTD projects using their internal anchors
+    # with, e.g., {external+ops:ref}`manage-configurations`:
+    'sphinx.ext.intersphinx',
 ]
 
 # Only add redirects extension if any redirects are specified.
@@ -86,6 +89,18 @@ notfound_context = {
 # https://github.com/canonical/sphinx-docs-starter-pack/pull/54 )
 if not 'ogp_image' in locals():
     ogp_image = 'https://assets.ubuntu.com/v1/253da317-image-document-ubuntudocs.svg'
+
+##################################
+# sphinx.ext.intersphinx options #
+##################################
+
+intersphinx_mapping = {
+    'juju': ('https://canonical-juju.readthedocs-hosted.com/en/latest/', None),
+    'tfjuju': ('https://canonical-terraform-provider-juju.readthedocs-hosted.com/en/latest/', None),
+    'pyjuju': ('https://pythonlibjuju.readthedocs.io/en/latest/', None),
+    'charmcraft': ('https://canonical-charmcraft.readthedocs-hosted.com/en/latest/', None),
+    'ops': ('https://ops.readthedocs.io/en/latest/', None),
+}
 
 ############################################################
 ### General configuration

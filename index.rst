@@ -9,21 +9,21 @@ JAAS is an enterprise layer on top of `Juju <https://canonical-juju.readthedocs-
 
 JAAS provides:
 
-- The Juju Infinite Model Manager, JIMM (and its `backing charm <https://charmhub.io/juju-jimm-k8s>`__):  A Juju enterprise-level controller. 
-  
+- The Juju Infinite Model Manager, JIMM (and its `backing charm <https://charmhub.io/juju-jimm-k8s>`__):  A Juju enterprise-level controller.
+
 - JIMM-specific extensions to existing Juju machinery, including
-  
+
   * the `Juju CLI <https://canonical-juju.readthedocs-hosted.com/en/latest/user/reference/juju-cli/>`__ (enhanced with `jimmctl`, for JIMM admins, and `jaas`, for regular JIMM users),
-    
+
   * the `Juju dashboard <https://canonical-juju.readthedocs-hosted.com/en/latest/user/reference/juju-dashboard/>`__ (and its `backing charm <https://charmhub.io/juju-dashboard>`__), and
-    
+
   * the `Terraform Provider for Juju <https://canonical-terraform-provider-juju.readthedocs-hosted.com/en/latest/>`__.
 
 When you use an existing Juju on Kubernetes controller to deploy JIMM and its dependencies, and then connect your Juju controllers to JIMM, you gain the ability to:
 
-- use OIDC authentication for integration with your existing identity provider for federated login, service accounts and other features offered by identity providers;  
+- use OIDC authentication for integration with your existing identity provider for federated login, service accounts and other features offered by identity providers;
 - use ReBAC for authorisation;
-- use the Juju CLI, Juju Dashboard, and the Terraform Provider for Juju to interact with multiple Juju controllers from a single point of contact. 
+- use the Juju CLI, Juju Dashboard, and the Terraform Provider for Juju to interact with multiple Juju controllers from a single point of contact.
 
 If you want to take Juju to the enterprise level, you need JAAS.
 
