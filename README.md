@@ -1,17 +1,12 @@
 JAAS Documentation
 ==========================
 
-This directory holds the JAAS documentation:
+This directory holds the source files for the JAAS documentation hosted at https://canonical-jaas-documentation.readthedocs-hosted.com/.
 
-- tutorials
-- how-tos
-- reference
-- explanations
-
-How to use 
+How to use
 ----------
 
-To compile the documentation locally run: 
+To compile the documentation locally run:
 
 `` make install``
 
