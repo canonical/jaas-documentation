@@ -1,0 +1,6 @@
+# Follow the pattern <old URL> <new URL>
+# If you're renaming things, run make clean before make run.
+
+# e.g., user/reference/charm/channel/ user/reference/charm/
+
+bob/bob/ how-to/add_controller/
