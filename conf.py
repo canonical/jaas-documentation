@@ -33,8 +33,6 @@ extensions = [
 # rediraffe_branch = "3.6"
 rediraffe_redirects = "redirects.txt"
 
-custom_required_modules = ['sphinxext-rediraffe']
-
 # Only add redirects extension if any redirects are specified.
 if AreRedirectsDefined():
     extensions.append('sphinx_reredirects')
