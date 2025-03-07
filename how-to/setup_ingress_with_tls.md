@@ -1,10 +1,10 @@
-JAAS: Setup Ingress with TLS
-============================
-The NGINX Ingress Integrator is a charm responsible for creating Kubernetes ingress rules, 
-these rules can be hardened via TLS and the charm provides a means to do so. See `here <https://charmhub.io/nginx-ingress-integrator>`__.
+# JAAS: Set up Ingress with TLS
+
+The NGINX Ingress Integrator is a charm responsible for creating Kubernetes ingress rules,
+these rules can be hardened via TLS and the charm provides a means to do so. See [here](https://charmhub.io/nginx-ingress-integrator).
 
 Our LEGO charms provide certificates for charms from a desired ACME server and can be integrated
-with the integrator to enable TLS at the ingress level. See `here <https://charmhub.io/httprequest-lego-k8s>`__.
+with the integrator to enable TLS at the ingress level. See [here](https://charmhub.io/httprequest-lego-k8s).
 
 You will require a domain that your ACME is aware of and an NGINX ingress controller installed
 on your Kubernetes cluster.

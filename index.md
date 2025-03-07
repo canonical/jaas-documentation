@@ -41,7 +41,7 @@ If you want to take Juju to the enterprise level, you need JAAS.
 ````{grid} 1 1 2 2
 
 ```{grid-item-card} [Tutorial](tutorial)
-:link: tutorials
+:link: tutorial/index
 :link-type: doc
 
 **Start here**: a hands-on introduction to Juju for new users
@@ -85,7 +85,7 @@ JAAS is a member of the Ubuntu family and warmly welcomes community contribution
 * Read our [Code of Conduct ](https://ubuntu.com/community/code-of-conduct)
 * Join our [Matrix chat](https://matrix.to/#/#jimm:ubuntu.com)
 * Join our [Discourse forum](https://discourse.charmhub.io/)
-* Report a bug in the [docs](https://github.com/canonical/jaas-documentation/issues) or the [code](https://bugs.launchpad.net/jaas-issue-tracking)
+* Report a bug in the [docs](https://github.com/canonical/jaas-documentation/issues) or the [code](https://github.com/canonical/jimm/issues)
 * Contribute to the [docs](https://github.com/canonical/jaas-documentation/) or the [code](https://github.com/canonical/jimm)
 * Visit the [Juju careers page](https://juju.is/careers)
 
