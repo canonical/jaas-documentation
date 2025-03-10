@@ -56,16 +56,16 @@ Canonical's identity bundle uses Ory Hydra/Kratos to provide an OAuth server and
 
 Now we will create a Juju model for the identity platform and deploy the bundle.
 
-``text
+```text
 juju add-model iam
 juju deploy identity-platform --trust --channel 0.2/edge
-``
+```
 
 Watch the deployment by running:
 
-``text
+```text
 juju status --watch 1s
-``
+```
 
 Eventually all application should reach an `active` state except for the `kratos-external-idp-integrator` application. This application allows you to connect your identity platform
 to an external identity provider like Google, GitHub, Microsoft, etc. This is necessary because the identity provider only acts as an identity broker. A summary on how to set this up is
@@ -73,10 +73,10 @@ provided in the next step.
 
 Now run the following commands to create offers that will be consumed in the next step.
 
-``text
+```text
 juju offer hydra:oauth
 juju offer self-signed-certificates:send-ca-cert
-``
+```
 
 Running `juju status` should now two offers that we will use from a different model in the next step.
 
@@ -85,9 +85,9 @@ Running `juju status` should now two offers that we will use from a different mo
 We recommend using the following `how-to <https://charmhub.io/topics/canonical-identity-platform/how-to/integrate-external-identity-provider>`__
 and choosing your preferred identity provider.
 
-``{note}
+```{note}
 You can temporarily skip this step and return to it later, JIMM can still run without integrating the identity bundle to an external identity provider but login to JIMM will not work.
-``
+```
 
 Setting up an IdP to point to your local environment can be tricky depending on the provider used. Below are some tips to make this work.
 
@@ -115,7 +115,6 @@ The same effect can be obtained by editing your `/etc/hosts` file but this would
 To utilise `nip.io`, get the address of your `traefik-public` instance and set the `external_hostname` config option as below,
 
 ```text
-
 TRAEFIK_PUBLIC=$(juju status traefik-public --format yaml | yq .applications.traefik-public.address)
 juju config traefik-public external_hostname="iam.$TRAEFIK_PUBLIC.nip.io"
 ```
@@ -293,6 +292,7 @@ To do this briefly run the following command, ensuring you have the `go` tool in
 
 ```text
 go run github.com/go-macaroon-bakery/macaroon-bakery/cmd/bakery-keygen/v3@latest
+```
 
 This should return a private and public key pair as below which can be used to configure JIMM.
 These values are only used internally between JIMM and Juju controllers.

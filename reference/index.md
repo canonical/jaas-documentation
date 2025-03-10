@@ -35,5 +35,5 @@ Supported Juju versions <juju_required_version>
 ```{toctree}
 :maxdepth: 1
 
-`jimmctl` CLI reference <jimmctl>
+jimmctl CLI reference <jimmctl>
 ```
