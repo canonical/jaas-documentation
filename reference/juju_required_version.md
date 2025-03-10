@@ -28,13 +28,13 @@ support Juju controllers with the same major version as itself. E.g. JAAS v3 sho
 Additionally, JAAS will also support the last LTS release from Juju's previous major release E.g. JAAS v4 will also
 support the final Juju 3.x minor version.
 
-More information on Juju's roadmap and release information can be found `here <https://juju.is/docs/juju/roadmap>`__.
+More information on Juju's roadmap and release information can be found [here](https://juju.is/docs/juju/roadmap).
 
 ## Using the Juju Terraform Provider
 
 The Juju Terraform Provider can be used with JAAS to provision your models.
 Additionally, JAAS specific resources can be used to configure access rules.
-Read the docs for more information on the `Juju Terraform Provider <https://registry.terraform.io/providers/juju/juju/latest/docs>`__.
+Read the docs for more information on the [Juju Terraform Provider](https://registry.terraform.io/providers/juju/juju/latest/docs).
 
 The minimum version of JAAS that supports all functionality of the Terraform provider is v3.1.11.
 The minimum recommended version of the Terraform provider to use with JAAS is v0.15.0.

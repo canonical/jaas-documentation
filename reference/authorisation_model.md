@@ -3,16 +3,16 @@
 JAAS uses a Relationship-Based Access Control (ReBAC) scheme for authorisation purposes. This document illustrates the underlying authorisation model used by JAAS.
 
 ```{tip}
-For an explanation on Relationship-Based Access Control (ReBAC) check out :doc:`this <../explanation/authorisation>` explanation topic.
+For an explanation on Relationship-Based Access Control (ReBAC) check out {doc}`this <../explanation/authorisation>` explanation topic.
 ```
 
 ```{tip}
-As a reference on manipulating authorisation data, check out :doc:`this <./authorisation_data>` reference topic.
+As a reference on manipulating authorisation data, check out {doc}`this <./authorisation_data>` reference topic.
 ```
 
 ## The model
 
-JAAS authorisation model reshapes the `Juju permission model <https://juju.is/docs/juju/user-permissions>`_ into a ReBAC paradigm. The OpenFGA authorisation model used by JAAS is defined as:
+JAAS authorisation model reshapes the [Juju permission model](https://juju.is/docs/juju/user-permissions) into a ReBAC paradigm. The OpenFGA authorisation model used by JAAS is defined as:
 
 ```text
 
@@ -72,7 +72,7 @@ determine how much access to provide to users and groups.
 Below, only permissions which are assignable to users or groups are described. Relations like `controller` are used internally to indicate
 that, for example, a controller admin is also an admin of any models.
 
-You can use the `jimmctl` CLI to manipulate relations as mentioned above or via the `Juju Terraform Provider <https://registry.terraform.io/providers/juju/juju/latest/docs>`_
+You can use the `jimmctl` CLI to manipulate relations as mentioned above or via the [Juju Terraform Provider](https://registry.terraform.io/providers/juju/juju/latest/docs)
 using the JAAS specific resources.
 
 ```{tip}
@@ -80,7 +80,7 @@ Treat service accounts as users when relating them to resources. Only when assig
 ```
 
 Currently the permission levels are analogous (with slightly different wording) to those built into Juju. They are included here as JAAS intends to build finer
-grained access levels in the future. View the `Juju permission docs <https://juju.is/docs/juju/user-permissions>`_.
+grained access levels in the future. View the [Juju permission docs](https://juju.is/docs/juju/user-permissions).
 
 ### Application Offer
 

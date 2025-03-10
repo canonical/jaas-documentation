@@ -3,7 +3,7 @@
 
 An important precursor to understanding JAAS, is Juju, the open source orchestration engine for software operators.
 
-Read more about Juju over at `their docs <https://juju.is>`__.
+Read more about Juju over at [their docs](https://juju.is).
 
 ## JAAS Concepts
 

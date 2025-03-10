@@ -11,7 +11,7 @@ The components of JAAS are deployed via Juju K8s charms. This implies that in or
 must first bootstrap a single Juju controller to manage the components of JAAS, this is described in
 more detail in our {doc}`tutorial <../tutorial/deploy_jaas_microk8s>`.
 
-Not all the components of JAAS are expected to be deployed on Kubernetes. With the use of Juju `offers <https://juju.is/docs/juju/manage-offers>`__
+Not all the components of JAAS are expected to be deployed on Kubernetes. With the use of Juju [offers](https://juju.is/docs/juju/manage-offers)
 certain components can be deployed to virtual machines and used by the Kubernetes charms. These components
 include PostgreSQL and Vault and can be deployed with their corresponding machine charms. Currently JIMM
 and OpenFGA are only supported as Kubernetes charms.

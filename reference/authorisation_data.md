@@ -3,11 +3,11 @@
 JAAS uses a Relationship-Based Access Control (ReBAC) scheme for authorisation purposes. This document provides the information about the authorisation data structure.
 
 ```{tip}
-For an explanation on Relationship-Based Access Control (ReBAC) check out :doc:`this <../explanation/authorisation>` explanation topic.
+For an explanation on Relationship-Based Access Control (ReBAC) check out {doc}`this <../explanation/authorisation>` explanation topic.
 ```
 
 ```{tip}
-As a reference on JAAS authorisation model, check out :doc:`this <./authorisation_model>` reference topic.
+As a reference on JAAS authorisation model, check out {doc}`this <./authorisation_model>` reference topic.
 ```
 
 
@@ -37,7 +37,7 @@ This reads as: "an entity of type `user`, named `alice@canonical.com`, has the `
 ## Manipulating tuples
 
 ```{tip}
-For a tutorial on managing users/groups permissions, check out :doc:`this <../tutorial/group_management>` topic.
+For a tutorial on managing users/groups permissions, check out {doc}`this <../tutorial/group_management>` topic.
 ```
 
 To manipulate the tuples (i.e. add/remove relations between different resources), you can use the `jimmctl auth` commands. For example, the command below adds the tuple discussed in the last example:

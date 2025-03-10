@@ -82,7 +82,7 @@ Running `juju status` should now two offers that we will use from a different mo
 
 ## Setup External IdP
 
-We recommend using the following `how-to <https://charmhub.io/topics/canonical-identity-platform/how-to/integrate-external-identity-provider>`__
+We recommend using the following [how-to](https://charmhub.io/topics/canonical-identity-platform/how-to/integrate-external-identity-provider)
 and choosing your preferred identity provider.
 
 ```{note}
@@ -173,7 +173,7 @@ Now move onto the next step to initialise Vault.
 
 ## Initialise Vault
 
-The Vault charm has documentation on how to initialise it `here <https://charmhub.io/vault-k8s/docs/h-getting-started?channel=1.15/beta>`__. But an abridged version of the steps are provided here.
+The Vault charm has documentation on how to initialise it [here](https://charmhub.io/vault-k8s/docs/h-getting-started?channel=1.15/beta). But an abridged version of the steps are provided here.
 
 Install the Vault CLI client.
 
@@ -334,7 +334,7 @@ juju login test-jimm.localhost:443 -c jimm-k8s
 Now that you have JIMM running you can browse our additional guides to setup an admin user, add controllers and migrate existing workloads.
 
 - {doc}`Setup your initial JIMM admin and configure permissions <../howto/bootstrap_permissions>`.
-- {doc}`Learn how to add a new controller to JIMM.<../howto/add_controller>`
+- {doc}`Learn how to add a new controller to JIMM. <../howto/add_controller>`
 - {doc}`Learn how to setup your new user.<../howto/setup_new_users>`
 - {doc}`Learn how to migrate models from existing controllers to JIMM <../howto/migrate_models>`.
 - {doc}`Understand the difference between the available CLI tools <../explanation/cli_tools>`.
