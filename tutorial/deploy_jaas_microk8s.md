@@ -18,10 +18,10 @@ Set up an isolated test environment with Multipass and the `charm-dev` blueprint
 
 On your machine, install Multipass and use it to set up an Ubuntu virtual machine (VM) called `my-juju-vm` from the `charm-dev` blueprint.
 
-```{note}
-See more: [Set things up (automatically)](https://canonical-juju.readthedocs-hosted.com/en/latest/user/howto/manage-your-deployment/manage-your-deployment-environment/#manage-your-deployment-environment)
+> See more: [Set things up (automatically)](https://canonical-juju.readthedocs-hosted.com/en/latest/user/howto/manage-your-deployment/manage-your-deployment-environment/#manage-your-deployment-environment)
 
-Note: This document also contains a manual path, using which you can set things up without the Multipass VM or the `charm-dev` blueprint. However, please note that the manual path may yield slightly different results that may impact your experience of this tutorial.
+```{note}
+This document also contains a manual path, using which you can set things up without the Multipass VM or the `charm-dev` blueprint. However, please note that the manual path may yield slightly different results that may impact your experience of this tutorial.
 For best results we strongly recommend the automatic path, or else suggest that you follow the manual path in a way that stays very close to [the definition of the charm-dev blueprint](https://github.com/canonical/multipass-blueprints/blob/e270a76093aad7b178ce0df5b7aa00e9dfd9b054/v1/charm-dev.yaml).
 
 ```

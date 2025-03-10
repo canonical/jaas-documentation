@@ -14,7 +14,7 @@ access to those groups.
 
 For this tutorial you will need the following:
 
-- At least one controller connected to JIMM  (see :doc:`../how-to/add_controller`)
+- At least one controller connected to JIMM  (see {doc}`../how-to/add_controller`)
 - `jimmctl` command (either built from source or installed via a snap)
 
 ## Group management
@@ -100,7 +100,7 @@ And now listing groups will show only groups `A` and `B`.
 Now that we know how to manage groups and group membership let's take a look
 at how we can grant groups access to resources in JIMM. Remember that we
 will refer to resources by their JAAS tags (for
-explanation see :doc:`../explanation/jaas_tags`).
+explanation see {doc}`../explanation/jaas_tags`).
 
 For this tutorial we will assume:
 

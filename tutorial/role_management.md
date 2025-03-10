@@ -4,7 +4,7 @@ Introduction
 
 ```{tip}
 Roles are currently identical to groups in functionality.
-This tutorial is a summarised version of :doc:`./group_management`.
+This tutorial is a summarised version of {doc}`./group_management`.
 ```
 
 
@@ -17,8 +17,8 @@ In this tutorial we will show you how to manage roles in JAAS.
 
 For this tutorial you will need the following:
 
-- At least one controller connected to JIMM  (see :doc:`../how-to/add_controller`)
-- `jimmctl` CLI (installed via `Snap <https://snapcraft.io/jimmctl>`__)
+- At least one controller connected to JIMM  (see {doc}`../how-to/add_controller`)
+- `jimmctl` CLI (installed via [Snap](https://snapcraft.io/jimmctl))
 
 ## Role management
 
