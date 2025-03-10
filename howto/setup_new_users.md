@@ -6,8 +6,8 @@ This how-to describes how a new user can begin to use JAAS to deploy application
 
 For this how-to you will need the following:
 
-- A running JAAS environment, see {doc}`our tutorial](../tutorial/deploy_jaas_microk8s>`.
-- A controller connected to JAAS, see {doc}`our how-to](./add_controller>`. This how-to assumes you have added an LXD controller.
+- A running JAAS environment, see {doc}`our tutorial <../tutorial/deploy_jaas_microk8s>`.
+- A controller connected to JAAS, see {doc}`our how-to <./add_controller>`. This how-to assumes you have added an LXD controller.
 
 ## Login to JAAS
 
@@ -39,7 +39,7 @@ localhost  1        localhost  lxd
 ```
 
 If no clouds are available, an administrator may need to grant you
-`add-model` permissions on this cloud. See the [`juju grant-cloud`](https://juju.is/docs/juju/juju-grant-cloud) command for details.
+`add-model` permissions on this cloud. See the [`juju grant-cloud`](https://canonical-juju.readthedocs-hosted.com/en/latest/user/reference/juju-cli/list-of-juju-cli-commands/grant-cloud/) command for details.
 
 ## Cloud Credentials
 

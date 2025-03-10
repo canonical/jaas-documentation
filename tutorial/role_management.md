@@ -17,7 +17,7 @@ In this tutorial we will show you how to manage roles in JAAS.
 
 For this tutorial you will need the following:
 
-- At least one controller connected to JIMM  (see {doc}`../how-to/add_controller`)
+- At least one controller connected to JIMM  (see {doc}`../howto/add_controller`)
 - `jimmctl` CLI (installed via [Snap](https://snapcraft.io/jimmctl))
 
 ## Role management

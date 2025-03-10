@@ -4,11 +4,11 @@ The ReBAC Admin API is a REST API that provides various endpoints to query or
 manipulate relationships in JAAS ReBAC authorisation model.
 
 ```{tip}
-For an explanation on Relationship-Based Access Control (ReBAC) check out :doc:`this <../explanation/authorisation>` explanation topic.
+For an explanation on Relationship-Based Access Control (ReBAC) check out {doc}`this <../explanation/authorisation>` explanation topic.
 ```
 
 ```{tip}
-As a reference on JAAS authorisation model, check out :doc:`this <../reference/authorisation_model>` reference topic.
+As a reference on JAAS authorisation model, check out {doc}`this <../reference/authorisation_model>` reference topic.
 ```
 
 ## OpenAPI specification

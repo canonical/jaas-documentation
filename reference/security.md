@@ -9,7 +9,7 @@ Cloud credentials are API keys used by Juju/JAAS to provision cloud infrastructu
 These credentials are securely uploaded to and stored by JAAS.
 When a model is created, the key is passed to the Juju controller to manage cloud resources.
 
-User-provided cloud credentials are stored securely in a [Vault](ttps://www.vaultproject.io/),
+User-provided cloud credentials are stored securely in a [Vault](https://www.vaultproject.io/),
 a tool for managing secrets. Ensuring the secure handling of these credentials is essential
 to prevent unauthorised access or data breaches.
 
@@ -19,7 +19,7 @@ Vault encrypts credentials at rest and provides mechanisms to prevent unauthoris
 
 JAAS acts as an authentication gateway between users and Juju controllers.
 Juju controllers trust JAAS by setting the `login-token-refresh-url` during bootstrap.
-More information on setting up a Juju controller for JAAS can be found in our {doc}`how-to guide](../how-to/add_controller>`.
+More information on setting up a Juju controller for JAAS can be found in our {doc}`how-to guide <../howto/add_controller>`.
 
 Trust between Juju controllers and JAAS is established through asymmetric cryptography
 and [JSON Web Tokens (JWTs)](https://jwt.io/introduction).

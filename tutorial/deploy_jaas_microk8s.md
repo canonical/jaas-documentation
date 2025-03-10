@@ -333,10 +333,10 @@ juju login test-jimm.localhost:443 -c jimm-k8s
 
 Now that you have JIMM running you can browse our additional guides to setup an admin user, add controllers and migrate existing workloads.
 
-- {doc}`Setup your initial JIMM admin and configure permissions <../how-to/bootstrap_permissions>`.
-- {doc}`Learn how to add a new controller to JIMM.<../how-to/add_controller>`
-- {doc}`Learn how to setup your new user.<../how-to/setup_new_users>`
-- {doc}`Learn how to migrate models from existing controllers to JIMM <../how-to/migrate_models>`.
+- {doc}`Setup your initial JIMM admin and configure permissions <../howto/bootstrap_permissions>`.
+- {doc}`Learn how to add a new controller to JIMM.<../howto/add_controller>`
+- {doc}`Learn how to setup your new user.<../howto/setup_new_users>`
+- {doc}`Learn how to migrate models from existing controllers to JIMM <../howto/migrate_models>`.
 - {doc}`Understand the difference between the available CLI tools <../explanation/cli_tools>`.
 
 ## Common Issues

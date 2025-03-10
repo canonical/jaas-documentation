@@ -14,7 +14,7 @@ access to those groups.
 
 For this tutorial you will need the following:
 
-- At least one controller connected to JIMM  (see {doc}`../how-to/add_controller`)
+- At least one controller connected to JIMM  (see {doc}`../howto/add_controller`)
 - `jimmctl` command (either built from source or installed via a snap)
 
 ## Group management

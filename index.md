@@ -6,7 +6,7 @@
 :hidden: true
 
 tutorial/index
-how-to/index
+howto/index
 reference/index
 explanation/index
 ```
@@ -48,7 +48,7 @@ If you want to take Juju to the enterprise level, you need JAAS.
 ```
 
 ```{grid-item-card} [How-to guides](/index)
-:link: how-to/index
+:link: howto/index
 :link-type: doc
 
 **Step-by-step guides** covering key operations and common tasks
@@ -82,7 +82,7 @@ If you want to take Juju to the enterprise level, you need JAAS.
 
 JAAS is a member of the Ubuntu family and warmly welcomes community contributions, suggestions, fixes and constructive feedback.
 
-* Read our [Code of Conduct ](https://ubuntu.com/community/code-of-conduct)
+* Read our [Code of Conduct ](https://ubuntu.com/community/ethos/code-of-conduct)
 * Join our [Matrix chat](https://matrix.to/#/#jimm:ubuntu.com)
 * Join our [Discourse forum](https://discourse.charmhub.io/)
 * Report a bug in the [docs](https://github.com/canonical/jaas-documentation/issues) or the [code](https://github.com/canonical/jimm/issues)
