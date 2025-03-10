@@ -1,0 +1,14 @@
+# Follow the pattern <old URL> <new URL>
+# E.g., user/reference/charm/channel/ user/reference/charm/
+# If you're renaming things, run make clean before make run.
+
+how-to/bootstrap_permissions/ howto/bootstrap_permissions/
+how-to/add_controller/ howto/add_controller/
+how-to/migrate_models/ howto/migrate_models/
+how-to/migrate_models_internal/ howto/migrate_models_internal/
+how-to/use_terraform/ howto/use_terraform/
+how-to/integrate_with_cos/ howto/integrate_with_cos/
+how-to/security_hardening/ howto/security_hardening/
+how-to/setup_ingress_with_tls/ howto/setup_ingress_with_tls/
+how-to/setup_dashboard/ howto/setup_dashboard/
+how-to/setup_new_users/ howto/setup_new_users/

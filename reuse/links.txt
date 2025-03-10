@@ -1,4 +1,3 @@
-.. _Canonical website: https://canonical.com/
-.. _Canonical identity platform: https://charmhub.io/topics/canonical-identity-platform
-.. _Canonical Observability Stack: https://charmhub.io/topics/canonical-observability-stack
-.. _COS-lite: https://charmhub.io/topics/canonical-observability-stack
+[canonical]: https://canonical.com/
+[iam]: https://charmhub.io/topics/canonical-identity-platform
+[cos]: https://charmhub.io/topics/canonical-observability-stack
