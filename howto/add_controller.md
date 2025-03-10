@@ -57,7 +57,7 @@ pass this information to JIMM, which then connects to the new controller.
 
 ```{note}
 A Juju server's default certificate contains a [Subject Alternative Name (SAN)](
-https://en.wikipedia.org/wiki/Public_key_certificate#Subject_Alternative_Name_certificate) for the name `juju-apiserver`. This is why we specify the `--tls-hostname juju-apiserver` flag when running thecontroller-info command.
+https://en.wikipedia.org/wiki/Public_key_certificate#Subject_Alternative_Name_certificate) for the name `juju-apiserver`. This is why we specify the `--tls-hostname juju-apiserver` flag when running the `jimmctl controller-info` command.
 ```
 
 The use of the `--local` flag avoids the need to provide a public DNS address and `--tls-hostname` provides the expected

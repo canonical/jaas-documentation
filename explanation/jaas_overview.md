@@ -1,6 +1,6 @@
 # JAAS Overview
 
-### What is JAAS?
+## What is JAAS?
 
 To detail what JAAS is, let's look at what JAAS provides:
 

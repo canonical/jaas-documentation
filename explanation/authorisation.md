@@ -1,4 +1,4 @@
-## JAAS Authorisation
+# JAAS Authorisation
 
 JAAS provides enterprise-level features on top of Juju. One such features is enhanced authorisation, which provides enterprises with more control over user permissions to access underlying Juju resources (e.g. controllers or models). JAAS utilises [Relationship-Based Access Control (ReBAC)](https://en.wikipedia.org/wiki/Relationship-based_access_control) by using [OpenFGA](https://openfga.dev/) as the back-end service for ReBAC. You can read more about Juju's permission model in [here](https://juju.is/docs/juju/user-permissions).
 

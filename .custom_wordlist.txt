@@ -8,6 +8,7 @@ aws
 Backend
 balancer
 certbot
+charmhub
 Charmhub
 CLI
 CN
@@ -33,10 +34,12 @@ Grafana
 HAProxy
 HMAC
 https
+iam
 IAM
 IdP
 init
 installable
+io
 jaas
 JAAS
 jimm
