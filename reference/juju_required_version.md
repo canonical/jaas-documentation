@@ -1,24 +1,20 @@
-Supported Juju Versions
-=======================
+# Supported Juju versions
 
 The following sections describe which version of the Juju CLI or controller is required for different scenarios.
 
-Deploying JAAS
---------------
+## Deploying JAAS
 
 In order to deploy JAAS and all its components you must use a Juju controller with a minimum version of **3.x**.
 
 Juju 3.x is required for the support of Juju secrets.
 
-Using JAAS
-----------
+## Using JAAS
 
 In order to interact with JAAS as a user, you must use a Juju CLI with a minimum version of **3.5.4**.
 
 Previous versions of the Juju CLI do not include the necessary functionality to authenticate with JAAS.
 
-Add controllers to JAAS
------------------------
+## Add controllers to JAAS
 
 JAAS supports communicating with Juju controllers of various versions.
 
@@ -34,10 +30,9 @@ support the final Juju 3.x minor version.
 
 More information on Juju's roadmap and release information can be found `here <https://juju.is/docs/juju/roadmap>`__.
 
-Using the Juju Terraform Provider
----------------------------------
+## Using the Juju Terraform Provider
 
-The Juju Terraform Provider can be used with JAAS to provision your models. 
+The Juju Terraform Provider can be used with JAAS to provision your models.
 Additionally, JAAS specific resources can be used to configure access rules.
 Read the docs for more information on the `Juju Terraform Provider <https://registry.terraform.io/providers/juju/juju/latest/docs>`__.
 

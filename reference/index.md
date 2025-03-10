@@ -27,7 +27,7 @@ ReBAC Admin Backend <rebac_admin_backend>
 ```{toctree}
 :maxdepth: 1
 
-Supported Juju Versions <juju_required_version>
+Supported Juju versions <juju_required_version>
 ```
 
 ## CLI Reference
