@@ -13,7 +13,7 @@ As a reference on JAAS authorisation model, check out {doc}`this <../reference/a
 
 ## OpenAPI specification
 
-The OpenAPI spec can be found at [https://<jimm-deployment>/rebac/v1/swagger.json](https://<jimm-deployment>/rebac/v1/swagger.json)
+The OpenAPI spec can be found at `https://<jimm-deployment>/rebac/v1/swagger.json`
 
 ## Authentication
 
