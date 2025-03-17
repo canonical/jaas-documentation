@@ -1,4 +1,11 @@
-# Integrate With Canonical Observability Stack (COS)
+(manage-jimm-controllers)=
+# Manage JIMM controllers
+
+(deploy-a-jimm-controller)=
+## Deploy a JIMM controller
+
+
+## Integrate a JIMM controller with the Canonical Observability Stack
 
 This document shows how to integrate the different components of JAAS with the
 [Canonical Observability Stack][cos] to enable pre-configured dashboards and alerting rules.
@@ -8,7 +15,7 @@ open source observability applications and related automation.
 For the complete list of components in COS, read the
 [Component List](https://charmhub.io/topics/canonical-observability-stack/editions/lite).
 
-## Prerequisites
+### Prerequisites
 
 - A running `COS-Lite` bundle.
   You can follow the [Getting started on MicroK8s](https://charmhub.io/topics/canonical-observability-stack/tutorials/install-microk8s).
@@ -25,7 +32,7 @@ This document assumes that JAAS and the COS bundle are deployed to different mod
 This how-to assumes that Vault and PostgreSQL are deployed alongside JIMM and OpenFGA. Depending on your approach, this may not be true.
 Additionally this how-to assumes the names of the deployed applications, which might differ in your environment.
 
-## Integration approaches
+### Integration approaches
 
 There are 2 possible  integration approaches depending on your networking / deployment setup:
 
@@ -34,9 +41,9 @@ There are 2 possible  integration approaches depending on your networking / depl
 2. If you prefer using a telemetry collector component follow
    the Integrate JAAS with COS-Lite through Grafana-Agent section
 
-## Integrate JAAS with COS-Lite
+### Integrate JAAS with COS-Lite
 
-### Grafana integration
+#### Grafana integration
 
 Assuming you deployed the COS-Lite bundle in model `cos-model` with user admin, use the following
 commands to integrate the JAAS applications by means of an application offer.
@@ -48,7 +55,7 @@ juju integrate postgresql admin/cos-model.grafana-dashboards
 juju integrate vault admin/cos-model.grafana-dashboards
 ```
 
-### Loki integration
+#### Loki integration
 
 Assuming you deployed the COS-Lite bundle in model cos-model with user admin, use the following commands
 to integrate JAAS by means of an application offer.
@@ -60,7 +67,7 @@ juju integrate postgresql admin/cos-model.loki-logging
 juju integrate vault admin/cos-model.loki-logging
 ```
 
-### Prometheus integration
+#### Prometheus integration
 
 Assuming you deployed the COS-Lite bundle in model `cos-model` with user admin, use the following commands to integrate JAAS by means of an application offer.
 
@@ -71,7 +78,7 @@ juju integrate postgresql admin/cos-model.prometheus-scrape
 juju integrate vault admin/cos-model.prometheus-scrape
 ```
 
-## Integrate JAAS with COS-Lite through Grafana-Agent
+### Integrate JAAS with COS-Lite through Grafana-Agent
 
 You first need to deploy the [Grafana-Agent operator](https://charmhub.io/grafana-agent-k8s), which is a telemetry collector used
 to aggregate and push information to the COS-lite bundle.
@@ -86,7 +93,7 @@ To deploy Grafana-Agent run:
 juju deploy grafana-agent-k8s --channel latest/stable --trust
 ```
 
-### Forward Prometheus metrics
+#### Forward Prometheus metrics
 
 Integrate Grafana-Agent with JAAS by running the following commands:
 
@@ -97,7 +104,7 @@ juju integrate grafana-agent-k8s postgresql:metrics-endpoint
 juju integrate grafana-agent-k8s vault:metrics-endpoint
 ```
 
-### Forward Loki metrics
+#### Forward Loki metrics
 
 Integrate Grafana-Agent with JAAS by running the following commands:
 
@@ -108,7 +115,7 @@ juju integrate grafana-agent-k8s postgresql:logging
 juju integrate grafana-agent-k8s vault:logging
 ```
 
-### Integrate Grafana-Agent with COS-Lite
+#### Integrate Grafana-Agent with COS-Lite
 
 Assuming you deployed the COS-Lite bundle in model `cos-model` with user admin,
 use this command to integrate the Grafana-Agent with Prometheus by means of an application offer.
@@ -124,7 +131,7 @@ use this command to integrate the Grafana-Agent with Loki by means of an applica
 juju integrate grafana-agent-k8s admin/cos-model.loki-logging
 ```
 
-## Access the dashboards
+### Access the dashboards
 
 You can get the Grafana IP address with the [`juju status`](https://juju.is/docs/juju/status) command.
 The default port for the Grafana HTTP server is 3000.
