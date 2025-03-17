@@ -4,7 +4,6 @@
 (deploy-a-jimm-controller)=
 ## Deploy a JIMM controller
 
-
 ## Integrate a JIMM controller with the Canonical Observability Stack
 
 This document shows how to integrate the different components of JAAS with the
