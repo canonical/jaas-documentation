@@ -1,187 +1,94 @@
 (manage-groups)=
 # Manage groups
+> Who: JIMM controller admin
+>
+> See also: {ref}`group`
 
-<!-- > See also: {ref}`group` -->
+````{dropdown} Preview an example workflow
+```text
+# Create a group:
+jimmctl auth group add A
+
+# Verify that the group has been created successfully:
+jimmctl auth group list
+
+# Give the members of the group write access to test-model-1:
+jimmctl auth relation add group-B#members writer model-test-ctl-1/test-model-1
+
+# Rename the role to something more suitable:
+jimmctl auth group rename model-writers
+
+# Add users to the group:
+jimmctl auth relation add user-alice@canonical.com member group-A
+jimmctl auth relation add user-bob@canonical.com member group-B
+
+# Verify that user Alice has indeed inherited the group's write access to test-model-1:
+jimmctl auth relation check user-alice@canonical.com writer model-test-ctl-1/test-model-1
+
+# Create another group B and make members of group A also members of group B:
+jimmctl auth relation add group-A#member member group-B
+...
+```
+````
 
 (add-a-group)=
 ## Add a group
 
+To add a new group to your JIMM controller, use the `auth group add` command followed by the name you want to assign to the group. For example:
+
+```text
+jimmctl auth group add A
+```
+
+> See more: {ref}`jimmctl auth group add <summary-5>`
+
 (view-all-the-current-groups)=
 ## View all the current groups
 
+To view all the current groups, run the `auth group list` command. For example:
+
+```text
+jimmctl auth group list [options]
+```
+
+> See more: {ref}`jimmctl auth group list <summary-6>`
+
+
 (manage-access-to-a-group)=
-## Manage-access to a group
+## Manage access to a group
+
+**Grant access to a group.** Given an entity A and a group, to grant A access to the group, add a relation between A and the group, specifying the desired access level.
+
+> See more: {ref}`add-a-relation`
+
+**Revoke access to a group.** Given an entity A and a group, to revoke A's access to the group, remove the relation that grants that access.
+
+> See more: {ref}`remove-a-relation`
 
 (manage-a-groups-access)=
 ## Manage a group’s access to a controller, cloud, model, offer, or group
+
+> See more: {ref}`manage-access-to-a-controller`, {ref}`manage-access-to-a-cloud`, {ref}`manage-access-to-a-model`, {ref}`manage-access-to-an-offer`, {ref}`manage-access-to-a-group`
 
 
 (rename-a-group)=
 ## Rename a group
 
+To rename a group, run the `auth group rename` command followed by the old name and the new name. For example:
+
+```text
+jimmctl auth group rename TeamA TeamB
+```
+
+> See more: {ref}`jimmctl auth group rename <summary-8>`
+
 (remove-a-group)=
 ## Remove a group
 
-
-
-## Introduction
-
-JAAS provides group management capabilities, this allows JAAS
-administrators to add and remove users to and from groups and
-allow or disallow group access to various resources.
-
-In this tutorial we will show you how to manage groups in JAAS and how to grant
-access to those groups.
-
-## Prerequisites
-
-For this tutorial you will need the following:
-
-- At least one controller connected to JIMM  (see {doc}`../howto/add_controller`)
-- `jimmctl` command (either built from source or installed via a snap)
-
-## Group management
-
-For this part of the tutorial we will assume the following users exist in an organisation:
-
-- `alice@canonical.com`
-- `adam@canonical.com`
-- `eve@canonical.com`
-
-Next, let us create three groups for these users. Run:
+To remove a group from a JIMM controller, run the `auth group remove` command followed by the name of the group. For example:
 
 ```text
-jimmctl auth group add A
-jimmctl auth group add B
-jimmctl auth group add C
+jimmctl auth group remove TeamB
 ```
 
-which will create groups `A`, `B` and `C`.
-
-To add users to groups, let's run:
-
-```text
-jimmctl auth relation add user-alice@canonical.com member group-A
-jimmctl auth relation add user-adam@canonical.com member group-B
-jimmctl auth relation add user-eve@canonical.com member group-C
-```
-
-which will add Alice to group `A`, Adam to group `B` and Eve to group `C`.
-You will notice that we refer to user and group by their *JAAS tags* (for
-explanation see {doc}`../explanation/jaas_tags`).
-
-Now to make things a bit more interesting we will make group `A` member of
-group `B` and group `B` member of group `C` by running:
-
-```text
-jimmctl auth relation add group-A#member member group-B
-jimmctl auth relation add group-B#member member group-C
-```
-
-Note the special `group-A#member` notation by which we refer to members of
-group `A`. In effect the first of these two commands tells JAAS that all users
-that have a `member` relation to group `A` also have a `member` relation to
-group `B`. And likewise the second command tells JAAS that all users that
-have a `member` relation to group `B` also have a `member` relation to group `C`.
-
-To list all groups known to JAAS run:
-
-```text
-jimmctl auth group list
-```
-
-which will show us the three groups we created.
-
-Let's assume we want to rename group `C` to `D`. To achieve this we run:
-
-```text
-jimmctl auth group rename C D
-```
-
-If we run:
-
-```text
-jimmctl group list
-```
-
-we will see groups `A`, `B` and `D`.
-
-Renaming a group **does not** affect group membership or any access rights a group
-might already have in JAAS. This means that members of groups `A` and `B` are
-still members of group `D`.
-
-To remove group `D` from JAAS, we run:
-
-```text
-jimmctl auth group remove D
-```
-
-And now listing groups will show only groups `A` and `B`.
-
-### Granting access to groups
-
-Now that we know how to manage groups and group membership let's take a look
-at how we can grant groups access to resources in JIMM. Remember that we
-will refer to resources by their JAAS tags (for
-explanation see {doc}`../explanation/jaas_tags`).
-
-For this tutorial we will assume:
-
-- that you have followed the previous part of the tutorial and have
-    - three users `alice@canonical.com`, `adam@canonical.com` and `eve@canonical.com`
-    - two groups `A` and `B` set up during part one of this tutorial
-- that you have added controller `test-ctl-1` to JIMM
-- that you have added a model `test-model-1` on the same controller
-- that you have deployed PostgreSQL in this model and created and application offer names `postgresql-db`
-
-First let us make user `eve@canonical.com` an administrator of controller `test-ctl-1`. Since
-`eve@canonical.com` is not member of any group, we will add a direct relation between the
-user and the controller by running:
-
-```text
-jimmctl auth relation add user-eve@canonical.com administrator controller-test-ctl-1
-```
-
-Now let us make group `A` writer on the `test-model-1` model. Having write access
-to a model means users are able to deploy applications in the model and
-manage deployed applications. To achieve this run:
-
-```text
-jimmctl auth relation add group-A#members writer model-test-ctl-1/test-model-1
-```
-
-And finally let us give members of group `B` consume permission on the created
-application offer by running:
-
-```text
-jimmctl auth relation add group-B#members consumer applicationoffer-test-ctl-1/test-model-1.postgresql-db
-```
-
-Now let us check if `adam@canonical.com` has consume access to the application offer
-by running:
-
-```text
-jimmctl auth relation check user-adam@canonical.com consumer applicationoffer-test-ctl-1/test-model-1.postgresql-db
-```
-
-We should get a positive answer since `adam@canonical.com` is member of group `B` and
-we have granted members of group `B` consume access to the application offer.
-
-To remove group `B`'s access to the application offer we can run:
-
-```text
-jimmctl auth relation remove user-adam@canonical.com consumer applicationoffer-test-ctl-1/test-model-1.postgresql-db
-```
-
-Running:
-
-```text
-jimmctl auth relation check user-adam@canonical.com consumer applicationoffer-test-ctl-1/test-model-1.postgresql-db
-```
-
-we will see user `adam@canonical.com` no longer has access to the application offer.
-
-### Conclusion
-
-This tutorial taught you the basics of group and access management in JAAS.
-
+> See more: {ref}`jimmctl auth group remove <summary-7>`

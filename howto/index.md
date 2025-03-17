@@ -3,6 +3,15 @@
 
 These how-to guides cover key operations and processes in JAAS.
 
+```{toctree}
+:titlesonly:
+:glob:
+
+*
+```
+
+
+<!--
 ## Configuration
 
 After JAAS has been deployed, you need to configure it with your Juju operated cluster.
@@ -15,8 +24,6 @@ Add a controller to JAAS <add_controller>
 Migrate models to JAAS <migrate_models>
 Migrate models internally <migrate_models_internal>
 Use Terraform for configuration <use_terraform>
-manage-roles
-manage-groups
 ```
 
 ## Observability
@@ -51,3 +58,4 @@ Set up Juju Dashboard <setup_dashboard>
 
 Set up new users <setup_new_users>
 ```
+-->
