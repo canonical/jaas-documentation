@@ -1,3 +1,6 @@
+(manage-roles)=
+# Manage roles
+
 # Role management
 
 Introduction

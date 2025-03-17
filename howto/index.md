@@ -15,6 +15,8 @@ Add a controller to JAAS <add_controller>
 Migrate models to JAAS <migrate_models>
 Migrate models internally <migrate_models_internal>
 Use Terraform for configuration <use_terraform>
+manage-roles
+manage-groups
 ```
 
 ## Observability
