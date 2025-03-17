@@ -1,3 +1,6 @@
+(manage-offers)=
+# Manage offers
+
 (manage-access-to-an offer)=
 ## Manage access to an offer
 
