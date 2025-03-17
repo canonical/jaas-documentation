@@ -16,3 +16,11 @@ tutorial/role_management/ howto/manage-roles/
 tutorial/group_management/ howto/manage-groups/
 tutorial/deploy_jaas_microk8s/ tutorial/index/
 explanation/jaas_tags/ reference/tag/
+reference/juju_required_version/ reference/jaas/juju_required_version/
+reference/authorisation_model/ reference/jaas/authorisation_model/
+reference/authorisation_data/ reference/jaas/authorisation_data/
+reference/security/ reference/jaas/security/
+explanation/authentication/ reference/jaas/authentication/
+explanation/authorisation/ reference/jaas/authorisation/
+explanation/jaas_architecture/ reference/jaas/jaas_architecture/
+explanation/jaas_security_scope/ reference/jaas/jaas_security_scope/
