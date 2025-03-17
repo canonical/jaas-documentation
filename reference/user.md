@@ -1,6 +1,8 @@
 (user)=
 # User
 > See first: {external+juju:ref}`Juju | User <user>`
+>
+> See also: {ref}`manage-users`
 
 (user-tag)=
 ## User tag

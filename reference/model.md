@@ -1,7 +1,6 @@
 (model)=
 # Model
-> See first: {external+juju:ref}`Juju | Mode <model>`
-
+> See also: {ref}`model`
 
 (model-tag)=
 ## Model tag

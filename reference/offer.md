@@ -1,6 +1,8 @@
 (offer)=
 # Offer
 > See first: {external+juju:ref}`Juju | Offer <offer>`
+>
+> See also: {ref}`manage-offers`
 
 (offer-tag)=
 ## Offer tag

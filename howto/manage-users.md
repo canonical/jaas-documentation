@@ -1,6 +1,5 @@
 (manage-users)=
 # Manage users
-
 > See first: {ref}`user`
 
 (manage-a-users-access)=

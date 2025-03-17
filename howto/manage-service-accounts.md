@@ -1,7 +1,6 @@
 (manage-service-accounts)=
 # Manage service accounts
-
-> See first: {ref}`service account`
+> See also: {ref}`service account`
 
 (manage-a-service-accounts-access)=
 ## Manage a service account’s access to a controller, cloud, model, offer, role, or group

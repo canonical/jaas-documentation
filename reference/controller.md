@@ -1,7 +1,8 @@
 (controller.md)=
 # Controller
 > See first: {external+juju:ref}`Juju | Controller <controller>`
-
+>
+> See also: {ref}`manage-juju-controllers`
 
 (controller-tag)=
 ## Controller tag

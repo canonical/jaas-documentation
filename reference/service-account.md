@@ -1,5 +1,6 @@
 (service-account)=
 # Service account
+> See also: {manage-service-accounts}
 
 In JAAS, a service account is a machine identity used for non-human interactions with a Juju cotnroller.
 
