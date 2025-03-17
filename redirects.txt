@@ -28,3 +28,5 @@ howto/integrate_with_cos/ howto/manage-jimm-controllers/
 howto/migrate_models/ howto/manage-models/
 howto/migrate_models_internal/ howto/manage-models/
 howto/add_controller/ howto/manage-juju-controllers/
+howto/setup_ingress_with_tls/ howto/manage-jimm-controllers/
+howto/setup_dashboard/ howto/manage-jimm-controllers/

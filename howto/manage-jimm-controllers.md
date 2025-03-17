@@ -147,3 +147,68 @@ You will find the available dashboards by clicking on the Dashboards menu
 [canonical]: https://canonical.com/
 [iam]: https://charmhub.io/topics/canonical-identity-platform
 [cos]: https://charmhub.io/topics/canonical-observability-stack
+
+
+## Equip a JIMM controller with TLS ingress
+
+The NGINX Ingress Integrator is a charm responsible for creating Kubernetes ingress rules,
+these rules can be hardened via TLS and the charm provides a means to do so. See [here](https://charmhub.io/nginx-ingress-integrator).
+
+Our LEGO charms provide certificates for charms from a desired ACME server and can be integrated
+with the integrator to enable TLS at the ingress level. See [here](https://charmhub.io/httprequest-lego-k8s).
+
+You will require a domain that your ACME is aware of and an NGINX ingress controller installed
+on your Kubernetes cluster.
+
+With JAAS deployed, you can deploy both LEGO and the integrator, and integrate your LEGO charm deployment
+to your ingress integrator, and then the ingress integrator to JIMM to enable TLS ingress for your deployment.
+
+## Integrate a JIMM controller with the Juju dashboard
+
+Juju dashboard is a web UI that is intended to supplement the CLI experience with aggregate views and at a glance health checks.
+
+This how-to provides you with instructions on how to setup Juju Dashboard for your JAAS deployment.
+
+```{tip}
+To explore Juju Dashboard features you can go [here](https://juju.is/docs/juju/the-juju-dashboard).
+```
+
+### Prerequisites
+
+For this how-to you will need the following:
+
+- A running JAAS environment, see {doc}`our tutorial <../tutorial/deploy_jaas_microk8s>`.
+
+### Deploy Juju Dashboard
+
+First deploy the Juju Dashboard charm.
+
+```text
+juju switch <model_where_jimm_is>
+juju deploy juju-dashboard-k8s dashboard
+juju integrate dashboard jimm-app
+```
+
+Then you need to expose your dashboard through an ingress.
+
+```{tip}
+You can follow {doc}`this guide <./setup_ingress_with_tls>` to add TLS to your ingress.
+```
+
+```text
+juju deploy nginx-ingress-integrator dashboard-ingress
+juju integrate dashboard dashboard-ingress
+juju config dashboard-ingress service-hostname="<https://hostname>""
+```
+
+You will visit your dashboard at `https://hostname`.
+
+Now you need to configure JIMM to accept requests coming from `https://hostname`.
+
+```text
+juju config jimm-app cors-allowed-origins="https://hostname"
+juju config jimm-app juju-dashboard-location="https://hostname"
+```
+
+Now go to `https://hostname`, sign in through the identity provider you setup during JAAS deployment, and you
+are in the dashboard.
