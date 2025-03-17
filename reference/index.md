@@ -3,6 +3,15 @@
 
 **Technical information** - security, APIs, and reference docs.
 
+```{toctree}
+:titlesonly:
+:glob:
+
+*
+```
+
+<!--
+
 ## Security
 
 ```{toctree}
@@ -37,3 +46,4 @@ Supported Juju versions <juju_required_version>
 
 jimmctl CLI reference <jimmctl>
 ```
+-->

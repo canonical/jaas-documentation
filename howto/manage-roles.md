@@ -1,27 +1,62 @@
 (manage-roles)=
 # Manage roles
+> Who: JIMM controller admin
+>
+> See also: {ref}`role`
 
-# Role management
+(add-a-role)=
+## Add a role
 
-Introduction
+To add a new role to your JIMM controller, use the `auth role add` command followed by the name you want to assign to the role. For example:
 
-```{tip}
-Roles are currently identical to groups in functionality.
-This tutorial is a summarised version of {doc}`./group_management`.
+```text
+jimmctl auth role add model-admin
 ```
 
+> See more: {ref}`jimmctl auth role add <summary-15>`
 
-JAAS provides role management capabilities, this allows JAAS
-administrators to assign roles to users granting them access to resources.
+(view-all-the-current-roles)=
+## View all the current roles
 
-In this tutorial we will show you how to manage roles in JAAS.
+(manage-access-to-a-role)=
+## Manage access to a role
 
-## Prerequisites
+To grant access to a role, run the `auth relation add` command followed by the name of an entity you've defined earlier (user, service account, or group, in their tag notation), the desired role access level (currently just `assignee`), and the name of a role you've defined earlier. For example, assuming a predefined user `alice@canonical.com` and a predefine role `model-admin`, run:
 
-For this tutorial you will need the following:
+```text
+jimmctl auth relation add user-alice@canonical.com assignee role-model-admin
+```
 
-- At least one controller connected to JIMM  (see {doc}`../howto/add_controller`)
-- `jimmctl` CLI (installed via [Snap](https://snapcraft.io/jimmctl))
+> See more: {ref}`jimmctl auth relation add <summary-10>`, {ref}`tag`, {ref}`role-access-levels`
+
+
+
+
+a user call
+- `alice@canonical.com`
+
+
+Next, let us create a role. Run:
+
+```text
+jimmctl auth role add model-admin
+```
+
+To assign this role to Alice run:
+
+
+
+> See more: [JAAS | Role access levels](https://canonical-jaas-documentation.readthedocs-hosted.com/en/latest/reference/authorisation_model/#role)
+
+(manage-a-roles-access)=
+## Manage a role’s access to a controller, cloud, model, offer, or group
+
+(rename-a-role)=
+## Rename a role
+
+(remove-a-role)=
+## Remove a role
+
 
 ## Role management
 

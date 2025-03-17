@@ -13,5 +13,6 @@ how-to/setup_ingress_with_tls/ howto/setup_ingress_with_tls/
 how-to/setup_dashboard/ howto/setup_dashboard/
 how-to/setup_new_users/ howto/setup_new_users/
 tutorial/role_management/ howto/manage-roles/
-tutorial/group_management/ howto/manage-groups
-tutorial/deploy_jaas_microk8s/ tutorial/index
+tutorial/group_management/ howto/manage-groups/
+tutorial/deploy_jaas_microk8s/ tutorial/index/
+explanation/jaas_tags/ reference/tag/

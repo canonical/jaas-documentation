@@ -1,7 +1,9 @@
 (tutorial)=
-# Tutorial
+# Get started with JAAS
 
-In this tutorial we will be deploying JIMM v3 and all supporting components on Kubernetes, specifically MicroK8s. JIMM - Juju Intelligent Model Manager provides the ability to manage multiple Juju models from a single place.
+## Introduction
+
+In this how-to we will be deploying JIMM v3 and all supporting components on Kubernetes, specifically MicroK8s. JIMM - Juju Intelligent Model Manager provides the ability to manage multiple Juju models from a single place.
 
 This tutorial will teach you about JIMM and Juju as well as a bit about Canonical's identity bundle and other supporting dependencies.
 
@@ -40,10 +42,10 @@ sudo microk8s dns ingress host-access
 
 Then install some handy tools to query and extract info from json and yaml:
 
-``text
+```text
 sudo apt install jq
 sudo snap install yq
-``
+```
 
 You are now all set and ready to deploy JAAS.
 

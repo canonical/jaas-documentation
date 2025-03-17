@@ -1,6 +1,29 @@
 (manage-groups)=
 # Manage groups
 
+<!-- > See also: {ref}`group` -->
+
+(add-a-group)=
+## Add a group
+
+(view-all-the-current-groups)=
+## View all the current groups
+
+(manage-access-to-a-group)=
+## Manage-access to a group
+
+(manage-a-groups-access)=
+## Manage a group’s access to a controller, cloud, model, offer, or group
+
+
+(rename-a-group)=
+## Rename a group
+
+(remove-a-group)=
+## Remove a group
+
+
+
 ## Introduction
 
 JAAS provides group management capabilities, this allows JAAS
