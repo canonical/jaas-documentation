@@ -24,3 +24,6 @@ explanation/authentication/ reference/jaas/authentication/
 explanation/authorisation/ reference/jaas/authorisation/
 explanation/jaas_architecture/ reference/jaas/jaas_architecture/
 explanation/jaas_security_scope/ reference/jaas/jaas_security_scope/
+howto/integrate_with_cos/ howto/manage-jimm-controllers/
+howto/migrate_models/ howto/manage-models/
+howto/migrate_models_internal/ howto/manage-models/
