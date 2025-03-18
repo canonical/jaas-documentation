@@ -1,9 +1,32 @@
 # JAAS Architecture
 
-This document briefly goes into more detail on JAAS' deployment and scalability.
+The diagram below shows an overall picture of JAAS architecture.
 
-We recommend first reading the {doc}`JAAS overview <./jaas_overview>` to understand the
-components that make up JAAS.
+<!--
+Note: JAAS diagram is already in a Miro board here: https://miro.com/app/board/uXjVKUIUKAc=/
+
+There is also a backup of the board in this directory (named `jaas-diagram.rtb`) which can be used to restore on Miro (in case the original board mentioned above was no longer available).
+-->
+
+![JAAS architecture](images/jaas-architecture.png)
+
+This includes the following components:
+
+- Juju Intelligent Model Manager (JIMM)
+- ReBAC authorisation (OpenFGA)
+- Database (PostgreSQL)
+- Secure storage (Vault)
+
+JIMM is an API server that implements a number of Juju facades (i.e. endpoints) and behaves as a *Juju Controller*,
+which under the hood proxies operations to underlying controllers. This enables
+other tools, like the Juju Dashboard or Juju CLI, that communicate with a
+Juju Controller to work seamlessly with JIMM.
+
+For authentication of users or service accounts, JAAS requires an *OIDC Provider*
+(Hydra) that handles the standard OAuth2.0 flows including browser flow, device flow,
+and client credentials.
+
+The remainder of this document briefly goes into more detail on JAAS' deployment and scalability.
 
 ## Deployment
 
