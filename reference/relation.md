@@ -29,7 +29,7 @@ reads as  "an entity of type `user`, named `alice@canonical.com`, has the `membe
 
 ````{dropdown} View the authorization model (diagram)
 
-Note: Directed graph illustration of the JAAS authorization model. Purple and green nodes represent entity types and relations, respectively. The dashed lines show the internal indirect relationships among relations defined on the entity type (e.g., an entity can have the `reader`, `writer`, or `administrator` relation to a `model`). The `controller` and `model` relations are implicit internal relations that describe the inheritance structure for permissions (e.g., controller administrator is also an administrator for all models on that controller).
+Note: Directed graph illustration of the JAAS authorization model. Purple and green nodes represent entity types and relations, respectively. The dashed lines show the internal indirect relationships among relations defined on the entity type (e.g., an entity can have the `reader`, `writer`, or `administrator` relation to a `model`). Note: The `controller` and `model` relations are implicit internal relations that describe the inheritance structure for permissions (e.g., the fact that a cloud/model is always associated with a controller or an offer with a model, and permissions on the latter carry over to the former).
 
 ```{figure} relation-authorization-model.png
    :width: 600px
@@ -39,7 +39,7 @@ Note: Directed graph illustration of the JAAS authorization model. Purple and gr
 
 ````{dropdown} View the authorization model (source)
 
-Note: The `controller` and `model` relations are implicit internal relations that describe the inheritance structure for permissions (e.g., controller administrator is also an administrator for all models on that controller).
+Note: The `controller` and `model` relations are implicit internal relations that describe the inheritance structure for permissions (e.g., the fact that a cloud/model is always associated with a controller or an offer with a model, and permissions on the latter carry over to the former).
 
 ```text
 # copy me into https://play.fga.dev to update png
@@ -91,6 +91,8 @@ type serviceaccount
 ````
 
 ````{dropdown} View all the tuple templates arising from the authorization model
+
+Note: The `controller` and `model` relations are implicit internal relations that describe the inheritance structure for permissions (e.g., the fact that a cloud/model is always associated with a controller or an offer with a model, and permissions on the latter carry over to the former).
 
 ```text
 
@@ -169,6 +171,9 @@ type serviceaccount
 ````
 
 ```{dropdown} View the relations in their target entity context
+
+Note: The `controller` and `model` relations are implicit internal relations that describe the inheritance structure for permissions (e.g., the fact that a cloud/model is always associated with a controller or an offer with a model, and permissions on the latter carry over to the former). As this is not something that a JAAS user can interact with, the sections link below omit them.
+
 > See : {ref}`controller-relation`, {ref}`cloud-relation`, {ref}`model-relation`, {ref}`offer-relation`, {ref}`service-account-relation`, {ref}`role-relation`, {ref}`group-relation`
 ```
 
