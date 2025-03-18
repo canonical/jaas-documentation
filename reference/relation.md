@@ -16,15 +16,6 @@ JAAS reshapes Juju's permission model based on access levels into the more flexi
 
 ```
 
-
-```{note}
-**JAAS relations vs. {external+juju:ref}`Juju relations <relation>`:** JAAS relations have nothing to do with Juju relations., which refer to the relationship, or rather integration, of two charmed applications. However, JAAS relations are related to Juju access levels.
-
-**JAAS relations vs. {external+juju:ref}`Juju access levels <user-access-levels>`:** With Juju access levels a user is granted access to another entity. With JAAS relations, a user, service account, role or group is brought into a relation with another entity, where the relation is about access to the entity. In short, JAAS supports access for more entity types and reshapes the Juju permission model into the more flexible [ReBAC](https://openfga.dev/docs/authorization-concepts#what-is-relationship-based-access-control) paradigm -- both features desirable at an enterprise level. Note: Currently JAAS relations are parallel to Juju access levels, but in the future they're expected to be a superset thereof.
-
-```
-
-
 <!--following [Relation Based Access Control (**ReBAC**)](https://en.wikipedia.org/wiki/Relationship-based_access_control) and using [OpenFGA](https://openfga.dev/docs/concepts#what-is-a-relation),-->
 
 In JAAS, a relation is a string in an [OpenFGA ReBAC authorization model](https://openfga.dev/docs/authorization-concepts#what-is-relationship-based-access-control) that is part of a tuple consisting of an entity type A (in OpenFGA: 'user'; in JAAS: 'object'), the relation, and an entity type B (in OpenFGA: 'object'; in JAAS: 'target), where the relation is defined by type B and represents an entitlement of entity type A on the entity type B (i.e., it is about permission for A to perfom an action on B).

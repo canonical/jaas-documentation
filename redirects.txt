@@ -34,3 +34,4 @@ howto/bootstrap_permissions/ howto/manage-jimm-controllers/
 reference/jaas/authorisation_data/ reference/relation/
 reference/jaas/authorisation_model/ reference/relation/
 reference/jaas/authorisation/ reference/relation/
+explanation/jaas_overview/ reference/jaas/jaas_architecture
