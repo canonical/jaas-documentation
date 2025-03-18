@@ -8,7 +8,7 @@ Note: JAAS diagram is already in a Miro board here: https://miro.com/app/board/u
 There is also a backup of the board in this directory (named `jaas-diagram.rtb`) which can be used to restore on Miro (in case the original board mentioned above was no longer available).
 -->
 
-![JAAS architecture](images/jaas-architecture.png)
+![JAAS architecture](jaas-architecture.png)
 
 This includes the following components:
 
