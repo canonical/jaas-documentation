@@ -19,7 +19,7 @@ where `group id` represents the unique identifier of the group.
 
 
 (list-of-group-relations)=
-## Group relations
+## List of group relations
 > See first: {ref}`relation`
 
 (group-relation-member)=
