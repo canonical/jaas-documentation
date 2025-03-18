@@ -17,13 +17,16 @@ group-<group id>
 
 where `group id` represents the unique identifier of the group.
 
+(group-relation)=
+## Group relation
+
+A group relation is a {ref}`relation <relation>` that describes permissions on a group.
 
 (list-of-group-relations)=
-## List of group relations
-> See first: {ref}`relation`
+### List of group relations
 
 (group-relation-member)=
-### `member`
+#### `member`
 
 Abilities: Shares the group's access level to Juju resources and JIMM logs.
 

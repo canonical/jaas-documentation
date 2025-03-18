@@ -18,10 +18,13 @@ where `<controller name>` specifies name of the controller on which the model
 is running, `<model name>` specifies name of the model in which the application
 offer was created and `<offer name>` specifies the name of the application offer.
 
+(offer-relation)=
+## Offer relation
+
+An offer relation is a {ref}`relation <relation>` that describes permissions on a offer.
 
 (list-of-offer-relations)=
 ## List of offer relations
-> See first: {ref}`relation`
 
 (offer-relation-administrator)=
 ### `administrator`

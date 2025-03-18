@@ -18,10 +18,13 @@ role-<role id>
 
 where `role id` represents the unique identifier of the role.
 
+(role-relation)=
+## Role relation
+
+A role relation is a {ref}`relation <relation>` that describes permissions on a role.
 
 (list-of-role-relations)=
 ## List of role relations
-> See first: {ref}`relation`
 
 (role-relation-assignee)=
 ### `assignee`

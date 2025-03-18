@@ -32,3 +32,5 @@ howto/setup_ingress_with_tls/ howto/manage-jimm-controllers/
 howto/setup_dashboard/ howto/manage-jimm-controllers/
 howto/bootstrap_permissions/ howto/manage-jimm-controllers/
 reference/jaas/authorisation_data/ reference/relation/
+reference/jaas/authorisation_model/ reference/relation/
+reference/jaas/authorisation/ reference/jaas/relation/

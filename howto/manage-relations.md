@@ -5,7 +5,7 @@
 (add-a-relation)=
 ## Add a relation
 
-Given two entities A and B, to add a relation between run the `auth relation add` command followed by the tag of A, the access level you want to give A from the list supported by B, and the tag of B. For example, to add a relation where you make user `alice@canonical.com` a `member` of the `mygroup` group:
+Given two entities A and B, to add a relation between them run the `auth relation add` command followed by the tag of A, the desired B relation, and the tag of B. For example, to add a relation where you make user `alice@canonical.com` a `member` of the `mygroup` group:
 
 ```text
 jimmctl auth relation add user-alice@canonical.com member group-mygroup
@@ -20,7 +20,7 @@ jimmctl auth relation add user-alice@canonical.com member group-mygroup
 (verify-a-relation)=
 ## Verify a relation
 
-Given two entities A and B, to verify that there is a relation between them with a specific access level, run the `auth relation check` command followed by the tag of A, the access level, and the tag of B. For example:
+Given two entities A and B, to verify that there is a specific relation between them, run the `auth relation check` command followed by the tag of A, the relation, and the tag of B. For example:
 
 ```text
 jimmctl auth relation check user-alice@canonical.com administrator controller-aws-controller-1
@@ -43,7 +43,7 @@ jimmctl auth relation list [options]
 (remove-a-relation)=
 ## Remove a relation
 
-Given two entities A and B and a pre-existing relation between them, to remove the relation, run the `auth relation remove` command followed by the tag of A, the access level that A has to B, and the tag of B. For example:
+Given two entities A and B and a pre-existing relation between them, to remove the relation, run the `auth relation remove` command followed by the tag of A, the relation, and the tag of B. For example:
 
 ```text
 jimmctl auth relation remove user-alice@canonical.com member group-mygroup

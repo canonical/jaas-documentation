@@ -1,38 +1,182 @@
 (relation)=
 # Relation
+> See first: {external+juju:ref}`Juju | User access levels <user-access-levels>`
+>
 > See also: {ref}`manage-relations`
 
-In JAAS, following [Relation Based Access Control (**ReBAC**)](https://en.wikipedia.org/wiki/Relationship-based_access_control) and using [OpenFGA](https://openfga.dev/docs/concepts#what-is-a-relation), a relation is a tuple that represents the relationship between two entities A and B, where
 
-- entity A ('object') is the entity that receives (or uses) the relationship and
-- entity B ('target') is the entity that provides the relationship, and
-- the relationship itself is about permission for A to perform an action on B; that is, a relation represents an entitlement of A on B.
+```{note}
+**JAAS relations vs. {external+juju:ref}`Juju relations <relation>`:** JAAS relations have nothing to do with Juju relations., which refer to the relationship, or rather integration, of two charmed applications. However, JAAS relations are related to Juju access levels.
 
-For example, if a `user` named `alice@canonical.com` has the `member` relation with a group named `foo`, then the tuple that represents this relation will look like this:
+**JAAS relations vs. {external+juju:ref}`Juju access levels <user-access-levels>`:** With Juju access levels a user is granted access to another entity. With JAAS relations, a user, service account, role or group is brought into a relation with another entity, where the relation is about access to the entity. In short, JAAS supports access for more entity types and reshapes the Juju permission model into the more flexible [ReBAC](https://openfga.dev/docs/authorization-concepts#what-is-relationship-based-access-control) paradigm -- both features desirable at an enterprise level. Note: Currently JAAS relations are parallel to Juju access levels, but in the future they're expected to be a superset thereof.
+
+```
+
+
+<!--following [Relation Based Access Control (**ReBAC**)](https://en.wikipedia.org/wiki/Relationship-based_access_control) and using [OpenFGA](https://openfga.dev/docs/concepts#what-is-a-relation),-->
+
+In JAAS, a relation is a string in an [OpenFGA ReBAC authorization model](https://openfga.dev/docs/authorization-concepts#what-is-relationship-based-access-control) that is part of a tuple consisting of an entity type A (in OpenFGA: 'user'; in JAAS: 'object'), the relation, and an entity type B (in OpenFGA: 'object'; in JAAS: 'target), where the relation is defined by type B and represents an entitlement of entity type A on the entity type B (i.e., it is about permission for A to perfom an action on B).
+
+For example:
 
 ```yaml
 object:   user:alice@canonical.com
 relation: member
 target:   group:foo
 ```
-
-This reads as: "an entity of type `user`, named `alice@canonical.com`, has the `member` relationship to an entity of type `group`, named `foo`.
-
-> See more: {ref}`list-of-controller-relations`, {ref}`list-of-cloud-relations`, {ref}`list-of-model-relations`, {ref}`list-of-offer-relations`, {ref}`list-of-service-account-relations`, {ref}`list-of-role-relations`, {ref}`list-of-group-relations`
+reads as  "an entity of type `user`, named `alice@canonical.com`, has the `member` relation to an entity of type `group`, named `foo`".
 
 
+````{dropdown} View the authorization model (diagram)
 
-```{note}
-**JAAS vs. OpenFGA.**
+Note: Directed graph illustration of the JAAS authorization model. Purple and green nodes represent entity types and relations, respectively. The dashed lines show the internal indirect relationships among relations defined on the entity type (e.g., an entity can have the `reader`, `writer`, or `administrator` relation to a `model`). The `controller` and `model` relations are implicit internal relations that describe the inheritance structure for permissions (e.g., controller administrator is also an administrator for all models on that controller).
+
+```{figure} relation-authorization-model.png
+   :width: 600px
+   :alt: JAAS authorization model
+```
+````
+
+````{dropdown} View the authorization model (source)
+
+Note: The `controller` and `model` relations are implicit internal relations that describe the inheritance structure for permissions (e.g., controller administrator is also an administrator for all models on that controller).
+
+```text
+# copy me into https://play.fga.dev to update png
+
+model
+  schema 1.1
+
+type user
+
+type role
+  relations
+    define assignee: [user, user:*, group#member]
+
+type group
+  relations
+    define member: [user, user:*, group#member]
+
+type controller
+  relations
+    define administrator: [user, user:*, group#member, role#assignee] or administrator from controller
+    define audit_log_viewer: [user, user:*, group#member, role#assignee] or administrator
+    define controller: [controller]
+
+type model
+  relations
+    define administrator: [user, user:*, group#member, role#assignee] or administrator from controller
+    define controller: [controller]
+    define reader: [user, user:*, group#member, role#assignee] or writer
+    define writer: [user, user:*, group#member, role#assignee] or administrator
+
+type applicationoffer
+  relations
+    define administrator: [user, user:*, group#member, role#assignee] or administrator from model
+    define consumer: [user, user:*, group#member, role#assignee] or administrator
+    define model: [model]
+    define reader: [user, user:*, group#member, role#assignee] or consumer
+
+type cloud
+  relations
+    define administrator: [user, user:*, group#member, role#assignee] or administrator from controller
+    define can_addmodel: [user, user:*, group#member, role#assignee] or administrator
+    define controller: [controller]
+
+type serviceaccount
+  relations
+    define administrator: [user, user:*, group#member, role#assignee]
+
+```
+````
+
+````{dropdown} View all the tuple templates arising from the authorization model
+
+```text
+
+(applicationoffer:some_offer, model, model:some_model)
+(applicationoffer:some_offer, administrator, user:some_user)
+(applicationoffer:some_offer, administrator, user:*)
+(applicationoffer:some_offer, administrator, group:some_group#member)
+(applicationoffer:some_offer, administrator, role:some_role#assignee)
+(applicationoffer:some_offer, administrator, model:some_model#administrator)
+(applicationoffer:some_offer, consumer, user:some_user)
+(applicationoffer:some_offer, consumer, user:*)
+(applicationoffer:some_offer, consumer, group:some_group#member)
+(applicationoffer:some_offer, consumer, role:some_role#assignee)
+(applicationoffer:some_offer, consumer, applicationoffer:some_offer#administrator)
+(applicationoffer:some_offer, reader, user:some_user)
+(applicationoffer:some_offer, reader, user:*)
+(applicationoffer:some_offer, reader, group:some_group#member)
+(applicationoffer:some_offer, reader, role:some_role#assignee)
+(applicationoffer:some_offer, reader, applicationoffer:some_offer#consumer)
+
+(cloud:some_cloud, controller, controller:some_controller)
+(cloud:some_cloud, administrator, user:some_user)
+(cloud:some_cloud, administrator, user:*)
+(cloud:some_cloud, administrator, group:some_group#member)
+(cloud:some_cloud, administrator, role:some_role#assignee)
+(cloud:some_cloud, administrator, controller:some_controller#administrator)
+(cloud:some_cloud, can_addmodel, user:some_user)
+(cloud:some_cloud, can_addmodel, user:*)
+(cloud:some_cloud, can_addmodel, group:some_group#member)
+(cloud:some_cloud, can_addmodel, role:some_role#assignee)
+(cloud:some_cloud, can_addmodel, cloud:some_cloud#administrator)
+
+(controller:some_controller, controller, controller:some_other_controller)
+(controller:some_controller, administrator, user:some_user)
+(controller:some_controller, administrator, user:*)
+(controller:some_controller, administrator, group:some_group#member)
+(controller:some_controller, administrator, role:some_role#assignee)
+(controller:some_controller, administrator, controller:some_controller#administrator)
+(controller:some_controller, audit_log_viewer, user:some_user)
+(controller:some_controller, audit_log_viewer, user:*)
+(controller:some_controller, audit_log_viewer, group:some_group#member)
+(controller:some_controller, audit_log_viewer, role:some_role#assignee)
+(controller:some_controller, audit_log_viewer, controller:some_controller#administrator)
+
+(group:some_group, member, user:some_user)
+(group:some_group, member, user:*)
+(group:some_group, member, group:some_other_group#member)
+
+(model:some_model, controller, controller:some_controller)
+(model:some_model, administrator, user:some_user)
+(model:some_model, administrator, user:*)
+(model:some_model, administrator, group:some_group#member)
+(model:some_model, administrator, role:some_role#assignee)
+(model:some_model, administrator, controller:some_controller#administrator)
+(model:some_model, reader, user:some_user)
+(model:some_model, reader, user:*)
+(model:some_model, reader, group:some_group#member)
+(model:some_model, reader, role:some_role#assignee)
+(model:some_model, reader, model:some_model#writer)
+(model:some_model, writer, user:some_user)
+(model:some_model, writer, user:*)
+(model:some_model, writer, group:some_group#member)
+(model:some_model, writer, role:some_role#assignee)
+(model:some_model, writer, model:some_model#administrator)
+
+(role:some_role, assignee, user:some_user)
+(role:some_role, assignee, user:*)
+(role:some_role, assignee, group:some_group#member)
+
+(serviceaccount:some_account, administrator, user:some_user)
+(serviceaccount:some_account, administrator, user:*)
+(serviceaccount:some_account, administrator, group:some_group#member)
+(serviceaccount:some_account, administrator, role:some_role#assignee)
+
+```
+````
+
+```{dropdown} View the relations in their target entity context
+> See : {ref}`controller-relation`, {ref}`cloud-relation`, {ref}`model-relation`, {ref}`offer-relation`, {ref}`service-account-relation`, {ref}`role-relation`, {ref}`group-relation`
+```
+
+
+<!--
+**JAAS entity names vs. OpenFGA ReBAC entity names.**
+
 JAAS terminology is slightly different from OpenFGA. In OpenFGA, entity A and entity B are called 'user' and 'object', but in JAAS, they are called 'object' and 'target'.
-```
+-->
 
-
-```{important}
-**Juju relations vs. JAAS relations:**
-
-JAAS relations have nothing to the with {external+juju:ref}`Juju relations <relation>`, which refer to the relationship, or rather integration, of two charmed applications.
-
-JAAS relations are currently similar to {external+juju:ref}`Juju access levels <user-access-levels>` -- they're both about permissions. The difference is that the relation paradigm is much broader; the list of relations is anticipated to become a superset of Juju access levels; and, while Juju access levels are always about a user's permissions on a controller, cloud, model, or offer, JAAS relations encompass many more entities on both sides, e.g., groups, roles, and service accounts.
-```
 
