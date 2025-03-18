@@ -1,4 +1,4 @@
-(manage-clouds)
+(manage-clouds)=
 # Manage clouds
 > See first: {ref}`cloud`
 
