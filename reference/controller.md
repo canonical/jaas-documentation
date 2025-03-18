@@ -14,15 +14,16 @@ A controller tag has the following format:
 controller-<controller name>
 ```
 
-(controller-access-levels)=
-## Controller access levels
+(list-of-controller-relations)=
+## List of controller relations
+> See first: {ref}`relation`
 
-(controller-access-levels-administrator)=
+(controller-relation-administrator)=
 ### `administrator`
 
 Abilities: Can do anything that it is possible to do at the level of a controller. This grants permissions to all resources that inherit from controller access.
 
-(controller-access-levels-audit-log-viewer)=
+(controller-relation-audit-log-viewer)=
 ### `audit_log_viewer`
 
 Abilities: Can read audit logs.

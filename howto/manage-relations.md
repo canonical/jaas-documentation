@@ -12,9 +12,9 @@ jimmctl auth relation add user-alice@canonical.com member group-mygroup
 ```
 
 > See more:
-> - {ref}`tag`
 > - {ref}`jimmctl auth relation add <summary-10>`
-> - {ref}`controller-access-levels`, {ref}`cloud-access-levels`, {ref}`model-access-levels`, {ref}`offer-access-levels`, {ref}`service-account-access-levels`, {ref}`role-access-levels`, {ref}`group-access-levels`
+> - {ref}`controller-tag`, {ref}`cloud-tag`, {ref}`model-tag`, {ref}`offer-tag`, {ref}`user-tag`, {ref}`service-account-tag`, {ref}`role-tag`, {ref}`group-tag`
+> - {ref}`list-of-controller-relations`, {ref}`list-of-cloud-relations`, {ref}`list-of-model-relations`, {ref}`list-of-offer-relations`, {ref}`list-of-service-account-relations`, {ref}`list-of-role-relations`, {ref}`list-of-group-relations`
 
 
 (verify-a-relation)=

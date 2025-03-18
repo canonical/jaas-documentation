@@ -19,20 +19,21 @@ is running, `<model name>` specifies name of the model in which the application
 offer was created and `<offer name>` specifies the name of the application offer.
 
 
-(offer-access-levels)=
-## Offer access levels
+(list-of-offer-relations)=
+## List of offer relations
+> See first: {ref}`relation`
 
-(offer-access-levels-administrator)=
+(offer-relation-administrator)=
 ### `administrator`
 
 Abilities: Can do anything that it is possible to do at the level of an offer.
 
-(offer-access-levels-consumer)=
+(offer-relation-consumer)=
 ### `consumer`
 
 Abilities: Can relate an application to the offer.
 
-(offer-access-levels-reader)=
+(offer-relation-reader)=
 ### `reader`
 
 Abilities: Can view offers during a search with `juju find-offers`.

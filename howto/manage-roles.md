@@ -49,22 +49,15 @@ jimmctl auth role list [options]
 
 > See more: {ref}`jimmctl auth role list <summary-16>`
 
+(manage-an-entitys-relation-to-a-role)=
+## Manage an entity's relation to a role
 
-(manage-access-to-a-role)=
-## Manage access to a role
+See {ref}`manage-relations`.
 
-**Grant access to a role.** Given an entity A and a role, to grant A access to the role, add a relation between A and the role, specifying the desired access level.
+(manage-a-roles-relation-to-an-entity)=
+## Manage a role's relation to an entity
 
-> See more: {ref}`add-a-relation`
-
-**Revoke access to a role.** Given an entity A and a role, to revoke A's access to the role, remove the relation that grants that access.
-
-> See more: {ref}`remove-a-relation`
-
-(manage-a-roles-access)=
-## Manage a role’s access to a controller, cloud, model, or offer
-
-> See more: {ref}`manage-access-to-a-controller`, {ref}`manage-access-to-a-cloud`, {ref}`manage-access-to-a-model`, {ref}`manage-access-to-an-offer`
+See {ref}`manage-relations`.
 
 (rename-a-role)=
 ## Rename a role

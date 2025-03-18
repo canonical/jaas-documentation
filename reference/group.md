@@ -18,10 +18,11 @@ group-<group id>
 where `group id` represents the unique identifier of the group.
 
 
-(group-access-levels)=
-## Group access levels
+(list-of-group-relations)=
+## Group relations
+> See first: {ref}`relation`
 
-(group-access-levels-member)=
+(group-relation-member)=
 ### `member`
 
 Abilities: Shares the group's access level to Juju resources and JIMM logs.

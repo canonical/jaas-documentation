@@ -24,10 +24,12 @@ A `serviceaccount-<identifier>` type tag is only useful for providing permission
 In all other cases treat service accounts as users and use a {ref}`user tag <user-tag>` to grant them access to resources.
 ```
 
-(service-account-access-levels)=
-## Service account access levels
+(list-of-service-account-relations)=
+## List of service account relations
+> See first: {ref}`relation`
 
-(service-account-access-levels-administrator)=
+
+(service-account-relation-administrator)=
 ### `administrator`
 
 Abilities: Can do anything that it is possible to do at the level of a service account. Used to manage the credentials of a service account.

@@ -53,23 +53,15 @@ jimmctl auth group list [options]
 
 > See more: {ref}`jimmctl auth group list <summary-6>`
 
+(manage-an-entitys-relation-to-a-group)=
+## Manage an entity's relation to a group
 
-(manage-access-to-a-group)=
-## Manage access to a group
+See {ref}`manage-relations`.
 
-**Grant access to a group.** Given an entity A and a group, to grant A access to the group, add a relation between A and the group, specifying the desired access level.
+(manage-a-groups-relation-to-an-entity)=
+## Manage a group's relation to an entity
 
-> See more: {ref}`add-a-relation`
-
-**Revoke access to a group.** Given an entity A and a group, to revoke A's access to the group, remove the relation that grants that access.
-
-> See more: {ref}`remove-a-relation`
-
-(manage-a-groups-access)=
-## Manage a group’s access to a controller, cloud, model, offer, or group
-
-> See more: {ref}`manage-access-to-a-controller`, {ref}`manage-access-to-a-cloud`, {ref}`manage-access-to-a-model`, {ref}`manage-access-to-an-offer`, {ref}`manage-access-to-a-group`
-
+See {ref}`manage-relations`.
 
 (rename-a-group)=
 ## Rename a group

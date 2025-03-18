@@ -19,10 +19,11 @@ role-<role id>
 where `role id` represents the unique identifier of the role.
 
 
-(role-access-levels)=
-## Role access levels
+(list-of-role-relations)=
+## List of role relations
+> See first: {ref}`relation`
 
-(role-access-levels-assignee)=
+(role-relation-assignee)=
 ### `assignee`
 
 Abilities: Shares the role's access level to Juju resources and JIMM logs.

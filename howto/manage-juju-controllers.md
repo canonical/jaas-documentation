@@ -117,14 +117,8 @@ jimmctl controller-info workload-lxd ~/snap/jimmctl/common/lxd-controller-info.y
 jimmctl add-controller ~/snap/jimmctl/common/lxd-controller-info.yaml
 ```
 
-(manage-access-to-a-juju-controller)=
-## Manage access to a Juju controller
+(manage-an-entitys-relation-to-a-juju-controller)=
+## Manage an entity's relation to a Juju controller
 
-**Grant access to a Juju controller.** Given an entity A and a controller, to grant A access to the controller, add a relation between A and the controller, specifying the desired access level.
-
-> See more: {ref}`add-a-relation`
-
-**Revoke access to a Juju controller.** Given an entity A and a controller, to revoke A's access to the controller, remove the relation that grants that access.
-
-> See more: {ref}`remove-a-relation`
+See {ref}`manage-relations`.
 

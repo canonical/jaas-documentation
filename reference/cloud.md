@@ -13,15 +13,16 @@ A cloud tag has the following format:
 cloud-<cloud name>
 ```
 
-(cloud-access-levels)=
-## Cloud access levels
+(list-of-cloud-relations)=
+## List of cloud relations
+> See first: {ref}`relation`
 
-(cloud-access-levels-administrator)=
+(cloud-relation-administrator)=
 ### `administrator`
 
 Abilities: Can do anything that it is possible to do at the level of a cloud.
 
-(cloud-access-levels-can-addmodel)=
+(cloud-relation-can-addmodel)=
 ### `can_addmodel`
 
 Abilities: Can add a model and grant another user model-level permissions.
