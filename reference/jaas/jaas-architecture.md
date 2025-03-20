@@ -1,4 +1,4 @@
-# JAAS Architecture
+# Architecture
 
 The diagram below shows an overall picture of JAAS architecture.
 

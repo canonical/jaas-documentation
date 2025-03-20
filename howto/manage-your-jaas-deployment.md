@@ -374,5 +374,18 @@ juju config jimm-app cors-allowed-origins="https://hostname"
 juju config jimm-app juju-dashboard-location="https://hostname"
 ```
 
-Now go to `https://hostname`, sign in through the identity provider you setup during JAAS deployment, and you
-are in the dashboard.
+Now go to `https://hostname`, sign in through the identity provider you setup during JAAS deployment, and you are in the dashboard.
+
+## Harden your deployment
+
+Configure JIMM to use CORS using the configuration option `cors-allowed-origins`.
+
+> See more: [Charmhub | JIMM-K8S > Configurations > `cors-allowed-origins`](https://charmhub.io/juju-jimm-k8s/configurations#cors-allowed-origins)
+
+Integrate JIMM with Self-Signed Certificates using the `receive-ca-cert` relation endpoint.
+
+> See more: [Charmhub | JIMM-K8s > Integrations > `receive-ca-cert`](https://charmhub.io/juju-jimm-k8s/integrations#receive-ca-cert)
+
+Enable TLS for PostgreSQL.
+
+> See more: [Charmhub | PostgreSQL K8s > Enable TLS](https://charmhub.io/postgresql-k8s/docs/t-enable-tls?channel=14/stable)
