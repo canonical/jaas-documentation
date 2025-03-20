@@ -1,10 +1,115 @@
-(manage-jimm-controllers)=
-# Manage JIMM controllers
+(manage-jaas)=
+# Manage JAAS
 
-(deploy-a-jimm-controller)=
-## Deploy a JIMM controller
-TBA
+(deploy-JAAS)=
+## Deploy JAAS
 
+TBA (for now please see the tutorial)
+
+<!--
+To deploy JAAS:
+
+```{note}
+While some of the core components (the JIMM controller and OpenFGA) must be deployed on a Kubernetes cloud, others (PostgreSQL and Vault) can also be deployed on a machine cloud and provided through cross-model relations. Note however that the core components of JAAS all require a Kubernetes cloud.
+```
+
+1. Deploy an authentication provider. A Juju-native way is the Canonical Identity Platform. Use a preexisting Juju controller to deplot it:
+
+```text
+juju add-model iam
+juju deploy identity-platform --trust --channel 0.2/edge
+juju offer hydra:oauth
+juju offer self-signed-certificates:send-ca-cert
+```
+
+2. Set up external IdP.
+
+3. Use a preexisting Juju controller to deploy the JIMM controller and all of its dependencies, including an external identity provider.
+
+```text
+juju add-model jimm
+# The channel used for the JIMM charm is currently 3/edge.
+# At a later date this will be promoted to the 3/stable channel.
+juju deploy juju-jimm-k8s --channel=3/edge jimm
+juju deploy openfga-k8s --channel=2.0/stable openfga
+juju deploy postgresql-k8s --channel=14/stable postgresql
+juju deploy vault-k8s --channel=1.15/beta vault
+juju deploy nginx-ingress-integrator --channel=latest/stable --trust ingress
+juju relate jimm:nginx-route ingress
+juju relate jimm:openfga openfga
+juju relate jimm:database postgresql
+juju relate jimm:vault vault
+juju relate openfga:database postgresql
+juju relate jimm admin/iam.hydra
+juju relate jimm admin/iam.self-signed-certificates
+juju deploy self-signed-certificates jimm-cert
+juju relate ingress jimm-cert
+```
+
+4. Initialize Vault.
+
+Install the Vault client:
+
+```text
+sudo snap install vault
+```
+
+Set up the variables that will enable communication with Vault:
+
+```
+export VAULT_ADDR=https://$(juju status vault/leader --format=yaml | yq '.applications.vault.address'):8200; echo "Vault address =" "$VAULT_ADDR"
+cert_juju_secret_id=$(juju secrets --format=yaml | yq 'to_entries | .[] | select(.value.label == "self-signed-vault-ca-certificate") | .key'); echo "Vault ca-cert secret ID =" "$cert_juju_secret_id"
+juju show-secret ${cert_juju_secret_id} --reveal --format=yaml | yq '.[].content.certificate' > vault.pem && echo "saved certificate contents to vault.pem"
+export VAULT_CAPATH=$(pwd)/vault.pem; echo "Setting VAULT_CAPATH from" "$VAULT_CAPATH"
+```
+
+Verify that Vault is accessible:
+
+```
+vault status
+```
+
+Create an unseal key:
+
+```text
+key_init=$(vault operator init -key-shares=1 -key-threshold=1); echo "$key_init"
+export VAULT_TOKEN=$(echo "$key_init" | sed -n -e 's/.*Root Token: //p'); echo "RootToken = $VAULT_TOKEN"
+export UNSEAL_KEY=$(echo "$key_init" | sed -n -e 's/.*Unseal Key 1: //p'); echo "UnsealKey = $UNSEAL_KEY"
+vault operator unseal "$UNSEAL_KEY"
+```
+
+Authorize the charm to interact with Vault and manage its operations:
+
+```text
+vault_secret_id=$(juju add-secret vault-token token="$VAULT_TOKEN")
+juju grant-secret vault-token vault
+juju run vault/leader authorize-charm secret-id="$vault_secret_id"
+juju remove-secret "vault-token"
+```
+
+Save the root token and unseal key for later use:
+
+```text
+echo $UNSEAL_KEY > vault_unseal_key.txt
+echo $VAULT_TOKEN > vault_token.txt
+```
+
+5. Configure JIMM
+
+```
+# The UUID value is used internally to represent the JIMM controller in OpenFGA relations/tuples.
+# Changes to the UUID value after deployment will likely result in broken permissions.
+# Use a randomly generated UUID.
+juju config jimm uuid=3f4d142b-732e-4e99-80e7-5899b7e67e59
+# The address to reach JIMM, this will configure ingress and is also used for OAuth flows/redirects.
+juju config jimm dns-name=test-jimm.localhost
+# A private and public key for macaroon based authentication with Juju controllers.
+juju config jimm public-key="<public-key>"
+juju config jimm private-key="<private-key>"
+# If you have deployed `juju-dashboard`:
+juju config jimm juju-dashboard-location="<juju-dashboard-url>"
+```
+-->
 
 ## Create a JIMM controller admin
 
@@ -53,50 +158,7 @@ In a fresh setup, the first should return an empty list, showing that no control
 The second command returns a list of audited events that JIMM has recorded. More information on JIMM's audit log feature
 is available at the following {doc}`page<../reference/audit_logs>`.
 
-## Manage access to a resource managed by JIMM
-
-As a JIMM admin, you are automatically an administrator of all controllers and models on those controllers.
-
-Permissions to resources can now be handled in one of two ways.
-
-1. Through `juju`
-
-All Juju permission related commands are valid with JIMM. This is the expected approach for all users to manage permissions
-to resources they own.
-
-The following example will create a model and grant a fictional user read access to the model.
-
-```text
-juju add-model permission-test
-juju grant foo@canonical.com read permission-test
-```
-
-This allows user `foo@canonical.com` to see your model provided they have logged into JIMM.
-
-2. Using `jimmctl`
-
-Admins of JIMM can use `jimmctl` to view permissions on a more granular level and perform group management.
-
-```text
-# View all relations
-jimmctl auth relation list
-# Check if a user has access to a resource
-jimmctl auth relation check user-foo@canonical.com administrator controller-jimm
-# Add a group
-jimmctl auth group add my-group
-# Add user to a group
-jimmctl auth relation add user-foo@canonical.com member group-my-group
-# View members of a group
-jimmctl auth relation list --target group-my-group
-```
-
-The purpose of the prefixes `user-` and `group-` is to distinguish the type of the object.
-More information is available in our doc on {doc}`JAAS tags <../explanation/jaas_tags>`
-
-And more information on group management is available in our {doc}`group and access management tutorial<../tutorial/group_management>`.
-
-
-## Integrate a JIMM controller with the Canonical Observability Stack
+## Integrate JAAS with the Canonical Observability Stack
 
 This document shows how to integrate the different components of JAAS with the
 [Canonical Observability Stack][cos] to enable pre-configured dashboards and alerting rules.
@@ -241,7 +303,7 @@ You will find the available dashboards by clicking on the Dashboards menu
 [cos]: https://charmhub.io/topics/canonical-observability-stack
 
 
-## Equip a JIMM controller with TLS ingress
+## Equip JAAS with TLS ingress
 
 The NGINX Ingress Integrator is a charm responsible for creating Kubernetes ingress rules,
 these rules can be hardened via TLS and the charm provides a means to do so. See [here](https://charmhub.io/nginx-ingress-integrator).
@@ -255,7 +317,7 @@ on your Kubernetes cluster.
 With JAAS deployed, you can deploy both LEGO and the integrator, and integrate your LEGO charm deployment
 to your ingress integrator, and then the ingress integrator to JIMM to enable TLS ingress for your deployment.
 
-## Integrate a JIMM controller with the Juju dashboard
+## Integrate JAAS with the Juju dashboard
 
 Juju dashboard is a web UI that is intended to supplement the CLI experience with aggregate views and at a glance health checks.
 
