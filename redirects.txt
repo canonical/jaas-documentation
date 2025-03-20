@@ -35,4 +35,6 @@ reference/jaas/authorisation_data/ reference/relation/
 reference/jaas/authorisation_model/ reference/relation/
 reference/jaas/authorisation/ reference/relation/
 explanation/jaas_overview/ reference/jaas/jaas_architecture/
-howto/manage-jimm-controllers/ howto/manage-jaas/
+howto/manage-jimm-controllers/ howto/manage-your-jaas-deployment/
+howto/setup_new_users/ howto/manage-users/
+reference/juju_required_version/ reference/supported-juju-versions/

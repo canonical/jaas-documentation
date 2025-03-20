@@ -1,3 +1,4 @@
+(supported-juju-versions)=
 # Supported Juju versions
 
 The following sections describe which version of the Juju CLI or controller is required for different scenarios.

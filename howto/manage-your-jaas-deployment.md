@@ -1,8 +1,18 @@
-(manage-jaas)=
-# Manage JAAS
+(manage-your-jaas-deployment)=
+# Manage your JAAS deployment
 
 (deploy-JAAS)=
 ## Deploy JAAS
+
+```{note}
+In order to deploy JAAS and all its components you must use a Juju controller with a minimum version of 3.x.
+
+In order to interact with JAAS as a user, you must use a Juju CLI with a minimum version of 3.5.4.
+
+JAAS supports Juju controllers with a minimum version 3.4.
+
+```
+
 
 TBA (for now please see the tutorial)
 

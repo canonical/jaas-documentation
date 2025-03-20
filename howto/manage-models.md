@@ -155,9 +155,6 @@ If the model migration fails, then no further user input is required and the mod
 
 To inspect the reason for failure, consult the output from `juju debug-log` and `juju status`.
 
-
-
-
 (manage-an-entitys-relation-to-a-model)=
 ## Manage an entity's relation to a model
 
