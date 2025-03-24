@@ -41,9 +41,6 @@ Unmarked items are JAAS-specific.
 
 ## JAAS Tools
 
-```{toctree}
-:titlesonly:
+- {doc}`jimmctl <./jimmctl>`
+- {ref}`jimmctl-audit-events-details`
 
-jimmctl
-jimmctl-audit-events
-```

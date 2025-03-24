@@ -1,3 +1,4 @@
+(jimmctl-audit-events-details)=
 # `jimmctl audit-events` details
 
 JIMM provides audit logging functionality, tracking all requests/responses into the system.

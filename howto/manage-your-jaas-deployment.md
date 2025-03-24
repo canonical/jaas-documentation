@@ -166,7 +166,7 @@ jimmctl audit-events
 In a fresh setup, the first should return an empty list, showing that no controllers have been added to JIMM.
 
 The second command returns a list of audited events that JIMM has recorded. More information on JIMM's audit log feature
-is available at the following {doc}`page<../reference/audit_logs>`.
+is available at the following {ref}`jimmctl-audit-events-details`.
 
 ## Integrate JAAS with the Canonical Observability Stack
 
@@ -385,7 +385,7 @@ Configure JIMM to use CORS using the configuration option `cors-allowed-origins`
 
 Integrate JIMM with Self-Signed Certificates using the `receive-ca-cert` relation endpoint.
 
-> See more: [Charmhub | JIMM-K8s > Integrations > `receive-ca-cert`](https://charmhub.io/juju-jimm-k8s/integrations#receive-ca-cert)
+> See more: [Charmhub | JIMM-K8s > Integrations > `receive-ca-cert`](https://charmhub.io/juju-jimm-k8s/integrations)
 
 Enable TLS for PostgreSQL.
 

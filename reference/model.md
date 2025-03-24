@@ -1,6 +1,6 @@
 (model)=
 # Model
-> See also: {ref}`model`
+> See first: {external+juju:ref}`Juju | Model <model>`
 
 (model-tag)=
 ## Model tag
