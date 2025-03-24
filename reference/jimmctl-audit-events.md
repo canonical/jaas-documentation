@@ -1,6 +1,4 @@
-# JAAS: Understanding Audit Logs
-
-## Introduction
+# `jimmctl audit-events` details
 
 JIMM provides audit logging functionality, tracking all requests/responses into the system.
 This gives administrators of JIMM the ability to audit changes at a very granular level.

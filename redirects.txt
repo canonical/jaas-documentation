@@ -44,3 +44,4 @@ reference/jaas/security_hardening/ reference/jaas/security/
 reference/jaas/jaas_architecture/ reference/jaas/jaas-architecture/
 reference/jaas/security/ reference/jaas/jaas-security/
 reference/jaas/supported-juju-versions/ reference/jaas/jaas-supported-juju-versions/
+reference/audit_logs/ reference/jimmctl-audit-events

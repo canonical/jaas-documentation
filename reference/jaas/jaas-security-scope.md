@@ -1,4 +1,5 @@
-# Security Scope
+(jaas-security-scope)=
+# Security scope
 
 <!--   TODO (Kian):
    Much of this document's content is now covered in the security doc in reference/security and reused where possible.

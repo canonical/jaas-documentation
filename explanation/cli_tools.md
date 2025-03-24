@@ -1,4 +1,4 @@
-# Understanding `juju` vs `jaas` vs `jimmctl`
+# `juju` vs. `jaas` vs. `jimmctl`
 
 This document aims to explain the differences between the various CLI tools you may encounter when using Juju and JAAS.
 

@@ -6,44 +6,44 @@
 ```{toctree}
 :titlesonly:
 :glob:
+:hidden:
 
 *
 ```
 
-<!--
+## JAAS at a glance
 
-## Security
+- {ref}`jaas`
+    - {ref}`jaas-architecture`
+    - {ref}`jaas-authentication`
+    - {ref}`jaas-authorization`
+    - {ref}`jaas-rebac-admin-backend`
+    - {ref}`jaas-security-scope`
+    - {ref}`jaas-security-overview`
+    - {ref}`jaas-supported-juju-versions`
+
+
+## JAAS Entities
+
+Items marked with an asterisk are Juju entities enhanced in JAAS. <br>
+Unmarked items are JAAS-specific.
+
+- {ref}`cloud`*
+- {ref}`controller`*
+- {ref}`group`
+- {ref}`model`*
+- {ref}`offer`*
+- {ref}`relation`
+- {ref}`role`
+- {ref}`service-account`
+- {ref}`tag`
+- {ref}`user`*
+
+## JAAS Tools
 
 ```{toctree}
-:maxdepth: 1
+:titlesonly:
 
-JAAS Security <security>
-Audit Logs <audit_logs>
+jimmctl
+jimmctl-audit-events
 ```
-
-## Authorisation
-
-```{toctree}
-:maxdepth: 1
-
-Authorisation Model <authorisation_model>
-Authorisation Data <authorisation_data>
-ReBAC Admin Backend <rebac_admin_backend>
-```
-
-## Support
-
-```{toctree}
-:maxdepth: 1
-
-Supported Juju versions <juju_required_version>
-```
-
-## CLI Reference
-
-```{toctree}
-:maxdepth: 1
-
-jimmctl CLI reference <jimmctl>
-```
--->

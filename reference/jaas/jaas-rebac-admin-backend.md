@@ -1,3 +1,4 @@
+(jaas-rebac-admin-backend)=
 # ReBAC admin backend
 
 The ReBAC Admin API is a REST API that provides various endpoints to query or
