@@ -10,8 +10,8 @@ In many scenarios it is necessary to migrate models to and from an environment t
 
 - A standalone Juju controller with a model (optionally with a running application).
 - A basic understanding of Juju model migrations, see the [docs](https://juju.is/docs/juju/manage-models).
-- A running JAAS, see the {doc}`tutorial <../tutorial/deploy_jaas_microk8s>`.
-- Administrator permissions for JAAS, see our {doc}`how-to <./bootstrap_permissions>`.
+- A running JAAS, see the {doc}`the tutorial <../tutorial/index>`.
+- Administrator permissions for JAAS, see our {doc}`how-to <./manage-your-jaas-deployment>`.
 
 ### 1. Create a new Juju controller
 
@@ -28,7 +28,7 @@ is required.
 In order to use models with JAAS, the models must be running on a Juju controller that is properly configured. The
 necessary config values cannot be set after bootstrap time, so any existing models must be migrated to a new controller.
 
-The process of creating a local Juju controller that is properly configured is described in {doc}`this how-to <./add_controller>`.
+The process of creating a local Juju controller that is properly configured is described in {ref}`add-a-juju-controller`.
 
 Once a Juju controller that is configured to communicate with JIMM has been created, move onto the next step.
 
@@ -104,10 +104,10 @@ The below is useful if you want to move the model to a specific controller.
 ### Prerequisites
 
 - A basic understanding of Juju model migrations, see the [docs](https://juju.is/docs/juju/manage-models).
-- A running JAAS with with multiple controllers attached, see the {doc}`tutorial <../tutorial/deploy_jaas_microk8s>` for deploying JAAS.
-- Administrator permissions for JAAS, so our {doc}`how-to <./bootstrap_permissions>`.
+- A running JAAS with with multiple controllers attached, see the {doc}`the tutorial <../tutorial/index>` for deploying JAAS.
+- Administrator permissions for JAAS, so our {ref}`add-a-juju-controller`.
 
-Connecting multiple controllers to JAAS can be accomplished adding LXD controllers as described in our {doc}`how-to <./add_controller>`.
+Connecting multiple controllers to JAAS can be accomplished adding LXD controllers as described in {ref}`add-a-juju-controller`.
 
 ### 1. Identify the new controller
 

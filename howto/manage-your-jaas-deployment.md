@@ -14,7 +14,7 @@ JAAS supports Juju controllers with a minimum version 3.4.
 ```
 
 
-TBA (for now please see the tutorial)
+TBA (for now please see {doc}`the tutorial <../tutorial/index>`)
 
 <!--
 To deploy JAAS:
@@ -127,8 +127,8 @@ juju config jimm juju-dashboard-location="<juju-dashboard-url>"
 
 For this how-to you will need the following:
 
-- A basic understanding of JAAS tags, see our {doc}`explanation doc<../explanation/jaas_tags>`.
-- A running JAAS environment, see {doc}`our tutorial <../tutorial/deploy_jaas_microk8s>`.
+- A basic understanding of JAAS tags, see {ref}`tag`.
+- A running JAAS environment, see {doc}`the tutorial <../tutorial/index>`.
 - An understanding of Juju permissions, see the [Juju docs](https://juju.is/docs/juju/user-permissions).
 
 ### Creating an admin user
@@ -183,7 +183,7 @@ For the complete list of components in COS, read the
 - A running `COS-Lite` bundle.
   You can follow the [Getting started on MicroK8s](https://charmhub.io/topics/canonical-observability-stack/tutorials/install-microk8s).
   tutorial to get you started. Make sure to follow the section **Deploy the COS Lite bundle with overlays** section to create offers.
-- A running JAAS. Please refer to the deployment {doc}`tutorial<../tutorial/deploy_jaas_microk8s>`.
+- A running JAAS. Please refer to the deployment {doc}`the tutorial <../tutorial/index>`.
 
 ```{tip}
 [Juju offers](https://juju.is/docs/juju/manage-offers) are a way of sharing software as a service between models. Make sure you deploy COS and setup offers so that you can relate to it across models.
@@ -313,7 +313,8 @@ You will find the available dashboards by clicking on the Dashboards menu
 [cos]: https://charmhub.io/topics/canonical-observability-stack
 
 
-## Equip JAAS with TLS ingress
+(equip-your-jaas-deployment-with-tls-ingress)=
+## Equip your JAAS deployment with TLS ingress
 
 The NGINX Ingress Integrator is a charm responsible for creating Kubernetes ingress rules,
 these rules can be hardened via TLS and the charm provides a means to do so. See [here](https://charmhub.io/nginx-ingress-integrator).
@@ -341,7 +342,7 @@ To explore Juju Dashboard features you can go [here](https://juju.is/docs/juju/t
 
 For this how-to you will need the following:
 
-- A running JAAS environment, see {doc}`our tutorial <../tutorial/deploy_jaas_microk8s>`.
+- A running JAAS environment, see {doc}`the tutorial <../tutorial/index>`.
 
 ### Deploy Juju Dashboard
 
@@ -356,7 +357,7 @@ juju integrate dashboard jimm-app
 Then you need to expose your dashboard through an ingress.
 
 ```{tip}
-You can follow {doc}`this guide <./setup_ingress_with_tls>` to add TLS to your ingress.
+You can follow {ref}`equip-your-jaas-deployment-with-tls-ingress` to add TLS to your ingress.
 ```
 
 ```text

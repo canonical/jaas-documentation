@@ -1,3 +1,4 @@
+(jaas-architecture)=
 # Architecture
 
 The diagram below shows an overall picture of JAAS architecture.
@@ -32,7 +33,7 @@ The remainder of this document briefly goes into more detail on JAAS' deployment
 
 The components of JAAS are deployed via Juju K8s charms. This implies that in order to deploy JAAS, you
 must first bootstrap a single Juju controller to manage the components of JAAS, this is described in
-more detail in our {doc}`tutorial <../tutorial/deploy_jaas_microk8s>`.
+more detail in our {ref}`tutorial`.
 
 Not all the components of JAAS are expected to be deployed on Kubernetes. With the use of Juju [offers](https://juju.is/docs/juju/manage-offers)
 certain components can be deployed to virtual machines and used by the Kubernetes charms. These components

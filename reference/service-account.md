@@ -2,7 +2,7 @@
 # Service account
 > See also: {manage-service-accounts}
 
-In JAAS, a service account is a machine identity used for non-human interactions with a Juju cotnroller.
+In JAAS, a service account is a machine identity used for non-human interactions with a Juju controller.
 
 A service account identifier will vary depending on the identity provider.
 
@@ -16,7 +16,7 @@ A service account tag has the following format:
 serviceaccount-<identifier>
 ```
 
-where `<identifier>` is the name/id of the service account as prvoided by your IdP.
+where `<identifier>` is the name/id of the service account as provided by your IdP.
 
 ```{tip}
 A `serviceaccount-<identifier>` type tag is only useful for providing permissions over administration of a service account.

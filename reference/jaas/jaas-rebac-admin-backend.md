@@ -3,14 +3,6 @@
 The ReBAC Admin API is a REST API that provides various endpoints to query or
 manipulate relationships in JAAS ReBAC authorisation model.
 
-```{tip}
-For an explanation on Relationship-Based Access Control (ReBAC) check out {doc}`this <../explanation/authorisation>` explanation topic.
-```
-
-```{tip}
-As a reference on JAAS authorisation model, check out {doc}`this <../reference/authorisation_model>` reference topic.
-```
-
 ## OpenAPI specification
 
 The OpenAPI spec can be found at `https://<jimm-deployment>/rebac/v1/swagger.json`
@@ -29,6 +21,6 @@ JAAS implements a subset of the operations described in the OpenAPI spec.
 | ✅  | `capabilities` ||
 | ✅  | `groups` ||
 | ✅  | `resources` ||
+| ✅  | `roles`      ||
 | 🟡  | `identities`  |   No support for creation, update and deletion.|
-| ❌  | `roles`      |    No support for roles.|
 | ❌  | `authentication` | No support for identity provider management.|

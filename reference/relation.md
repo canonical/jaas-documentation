@@ -6,7 +6,7 @@
 
 
 ```{dropdown} JAAS relations vs. Juju relations
-JAAS relations have nothing to do with {external+juju:ref}`Juju relations <relation>, which refer to the relationship, or rather integration, of two charmed applications. However, JAAS relations are related to {external+juju:ref}`Juju access levels <user-access-levels>`.
+JAAS relations have nothing to do with [Juju relations](https://canonical-juju.readthedocs-hosted.com/en/latest/user/reference/relation/), which refer to the relationship, or rather integration, of two charmed applications. However, JAAS relations are related to [Juju user access levels](https://canonical-juju.readthedocs-hosted.com/en/latest/user/reference/user/).
 ```
 
 ```{dropdown} JAAS relations vs. Juju access levels
@@ -18,7 +18,7 @@ JAAS reshapes Juju's permission model based on access levels into the more flexi
 
 <!--following [Relation Based Access Control (**ReBAC**)](https://en.wikipedia.org/wiki/Relationship-based_access_control) and using [OpenFGA](https://openfga.dev/docs/concepts#what-is-a-relation),-->
 
-In JAAS, a relation is a string in an [OpenFGA ReBAC authorization model](https://openfga.dev/docs/authorization-concepts#what-is-relationship-based-access-control) that is part of a tuple consisting of an entity type A (in OpenFGA: 'user'; in JAAS: 'object'), the relation, and an entity type B (in OpenFGA: 'object'; in JAAS: 'target), where the relation is defined by type B and represents an entitlement of entity type A on the entity type B (i.e., it is about permission for A to perfom an action on B).
+In JAAS, a relation is a string in an [OpenFGA ReBAC authorization model](https://openfga.dev/docs/authorization-concepts#what-is-relationship-based-access-control) that is part of a tuple consisting of an entity type A (in OpenFGA: 'user'; in JAAS: 'object'), the relation, and an entity type B (in OpenFGA: 'object'; in JAAS: 'target), where the relation is defined by type B and represents an entitlement of entity type A on the entity type B (i.e., it is about permission for A to perform an action on B).
 
 For example:
 

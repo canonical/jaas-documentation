@@ -14,7 +14,8 @@ jimmctl remove-controller
 jimmctl set-controller-deprecated
 -->
 
-## Add a Juju controller to a JIMM controller
+(add-a-juju-controller)=
+## Add a Juju controller
 
 JIMM gives a centralised view of all models in the system. However the work of managing
 the models is delegated to a set of Juju controllers deployed in various clouds
@@ -32,8 +33,8 @@ a JIMM controller.
 For this tutorial you will need the following:
 
 - Basic knowledge of Juju
-- A JIMM controller deployed in MicroK8s, see {doc}`the tutorial <../tutorial/deploy_jaas_microk8s>`.
-- Administrator permission on the JIMM controller, see {doc}`bootstrapping permissions <./bootstrap_permissions>`.
+- A JIMM controller deployed in MicroK8s, see {doc}`the tutorial <../tutorial/index>`.
+<!--- Administrator permission on the JIMM controller, see {ref}`add-a-juju-controller`.-->
 
 
 ### Prelude

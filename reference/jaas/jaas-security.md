@@ -1,4 +1,4 @@
-# Security
+# Security overview
 
 This document provides an overview of JAAS security measures, focusing on areas related to
 sensitive data storage, transmission, and cryptographic technologies.
@@ -15,18 +15,11 @@ to prevent unauthorised access or data breaches.
 
 Vault encrypts credentials at rest and provides mechanisms to prevent unauthorised access.
 
-<!--
-
-TLS is enabled by default when communicating with the Vault charm. See [here](https://charmhub.io/vault?channel=1.16/stable).
-
-JIMM uses Vault for storing cloud credentials, JWKS, and other secrets.
--->
-
-### JAAS - Juju Communication
+## JAAS - Juju Communication
 
 JAAS acts as an authentication gateway between users and Juju controllers.
 Juju controllers trust JAAS by setting the `login-token-refresh-url` during bootstrap.
-More information on setting up a Juju controller for JAAS can be found in our {doc}`how-to guide <../howto/add_controller>`.
+More information on setting up a Juju controller for JAAS can be found in {ref}`add-a-juju-controller`.
 
 Trust between Juju controllers and JAAS is established through asymmetric cryptography
 and [JSON Web Tokens (JWTs)](https://jwt.io/introduction).
@@ -56,27 +49,6 @@ The following Go packages are used:
 - `github.com/lestrrat-go/jwx/v2/jwa`
 - `github.com/lestrrat-go/jwx/v2/jwt`
 - `github.com/lestrrat-go/jwx/v2/jwk`
-
-<!-- TODO Incorporate into this section:
-
-JAAS ensures secure communication between controllers (management nodes) and models (namespaces)
-by means of authorisation, authentication and TLS encryption to prevent unauthorised access
-and prevent data interception or tampering.
-
-Additionally, when communicating with any controller, JAAS uses token based authorisation whilst
-additionally acting as the IdP (Identity Provider) for said tokens.
-
--->
-
-<!--Incorporate:
-
-TLS is enabled by default when communicating with controllers.
-
-When adding a Juju controller to JIMM, the self-signed certificate of the controller is given to
-JIMM.
-
-
--->
 
 ## User Sessions
 
@@ -143,79 +115,6 @@ The following Go packages are used:
 - `golang.org/x/oauth2/clientcredentials`
 - `github.com/coreos/go-oidc/v3/oidc`
 
-<!-- TODO Incorporate:
-JAAS provides an abstraction layer of access control on top of Juju. JAAS does this by backing its users
-with an IdP (Identity Provider). Various identity providers can be used for this purpose (e.g. Google or Microsoft).
-We recommend the [Canonical identity platform](https://charmhub.io/topics/canonical-identity-platform) as the preferred IdP for JAAS. The IdP will handle user
-authentication on behalf of JAAS using OAuth 2.0 and OIDC.
--->
-
-<!--TODO: Incorporate:
-
-
-JAAS uses the Canonical Identity Platform for authentication. The communication between JAAS
-and the Identity Platform can be secured via TLS.
-
-You will require the Identity Platform and the `self-signed-certificates` charm deployed.
-See [here](https://charmhub.io/topics/canonical-identity-platform/tutorials/e2e-tutorial) for deploying the identity platform.
-
-Your Identity Platform will require TLS enabled via the [self-signed certificates charm](https://charmhub.io/self-signed-certificates).
-
-Using JIMM's `receive-ca-cert integration`, you can now relate to the self-signed-certificates charm
-to enabled TLS between the identity platform and JIMM.
-
--->
-
-<!--TODO Incorporate:
-
-# JAAS Authentication
-
-As a brief refresher, authentication refers to the process of proving something to be true, in this case proving that
-the user logging in is who they say they are.
-
-This is one of the key features of JAAS. Where Juju controllers implement login via commonly understood username/password authentication,
-JAAS uses [OAuth 2.0](https://auth0.com/intro-to-iam/what-is-oauth-2) and [OIDC](https://developer.okta.com/blog/2019/10/21/illustrated-guide-to-oauth-and-oidc).
-While a full explanation of OAuth and OIDC are out of the scope of this document, you are likely already familiar with
-the benefits of these standards when you log into various services across the internet.
-
-These standards define how services can access your resources on your behalf and how services can authenticate your identity.
-When logging into a web application that employs OIDC you will commonly be asked to login via a different website or provider,
-like your email or social media provider and this information is then securely passed onto the original application.
-
-#3 Login Providers
-
-Because JAAS uses the OAuth 2.0/OIDC standard, theoretically various providers can be connected to JAAS and used as a login provider.
-However, due to the varying security practices and slight deviations from the standard, not all providers are supported with JAAS.
-
-Officially, JAAS supports [Ory Hydra](https://www.ory.sh/hydra/), a cloud native OAuth 2.0 and OIDC server. This is a key component of
-the [Canonical identity platform](https://charmhub.io/topics/canonical-identity-platform) which not only provides a standards compliant OAuth/OIDC server but also allows you to configure
-social sign-on via other OIDC compliant identity providers (e.g. Azure AD, Google, Okta, etc.).
-
-
-## Authentication Methods
-
-JAAS offers multiple OAuth 2.0 flows (a sequence of steps to login). Each of which is referred to as a **grant type**.
-
-**Authorisation Code grant**: This flow is the most common and used primarily by web applications. You will encounter this flow with JAAS when using
-the Juju dashboard. The login process will redirect your browser to JAAS' identity provider and ask you to login before redirecting you
-to the dashboard. At this point you have been authenticated and can use your resources through the graphical interface.
-
-**Device Code grant**: You will encounter this flow when using the Juju CLI with JAAS. If you are logging in for the first time or if your
-session has expired you will be prompted with URL and unique code. Navigating to the page will ask you to login and provide the code.
-During this time the CLI will continually ping the server until authentication is complete.
-
-## Sessions
-
-A brief mention on sessions is also important in the context of authentication. While JAAS authenticates a user by communicating with
-an external identity provider, this is neither performant nor would make a great user experience if a user were asked to log in after each interaction.
-
-To solve this, JAAS also provides users with their own application sessions. Depending on your authentication flow, your session with
-JAAS will last a varying amount of time until you are asked to log in again. This is a configurable option to cater for different
-organisational needs.
-
--->
-
-
 ### Authorisation Code Flow
 
 In a browser-based login, users follow the [authorisation code flow](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow).
@@ -224,18 +123,6 @@ and a session cookie is issued to the user's browser as described in below in Br
 
 To protect against [CSRF attacks](https://auth0.com/docs/secure/attack-protection/state-parameters),
 the backend issues a random nonce in the `state` parameter of the OAuth authorisation code flow.
-
-<!--
-
-For authorisation, JAAS provides this by means
-of tags and ReBAC (Relation-Based Access Control).
-
--->
-
-<!--
-JIMM uses OpenFGA for authorisation and currently, the OpenFGA charm does not support TLS. See [here](https://charmhub.io/openfga-k8s).
--->
-
 
 ### Device Code Flow
 
@@ -306,14 +193,6 @@ Specific details are below:
 TLS encryption is enforced between various components in JAAS, using Go's standard
 library (`crypto/tls` and `crypto/x509`). The minimum supported version is TLS v1.2.
 
-<!--TODO: Incorporate:
-
-## Ingress TLS
-
-Please refer {doc}`here <../manage-your-jaas-deployment/setup_ingress_with_tls>`.
-
--->
-
 ### Client - JAAS
 
 The GO Juju client enforces TLS for all connections to JAAS, including the
@@ -349,34 +228,8 @@ requires the ability to send cross-origin requests from the domain where it is h
 the domain where JAAS is hosted. More information on how to set up CORS to securely handle
 these requests will be available in a future how-to guide.
 
-<!--TODO: Incorporate:
-
-
-Cross-Origin Resource Sharing ([CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS))
-is an HTTP-header based mechanism that allows a server to indicate any origins (domain, scheme, or port)
-other than its own from which a browser should permit loading resources. CORS also relies on
-a mechanism by which browsers make a "pre-flight" request to the server hosting the cross-origin
-resource, in order to check that the server will permit the actual request. In that pre-flight,
-the browser sends headers that indicate the HTTP method and headers that will be used in the
-actual request.
-
-To set CORS on JIMM, use the configuration option `cors-allowed-origins`.
-
--->
-
 <!-- TODO(Kian): update the above paragraph after we have a deploy dashboard how-to.-->
 
 The following Go package is used to validate CORS requests:
 
 - `github.com/rs/cors`
-
-
-<!--TODO Incorporate:
-
-JIMM uses PostgreSQL as its persistent storage layer. The communication with PostgreSQL can be encrypted
-via TLS. To enable TLS for charmed PostgreSQL you can follow this [guide](https://charmhub.io/postgresql-k8s/docs/t-enable-tls?channel=14/stable).
-
-```{tip}
-As of October 2024, you need to manually restart JIMM if you enable TLS on PostgreSQL after having related the JIMM and PostgreSQL charms.
-```
--->
