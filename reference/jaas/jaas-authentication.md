@@ -1,4 +1,5 @@
-# JAAS Authentication
+(jaas-authentication)=
+# Authentication
 
 As a brief refresher, authentication refers to the process of proving something to be true, in this case proving that
 the user logging in is who they say they are.

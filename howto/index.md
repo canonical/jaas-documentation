@@ -3,49 +3,54 @@
 
 These how-to guides cover key operations and processes in JAAS.
 
-## Configuration
+<!--
+```{toctree}
+:titlesonly:
+:glob:
 
-After JAAS has been deployed, you need to configure it with your Juju operated cluster.
+*
+```
+-->
+
+## Your JAAS deployment, the bird's eye
 
 ```{toctree}
-:maxdepth: 2
+:titlesonly:
+:glob:
 
-Bootstrap permissions <bootstrap_permissions>
-Add a controller to JAAS <add_controller>
-Migrate models to JAAS <migrate_models>
-Migrate models internally <migrate_models_internal>
-Use Terraform for configuration <use_terraform>
+manage-your-jaas-deployment
 ```
 
-## Observability
+## Juju in JAAS
 
 ```{toctree}
-:maxdepth: 2
+:titlesonly:
+:glob:
 
-Integrate with the Canonical Observability Stack <integrate_with_cos>
+manage-juju-controllers
+manage-clouds
+manage-models
+manage-offers
 ```
 
-## Security
+## Authorization with JAAS
 
 ```{toctree}
-:maxdepth: 2
+:titlesonly:
+:glob:
 
-Harden JIMM deployment <security_hardening>
-Set up Ingress with TLS <setup_ingress_with_tls>
+manage-users
+manage-service-accounts
+manage-roles
+manage-groups
+manage-relations
 ```
 
-## Juju Dashboard
+## JAAS with Terraform
 
 ```{toctree}
-:maxdepth: 2
+:titlesonly:
+:glob:
 
-Set up Juju Dashboard <setup_dashboard>
-```
-
-## Access
-
-```{toctree}
-:maxdepth: 2
-
-Set up new users <setup_new_users>
+use_terraform
 ```

@@ -11,7 +11,6 @@ reference/index
 explanation/index
 ```
 
-
 JAAS is an enterprise layer on top of [Juju](https://canonical-juju.readthedocs-hosted.com/en/latest/).
 
 JAAS provides:
@@ -32,7 +31,7 @@ When you use an existing Juju on Kubernetes controller to deploy JIMM and its de
 - use ReBAC for authorisation;
 - use the Juju CLI, Juju Dashboard, and the Terraform Provider for Juju to interact with multiple Juju controllers from a single point of contact.
 
-If you want to take Juju to the enterprise level, you need JAAS.
+If you are a site reliability engineer looking to take Juju to the enterprise level, you need JAAS.
 
 ---------
 

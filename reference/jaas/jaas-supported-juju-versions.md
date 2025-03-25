@@ -1,3 +1,4 @@
+(jaas-supported-juju-versions)=
 # Supported Juju versions
 
 The following sections describe which version of the Juju CLI or controller is required for different scenarios.
@@ -10,7 +11,7 @@ Juju 3.x is required for the support of Juju secrets.
 
 ## Using JAAS
 
-In order to interact with JAAS as a user, you must use a Juju CLI with a minimum version of **3.5.4**.
+In order to interact with JAAS as a user, you must use a Juju CLI with a minimum version of **3.6.4**.
 
 Previous versions of the Juju CLI do not include the necessary functionality to authenticate with JAAS.
 

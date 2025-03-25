@@ -1,5 +1,5 @@
-JAAS Security Scope
-===================
+(jaas-security-scope)=
+# Security scope
 
 <!--   TODO (Kian):
    Much of this document's content is now covered in the security doc in reference/security and reused where possible.
@@ -25,7 +25,7 @@ We recommend the [Canonical identity platform](https://charmhub.io/topics/canoni
 authentication on behalf of JAAS using OAuth 2.0 and OIDC. For authorisation, JAAS provides this by means
 of tags and ReBAC (Relation-Based Access Control).
 
-See the following pages for more details on how JAAS provides {doc}`authentication <./authentication>` and {doc}`authorisation <./authorisation>`.
+See the following pages for more details on how JAAS provides {ref}`jaas-authentication` and {ref}`jaas-authorization`.
 
 ## Auditing and logging
 

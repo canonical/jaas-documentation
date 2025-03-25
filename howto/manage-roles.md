@@ -1,0 +1,82 @@
+(manage-roles)=
+# Manage roles
+> Who: JIMM controller admin
+>
+> See also: {ref}`role`
+
+````{dropdown} Preview an example workflow
+
+```text
+# Create a role
+jimmctl auth role add myrole
+
+# Verify that the role has been created successfully:
+jimmctl auth role list
+
+# Give the role admin access to a model:
+jimmctl auth relation add role-model-admin#assignee administrator model-bob@canonical.com/foo
+
+# Rename the role to better match its function:
+jimmctl auth role rename model-admin
+
+# Grant Alice access to the role
+jimmctl auth relation add user-alice@canonical.com assignee role-model-admin
+
+# Verify that Alice's access to the role has been granted successfully:
+jimmctl auth relation check user-alice@canonical.com administrator model-bob@canonical.com/foo
+```
+````
+
+(add-a-role)=
+## Add a role
+
+To add a new role to your JIMM controller, use the `auth role add` command followed by the name you want to assign to the role. For example:
+
+```text
+jimmctl auth role add model-admin
+```
+
+> See more: {ref}`jimmctl auth role add <summary-15>`
+
+(view-all-the-current-roles)=
+## View all the current roles
+
+To view all the current roles, run the `auth role list` command. For example:
+
+```text
+jimmctl auth role list [options]
+```
+
+> See more: {ref}`jimmctl auth role list <summary-16>`
+
+(manage-an-entitys-relation-to-a-role)=
+## Manage an entity's relation to a role
+
+See {ref}`manage-relations`.
+
+(manage-a-roles-relation-to-an-entity)=
+## Manage a role's relation to an entity
+
+See {ref}`manage-relations`.
+
+(rename-a-role)=
+## Rename a role
+
+To rename a role, run the `auth role rename` command followed by the old name and the new name. For example:
+
+```text
+jimmctl auth role rename model-admin model-writer
+```
+
+> See more: {ref}`jimmctl auth role rename <summary-18>`
+
+(remove-a-role)=
+## Remove a role
+
+To remove a role from a JIMM controller, run the `auth role remove` command followed by the name of the role. For example:
+
+```text
+jimmctl auth role remove model-admin
+```
+
+> See more: {ref}`jimmctl auth role remove <summary-17>`

@@ -1,6 +1,5 @@
-# JAAS: Understanding Audit Logs
-
-## Introduction
+(jimmctl-audit-events-details)=
+# `jimmctl audit-events` details
 
 JIMM provides audit logging functionality, tracking all requests/responses into the system.
 This gives administrators of JIMM the ability to audit changes at a very granular level.
@@ -16,7 +15,7 @@ Filtering audit logs is also possible along a variety of fields including but no
 user executing the request, model name and command.
 
 Finally, access to audit logs is, by default, only afforded to JIMM superusers i.e. administrators of JIMM.
-Read access to audit logs can be granted to other users via `jimmctl`, see {doc}`/tutorial/group_management`
+Read access to audit logs can be granted to other users via `jimmctl`, see {ref}`manage-groups`.
 
 ## Filter Logs
 

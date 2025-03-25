@@ -1,4 +1,5 @@
-# JAAS security overview
+(jaas-security-overview)=
+# Security overview
 
 This document provides an overview of JAAS security measures, focusing on areas related to
 sensitive data storage, transmission, and cryptographic technologies.
@@ -19,7 +20,7 @@ Vault encrypts credentials at rest and provides mechanisms to prevent unauthoris
 
 JAAS acts as an authentication gateway between users and Juju controllers.
 Juju controllers trust JAAS by setting the `login-token-refresh-url` during bootstrap.
-More information on setting up a Juju controller for JAAS can be found in our {doc}`how-to guide <../howto/add_controller>`.
+More information on setting up a Juju controller for JAAS can be found in {ref}`add-a-juju-controller`.
 
 Trust between Juju controllers and JAAS is established through asymmetric cryptography
 and [JSON Web Tokens (JWTs)](https://jwt.io/introduction).

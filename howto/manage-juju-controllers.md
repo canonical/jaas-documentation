@@ -1,6 +1,21 @@
-# JAAS: Add a controller
+(manage-juju-controllers)=
+# Manage Juju controllers
+> Who: JIMM controller admin
+>
+> See also: {ref}`controller`
 
-## Introduction
+<!--
+ADD:
+jimmctl controller-info (part of the process for adding a Juju controller to JIMM), add-controller
+jimmctl controllers
+add-cloud-to-controller
+jimmctl remove-cloud-from-controller
+jimmctl remove-controller
+jimmctl set-controller-deprecated
+-->
+
+(add-a-juju-controller)=
+## Add a Juju controller
 
 JIMM gives a centralised view of all models in the system. However the work of managing
 the models is delegated to a set of Juju controllers deployed in various clouds
@@ -13,16 +28,16 @@ such that it will work correctly in a JAAS system.
 In this how-to we will show how to add Juju controllers deployed in both MicroK8s and LXD to
 a JIMM controller.
 
-## Prerequisites
+### Prerequisites
 
 For this tutorial you will need the following:
 
 - Basic knowledge of Juju
-- A JIMM controller deployed in MicroK8s, see {doc}`the tutorial <../tutorial/deploy_jaas_microk8s>`.
-- Administrator permission on the JIMM controller, see {doc}`bootstrapping permissions <./bootstrap_permissions>`.
+- A JIMM controller deployed in MicroK8s, see {doc}`the tutorial <../tutorial/index>`.
+<!--- Administrator permission on the JIMM controller, see {ref}`add-a-juju-controller`.-->
 
 
-## Prelude
+### Prelude
 
 In order for a Juju controller to trust a JIMM controller, the `login-token-refresh-url` config option must
 be specified when bootstrapping the Juju controller.
@@ -30,7 +45,7 @@ be specified when bootstrapping the Juju controller.
 This config option is set to a specific URL path that serves JIMM's public key, which is used to verify signed
 requests when they reach the Juju controller.
 
-## MicroK8s Controller
+### MicroK8s Controller
 
 The following section provides guidance on how to connect a controller bootstrapped on MicroK8s to your JIMM running in MicroK8s.
 
@@ -65,7 +80,7 @@ hostname used in TLS, a useful way of handling TLS issues during local developme
 in a production environment.
 
 
-## LXD Controller
+### LXD Controller
 
 The following section provides guidance on how to connect a controller bootstrapped on LXD to your JIMM running in MicroK8s.
 
@@ -102,3 +117,9 @@ juju switch jimm
 jimmctl controller-info workload-lxd ~/snap/jimmctl/common/lxd-controller-info.yaml--local --tls-hostname juju-apiserver
 jimmctl add-controller ~/snap/jimmctl/common/lxd-controller-info.yaml
 ```
+
+(manage-an-entitys-relation-to-a-juju-controller)=
+## Manage an entity's relation to a Juju controller
+
+See {ref}`manage-relations`.
+
