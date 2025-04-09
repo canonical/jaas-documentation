@@ -17,7 +17,7 @@ Set up an isolated test environment with Multipass and the `charm-dev` blueprint
 
 On your machine, install Multipass and use it to set up an Ubuntu virtual machine (VM) called `my-juju-vm` from the `charm-dev` blueprint.
 
-> See more: [Set things up (automatically)](https://canonical-juju.readthedocs-hosted.com/en/latest/user/howto/manage-your-deployment/manage-your-deployment-environment/#manage-your-deployment-environment)
+> See more: [Set things up (automatically)](https://documentation.ubuntu.com/juju/latest/howto/manage-your-deployment/manage-your-deployment-environment/index.html#manage-your-deployment-environment)
 
 ```{note}
 This document also contains a manual path, using which you can set things up without the Multipass VM or the `charm-dev` blueprint. However, please note that the manual path may yield slightly different results that may impact your experience of this tutorial.
@@ -35,7 +35,10 @@ Make sure MicroK8s is correctly set up:
 
 ```text
 # enable necessary add-ons
-sudo microk8s dns ingress host-access
+sudo microk8s enable dns host-access
+# reconfigure metallb
+sudo microk8s disable metallb
+sudo microk8s enable metallb:10.64.140.43-10.64.140.49
 ```
 
 Then install some handy tools to query and extract info from json and yaml:
@@ -57,7 +60,7 @@ Now we will create a Juju model for the identity platform and deploy the bundle.
 
 ```text
 juju add-model iam
-juju deploy identity-platform --trust --channel 0.2/edge
+juju deploy identity-platform --trust --channel latest/edge
 ```
 
 Watch the deployment by running:
@@ -79,47 +82,36 @@ juju offer self-signed-certificates:send-ca-cert
 
 Running `juju status` should now two offers that we will use from a different model in the next step.
 
-## Setup External IdP
-
-We recommend using the following [how-to](https://charmhub.io/topics/canonical-identity-platform/how-to/integrate-external-identity-provider)
-and choosing your preferred identity provider.
-
-```{note}
-You can temporarily skip this step and return to it later, JIMM can still run without integrating the identity bundle to an external identity provider but login to JIMM will not work.
-```
-
-Setting up an IdP to point to your local environment can be tricky depending on the provider used. Below are some tips to make this work.
-
-When setting up certain providers, e.g. Google, security restrictions limit what redirect URLs can be used. Some restrictions include,
-
-- The redirect URL must be `https`.
-- The redirect URL must be a top level domain `.com`.
-- The redirect URL cannot be an IP address.
-
-The redirect URL is the URL that your browser is returned to after you have signed in at the identity provider. When using Canonical's
-identity bundle, the redirect URL after login will be something like `https://<kratos-public-url>/self-service/methods/oidc/callback/<provider-id>`.
-as described in the above how-to. Although the URL is `https`, it is an IP address.
-This address needs to be registered in your identity provider as an approved redirect URI/URL.
-
-If your preferred identity provider does not accept an IP address, we recommend using a tool like `https://nip.io/`,
-a DNS resolver service that can map any IP address to a hostname.
-
-| This service can map hostnames of the form `<anything>[.-]<IP Address>.nip.io` to return simply `<IP Address>`.
-| E.g. `magic.127.0.0.1.nip.io` resolves to `127.0.0.1`. This service is very useful when working with an IdP locally for testing.
-
-```{note}
-The same effect can be obtained by editing your `/etc/hosts` file but this would require changes on your host system and within various containers.
-```
-
-To utilise `nip.io`, get the address of your `traefik-public` instance and set the `external_hostname` config option as below,
-
+### Create an user.
 ```text
-TRAEFIK_PUBLIC=$(juju status traefik-public --format yaml | yq .applications.traefik-public.address)
-juju config traefik-public external_hostname="iam.$TRAEFIK_PUBLIC.nip.io"
+# disable MFA to avoid unnecessary steps
+juju config kratos enforce_mfa=False
+# create the user and get the identity-id
+juju run kratos/0 create-admin-account email=test@example.com password=test username=admin
+# reset the password to make it active
+juju add-secret password-secret password=abc
+juju grant-secret password-secret kratos
+juju run kratos/0 reset-password identity-id=<identity-id> password-secret-id=<secret:id>
 ```
 
-This has now changed the URL that the identity provider shares to related applications like JIMM. JIMM and your browser will still be able
-to resolve this hostname and the IP will only be reachable from your local system.
+### Expose the identity bundle to your host machine. (only necessary if running in Multipass)
+The reason you need to expose the identity bundle to your host machine is that at the end of this tutorial
+you will need to login via a web browser.
+
+Locate the IP of your Multipass instance by running `multipass list` on your host machine, if you have multiple IPs pick the first one.
+```text
+juju config traefik-public external_hostname=<multipass-ip>
+sudo microk8s.kubectl port-forward traefik-public-0 443:443 --namespace=iam --address=<multipass_ip> &
+```
+
+Run the following on your host machine to test that you've successfully exposed the identity bundle:
+```text
+curl -k https://<multipass-ip>/iam-hydra/health/ready
+```
+The response should be:
+```
+{"status":"ok"}
+```
 
 ## Deploy JIMM
 
@@ -145,8 +137,8 @@ juju deploy juju-jimm-k8s --channel=3/edge jimm
 juju deploy openfga-k8s --channel=2.0/stable openfga
 juju deploy postgresql-k8s --channel=14/stable postgresql
 juju deploy vault-k8s --channel=1.15/beta vault
-juju deploy nginx-ingress-integrator --channel=latest/stable --trust ingress
-juju relate jimm:nginx-route ingress
+juju deploy traefik-k8s --channel=latest/stable --trust ingress
+juju relate jimm:ingress ingress
 juju relate jimm:openfga openfga
 juju relate jimm:database postgresql
 juju relate jimm:vault vault
@@ -165,7 +157,7 @@ We are doing this step afterwards to avoid issues that occur when performing the
 
 ```text
 juju deploy self-signed-certificates jimm-cert
-juju relate ingress jimm-cert
+juju relate ingress:certificates jimm-cert:certificates
 ```
 
 Now move onto the next step to initialise Vault.
@@ -266,11 +258,25 @@ Run the following commands:
 # Changes to the UUID value after deployment will likely result in broken permissions.
 # Use a randomly generated UUID.
 juju config jimm uuid=3f4d142b-732e-4e99-80e7-5899b7e67e59
-# The address to reach JIMM, this will configure ingress and is also used for OAuth flows/redirects.
-juju config jimm dns-name=test-jimm.localhost
+```
+
+```text
+sudo snap install go
 # A private and public key for macaroon based authentication with Juju controllers.
+go run github.com/go-macaroon-bakery/macaroon-bakery/cmd/bakery-keygen/v3@latest
+# extract the public and private keys from the response
 juju config jimm public-key="<public-key>"
 juju config jimm private-key="<private-key>"
+```
+
+Now you need to amend your `/etc/hosts` to create a DNS record for your ingress.
+To do so you need to locate the IP MetalLB assigned to your ingress by running `juju status` and locating the IP 
+in the description of the `ingress` application ("Serving at <IP>").
+
+```
+echo "<ip> test-jimm.local" | sudo tee -a /etc/hosts
+# The address to reach JIMM, this will configure ingress and is also used for OAuth flows/redirects.
+juju config jimm dns-name=test-jimm.local
 ```
 
 Optionally, if you have deployed Juju Dashboard, you can configure JIMM to enable browser flow for authentication:
@@ -286,23 +292,6 @@ However, in absence of a Juju Dashboard, you can still enable OAuth browser auth
 juju config jimm juju-dashboard-location="http://test-jimm.localhost/auth/whoami"
 ```
 
-Note that the public and private key pairs must be generated by the [go macaroon bakery repository](https://github.com/go-macaroon-bakery/macaroon-bakery).
-To do this briefly run the following command, ensuring you have the `go` tool installed:
-
-```text
-go run github.com/go-macaroon-bakery/macaroon-bakery/cmd/bakery-keygen/v3@latest
-```
-
-This should return a private and public key pair as below which can be used to configure JIMM.
-These values are only used internally between JIMM and Juju controllers.
-
-```text
-{
-    "public": "<public-key>",
-    "private": "<private-key>"
-}
-```
-
 At this point you can run `juju status` and you should observe JIMM is active.
 Navigate to `http://test-jimm.localhost/debug/info` to verify your JIMM deployment.
 
@@ -310,8 +299,8 @@ Finally we will obtain the ca-certificate generated to ensure that we can connec
 This is necessary for the Juju CLI to work properly
 
 ```text
-juju run jimm-cert/0 get-ca-certificate --quiet | yq .ca-certificate | sudo tee /usrlocal/share/ca-certificates/jimm-test.crt
-sudo update-ca-certificates
+juju run jimm-cert/0 get-ca-certificate --quiet | yq .ca-certificate | sudo tee /usr/local/share/ca-certificates/jimm-test.crt
+sudo update-ca-certificates --fresh
 ```
 
 Verify that you can securely connect to JIMM with the following command:
@@ -325,7 +314,15 @@ You should be presented with a message to login.
 
 ```text
 juju login test-jimm.localhost:443 -c jimm-k8s
-# Please visit https://iam.10.64.140.46.nip.io/iam-hydra/oauth2/device/verify and entercode <code> to log in.
+# Please visit https://<multipass-ip>/iam-hydra/oauth2/device/verify and entercode <code> to log in.
+```
+Visit the link from your browser, fill the credentials you've created before and you should see.
+```text
+Welcome, test@example.com. You are now logged into "jimm-k8s".
+
+There are no models available. You can add models with
+"juju add-model", or you can ask an administrator or owner
+of a model to grant access to that model with "juju grant".
 ```
 
 ## Using Your JIMM Deployment

@@ -28,6 +28,8 @@ hostnames
 IAM
 installable
 Integrations
+IP
+IPs
 JSON
 Juju
 Kubeflow
@@ -38,6 +40,7 @@ LTS
 Makefile
 Matrix
 Mattermost
+MetalLB
 MyST
 namespace
 namespaces
