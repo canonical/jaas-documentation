@@ -11,18 +11,6 @@
 *
 ```
 
-## JAAS at a glance
-
-- {ref}`jaas`
-    - {ref}`jaas-architecture`
-    - {ref}`jaas-authentication`
-    - {ref}`jaas-authorization`
-    - {ref}`jaas-rebac-admin-backend`
-    - {ref}`jaas-security-scope`
-    - {ref}`jaas-security-overview`
-    - {ref}`jaas-supported-juju-versions`
-
-
 ## JAAS Entities
 
 Items marked with an asterisk are Juju entities enhanced in JAAS. <br>
@@ -44,3 +32,8 @@ Unmarked items are JAAS-specific.
 - {doc}`jimmctl <./jimmctl>`
 - {ref}`jimmctl-audit-events-details`
 
+
+## JAAS as a whole
+
+- {ref}`jaas`
+    - {ref}`jaas-supported-juju-versions`
