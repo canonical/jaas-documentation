@@ -1,17 +1,15 @@
 (jaas-plugin)=
-# `jaas` Plugin
+# `jaas` plugin
 
-The JAAS ecosystem introduces the JIMM controller. A special controller that sits in front of your Juju controllers
-and acts as an authorisation gateway and aggregator.
+The `jaas` plugin is a CLI tool that acts as a plugin for the `juju` CLI and
+provides extra functionality in a JAAS system.
 
-Interacting with the JIMM controller is done in the same fashion as Juju controllers, i.e. using the Juju CLI.
-JIMM also offers extra functionality, exposed by the `jaas` plugin.
 
 This document explains how to install the `jaas` plugin and how it works.
 
 ## Installation
 
-The `jaas` plugin is distributed as [a Snap](https://snapcraft.io/jaas).
+The `jaas` plugin is distributed as a [Snap](https://snapcraft.io/jaas).
 
 ```text
 sudo snap install jaas --channel=3/stable
@@ -19,9 +17,8 @@ sudo snap install jaas --channel=3/stable
 
 ## How it works
 
-The `jaas` CLI tool acts as a plugin for the Juju CLI.
-When you install both the Juju and JAAS snaps, they automatically connect via Snap's
-[content-interface](https://snapcraft.io/docs/content-interface) enabling new commands on the Juju CLI.
+When you install both the Juju and JAAS snaps, they automatically connect via snap's
+[content-interface](https://snapcraft.io/docs/content-interface) enabling new commands on the `juju` CLI.
 
 To view a list of all the newly available commands run `juju jaas -h`.
 

@@ -19,7 +19,7 @@ JAAS provides:
 
 - JIMM-specific extensions to existing Juju machinery, including
 
-  * the {doc}`jaas plugin <./reference/jaas>` which enhances the [Juju CLI](https://canonical-juju.readthedocs-hosted.com/en/latest/user/reference/juju-cli/),
+  * the {doc}`jaas plugin <./reference/jaas>` which enhances the [`juju` CLI](https://canonical-juju.readthedocs-hosted.com/en/latest/user/reference/juju-cli/),
 
   * the [Juju dashboard](https://canonical-juju.readthedocs-hosted.com/en/latest/user/reference/juju-dashboard/) (and its [backing charm](https://charmhub.io/juju-dashboard), and
 

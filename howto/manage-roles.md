@@ -35,24 +35,24 @@ juju check-permission user-alice@canonical.com administrator model-bob@canonical
 (add-a-role)=
 ## Add a role
 
-To add a new role to your JIMM controller, use the `auth role add` command followed by the name you want to assign to the role. For example:
+To add a new role to your JIMM controller, use the `add-role` command followed by the name you want to assign to the role. For example:
 
 ```text
 juju add-role model-admin
 ```
 
-> See more: {ref}`juju add-role <summary-15>`
+> See more: {doc}`juju add-role <../reference/jaas-plugin>`
 
 (view-all-the-current-roles)=
 ## View all the current roles
 
-To view all the current roles, run the `auth role list` command. For example:
+To view all the current roles, run the `list-roles` command. For example:
 
 ```text
 juju list-roles [options]
 ```
 
-> See more: {ref}`juju list-roles <summary-16>`
+> See more: {doc}`juju list-roles <../reference/jaas-plugin>`
 
 (manage-an-entitys-relation-to-a-role)=
 ## Manage an entity's relation to a role
@@ -67,21 +67,21 @@ See {ref}`manage-relations`.
 (rename-a-role)=
 ## Rename a role
 
-To rename a role, run the `auth role rename` command followed by the old name and the new name. For example:
+To rename a role, run the `rename-role` command followed by the old name and the new name. For example:
 
 ```text
 juju rename-role model-admin model-writer
 ```
 
-> See more: {ref}`juju rename-role <summary-18>`
+> See more: {doc}`juju rename-role <../reference/jaas-plugin>`
 
 (remove-a-role)=
 ## Remove a role
 
-To remove a role from a JIMM controller, run the `auth role remove` command followed by the name of the role. For example:
+To remove a role from a JIMM controller, run the `remove-role` command followed by the name of the role. For example:
 
 ```text
 juju remove-role model-admin
 ```
 
-> See more: {ref}`juju remove-role <summary-17>`
+> See more: {doc}`juju remove-role <../reference/jaas-plugin>`

@@ -39,24 +39,24 @@ juju add-permission group-A#member member group-B
 (add-a-group)=
 ## Add a group
 
-To add a new group to your JIMM controller, use the `auth group add` command followed by the name you want to assign to the group. For example:
+To add a new group to your JIMM controller, use the `add-group` command followed by the name you want to assign to the group. For example:
 
 ```text
 juju add-group A
 ```
 
-> See more: {ref}`juju add-group <summary-5>`
+> See more: {doc}`juju add-group <../reference/jaas-plugin>`
 
 (view-all-the-current-groups)=
 ## View all the current groups
 
-To view all the current groups, run the `auth group list` command. For example:
+To view all the current groups, run the `list-groups` command. For example:
 
 ```text
 juju list-groups [options]
 ```
 
-> See more: {ref}`juju list-groups <summary-6>`
+> See more: {doc}`juju list-groups <../reference/jaas-plugin>`
 
 (manage-an-entitys-relation-to-a-group)=
 ## Manage an entity's relation to a group
@@ -71,21 +71,21 @@ See {ref}`manage-relations`.
 (rename-a-group)=
 ## Rename a group
 
-To rename a group, run the `auth group rename` command followed by the old name and the new name. For example:
+To rename a group, run the `rename-group` command followed by the old name and the new name. For example:
 
 ```text
 juju rename-group TeamA TeamB
 ```
 
-> See more: {ref}`juju rename-group <summary-8>`
+> See more: {doc}`juju rename-group <../reference/jaas-plugin>`
 
 (remove-a-group)=
 ## Remove a group
 
-To remove a group from a JIMM controller, run the `auth group remove` command followed by the name of the group. For example:
+To remove a group from a JIMM controller, run the `remove-group` command followed by the name of the group. For example:
 
 ```text
 juju remove-group TeamB
 ```
 
-> See more: {ref}`juju remove-group <summary-7>`
+> See more: {doc}`juju remove-group <../reference/jaas-plugin>`
