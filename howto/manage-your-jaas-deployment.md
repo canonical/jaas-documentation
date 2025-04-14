@@ -148,25 +148,25 @@ juju config jimm controller-admins="username@domain.com"
 
 See also: [Charmhub | juju-jimm-k8s > Configurations > controller-admin](https://charmhub.io/juju-jimm-k8s/configurations#controller-admins)
 
-Now you can verify that you have admin access to JIMM using `jimmctl`.
+Now you can verify that you have admin access to JIMM.
 
-If you do not have `jimmctl` installed, you can do so with the following command:
+Ensure you have the `jaas` plugin installed:
 
 ```text
-sudo snap install jimmctl --channel=3/stable
+sudo snap install jaas --channel=3/stable
 ```
 
 The following commands are particularly useful for interacting with controllers.
 
 ```text
-jimmctl controllers
-jimmctl audit-events
+juju controllers --managed
+juju list-audit-events
 ```
 
 In a fresh setup, the first should return an empty list, showing that no controllers have been added to JIMM.
 
 The second command returns a list of audited events that JIMM has recorded. More information on JIMM's audit log feature
-is available at the following {ref}`jimmctl-audit-events-details`.
+is available at the following {ref}`audit-logs`.
 
 ## Integrate JAAS with the Canonical Observability Stack
 

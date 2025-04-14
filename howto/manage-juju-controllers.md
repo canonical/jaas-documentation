@@ -6,12 +6,12 @@
 
 <!--
 ADD:
-jimmctl controller-info (part of the process for adding a Juju controller to JIMM), add-controller
-jimmctl controllers
+juju register-controller
+juju controllers --managed
 add-cloud-to-controller
-jimmctl remove-cloud-from-controller
-jimmctl remove-controller
-jimmctl set-controller-deprecated
+juju remove-cloud --target-controller
+juju remove-controller
+juju set-controller-deprecated
 -->
 
 (add-a-juju-controller)=
@@ -63,16 +63,14 @@ Once this process is complete we will switch back to JIMM and add the controller
 
 ```text
 juju switch jimm
-jimmctl controller-info workload-microk8s ~/snap/jimmctl/common/k8s-controller-infoyaml --local --tls-hostname juju-apiserver
-jimmctl add-controller ~/snap/jimmctl/common/k8s-controller-info.yaml
+juju register-controller workload-microk8s --local --tls-hostname juju-apiserver
 ```
 
-The `controller-info` command creates a YAML file with information about the controller and with the add-controller command we
-pass this information to JIMM, which then connects to the new controller.
+The `register-controller` command sends information about the controller to JIMM, which then connects to the new controller.
 
 ```{note}
 A Juju server's default certificate contains a [Subject Alternative Name (SAN)](
-https://en.wikipedia.org/wiki/Public_key_certificate#Subject_Alternative_Name_certificate) for the name `juju-apiserver`. This is why we specify the `--tls-hostname juju-apiserver` flag when running the `jimmctl controller-info` command.
+https://en.wikipedia.org/wiki/Public_key_certificate#Subject_Alternative_Name_certificate) for the name `juju-apiserver`. This is why we specify the `--tls-hostname juju-apiserver` flag.
 ```
 
 The use of the `--local` flag avoids the need to provide a public DNS address and `--tls-hostname` provides the expected
@@ -114,8 +112,7 @@ Connect our new controller to JIMM.
 
 ```text
 juju switch jimm
-jimmctl controller-info workload-lxd ~/snap/jimmctl/common/lxd-controller-info.yaml--local --tls-hostname juju-apiserver
-jimmctl add-controller ~/snap/jimmctl/common/lxd-controller-info.yaml
+juju register-controller workload-lxd --local --tls-hostname juju-apiserver
 ```
 
 (manage-an-entitys-relation-to-a-juju-controller)=

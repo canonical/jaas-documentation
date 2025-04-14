@@ -19,7 +19,7 @@
 
 ## JAAS tooling
 
-- {ref}`juju-vs-jaas-vs-jimmctl`
+- {ref}`JAAS plugin <jaas-plugin>`
 
 <!--
 An important precursor to understanding JAAS, is Juju, the open source orchestration engine for software operators.

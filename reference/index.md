@@ -29,8 +29,8 @@ Unmarked items are JAAS-specific.
 
 ## JAAS Tools
 
-- {doc}`jimmctl <./jimmctl>`
-- {ref}`jimmctl-audit-events-details`
+- {doc}`jaas plugin <./jaas-plugin>`
+- {ref}`audit-logs`
 
 
 ## JAAS as a whole

@@ -1,5 +1,5 @@
-(jimmctl-audit-events-details)=
-# `jimmctl audit-events` details
+(audit-logs)=
+# Audit logs
 
 JIMM provides audit logging functionality, tracking all requests/responses into the system.
 This gives administrators of JIMM the ability to audit changes at a very granular level.
@@ -15,21 +15,21 @@ Filtering audit logs is also possible along a variety of fields including but no
 user executing the request, model name and command.
 
 Finally, access to audit logs is, by default, only afforded to JIMM superusers i.e. administrators of JIMM.
-Read access to audit logs can be granted to other users via `jimmctl`, see {ref}`manage-groups`.
+Read access to audit logs can be granted to other users, see {ref}`manage-groups`.
 
 ## Filter Logs
 
-Querying for audit logs is most readily done via `jimmctl`.
+Querying for audit logs is most readily done via the `jaas` plugin.
 
 ### Basics
 
 To list all available filtering options:
 
-    jimmctl audit-events --help
+    juju audit-events --help
 
 To return a list of audit logs:
 
-    jimmctl audit-events
+    juju audit-events
 
 The results can be filtered and paginated as described below.
 
@@ -118,11 +118,11 @@ Paging through the result set is also possible with the `--offset` flag.
 
 For example:
 
-    jimmctl audit-events --offset 50
+    juju audit-events --offset 50
 
 To change the page size to 100 and get the third page:
 
-    jimmctl audit-events --offset <(page_number-1)*100> --limit 100
+    juju audit-events --offset <(page_number-1)*100> --limit 100
 
 ### Time filters
 
@@ -141,10 +141,10 @@ one can do the following `2023-12-19T16:39:57-08:00`
 
 Examples:
 
-    jimmctl audit-events --before 2023-10-12T07:20:50.52Z
-    jimmctl audit-events --before 2023-10-12T07:20:50.52-08:00
+    juju audit-events --before 2023-10-12T07:20:50.52Z
+    juju audit-events --before 2023-10-12T07:20:50.52-08:00
     Logs within 1 day
-    jimmctl audit-events --before 2023-10-12T07:20:50.52Z --after 2023-10-11T07:20:50.52Z
+    juju audit-events --before 2023-10-12T07:20:50.52Z --after 2023-10-11T07:20:50.52Z
 
 ###  Method filter
 
@@ -153,7 +153,7 @@ Filter logs by method call.
 `--method`
     display events for a specific method call
 
-Each `juju`/`jimmctl` call invokes a specific method. This can be thought of as an HTTP handler.
+Each `juju` call invokes a specific method. This can be thought of as an HTTP handler.
 Although a full list of all methods is not currently available, it is possible to filter audit events based
 on the method that was called. Important methods include `Login`, `Deploy`, `DestroyApplication`, `DestroyModels`.
 
@@ -161,7 +161,7 @@ Note that method names are case sensitive.
 
 Example:
 
-    jimmctl audit-events --method Login
+    juju audit-events --method Login
 
 ### Model filter
 
@@ -182,7 +182,7 @@ audit logs using other filters and identify an audit log against the desired mod
 
 Example:
 
-    jimmctl audit-events --model my-controller/model-name
+    juju audit-events --model my-controller/model-name
 
 ###  User filter
 
@@ -200,7 +200,7 @@ Note that the user tag will normally be of the form user-<username>@external
 
 Example:
 
-    jimmctl audit-events --user-tag user-alice@external
+    juju audit-events --user-tag user-alice@external
 
 ### Order
 
@@ -234,10 +234,10 @@ period will be kept, at least until the next cleanup.
 
 It is also possible to manually purge audit-logs.
 
-This can be done with the `jimmctl` CLI and again only JIMM admins have rights to purge audit logs. In this case,
+This can also be done via the CLI and again only JIMM admins have rights to purge audit logs. In this case,
 other users cannot be granted this permission.
 
-    jimmctl purge-audit-logs <date>
+    juju purge-audit-logs <date>
 
 This command will purge audit logs from the database before the given date.
 Note that the date format is flexible, accepting both a date or date and time.
@@ -246,6 +246,6 @@ Note that omitting the date will assume zero for the time, i.e. the start of tha
 
 Examples:
 
-    jimmctl purge-audit-logs 2021-02-03
-    jimmctl purge-audit-logs 2021-02-03T15:04:05Z
+    juju purge-audit-logs 2021-02-03
+    juju purge-audit-logs 2021-02-03T15:04:05Z
 

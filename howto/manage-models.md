@@ -52,7 +52,7 @@ At this point we should see the model has been migrated.
 
 ### 3. Import the model into JIMM
 
-Finally we will import the model into JIMM using `jimmctl`.
+Finally we will import the model into JIMM.
 
 First we must check that we have a cloud-credential for the cloud where the desired model is running.
 This is simply a pre-check performed when importing a model to ensure that the user has credentials for the cloud.
@@ -73,8 +73,8 @@ MODEL_NAME="my-model"
 juju switch workload-lxd:$MODEL_NAME
 MODEL_UUID=$(juju show-model $MODEL_NAME --format yaml | yq .$MODEL_NAME.model-uuid)
 juju switch jimm-k8s
-# Replace](user-email> below with your email address
-jimmctl import-model workload-lxd $MODEL_UUID --owner](username>
+# Replace <user-email> below with your email address
+juju import-model workload-lxd $MODEL_UUID --owner <username>
 juju models
 # The new model should now be visible
 ```
@@ -87,9 +87,6 @@ At this point you can grant other users access to the model. See Juju documentat
 
 Migrating the model back to the original controller is also possible using the same migrate command as used in step 2.
 Switch to the `workload-lxd` controller where the model now lives and run the same steps to migrate back to `my-controller`.
-
-> See more: {ref}`jimmctl import-model <summary-25>`
-
 
 (migrate-a-model-within-jimm)=
 ## Migrate a model within JIMM
@@ -118,12 +115,11 @@ is JIMM's UUID and name, hiding the underlying controller information.
 The following command will show you all the controllers connected to JIMM.
 
 ```text
-jimmctl list-controllers
+juju list-controllers --managed
 ```
 
 Currently to identify where the model is hosted, you must have access to the controllers connected to JIMM and switch to
-those controllers in turn, and run `juju models` until you identify the correct controller. This may be improved in the future
-for users of `jimmctl` to identify the underlying controller for a model.
+those controllers in turn, and run `juju models` until you identify the correct controller.
 
 Identify the controller you want to migrate to, only the name is necessary.
 
@@ -134,7 +130,7 @@ The following command will migrate a model named `my-model` to the desired contr
 ```text
 MODEL_NAME=my-model
 MODEL_UUID=$(juju show-model $MODEL_NAME --format yaml | yq .$MODEL_NAME.model-uuid)
-jimmctl migrate my-controller $MODEL_UUID
+juju jaas migrate my-controller $MODEL_UUID
 ```
 
 This will start the model migration process. You can now monitor the progress of the migration with `juju status` and `juju debug-log`.
@@ -142,7 +138,7 @@ This will start the model migration process. You can now monitor the progress of
 Once the model has been successfully migrated, run the following command to update JIMM with the new controller information for the model.
 
 ```text
-jimmctl update-migrated-model my-controller $MODEL_UUID
+juju update-migrated-model my-controller $MODEL_UUID
 ```
 
 This will update JIMM's internal state to locate the model on the specified controller.

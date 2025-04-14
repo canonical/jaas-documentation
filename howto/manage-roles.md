@@ -4,26 +4,31 @@
 >
 > See also: {ref}`role`
 
+```{note}
+This guide assumes you have the `jaas` plugin installed.
+See {doc}`here <../explanation/jaas-plugin>` for more information.
+```
+
 ````{dropdown} Preview an example workflow
 
 ```text
 # Create a role
-jimmctl auth role add myrole
+juju add-role myrole
 
 # Verify that the role has been created successfully:
-jimmctl auth role list
+juju list-roles
 
 # Give the role admin access to a model:
-jimmctl auth relation add role-model-admin#assignee administrator model-bob@canonical.com/foo
+juju add-permission role-model-admin#assignee administrator model-bob@canonical.com/foo
 
 # Rename the role to better match its function:
-jimmctl auth role rename model-admin
+juju rename-role model-admin
 
 # Grant Alice access to the role
-jimmctl auth relation add user-alice@canonical.com assignee role-model-admin
+juju add-permission user-alice@canonical.com assignee role-model-admin
 
 # Verify that Alice's access to the role has been granted successfully:
-jimmctl auth relation check user-alice@canonical.com administrator model-bob@canonical.com/foo
+juju check-permission user-alice@canonical.com administrator model-bob@canonical.com/foo
 ```
 ````
 
@@ -33,10 +38,10 @@ jimmctl auth relation check user-alice@canonical.com administrator model-bob@can
 To add a new role to your JIMM controller, use the `auth role add` command followed by the name you want to assign to the role. For example:
 
 ```text
-jimmctl auth role add model-admin
+juju add-role model-admin
 ```
 
-> See more: {ref}`jimmctl auth role add <summary-15>`
+> See more: {ref}`juju add-role <summary-15>`
 
 (view-all-the-current-roles)=
 ## View all the current roles
@@ -44,10 +49,10 @@ jimmctl auth role add model-admin
 To view all the current roles, run the `auth role list` command. For example:
 
 ```text
-jimmctl auth role list [options]
+juju list-roles [options]
 ```
 
-> See more: {ref}`jimmctl auth role list <summary-16>`
+> See more: {ref}`juju list-roles <summary-16>`
 
 (manage-an-entitys-relation-to-a-role)=
 ## Manage an entity's relation to a role
@@ -65,10 +70,10 @@ See {ref}`manage-relations`.
 To rename a role, run the `auth role rename` command followed by the old name and the new name. For example:
 
 ```text
-jimmctl auth role rename model-admin model-writer
+juju rename-role model-admin model-writer
 ```
 
-> See more: {ref}`jimmctl auth role rename <summary-18>`
+> See more: {ref}`juju rename-role <summary-18>`
 
 (remove-a-role)=
 ## Remove a role
@@ -76,7 +81,7 @@ jimmctl auth role rename model-admin model-writer
 To remove a role from a JIMM controller, run the `auth role remove` command followed by the name of the role. For example:
 
 ```text
-jimmctl auth role remove model-admin
+juju remove-role model-admin
 ```
 
-> See more: {ref}`jimmctl auth role remove <summary-17>`
+> See more: {ref}`juju remove-role <summary-17>`

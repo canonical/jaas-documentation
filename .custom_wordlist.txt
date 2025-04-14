@@ -16,7 +16,9 @@ config
 CORS
 CPUs
 CSRF
+dialing
 Diátaxis
+Deregisters
 Dev
 dev
 DNS
@@ -119,6 +121,8 @@ Skype
 Snapcraft
 SSH
 SSL
+stdin
+subcommand
 subdirectories
 subfolders
 subtree
@@ -130,6 +134,7 @@ Traefik
 Ubuntu
 UbuntuSSO
 UI
+unregister
 URI
 URIs
 urls
