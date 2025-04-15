@@ -17,7 +17,7 @@ Set up an isolated test environment with Multipass and the `charm-dev` blueprint
 
 On your machine, install Multipass and use it to set up an Ubuntu virtual machine (VM) called `my-juju-vm` from the `charm-dev` blueprint.
 
-> See more: [Set things up (automatically)](https://documentation.ubuntu.com/juju/latest/howto/manage-your-deployment/manage-your-deployment-environment/index.html#manage-your-deployment-environment)
+> See more: [Set things up (automatically)](https://documentation.ubuntu.com/juju/3.6/howto/manage-your-deployment/manage-your-deployment-environment/index.html#manage-your-deployment-environment)
 
 ```{note}
 This document also contains a manual path, using which you can set things up without the Multipass VM or the `charm-dev` blueprint. However, please note that the manual path may yield slightly different results that may impact your experience of this tutorial.
@@ -270,7 +270,7 @@ juju config jimm private-key="<private-key>"
 ```
 
 Now you need to amend your `/etc/hosts` to create a DNS record for your ingress.
-To do so you need to locate the IP MetalLB assigned to your ingress by running `juju status` and locating the IP 
+To do so you need to locate the IP MetalLB assigned to your ingress by running `juju status` and locating the IP
 in the description of the `ingress` application ("Serving at <IP>").
 
 ```
