@@ -100,7 +100,7 @@ if not 'ogp_image' in locals():
 ##################################
 
 intersphinx_mapping = {
-    'juju': ('https://canonical-juju.readthedocs-hosted.com/en/latest/', None),
+    'juju': ('https://canonical-juju.readthedocs-hosted.com/3.6/', None),
     'tfjuju': ('https://canonical-terraform-provider-juju.readthedocs-hosted.com/en/latest/', None),
     'pyjuju': ('https://pythonlibjuju.readthedocs.io/en/latest/', None),
     'charmcraft': ('https://canonical-charmcraft.readthedocs-hosted.com/en/latest/', None),
