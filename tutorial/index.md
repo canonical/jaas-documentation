@@ -143,6 +143,7 @@ juju relate jimm:openfga openfga
 juju relate jimm:database postgresql
 juju relate jimm:vault vault
 juju relate openfga:database postgresql
+juju trust postgresql --scope=cluster
 ```
 
 At this point only OpenFGA and PostgreSQL should be in an active state.
@@ -261,7 +262,7 @@ juju config jimm uuid=3f4d142b-732e-4e99-80e7-5899b7e67e59
 ```
 
 ```text
-sudo snap install go
+sudo snap install go --classic
 # A private and public key for macaroon based authentication with Juju controllers.
 go run github.com/go-macaroon-bakery/macaroon-bakery/cmd/bakery-keygen/v3@latest
 # extract the public and private keys from the response
@@ -277,6 +278,7 @@ in the description of the `ingress` application ("Serving at <IP>").
 echo "<ip> test-jimm.local" | sudo tee -a /etc/hosts
 # The address to reach JIMM, this will configure ingress and is also used for OAuth flows/redirects.
 juju config jimm dns-name=test-jimm.local
+juju config ingress external_hostname=test-jimm.local
 ```
 
 Optionally, if you have deployed Juju Dashboard, you can configure JIMM to enable browser flow for authentication:
@@ -306,14 +308,14 @@ sudo update-ca-certificates --fresh
 Verify that you can securely connect to JIMM with the following command:
 
 ```text
-curl https://test-jimm.localhost/debug/info
+curl https://test-jimm.local/jimm-jimm/debug/info
 ```
 
 Verify that you can login to your new controller with the Juju CLI.
 You should be presented with a message to login.
 
 ```text
-juju login test-jimm.localhost:443 -c jimm-k8s
+juju login test-jimm.local:443/jimm-jimm -c jimm-k8s
 # Please visit https://<multipass-ip>/iam-hydra/oauth2/device/verify and entercode <code> to log in.
 ```
 Visit the link from your browser, fill the credentials you've created before and you should see.
