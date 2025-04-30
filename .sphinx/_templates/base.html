@@ -1,0 +1,12 @@
+{% extends "furo/base.html" %}
+
+{% block theme_scripts %}
+<script>
+  const product_tag = "{{ product_tag }}";
+</script>
+{% endblock theme_scripts %}
+
+{# ru-fu: don't include the color variables from the conf.py file, but use a
+￼   separate CSS file to save space #}
+{% block theme_styles %}
+{% endblock theme_styles %}
