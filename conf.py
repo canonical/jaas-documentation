@@ -112,6 +112,7 @@ html_context = {
     # Product tag image; the orange part of your logo, shown in the page header
     #
     # TODO: To add a tag image, uncomment and update as needed.
+    # 'product_tag': '_static/tag.png',
     'product_tag': '_static/logos/juju-logo-no-text.png',
     # Your Discourse instance URL
     #
@@ -206,13 +207,14 @@ redirects = {}
 
 linkcheck_ignore = [
     "http://127.0.0.1:8000",
-    "https://github.com/canonical/ACME/*"
+    "https://github.com/canonical/ACME/*",
+    "https://matrix.to/#",
+    "https://github\.com/.*",
+    "https://jwt.io/introduction",
     ]
 
-
 # A regex list of URLs where anchors are ignored by 'make linkcheck'
-
-linkcheck_anchors_ignore_for_url = [r"https://github\.com/.*"]
+# linkcheck_anchors_ignore_for_url = [r"https://github.com/.*"]
 
 # give linkcheck multiple tries on failure
 # linkcheck_timeout = 30
@@ -284,12 +286,6 @@ exclude_patterns.extend(
     'TODO.md'
     ],
 )
-
-linkcheck_ignore = [
-   'https://matrix.to/#',
-   'https://github\.com/.*',
-   'https://jwt.io/introduction',
-]
 
 # Adds custom CSS files, located under 'html_static_path'
 
