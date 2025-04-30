@@ -253,7 +253,6 @@ extensions = [
     "canonical_sphinx",
     "sphinxcontrib.cairosvgconverter",
     "sphinx_last_updated_by_git",
-    "sphinx.ext.intersphinx",
     # further extensions that jaas already had:
     'sphinx_design',
     # 'sphinx_copybutton',
