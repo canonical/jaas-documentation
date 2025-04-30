@@ -284,6 +284,12 @@ exclude_patterns.extend(
     'TODO.md'
     ],
 )
+
+linkcheck_ignore = [
+   'https://matrix.to/#',
+   'https://github\.com/.*',
+]
+
 # Adds custom CSS files, located under 'html_static_path'
 
 # html_css_files = []
