@@ -288,6 +288,7 @@ exclude_patterns.extend(
 linkcheck_ignore = [
    'https://matrix.to/#',
    'https://github\.com/.*',
+   'https://jwt.io/introduction',
 ]
 
 # Adds custom CSS files, located under 'html_static_path'
