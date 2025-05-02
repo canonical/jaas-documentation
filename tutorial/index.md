@@ -1,9 +1,9 @@
 (tutorial)=
 # Get started with JAAS
 
-In this tutorial we will be deploying JIMM v3 and all supporting components on Kubernetes, specifically MicroK8s. JIMM - Juju Intelligent Model Manager provides the ability to manage multiple Juju models from a single place.
+In this tutorial we will be deploying JAAS -- that is, the Juju Intelligent Model Manager (JIMM) and all its dependencies -- on a local Kubernetes cloud, MicroK8s.
 
-This tutorial will teach you about JIMM and Juju as well as a bit about Canonical's identity bundle and other supporting dependencies.
+With JAAS set up, you will be able to enjoy enterprise-level authentication and authorization and the ability to view all of your Juju real estate from a single point of contact.
 
 ## Prerequisites
 
@@ -13,11 +13,11 @@ This tutorial will teach you about JIMM and Juju as well as a bit about Canonica
 ## Set up an isolated test environment
 
 
-Set up an isolated test environment with Multipass and the `charm-dev` blueprint, which will provide all the necessary tools and configuration for the tutorial (a localhost machine cloud and Kubernetes cloud, Juju, etc.).
+Set up an isolated test environment with Multipass and the `charm-dev` blueprint, which
 
-On your machine, install Multipass and use it to set up an Ubuntu virtual machine (VM) called `my-juju-vm` from the `charm-dev` blueprint.
+On your machine, install Multipass and use it to set up an Ubuntu virtual machine (VM) called `my-juju-vm`. This will provide all the necessary tools and configuration for the tutorial (a localhost machine cloud and Kubernetes cloud, Juju, etc.).
 
-> See more: [Set things up (automatically)](https://documentation.ubuntu.com/juju/3.6/howto/manage-your-deployment/manage-your-deployment-environment/index.html#manage-your-deployment-environment)
+> See more: {external+juju:ref}`Juju | Set things up`. Please follow the automatic path with the `charm-dev` blueprint.
 
 ```{note}
 This document also contains a manual path, using which you can set things up without the Multipass VM or the `charm-dev` blueprint. However, please note that the manual path may yield slightly different results that may impact your experience of this tutorial.
@@ -50,7 +50,7 @@ sudo snap install yq
 
 You are now all set and ready to deploy JAAS.
 
-## Deploy the identity-bundle
+## Deploy the identity bundle
 
 For this tutorial we will use Canonical's identity bundle to provide authentication. JIMM uses OAuth 2.0, a provider agnostic way of handling authentication.
 Although any compliant identity provider could be used with JIMM, we recommend the use Canonical's identity platform for the best compatibility.
@@ -82,7 +82,8 @@ juju offer self-signed-certificates:send-ca-cert
 
 Running `juju status` should now two offers that we will use from a different model in the next step.
 
-### Create an user.
+### Create a user
+
 ```text
 # disable MFA to avoid unnecessary steps
 juju config kratos enforce_mfa=False
@@ -94,9 +95,9 @@ juju grant-secret password-secret kratos
 juju run kratos/0 reset-password identity-id=<identity-id> password-secret-id=<secret:id>
 ```
 
-### Expose the identity bundle to your host machine. (only necessary if running in Multipass)
-The reason you need to expose the identity bundle to your host machine is that at the end of this tutorial
-you will need to login via a web browser.
+### Expose the identity bundle to your host machine
+
+At the end of this tutorial you'll need to log in via a web browser. Given that we're in a Multipass VM, for that to work we need to expose the identity bundle to our host machine.
 
 Locate the IP of your Multipass instance by running `multipass list` on your host machine, if you have multiple IPs pick the first one.
 ```text
