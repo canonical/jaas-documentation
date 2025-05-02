@@ -5,7 +5,6 @@
 
 (cloud-tag)=
 ## Cloud tag
-> See first: {ref}`tag`
 
 A cloud tag has the following format:
 

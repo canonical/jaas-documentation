@@ -8,7 +8,6 @@ A service account identifier will vary depending on the identity provider.
 
 (service-account-tag)=
 ## Service account tag
-> See first: {ref}`tag`
 
 A service account tag has the following format:
 

@@ -6,7 +6,6 @@
 
 (offer-tag)=
 ## Offer tag
-> See first: {ref}`tag`
 
 An application offer tag has the following format:
 

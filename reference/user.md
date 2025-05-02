@@ -6,7 +6,6 @@
 
 (user-tag)=
 ## User tag
-> See first: {ref}`tag`
 
 A user tag has the following format:
 

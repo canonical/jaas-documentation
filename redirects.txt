@@ -2,6 +2,7 @@
 # E.g., user/reference/charm/channel/ user/reference/charm/
 # If you're renaming things, run make clean before make run.
 
+reference/tag reference
 howto/manage-relations/ howto/manage-permissions
 how-to/bootstrap_permissions/ howto/bootstrap_permissions/
 how-to/add_controller/ howto/add_controller/

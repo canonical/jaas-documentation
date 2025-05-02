@@ -7,7 +7,6 @@
 
 (controller-tag)=
 ## Controller tag
-> See first: {ref}`tag`
 
 A controller tag has the following format:
 

@@ -4,7 +4,6 @@
 
 (model-tag)=
 ## Model tag
-> See first: {ref}`tag`
 
 A model tag has the following format:
 

@@ -7,7 +7,6 @@ In JAAS, a role is a property of an entity that describes what they can do in a 
 
 (role-tag)=
 ## Role tag
-> See first: {ref}`tag`
 
 A role tag has the following format:
 

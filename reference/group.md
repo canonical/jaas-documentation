@@ -8,7 +8,6 @@ A group is referenced by name (which is internally matched to a unique ID).
 
 (group-tag)=
 ## Group tag
-> See first: {ref}`tag`
 
 A group tag has the following format:
 
