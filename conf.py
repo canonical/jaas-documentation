@@ -112,6 +112,8 @@ html_context = {
     # Product tag image; the orange part of your logo, shown in the page header
     #
     # TODO: To add a tag image, uncomment and update as needed.
+    # _static is no longer in .sphinx.
+    # For this to work, .sphinx/templates must have base.html defining product_tag.
     # 'product_tag': '_static/tag.png',
     'product_tag': '_static/logos/juju-logo-no-text.png',
     # Your Discourse instance URL
