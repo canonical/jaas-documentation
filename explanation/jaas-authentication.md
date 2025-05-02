@@ -13,7 +13,7 @@ These standards define how services can access your resources on your behalf and
 When logging into a web application that employs OIDC you will commonly be asked to login via a different website or provider,
 like your email or social media provider and this information is then securely passed onto the original application.
 
-#3 Login Providers
+## Login providers
 
 Because JAAS uses the OAuth 2.0/OIDC standard, theoretically various providers can be connected to JAAS and used as a login provider.
 However, due to the varying security practices and slight deviations from the standard, not all providers are supported with JAAS.
@@ -23,7 +23,7 @@ the [Canonical identity platform](https://charmhub.io/topics/canonical-identity-
 social sign-on via other OIDC compliant identity providers (e.g. Azure AD, Google, Okta, etc.).
 
 
-## Authentication Methods
+## Authentication methods
 
 JAAS offers multiple OAuth 2.0 flows (a sequence of steps to login). Each of which is referred to as a **grant type**.
 
