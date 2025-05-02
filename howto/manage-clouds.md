@@ -27,4 +27,4 @@ For example:
 juju add-permission user-alice@canonical.com administrator cloud-mycloud
 ```
 
-> See more: {ref}`manage-permissions`.
+> See more: {ref}`manage-permissions`

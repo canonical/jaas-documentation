@@ -1,5 +1,5 @@
 (offer)=
-# Offer
+# Application offer
 > See first: {external+juju:ref}`Juju | Offer <offer>`
 >
 > See also: {ref}`manage-offers`
@@ -23,20 +23,20 @@ offer was created and `<offer name>` specifies the name of the application offer
 An offer permission describes what an entity can do with an offer.
 
 (list-of-offer-permissions)=
-## List of offer permissions
+### List of offer permissions
 
 (offer-permission-administrator)=
-### `administrator`
+#### `administrator`
 
 Abilities: Can do anything that it is possible to do at the level of an offer.
 
 (offer-permission-consumer)=
-### `consumer`
+#### `consumer`
 
 Abilities: Can relate an application to the offer.
 
 (offer-permission-reader)=
-### `reader`
+#### `reader`
 
 Abilities: Can view offers during a search with `juju find-offers`.
 

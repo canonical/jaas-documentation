@@ -20,7 +20,7 @@ For example:
 juju add-permission user-alice@canonical.com administrator serviceaccount-myserviceaccount
 ```
 
-Given a service account and an entity B, to grant the service account permissions on B run the `add-permission` command followed by the tag of the service account, the desired service account permission, and the tag of B, where the possible (service account, permission, B) combinations are:
+Given a service account and an entity B, to grant the service account permissions on B run the `add-permission` command followed by the tag of the service account, the desired B-supported permission, and the tag of B, where the possible (service account, permission, B) combinations are:
 
 ```
 ("serviceaccount:some_account", "administrator", "serviceaccount:some_account")
@@ -32,4 +32,4 @@ For example:
 juju add-permission serviceaccount-myserviceaccount administrator serviceaccount-myotherserviceaccount
 ```
 
-> See more: {ref}`manage-permissions`.
+> See more: {ref}`manage-permissions`

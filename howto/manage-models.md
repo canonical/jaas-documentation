@@ -151,7 +151,34 @@ If the model migration fails, then no further user input is required and the mod
 
 To inspect the reason for failure, consult the output from `juju debug-log` and `juju status`.
 
-(manage-an-entitys-relation-to-a-model)=
-## Manage an entity's relation to a model
+(manage-permissions-related-to-a-model)=
+## Manage permissions related to a model
 
-See {ref}`manage-permissions`.
+Given an entity A and a model, to grant A permissions on the model run the `add-permission` command followed by the tag of A, the desired model permission, and the tag of the model, where the possible (A, permission, model) combinations are:
+
+```
+("controller:some_controller", "controller", "model:some_model")
+("controller:some_controller#administrator", "administrator", "model:some_model")
+("group:some_group#member", "administrator", "model:some_model")
+("group:some_group#member", "reader", "model:some_model")
+("group:some_group#member", "writer", "model:some_model")
+("model:some_model#administrator", "writer", "model:some_model")
+("model:some_model#writer", "reader", "model:some_model")
+("role:some_role#assignee", "administrator", "model:some_model")
+("role:some_role#assignee", "reader", "model:some_model")
+("role:some_role#assignee", "writer", "model:some_model")
+("user:*", "administrator", "model:some_model")
+("user:*", "reader", "model:some_model")
+("user:*", "writer", "model:some_model")
+("user:some_user", "administrator", "model:some_model")
+("user:some_user", "reader", "model:some_model")
+("user:some_user", "writer", "model:some_model")
+```
+
+For example:
+
+```text
+juju add-permission user-alice@canonical.com reader model-mymodel
+```
+
+> See more: {ref}`manage-permissions`

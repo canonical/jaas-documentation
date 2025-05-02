@@ -76,7 +76,7 @@ For example:
 juju add-permission user-alice@canonical.com member group-mygroup
 ```
 
-Given a group and an entity B, to grant the group permissions on B run the `add-permission` command followed by the tag of the group, the desired group permission, and the tag of B, where the possible (group, permission, B) combinations are:
+Given a group and an entity B, to grant the group permissions on B run the `add-permission` command followed by the tag of the group, the desired B-supported permission, and the tag of B, where the possible (group, permission, B) combinations are:
 
 ```
 ("group:some_group#member", "administrator", "applicationoffer:some_offer")
@@ -101,7 +101,7 @@ For example:
 juju add-permission group-mygroup#member member group-mynewgroup
 ```
 
-> See more: {ref}`manage-permissions`.
+> See more: {ref}`manage-permissions`
 
 
 (rename-a-group)=
