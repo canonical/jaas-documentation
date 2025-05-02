@@ -118,5 +118,5 @@ juju register-controller workload-lxd --local --tls-hostname juju-apiserver
 (manage-an-entitys-relation-to-a-juju-controller)=
 ## Manage an entity's relation to a Juju controller
 
-See {ref}`manage-relations`.
+See {ref}`manage-permissions`.
 

@@ -2,6 +2,7 @@
 # E.g., user/reference/charm/channel/ user/reference/charm/
 # If you're renaming things, run make clean before make run.
 
+reference/relation explanation/jaas-authorization
 reference/tag reference
 howto/manage-relations/ howto/manage-permissions
 how-to/bootstrap_permissions/ howto/bootstrap_permissions/
@@ -33,8 +34,8 @@ howto/add_controller/ howto/manage-juju-controllers/
 howto/setup_ingress_with_tls/ howto/manage-jimm-controllers/
 howto/setup_dashboard/ howto/manage-jimm-controllers/
 howto/bootstrap_permissions/ howto/manage-jimm-controllers/
-reference/jaas/authorisation_data/ reference/relation/
-reference/jaas/authorisation_model/ reference/relation/
+reference/jaas/authorisation_data/ explanation/jaas-authorization
+reference/jaas/authorisation_model/ explanation/jaas-authorization
 reference/jaas/authorisation/ reference/jaas/jaas-authorization
 explanation/jaas_overview/ explanation/jaas_architecture/
 howto/manage-jimm-controllers/ howto/manage-your-jaas-deployment/

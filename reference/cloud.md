@@ -12,20 +12,20 @@ A cloud tag has the following format:
 cloud-<cloud name>
 ```
 
-(cloud-relation)=
-## Cloud relation
+(cloud-permission)=
+## Cloud permission
 
-A cloud relation is a {ref}`relation <relation>` that describes permissions on a cloud.
+A cloud permission describes what an an entity can do on a cloud.
 
-(list-of-cloud-relations)=
-### List of cloud relations
+(list-of-cloud-permissions)=
+### List of cloud permissions
 
-(cloud-relation-administrator)=
+(cloud-permission-administrator)=
 #### `administrator`
 
 Abilities: Can do anything that it is possible to do at the level of a cloud.
 
-(cloud-relation-can-addmodel)=
+(cloud-permission-can-addmodel)=
 #### `can_addmodel`
 
 Abilities: Can add a model and grant another user model-level permissions.

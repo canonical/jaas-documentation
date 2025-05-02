@@ -43,7 +43,7 @@ manage-users
 manage-service-accounts
 manage-roles
 manage-groups
-manage-relations
+manage-permissions
 ```
 
 ## JAAS with Terraform

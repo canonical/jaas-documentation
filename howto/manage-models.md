@@ -154,4 +154,4 @@ To inspect the reason for failure, consult the output from `juju debug-log` and 
 (manage-an-entitys-relation-to-a-model)=
 ## Manage an entity's relation to a model
 
-See {ref}`manage-relations`.
+See {ref}`manage-permissions`.

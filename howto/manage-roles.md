@@ -57,12 +57,12 @@ juju list-roles [options]
 (manage-an-entitys-relation-to-a-role)=
 ## Manage an entity's relation to a role
 
-See {ref}`manage-relations`.
+See {ref}`manage-permissions`.
 
 (manage-a-roles-relation-to-an-entity)=
 ## Manage a role's relation to an entity
 
-See {ref}`manage-relations`.
+See {ref}`manage-permissions`.
 
 (rename-a-role)=
 ## Rename a role

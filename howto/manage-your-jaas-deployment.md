@@ -127,7 +127,7 @@ juju config jimm juju-dashboard-location="<juju-dashboard-url>"
 
 For this how-to you will need the following:
 
-- A basic understanding of JAAS tags, see {ref}`tag`.
+- A basic understanding of JAAS tags.
 - A running JAAS environment, see {doc}`the tutorial <../tutorial/index>`.
 - An understanding of Juju permissions, see the [Juju docs](https://juju.is/docs/juju/user-permissions).
 

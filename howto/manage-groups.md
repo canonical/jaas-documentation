@@ -58,15 +58,51 @@ juju list-groups [options]
 
 > See more: {doc}`juju list-groups <../reference/jaas-plugin>`
 
-(manage-an-entitys-relation-to-a-group)=
-## Manage an entity's relation to a group
 
-See {ref}`manage-relations`.
+(manage-permissions-related-to-a-group)=
+## Manage permissions related to a group
 
-(manage-a-groups-relation-to-an-entity)=
-## Manage a group's relation to an entity
+Given an entity A and a group, to grant A permissions on the group run the `add-permission` command followed by the tag of A, the desired group permission, and the tag of the group, where the possible (A, permission, group) combinations are:
 
-See {ref}`manage-relations`.
+```
+("group:some_other_group#member", "member", "group:some_group")
+("user:*", "member", "group:some_group")
+("user:some_user", "member", "group:some_group")
+```
+
+For example:
+
+```text
+juju add-permission user-alice@canonical.com member group-mygroup
+```
+
+Given a group and an entity B, to grant the group permissions on B run the `add-permission` command followed by the tag of the group, the desired group permission, and the tag of B, where the possible (group, permission, B) combinations are:
+
+```
+("group:some_group#member", "administrator", "applicationoffer:some_offer")
+("group:some_group#member", "administrator", "cloud:some_cloud")
+("group:some_group#member", "administrator", "controller:some_controller")
+("group:some_group#member", "administrator", "model:some_model")
+("group:some_group#member", "administrator", "serviceaccount:some_account")
+("group:some_group#member", "assignee", "role:some_role")
+("group:some_group#member", "audit_log_viewer", "controller:some_controller")
+("group:some_group#member", "can_addmodel", "cloud:some_cloud")
+("group:some_group#member", "consumer", "applicationoffer:some_offer")
+("group:some_group#member", "member", "group:some_group")
+("group:some_group#member", "reader", "applicationoffer:some_offer")
+("group:some_group#member", "reader", "model:some_model")
+("group:some_group#member", "writer", "model:some_model")
+("group:some_other_group#member", "member", "group:some_group")
+```
+
+For example:
+
+```text
+juju add-permission group-mygroup#member member group-mynewgroup
+```
+
+> See more: {ref}`manage-permissions`.
+
 
 (rename-a-group)=
 ## Rename a group

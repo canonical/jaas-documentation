@@ -17,7 +17,7 @@ Set up an isolated test environment with Multipass and the `charm-dev` blueprint
 
 On your machine, install Multipass and use it to set up an Ubuntu virtual machine (VM) called `my-juju-vm`. This will provide all the necessary tools and configuration for the tutorial (a localhost machine cloud and Kubernetes cloud, Juju, etc.).
 
-> See more: {external+juju:ref}`Juju | Set things up`. Please follow the automatic path with the `charm-dev` blueprint.
+> See more: {external+juju:ref}`Juju | Set things up <set-things-up>`. Please follow the automatic path with the `charm-dev` blueprint.
 
 ```{note}
 This document also contains a manual path, using which you can set things up without the Multipass VM or the `charm-dev` blueprint. However, please note that the manual path may yield slightly different results that may impact your experience of this tutorial.
