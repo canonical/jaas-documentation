@@ -1,6 +1,6 @@
 (manage-permissions)=
 # Manage permissions
-> See first: {external+juju:ref}`Juju access levels <user-access-levels>`
+> See first: {external+juju:ref}`Juju | Juju access levels <user-access-levels>`
 >
 > See also: {ref}`jaas-authorization`
 
@@ -16,15 +16,22 @@ juju add-permission user-alice@canonical.com member group-mygroup
 ````{dropdown} View the full list of possible combinations of (A, permission, B), grouped by A
 
 ```text
+# application offer
 ("applicationoffer:some_offer#administrator", "consumer", "applicationoffer:some_offer")
 ("applicationoffer:some_offer#consumer", "reader", "applicationoffer:some_offer")
+
+# cloud
 ("cloud:some_cloud#administrator", "can_addmodel", "cloud:some_cloud")
+
+# controller
 ("controller:some_controller", "controller", "cloud:some_cloud")
 ("controller:some_controller", "controller", "controller:some_controller")
 ("controller:some_controller#administrator", "administrator", "cloud:some_cloud")
 ("controller:some_controller#administrator", "administrator", "controller:some_controller")
 ("controller:some_controller#administrator", "audit_log_viewer", "controller:some_controller")
 ("controller:some_other_controller", "controller", "controller:some_controller")
+
+# group
 ("group:some_group#member", "administrator", "applicationoffer:some_offer")
 ("group:some_group#member", "administrator", "cloud:some_cloud")
 ("group:some_group#member", "administrator", "controller:some_controller")
@@ -39,10 +46,14 @@ juju add-permission user-alice@canonical.com member group-mygroup
 ("group:some_group#member", "reader", "model:some_model")
 ("group:some_group#member", "writer", "model:some_model")
 ("group:some_other_group#member", "member", "group:some_group")
+
+# model
 ("model:some_model", "model", "applicationoffer:some_offer")
 ("model:some_model#administrator", "administrator", "applicationoffer:some_offer")
 ("model:some_model#administrator", "writer", "model:some_model")
 ("model:some_model#writer", "reader", "model:some_model")
+
+# role
 ("role:some_role#assignee", "administrator", "applicationoffer:some_offer")
 ("role:some_role#assignee", "administrator", "cloud:some_cloud")
 ("role:some_role#assignee", "administrator", "controller:some_controller")
@@ -54,7 +65,11 @@ juju add-permission user-alice@canonical.com member group-mygroup
 ("role:some_role#assignee", "reader", "applicationoffer:some_offer")
 ("role:some_role#assignee", "reader", "model:some_model")
 ("role:some_role#assignee", "writer", "model:some_model")
+
+# service account
 ("serviceaccount:some_account", "administrator", "serviceaccount:some_account")
+
+# user
 ("user:*", "administrator", "applicationoffer:some_offer")
 ("user:*", "administrator", "cloud:some_cloud")
 ("user:*", "administrator", "controller:some_controller")
