@@ -28,8 +28,8 @@ juju update-credentials localhost --controller jimm
 
 At this point the user can start doing whatever the permissions you've granted them allow them to do, for example, add a model and deploy applications to it.
 
-(manage-permissions-related-to-a-user)=
-## Manage permissions related to a user
+(manage-user-permissions)=
+## Manage user permissions
 
 ```{note}
 This permissions mechanism supplements the Juju way of granting a user access to controllers, clouds, models, and offers, and can be used in addition to it. See more: [Juju | Manage a user's access level](https://canonical-juju.readthedocs-hosted.com/en/3.6/user/howto/manage-users/) or [Terraform Provider Juju | Manage a user's access level](https://canonical-terraform-provider-juju.readthedocs-hosted.com/en/latest/howto/manage-users/).

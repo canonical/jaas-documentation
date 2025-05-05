@@ -18,7 +18,7 @@ juju add-group A
 juju list-groups
 
 # Give the members of the group write access to test-model-1:
-juju add-permission group-B#members writer model-test-ctl-1/test-model-1
+juju add-permission group-B#member writer model-test-ctl-1/test-model-1
 
 # Rename the role to something more suitable:
 juju rename-group model-writers

@@ -10,8 +10,9 @@
 Given two entities A and B, to add a permission between them run the `add-permission` command followed by the tag of A, the desired B-supported permission, and the tag of B. For example:
 
 ```text
-juju add-permission user-alice@canonical.com member group-mygroup
+juju add-permission group-mygroup#member can-addmodel model-mymodel
 ```
+
 
 ````{dropdown} View the full list of possible combinations of (A, permission, B), grouped by A
 
@@ -183,6 +184,7 @@ juju add-permission user-alice@canonical.com member group-mygroup
 
 ```
 ````
+
 
 > See more:
 > - {doc}`juju add-permission <../reference/jaas-plugin>`
