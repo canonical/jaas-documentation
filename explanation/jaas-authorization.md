@@ -35,7 +35,7 @@ Note: Directed graph illustration of the JAAS authorization model. Purple and gr
 Note: The `controller` and `model` relations are implicit internal relations that describe the inheritance structure for permissions (e.g., the fact that a cloud/model is always associated with a controller or an offer with a model, and permissions on the latter carry over to the former).
 
 ```text
-# copy me into https://play.fga.dev to update png
+# copy me into https://play.fga.dev to interact with the model
 
 model
   schema 1.1

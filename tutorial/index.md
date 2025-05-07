@@ -12,9 +12,6 @@ With JAAS set up, you will be able to enjoy enterprise-level authentication and 
 
 ## Set up an isolated test environment
 
-
-Set up an isolated test environment with Multipass and the `charm-dev` blueprint, which
-
 On your machine, install Multipass and use it to set up an Ubuntu virtual machine (VM) called `my-juju-vm`. This will provide all the necessary tools and configuration for the tutorial (a localhost machine cloud and Kubernetes cloud, Juju, etc.).
 
 > See more: {external+juju:ref}`Juju | Set things up <set-things-up>`. Please follow the automatic path with the `charm-dev` blueprint.
@@ -96,6 +93,8 @@ juju run kratos/0 reset-password identity-id=<identity-id> password-secret-id=<s
 ```
 
 ### Expose the identity bundle to your host machine
+
+> If you chose not to use a Multipass VM, you can skip this step.
 
 At the end of this tutorial you'll need to log in via a web browser. Given that we're in a Multipass VM, for that to work we need to expose the identity bundle to our host machine.
 
