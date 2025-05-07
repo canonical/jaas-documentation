@@ -7,103 +7,45 @@
 (add-a-permission)=
 ## Add a permission
 
-Given two entities A and B, to add a permission between them run the `add-permission` command followed by the tag of A, the desired B-supported permission, and the tag of B. For example:
+To add a permission between an entity A (always a user, whether identified directly or through a group/role) and an entity B (group, role, or resource -- controller, cloud, model, or application offer), run the `add-permission` command followed by A (in tag notation or alternatives), the desired B-supported permission, and B (in tag notation). For example:
 
 ```text
-juju add-permission group-mygroup#member can-addmodel model-mymodel
+# Make Alice cloud admin:
+juju add-permission user-alice@canonical.com administrator cloud-mycloud
+
+# Add Bob and Cindy to the mygroup group:
+juju add-permission user-bob@canonical.com member group-mygroup
+juju add-permission user-cindy@canonical.com member group-mygroup
+
+# Let everyone in group mygroup add models that will use resources from cloud my-cloud:
+juju add-permission group-mygroup#member can-addmodel cloud-mycloud
 ```
 
+|entity A | permission| entity B|
+|-|-|-|
+|{ref}`user tag or alternatives except for role assignee <user-tag>` |{ref}`role-permission-assignee`|{ref}`role tag <role-tag>`|
+|{ref}`user tag or alternatives <user-tag>` |{ref}`group-permission-member`| {ref}`group tag <group-tag>`|
+|{ref}`user tag or alternatives <user-tag>` |{ref}`controller-permission-audit-log-viewer`| {ref}`controller tag <controller-tag>`|
+|{ref}`user tag or alternatives <user-tag>` |{ref}`controller-permission-administrator`| {ref}`controller tag <controller-tag>`|{ref}<-permission-
+|{ref}`user tag or alternatives <user-tag>` |{ref}`cloud-permission-can-addmodel`| {ref}`cloud tag <cloud-tag>`|
+|{ref}`user tag or alternatives <user-tag>` |{ref}`cloud-permission-administrator`| {ref}`cloud tag <cloud-tag>`|
+|{ref}`user tag or alternatives <user-tag>` |{ref}`model-permission-reader`|{ref}`model tag <model-tag>`|
+|{ref}`user tag or alternatives <user-tag>` |{ref}`model-permission-writer`|{ref}`model tag <model-tag>`|
+|{ref}`user tag or alternatives <user-tag>` |{ref}`model-permission-administrator`|{ref}`model tag <model-tag>`|
+|{ref}`user tag or alternatives <user-tag>` |{ref}`offer-permission-reader` | {ref}`offer tag <offer-tag>` |
+|{ref}`user tag or alternatives <user-tag>` |{ref}`offer-permission-consumer` | {ref}`offer tag <offer-tag>`|
+|{ref}`user tag or alternatives <user-tag>` |{ref}`offer-permission-administrator` | {ref}`offer tag <offer-tag>` |
 
-````{dropdown} View the full list of possible combinations of (A, permission, B), grouped by A
+For any given resource, permissions are currently hierarchical and some permissions are implicit -- e.g., given a cloud associated with a controller and a model associated with the cloud, a controller `administrator` entails cloud `administrator` entails cloud `can_addmodel`.
 
-```text
-# application offer
-("applicationoffer:some_offer#administrator", "consumer", "applicationoffer:some_offer")
-("applicationoffer:some_offer#consumer", "reader", "applicationoffer:some_offer")
+> See more: {doc}`juju add-permission <../reference/jaas-plugin>`
 
-# cloud
-("cloud:some_cloud#administrator", "can_addmodel", "cloud:some_cloud")
+<!--
+> - {ref}`user-tag`, {ref}`service-account-tag`, {ref}`role-tag`, {ref}`group-tag`, {ref}`controller-tag`, {ref}`cloud-tag`, {ref}`model-tag`, {ref}`offer-tag`
+> - {ref}`list-of-service-account-permissions`, {ref}`list-of-role-permissions`, {ref}`list-of-group-permissions`, {ref}`list-of-controller-permissions`, {ref}`list-of-cloud-permissions`, {ref}`list-of-model-permissions`, {ref}`list-of-offer-permissions`
+-->
 
-# controller
-("controller:some_controller", "controller", "cloud:some_cloud")
-("controller:some_controller", "controller", "controller:some_controller")
-("controller:some_controller#administrator", "administrator", "cloud:some_cloud")
-("controller:some_controller#administrator", "administrator", "controller:some_controller")
-("controller:some_controller#administrator", "audit_log_viewer", "controller:some_controller")
-("controller:some_other_controller", "controller", "controller:some_controller")
-
-# group
-("group:some_group#member", "administrator", "applicationoffer:some_offer")
-("group:some_group#member", "administrator", "cloud:some_cloud")
-("group:some_group#member", "administrator", "controller:some_controller")
-("group:some_group#member", "administrator", "model:some_model")
-("group:some_group#member", "administrator", "serviceaccount:some_account")
-("group:some_group#member", "assignee", "role:some_role")
-("group:some_group#member", "audit_log_viewer", "controller:some_controller")
-("group:some_group#member", "can_addmodel", "cloud:some_cloud")
-("group:some_group#member", "consumer", "applicationoffer:some_offer")
-("group:some_group#member", "member", "group:some_group")
-("group:some_group#member", "reader", "applicationoffer:some_offer")
-("group:some_group#member", "reader", "model:some_model")
-("group:some_group#member", "writer", "model:some_model")
-("group:some_other_group#member", "member", "group:some_group")
-
-# model
-("model:some_model", "model", "applicationoffer:some_offer")
-("model:some_model#administrator", "administrator", "applicationoffer:some_offer")
-("model:some_model#administrator", "writer", "model:some_model")
-("model:some_model#writer", "reader", "model:some_model")
-
-# role
-("role:some_role#assignee", "administrator", "applicationoffer:some_offer")
-("role:some_role#assignee", "administrator", "cloud:some_cloud")
-("role:some_role#assignee", "administrator", "controller:some_controller")
-("role:some_role#assignee", "administrator", "model:some_model")
-("role:some_role#assignee", "administrator", "serviceaccount:some_account")
-("role:some_role#assignee", "assignee", "role:some_role")
-("role:some_role#assignee", "can_addmodel", "cloud:some_cloud")
-("role:some_role#assignee", "consumer", "applicationoffer:some_offer")
-("role:some_role#assignee", "reader", "applicationoffer:some_offer")
-("role:some_role#assignee", "reader", "model:some_model")
-("role:some_role#assignee", "writer", "model:some_model")
-
-# service account
-("serviceaccount:some_account", "administrator", "serviceaccount:some_account")
-
-# user
-("user:*", "administrator", "applicationoffer:some_offer")
-("user:*", "administrator", "cloud:some_cloud")
-("user:*", "administrator", "controller:some_controller")
-("user:*", "administrator", "model:some_model")
-("user:*", "administrator", "serviceaccount:some_account")
-("user:*", "assignee", "role:some_role")
-("user:*", "audit_log_viewer", "controller:some_controller")
-("user:*", "can_addmodel", "cloud:some_cloud")
-("user:*", "consumer", "applicationoffer:some_offer")
-("user:*", "member", "group:some_group")
-("user:*", "reader", "applicationoffer:some_offer")
-("user:*", "reader", "model:some_model")
-("user:*", "writer", "model:some_model")
-("user:some_user", "administrator", "applicationoffer:some_offer")
-("user:some_user", "administrator", "cloud:some_cloud")
-("user:some_user", "administrator", "controller:some_controller")
-("user:some_user", "administrator", "model:some_model")
-("user:some_user", "administrator", "serviceaccount:some_account")
-("user:some_user", "assignee", "role:some_role")
-("user:some_user", "audit_log_viewer", "controller:some_controller")
-("user:some_user", "can_addmodel", "cloud:some_cloud")
-("user:some_user", "consumer", "applicationoffer:some_offer")
-("user:some_user", "member", "group:some_group")
-("user:some_user", "reader", "applicationoffer:some_offer")
-("user:some_user", "reader", "model:some_model")
-("user:some_user", "writer", "model:some_model")
-
-```
-
-````
-
-````{dropdown} View the full list of possible combinations of (A, permission, B), grouped by B
-```
+<!--
 # applicationoffer
 ("applicationoffer:some_offer#administrator", "consumer", "applicationoffer:some_offer")
 ("applicationoffer:some_offer#consumer", "reader", "applicationoffer:some_offer")
@@ -182,16 +124,7 @@ juju add-permission group-mygroup#member can-addmodel model-mymodel
 ("user:*", "administrator", "serviceaccount:some_account")
 ("user:some_user", "administrator", "serviceaccount:some_account")
 
-```
-````
-
-
-> See more:
-> - {doc}`juju add-permission <../reference/jaas-plugin>`
-> - {ref}`controller-tag`, {ref}`cloud-tag`, {ref}`model-tag`, {ref}`offer-tag`, {ref}`user-tag`, {ref}`service-account-tag`, {ref}`role-tag`, {ref}`group-tag`
-> - {ref}`list-of-controller-permissions`, {ref}`list-of-cloud-permissions`, {ref}`list-of-model-permissions`, {ref}`list-of-offer-permissions`, {ref}`list-of-service-account-permissions`, {ref}`list-of-role-permissions`, {ref}`list-of-group-permissions`
-
-
+-->
 
 
 (verify-a-permission)=

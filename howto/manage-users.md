@@ -12,7 +12,7 @@ Add a Juju controller to JAAS.
 
 Add the user to JAAS.
 
-> See more: {ref}`manage-a-users-relation-to-an-entity`
+> See more: {ref}`control-user-access`
 
 Assuming the user already has the `juju` CLI client installed, get the user to log in to JIMM using the DNS address. For example:
 
@@ -28,16 +28,35 @@ juju update-credentials localhost --controller jimm
 
 At this point the user can start doing whatever the permissions you've granted them allow them to do, for example, add a model and deploy applications to it.
 
-(manage-user-permissions)=
-## Manage user permissions
+(control-user-access)=
+## Control user access
 
 ```{note}
 This permissions mechanism supplements the Juju way of granting a user access to controllers, clouds, models, and offers, and can be used in addition to it. See more: [Juju | Manage a user's access level](https://canonical-juju.readthedocs-hosted.com/en/3.6/user/howto/manage-users/) or [Terraform Provider Juju | Manage a user's access level](https://canonical-terraform-provider-juju.readthedocs-hosted.com/en/latest/howto/manage-users/).
 ```
 
-Given a user and an entity B, to grant the user permissions on B run the `add-permission` command followed by the tag of the user, the desired B-supported permission, and the tag of B, where the possible (user, permission, B) combinations are:
+To control user access to another entity -- be it a role or a group, or a resource such as a controller, a cloud, a model, or an application offer -- add a permission between the user and the entity. For example:
 
+```text
+# Assign a user to a role:
+juju add-permission user-alice@canonical.com assignee role-myrole
+
+# Add a user to a group:
+juju add-permission user-alice@canonical.com member group-mygroup
+
+# Give a user administrator rights to a cloud:
+juju add-permission user-alice@canonical.com administrator cloud-mycloud
+
+# Give all users in group A add-model rights on a controller:
+juju add-permission group-groupA#member can_addmodel controller-mycontroller
+
+# Give all users the ability to consume an offer:
+juju add-permission user-everyone@external consumer applicationoffer-mycontroller/mymodel.myoffer
 ```
+
+> See more: {ref}`manage-permissions`, {ref}`assign-a-user-to-a-role`, {ref}`add-a-user-to-a-group`, {ref}`control-user-access-to-a-juju-controller`, {ref}`control-user-access-to-a-cloud`, {ref}`control-user-access-to-a-model`, {ref}`control-user-access-to-an-offer`
+
+<!--
 ("user:*", "administrator", "applicationoffer:some_offer")
 ("user:*", "administrator", "cloud:some_cloud")
 ("user:*", "administrator", "controller:some_controller")
@@ -64,12 +83,4 @@ Given a user and an entity B, to grant the user permissions on B run the `add-pe
 ("user:some_user", "reader", "applicationoffer:some_offer")
 ("user:some_user", "reader", "model:some_model")
 ("user:some_user", "writer", "model:some_model")
-```
-
-For example:
-
-```text
-juju add-permission user-alice@canonical.com member group-mygroup
-```
-
-> See more: {ref}`manage-permissions`
+-->

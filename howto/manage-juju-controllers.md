@@ -115,12 +115,24 @@ juju switch jimm
 juju register-controller workload-lxd --local --tls-hostname juju-apiserver
 ```
 
-(manage-permissions-related-to-a-juju-controller)=
-## Manage permissions related to a Juju controller
 
-Given an entity A and a Juju controller, to grant A permissions on the controller run the `add-permission` command followed by the tag of A, the desired controller permission, and the tag of the controller, where the possible (A, permission, controller) combinations are:
+(control-user-access-to-a-juju-controller)=
+## Control user access to a Juju controller
+
+To grant a (collection of) user(s) access to a Juju controller, add an `audit_log_viewer` or `administrator` permission between the user(s) and the controller. For example:
+
+For example:
+
+```text
+# Make Alice controller admin:
+juju add-permission user-alice@canonical.com administrator controller-mycontroller
 
 ```
+
+> See more: {ref}`manage-permissions`
+
+<!--
+# controller
 ("controller:some_controller#administrator", "administrator", "controller:some_controller")
 ("controller:some_controller#administrator", "audit_log_viewer", "controller:some_controller")
 ("controller:some_other_controller", "controller", "controller:some_controller")
@@ -132,12 +144,4 @@ Given an entity A and a Juju controller, to grant A permissions on the controlle
 ("user:*", "audit_log_viewer", "controller:some_controller")
 ("user:some_user", "administrator", "controller:some_controller")
 ("user:some_user", "audit_log_viewer", "controller:some_controller")
-```
-
-For example:
-
-```text
-juju add-permission user-alice@canonical.com audit_log_viewer controller-mycontroller
-```
-
-> See more: {ref}`manage-permissions`
+-->

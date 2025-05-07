@@ -54,44 +54,23 @@ juju list-roles [options]
 
 > See more: {doc}`juju list-roles <../reference/jaas-plugin>`
 
-(manage-permissions-related-to-a-role)=
-## Manage permissions related to a role
+(assign-a-user-to-a-role)=
+## Assign a user to a role
 
-Given an entity A and a role, to grant A permissions on the role run the `add-permission` command followed by the tag of A, the desired role permission, and the tag of the role, where the possible (A, permission, role) combinations are:
-
-```
-("group:some_group#member", "assignee", "role:some_role")
-("user:*", "assignee", "role:some_role")
-("user:some_user", "assignee", "role:some_role")
-```
-
-For example:
+To assign a user to a role, add an `assignee` permission between the user and the role. For example:
 
 ```text
 juju add-permission user-alice@canonical.com assignee role-myrole
+juju add-permission group-mygroup#member assignee role-myrole
+juju add-permission user-everyone@external assignee role-my-role
 ```
 
-Given a role and an entity B, to grant the role permissions on B run the `add-permission` command followed by the tag of the role, the desired B-supported permission, and the tag of B, where the possible (role, permission, B) combinations are:
-
-```
-("role:some_role#assignee", "administrator", "applicationoffer:some_offer")
-("role:some_role#assignee", "administrator", "cloud:some_cloud")
-("role:some_role#assignee", "administrator", "controller:some_controller")
-("role:some_role#assignee", "administrator", "model:some_model")
-("role:some_role#assignee", "administrator", "serviceaccount:some_account")
-("role:some_role#assignee", "assignee", "role:some_role")
-("role:some_role#assignee", "can_addmodel", "cloud:some_cloud")
-("role:some_role#assignee", "consumer", "applicationoffer:some_offer")
-("role:some_role#assignee", "reader", "applicationoffer:some_offer")
-("role:some_role#assignee", "reader", "model:some_model")
-("role:some_role#assignee", "writer", "model:some_model")
-```
-
-For example:
-
-```text
-juju add-permission role-myrole#assignee can_addmodel cloud-mycloud
-```
+<!--
+# role
+("group:some_group#member", "assignee", "role:some_role")
+("user:*", "assignee", "role:some_role")
+("user:some_user", "assignee", "role:some_role")
+-->
 
 > See more: {ref}`manage-permissions`
 

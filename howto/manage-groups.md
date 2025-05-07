@@ -58,48 +58,23 @@ juju list-groups [options]
 
 > See more: {doc}`juju list-groups <../reference/jaas-plugin>`
 
+(add-a-user-to-a-group)=
+## Add a user to a group
 
-(manage-permissions-related-to-a-group)=
-## Manage permissions related to a group
-
-Given an entity A and a group, to grant A permissions on the group run the `add-permission` command followed by the tag of A, the desired group permission, and the tag of the group, where the possible (A, permission, group) combinations are:
-
-```
-("group:some_other_group#member", "member", "group:some_group")
-("user:*", "member", "group:some_group")
-("user:some_user", "member", "group:some_group")
-```
-
-For example:
+To add a user to a group, add a `member` permission between the user and the group. For example:
 
 ```text
 juju add-permission user-alice@canonical.com member group-mygroup
+juju add-permission group-groupA#member member group-groupB
+juju add-permission user-everyone@external member group-mygroup
 ```
 
-Given a group and an entity B, to grant the group permissions on B run the `add-permission` command followed by the tag of the group, the desired B-supported permission, and the tag of B, where the possible (group, permission, B) combinations are:
-
-```
-("group:some_group#member", "administrator", "applicationoffer:some_offer")
-("group:some_group#member", "administrator", "cloud:some_cloud")
-("group:some_group#member", "administrator", "controller:some_controller")
-("group:some_group#member", "administrator", "model:some_model")
-("group:some_group#member", "administrator", "serviceaccount:some_account")
-("group:some_group#member", "assignee", "role:some_role")
-("group:some_group#member", "audit_log_viewer", "controller:some_controller")
-("group:some_group#member", "can_addmodel", "cloud:some_cloud")
-("group:some_group#member", "consumer", "applicationoffer:some_offer")
-("group:some_group#member", "member", "group:some_group")
-("group:some_group#member", "reader", "applicationoffer:some_offer")
-("group:some_group#member", "reader", "model:some_model")
-("group:some_group#member", "writer", "model:some_model")
+<!--
+# group
 ("group:some_other_group#member", "member", "group:some_group")
-```
-
-For example:
-
-```text
-juju add-permission group-mygroup#member member group-mynewgroup
-```
+("user:*", "member", "group:some_group")
+("user:some_user", "member", "group:some_group")
+-->
 
 > See more: {ref}`manage-permissions`
 

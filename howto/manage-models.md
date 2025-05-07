@@ -151,12 +151,26 @@ If the model migration fails, then no further user input is required and the mod
 
 To inspect the reason for failure, consult the output from `juju debug-log` and `juju status`.
 
-(manage-permissions-related-to-a-model)=
-## Manage permissions related to a model
+(control-user-access-to-a-model)=
+## Control user access to a model
 
-Given an entity A and a model, to grant A permissions on the model run the `add-permission` command followed by the tag of A, the desired model permission, and the tag of the model, where the possible (A, permission, model) combinations are:
+To grant a (collection of) user(s) access to a model, add a `reader`, `writer`, or `administrator` permission between the user(s) and the model. For example:
+
+For example:
+
+```text
+# Make Alice model admin:
+juju add-permission user-alice@canonical.com administrator cloud-mycloud
+
+# Let all users with role myrole have read access to model mymodel:
+juju add-permission role-myrole#assignee reader model-mycontroller/mymodel
 
 ```
+
+> See more: {ref}`manage-permissions`
+
+<!--
+# model
 ("controller:some_controller", "controller", "model:some_model")
 ("controller:some_controller#administrator", "administrator", "model:some_model")
 ("group:some_group#member", "administrator", "model:some_model")
@@ -173,12 +187,4 @@ Given an entity A and a model, to grant A permissions on the model run the `add-
 ("user:some_user", "administrator", "model:some_model")
 ("user:some_user", "reader", "model:some_model")
 ("user:some_user", "writer", "model:some_model")
-```
-
-For example:
-
-```text
-juju add-permission user-alice@canonical.com reader model-mymodel
-```
-
-> See more: {ref}`manage-permissions`
+-->
