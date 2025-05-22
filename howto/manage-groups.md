@@ -18,7 +18,7 @@ juju add-group A
 juju list-groups
 
 # Give the members of the group write access to test-model-1:
-juju add-permission group-B#members writer model-test-ctl-1/test-model-1
+juju add-permission group-B#member writer model-test-ctl-1/test-model-1
 
 # Rename the role to something more suitable:
 juju rename-group model-writers
@@ -58,15 +58,19 @@ juju list-groups [options]
 
 > See more: {doc}`juju list-groups <../reference/jaas-plugin>`
 
-(manage-an-entitys-relation-to-a-group)=
-## Manage an entity's relation to a group
+(add-a-user-to-a-group)=
+## Add a user to a group
 
-See {ref}`manage-relations`.
+To add a user to a group, add a `member` permission between the user and the group. For example:
 
-(manage-a-groups-relation-to-an-entity)=
-## Manage a group's relation to an entity
+```text
+juju add-permission user-alice@canonical.com member group-mygroup
+juju add-permission group-groupA#member member group-groupB
+juju add-permission user-everyone@external member group-mygroup
+```
 
-See {ref}`manage-relations`.
+> See more: {ref}`manage-permissions`
+
 
 (rename-a-group)=
 ## Rename a group

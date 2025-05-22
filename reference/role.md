@@ -7,7 +7,6 @@ In JAAS, a role is a property of an entity that describes what they can do in a 
 
 (role-tag)=
 ## Role tag
-> See first: {ref}`tag`
 
 A role tag has the following format:
 
@@ -18,15 +17,15 @@ role-<role id>
 
 where `role id` represents the unique identifier of the role.
 
-(role-relation)=
-## Role relation
+(role-permission)=
+## Role permission
 
-A role relation is a {ref}`relation <relation>` that describes permissions on a role.
+A role permission describes an entity's relationship to a role.
 
-(list-of-role-relations)=
-## List of role relations
+(list-of-role-permissions)=
+## List of role permissions
 
-(role-relation-assignee)=
+(role-permission-assignee)=
 ### `assignee`
 
 Abilities: Shares the role's access level to Juju resources and JIMM logs.

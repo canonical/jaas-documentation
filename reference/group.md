@@ -8,7 +8,6 @@ A group is referenced by name (which is internally matched to a unique ID).
 
 (group-tag)=
 ## Group tag
-> See first: {ref}`tag`
 
 A group tag has the following format:
 
@@ -18,15 +17,15 @@ group-<group id>
 
 where `group id` represents the unique identifier of the group.
 
-(group-relation)=
-## Group relation
+(group-permission)=
+## Group permission
 
-A group relation is a {ref}`relation <relation>` that describes permissions on a group.
+A group permission describes what an entity can do in a group.
 
-(list-of-group-relations)=
-### List of group relations
+(list-of-group-permissions)=
+### List of group permissions
 
-(group-relation-member)=
+(group-permission-member)=
 #### `member`
 
 Abilities: Shares the group's access level to Juju resources and JIMM logs.

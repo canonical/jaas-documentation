@@ -2,7 +2,15 @@
 # Manage service accounts
 > See also: {ref}`service-account`
 
-(manage-a-service-accounts-relation-to-an-entity)=
-## Manage a service account's relation to an entity
+(control-user-access-to-a-service-account)=
+## Control user access to a service account
 
-See {ref}`manage-relations`.
+To grant a (collection of) user(s) access to a service account, add an `administrator` permission between the user(s) and the service account. For example:
+
+For example:
+
+```text
+juju add-permission serviceaccount-myserviceaccount administrator serviceaccount-myotherserviceaccount
+```
+
+> See more: {ref}`manage-permissions`

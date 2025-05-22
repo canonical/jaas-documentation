@@ -7,7 +7,6 @@
 
 (controller-tag)=
 ## Controller tag
-> See first: {ref}`tag`
 
 A controller tag has the following format:
 
@@ -15,21 +14,20 @@ A controller tag has the following format:
 controller-<controller name>
 ```
 
-(controller-relation)=
-## Controller relation
+(controller-permission)=
+## Controller permission
 
-A controller relation is a {ref}`relation <relation>` that describes permissions on a controller.
+A controller permission describes what an entity can do on a controller.
 
-(list-of-controller-relations)=
-### List of controller relations
-> See first: {ref}`relation`
+(list-of-controller-permissions)=
+### List of controller permissions
 
-(controller-relation-administrator)=
+(controller-permission-administrator)=
 #### `administrator`
 
 Abilities: Can do anything that it is possible to do at the level of a controller. This grants permissions to all resources that inherit from controller access.
 
-(controller-relation-audit-log-viewer)=
+(controller-permission-audit-log-viewer)=
 #### `audit_log_viewer`
 
 Abilities: Can read audit logs.

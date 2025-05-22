@@ -54,15 +54,18 @@ juju list-roles [options]
 
 > See more: {doc}`juju list-roles <../reference/jaas-plugin>`
 
-(manage-an-entitys-relation-to-a-role)=
-## Manage an entity's relation to a role
+(assign-a-user-to-a-role)=
+## Assign a user to a role
 
-See {ref}`manage-relations`.
+To assign a user to a role, add an `assignee` permission between the user and the role. For example:
 
-(manage-a-roles-relation-to-an-entity)=
-## Manage a role's relation to an entity
+```text
+juju add-permission user-alice@canonical.com assignee role-myrole
+juju add-permission group-mygroup#member assignee role-myrole
+juju add-permission user-everyone@external assignee role-my-role
+```
 
-See {ref}`manage-relations`.
+> See more: {ref}`manage-permissions`
 
 (rename-a-role)=
 ## Rename a role

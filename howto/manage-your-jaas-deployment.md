@@ -127,7 +127,7 @@ juju config jimm juju-dashboard-location="<juju-dashboard-url>"
 
 For this how-to you will need the following:
 
-- A basic understanding of JAAS tags, see {ref}`tag`.
+- A basic understanding of JAAS tags.
 - A running JAAS environment, see {doc}`the tutorial <../tutorial/index>`.
 - An understanding of Juju permissions, see the [Juju docs](https://juju.is/docs/juju/user-permissions).
 
@@ -176,12 +176,12 @@ This document shows how to integrate the different components of JAAS with the
 The Canonical Observability Stack is a Juju bundle that includes a series of
 open source observability applications and related automation.
 For the complete list of components in COS, read the
-[Component List](https://charmhub.io/topics/canonical-observability-stack/editions/lite).
+[Component List](https://documentation.ubuntu.com/observability/explanation/cos-lite/).
 
 ### Prerequisites
 
 - A running `COS-Lite` bundle.
-  You can follow the [Getting started on MicroK8s](https://charmhub.io/topics/canonical-observability-stack/tutorials/install-microk8s).
+  You can follow the [Getting started on MicroK8s](https://documentation.ubuntu.com/observability/tutorial/installation/getting-started-with-cos-lite/) guide.
   tutorial to get you started. Make sure to follow the section **Deploy the COS Lite bundle with overlays** section to create offers.
 - A running JAAS. Please refer to the deployment {doc}`the tutorial <../tutorial/index>`.
 

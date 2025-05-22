@@ -151,7 +151,20 @@ If the model migration fails, then no further user input is required and the mod
 
 To inspect the reason for failure, consult the output from `juju debug-log` and `juju status`.
 
-(manage-an-entitys-relation-to-a-model)=
-## Manage an entity's relation to a model
+(control-user-access-to-a-model)=
+## Control user access to a model
 
-See {ref}`manage-relations`.
+To grant a (collection of) user(s) access to a model, add a `reader`, `writer`, or `administrator` permission between the user(s) and the model. For example:
+
+For example:
+
+```text
+# Make Alice model admin:
+juju add-permission user-alice@canonical.com administrator cloud-mycloud
+
+# Let all users with role myrole have read access to model mymodel:
+juju add-permission role-myrole#assignee reader model-mycontroller/mymodel
+
+```
+
+> See more: {ref}`manage-permissions`

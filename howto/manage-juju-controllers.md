@@ -115,8 +115,16 @@ juju switch jimm
 juju register-controller workload-lxd --local --tls-hostname juju-apiserver
 ```
 
-(manage-an-entitys-relation-to-a-juju-controller)=
-## Manage an entity's relation to a Juju controller
 
-See {ref}`manage-relations`.
+(control-user-access-to-a-juju-controller)=
+## Control user access to a Juju controller
 
+To grant a (collection of) user(s) access to a Juju controller, add an `audit_log_viewer` or `administrator` permission between the user(s) and the controller. For example:
+
+```text
+# Make Alice controller admin:
+juju add-permission user-alice@canonical.com administrator controller-mycontroller
+
+```
+
+> See more: {ref}`manage-permissions`
