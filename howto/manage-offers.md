@@ -17,23 +17,3 @@ juju add-permission user-alice@canonical.com consumer applicationoffer-mycontrol
 
 > See more: {ref}`manage-permissions`
 
-<!--
-# applicationoffer
-("applicationoffer:some_offer#administrator", "consumer", "applicationoffer:some_offer")
-("applicationoffer:some_offer#consumer", "reader", "applicationoffer:some_offer")
-("group:some_group#member", "administrator", "applicationoffer:some_offer")
-("group:some_group#member", "consumer", "applicationoffer:some_offer")
-("group:some_group#member", "reader", "applicationoffer:some_offer")
-("model:some_model", "model", "applicationoffer:some_offer")
-("model:some_model#administrator", "administrator", "applicationoffer:some_offer")
-("role:some_role#assignee", "administrator", "applicationoffer:some_offer")
-("role:some_role#assignee", "consumer", "applicationoffer:some_offer")
-("role:some_role#assignee", "reader", "applicationoffer:some_offer")
-("user:*", "administrator", "applicationoffer:some_offer")
-("user:*", "consumer", "applicationoffer:some_offer")
-("user:*", "reader", "applicationoffer:some_offer")
-("user:some_user", "administrator", "applicationoffer:some_offer")
-("user:some_user", "consumer", "applicationoffer:some_offer")
-("user:some_user", "reader", "applicationoffer:some_offer")
--->
-

@@ -14,11 +14,3 @@ juju add-permission serviceaccount-myserviceaccount administrator serviceaccount
 ```
 
 > See more: {ref}`manage-permissions`
-
-<!--
-# serviceaccount
-("group:some_group#member", "administrator", "serviceaccount:some_account")
-("role:some_role#assignee", "administrator", "serviceaccount:some_account")
-("user:*", "administrator", "serviceaccount:some_account")
-("user:some_user", "administrator", "serviceaccount:some_account")
--->

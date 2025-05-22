@@ -55,32 +55,3 @@ juju add-permission user-everyone@external consumer applicationoffer-mycontrolle
 ```
 
 > See more: {ref}`manage-permissions`, {ref}`assign-a-user-to-a-role`, {ref}`add-a-user-to-a-group`, {ref}`control-user-access-to-a-juju-controller`, {ref}`control-user-access-to-a-cloud`, {ref}`control-user-access-to-a-model`, {ref}`control-user-access-to-an-offer`
-
-<!--
-("user:*", "administrator", "applicationoffer:some_offer")
-("user:*", "administrator", "cloud:some_cloud")
-("user:*", "administrator", "controller:some_controller")
-("user:*", "administrator", "model:some_model")
-("user:*", "administrator", "serviceaccount:some_account")
-("user:*", "assignee", "role:some_role")
-("user:*", "audit_log_viewer", "controller:some_controller")
-("user:*", "can_addmodel", "cloud:some_cloud")
-("user:*", "consumer", "applicationoffer:some_offer")
-("user:*", "member", "group:some_group")
-("user:*", "reader", "applicationoffer:some_offer")
-("user:*", "reader", "model:some_model")
-("user:*", "writer", "model:some_model")
-("user:some_user", "administrator", "applicationoffer:some_offer")
-("user:some_user", "administrator", "cloud:some_cloud")
-("user:some_user", "administrator", "controller:some_controller")
-("user:some_user", "administrator", "model:some_model")
-("user:some_user", "administrator", "serviceaccount:some_account")
-("user:some_user", "assignee", "role:some_role")
-("user:some_user", "audit_log_viewer", "controller:some_controller")
-("user:some_user", "can_addmodel", "cloud:some_cloud")
-("user:some_user", "consumer", "applicationoffer:some_offer")
-("user:some_user", "member", "group:some_group")
-("user:some_user", "reader", "applicationoffer:some_offer")
-("user:some_user", "reader", "model:some_model")
-("user:some_user", "writer", "model:some_model")
--->

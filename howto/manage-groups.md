@@ -69,13 +69,6 @@ juju add-permission group-groupA#member member group-groupB
 juju add-permission user-everyone@external member group-mygroup
 ```
 
-<!--
-# group
-("group:some_other_group#member", "member", "group:some_group")
-("user:*", "member", "group:some_group")
-("user:some_user", "member", "group:some_group")
--->
-
 > See more: {ref}`manage-permissions`
 
 

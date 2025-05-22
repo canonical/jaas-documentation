@@ -121,8 +121,6 @@ juju register-controller workload-lxd --local --tls-hostname juju-apiserver
 
 To grant a (collection of) user(s) access to a Juju controller, add an `audit_log_viewer` or `administrator` permission between the user(s) and the controller. For example:
 
-For example:
-
 ```text
 # Make Alice controller admin:
 juju add-permission user-alice@canonical.com administrator controller-mycontroller
@@ -130,18 +128,3 @@ juju add-permission user-alice@canonical.com administrator controller-mycontroll
 ```
 
 > See more: {ref}`manage-permissions`
-
-<!--
-# controller
-("controller:some_controller#administrator", "administrator", "controller:some_controller")
-("controller:some_controller#administrator", "audit_log_viewer", "controller:some_controller")
-("controller:some_other_controller", "controller", "controller:some_controller")
-("group:some_group#member", "administrator", "controller:some_controller")
-("group:some_group#member", "audit_log_viewer", "controller:some_controller")
-("role:some_role#assignee", "administrator", "controller:some_controller")
-("role:some_role#assignee", "audit_log_viewer", "controller:some_controller")
-("user:*", "administrator", "controller:some_controller")
-("user:*", "audit_log_viewer", "controller:some_controller")
-("user:some_user", "administrator", "controller:some_controller")
-("user:some_user", "audit_log_viewer", "controller:some_controller")
--->

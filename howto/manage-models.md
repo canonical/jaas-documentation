@@ -168,23 +168,3 @@ juju add-permission role-myrole#assignee reader model-mycontroller/mymodel
 ```
 
 > See more: {ref}`manage-permissions`
-
-<!--
-# model
-("controller:some_controller", "controller", "model:some_model")
-("controller:some_controller#administrator", "administrator", "model:some_model")
-("group:some_group#member", "administrator", "model:some_model")
-("group:some_group#member", "reader", "model:some_model")
-("group:some_group#member", "writer", "model:some_model")
-("model:some_model#administrator", "writer", "model:some_model")
-("model:some_model#writer", "reader", "model:some_model")
-("role:some_role#assignee", "administrator", "model:some_model")
-("role:some_role#assignee", "reader", "model:some_model")
-("role:some_role#assignee", "writer", "model:some_model")
-("user:*", "administrator", "model:some_model")
-("user:*", "reader", "model:some_model")
-("user:*", "writer", "model:some_model")
-("user:some_user", "administrator", "model:some_model")
-("user:some_user", "reader", "model:some_model")
-("user:some_user", "writer", "model:some_model")
--->

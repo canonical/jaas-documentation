@@ -3,7 +3,7 @@
 
 JAAS provides enterprise-level features on top of Juju. One such feature is enhanced authorization, which provides enterprises with more control over user permissions to access underlying Juju resources (e.g., controllers or models).
 
-JAAS reshapes Juju's permission model based on access levels into the more flexible [Relationship-Based Access Control (ReBAC)](https://en.wikipedia.org/wiki/Relationship-based_access_control) paradigm and also expands the list of entities that can be involved in access: With Juju access levels a user is granted access to another entity. With JAAS relations, a user, service account, role or group is brought into a relation with another entity, where the relation is about access to the entity.
+JAAS reshapes Juju's permission model based on access levels into the more flexible [Relationship-Based Access Control (ReBAC)](https://en.wikipedia.org/wiki/Relationship-based_access_control) paradigm: while with Juju you can grant a specific user access to a specific entity, with JAAS you can pick every user, or every user in a given group or with a given role.
 
 At present JAAS relations are parallel to {external+juju:ref}`Juju access levels <user-access-levels>`, but in the future they're expected to become a superset thereof.
 
@@ -88,83 +88,3 @@ type serviceaccount
 
 Inherently, the authorization model is a static component and cannot be changed by the administrators of JAAS. On the other hand, the tuples, are dynamic data and JAAS provides tools for administrators to manipulate them.
 
-
-````{dropdown} View all the tuple templates arising from the authorization model
-
-Note: The `controller` and `model` relations are implicit internal relations that describe the inheritance structure for permissions (e.g., the fact that a cloud/model is always associated with a controller or an offer with a model, and permissions on the latter carry over to the former).
-
-```text
-
-(applicationoffer:some_offer, model, model:some_model)
-(applicationoffer:some_offer, administrator, user:some_user)
-(applicationoffer:some_offer, administrator, user:*)
-(applicationoffer:some_offer, administrator, group:some_group#member)
-(applicationoffer:some_offer, administrator, role:some_role#assignee)
-(applicationoffer:some_offer, administrator, model:some_model#administrator)
-(applicationoffer:some_offer, consumer, user:some_user)
-(applicationoffer:some_offer, consumer, user:*)
-(applicationoffer:some_offer, consumer, group:some_group#member)
-(applicationoffer:some_offer, consumer, role:some_role#assignee)
-(applicationoffer:some_offer, consumer, applicationoffer:some_offer#administrator)
-(applicationoffer:some_offer, reader, user:some_user)
-(applicationoffer:some_offer, reader, user:*)
-(applicationoffer:some_offer, reader, group:some_group#member)
-(applicationoffer:some_offer, reader, role:some_role#assignee)
-(applicationoffer:some_offer, reader, applicationoffer:some_offer#consumer)
-
-(cloud:some_cloud, controller, controller:some_controller)
-(cloud:some_cloud, administrator, user:some_user)
-(cloud:some_cloud, administrator, user:*)
-(cloud:some_cloud, administrator, group:some_group#member)
-(cloud:some_cloud, administrator, role:some_role#assignee)
-(cloud:some_cloud, administrator, controller:some_controller#administrator)
-(cloud:some_cloud, can_addmodel, user:some_user)
-(cloud:some_cloud, can_addmodel, user:*)
-(cloud:some_cloud, can_addmodel, group:some_group#member)
-(cloud:some_cloud, can_addmodel, role:some_role#assignee)
-(cloud:some_cloud, can_addmodel, cloud:some_cloud#administrator)
-
-(controller:some_controller, controller, controller:some_other_controller)
-(controller:some_controller, administrator, user:some_user)
-(controller:some_controller, administrator, user:*)
-(controller:some_controller, administrator, group:some_group#member)
-(controller:some_controller, administrator, role:some_role#assignee)
-(controller:some_controller, administrator, controller:some_controller#administrator)
-(controller:some_controller, audit_log_viewer, user:some_user)
-(controller:some_controller, audit_log_viewer, user:*)
-(controller:some_controller, audit_log_viewer, group:some_group#member)
-(controller:some_controller, audit_log_viewer, role:some_role#assignee)
-(controller:some_controller, audit_log_viewer, controller:some_controller#administrator)
-
-(group:some_group, member, user:some_user)
-(group:some_group, member, user:*)
-(group:some_group, member, group:some_other_group#member)
-
-(model:some_model, controller, controller:some_controller)
-(model:some_model, administrator, user:some_user)
-(model:some_model, administrator, user:*)
-(model:some_model, administrator, group:some_group#member)
-(model:some_model, administrator, role:some_role#assignee)
-(model:some_model, administrator, controller:some_controller#administrator)
-(model:some_model, reader, user:some_user)
-(model:some_model, reader, user:*)
-(model:some_model, reader, group:some_group#member)
-(model:some_model, reader, role:some_role#assignee)
-(model:some_model, reader, model:some_model#writer)
-(model:some_model, writer, user:some_user)
-(model:some_model, writer, user:*)
-(model:some_model, writer, group:some_group#member)
-(model:some_model, writer, role:some_role#assignee)
-(model:some_model, writer, model:some_model#administrator)
-
-(role:some_role, assignee, user:some_user)
-(role:some_role, assignee, user:*)
-(role:some_role, assignee, group:some_group#member)
-
-(serviceaccount:some_account, administrator, user:some_user)
-(serviceaccount:some_account, administrator, user:*)
-(serviceaccount:some_account, administrator, group:some_group#member)
-(serviceaccount:some_account, administrator, role:some_role#assignee)
-
-```
-````

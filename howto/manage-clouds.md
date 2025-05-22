@@ -19,18 +19,3 @@ juju add-permission user-everyone@external can_addmodel cloud-mycloud
 ```
 
 > See more: {ref}`manage-permissions`
-
-<!--
-# cloud
-("cloud:some_cloud#administrator", "can_addmodel", "cloud:some_cloud")
-("controller:some_controller", "controller", "cloud:some_cloud")
-("controller:some_controller#administrator", "administrator", "cloud:some_cloud")
-("group:some_group#member", "administrator", "cloud:some_cloud")
-("group:some_group#member", "can_addmodel", "cloud:some_cloud")
-("role:some_role#assignee", "administrator", "cloud:some_cloud")
-("role:some_role#assignee", "can_addmodel", "cloud:some_cloud")
-("user:*", "administrator", "cloud:some_cloud")
-("user:*", "can_addmodel", "cloud:some_cloud")
-("user:some_user", "administrator", "cloud:some_cloud")
-("user:some_user", "can_addmodel", "cloud:some_cloud")
--->

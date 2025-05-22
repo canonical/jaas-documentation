@@ -65,13 +65,6 @@ juju add-permission group-mygroup#member assignee role-myrole
 juju add-permission user-everyone@external assignee role-my-role
 ```
 
-<!--
-# role
-("group:some_group#member", "assignee", "role:some_role")
-("user:*", "assignee", "role:some_role")
-("user:some_user", "assignee", "role:some_role")
--->
-
 > See more: {ref}`manage-permissions`
 
 (rename-a-role)=
