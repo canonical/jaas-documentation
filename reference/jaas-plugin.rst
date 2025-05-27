@@ -158,11 +158,11 @@ Certain constraints apply when creating/removing permissions, namely: Object may
 
 ::
 
-   user tag                = "user-&lt;name&gt;"
-   group tag               = "group-&lt;name&gt;"
-   controller tag          = "controller-&lt;name&gt;"
-   model tag               = "model-&lt;name&gt;"
-   application offer tag   = "offer-&lt;name&gt;"
+   user tag                = "user-<name>"
+   group tag               = "group-<name>"
+   controller tag          = "controller-<name>"
+   model tag               = "model-<name>"
+   application offer tag   = "offer-<name>"
 
 If target_object is a group, the relation can only be:
 
@@ -1413,25 +1413,25 @@ Usage
 Options
 ~~~~~~~
 
-+--------------------------------+-----------------------+----------------------------------------------------------------------------------------------------+
-| Flag                           | Default               | Usage                                                                                              |
-+================================+=======================+====================================================================================================+
-| ``-B``, ``--no-browser-login`` | false                 | Do not use web browser for authentication                                                          |
-+--------------------------------+-----------------------+----------------------------------------------------------------------------------------------------+
-| ``--dry-run``                  | false                 | Dry-run enabled will only print the controller details.                                            |
-+--------------------------------+-----------------------+----------------------------------------------------------------------------------------------------+
-| ``--file``                     |                       | Specify a file-path for controller details, use ‘-’ to read from stdin.                            |
-+--------------------------------+-----------------------+----------------------------------------------------------------------------------------------------+
-| ``--format``                   | yaml                  | Specify output format (json|yaml)                                                                  |
-+--------------------------------+-----------------------+----------------------------------------------------------------------------------------------------+
-| ``--local``                    | false                 | If local flag is specified, then the local API address and CA cert of the controller will be used. |
-+--------------------------------+-----------------------+----------------------------------------------------------------------------------------------------+
-| ``-o``, ``--output``           |                       | Specify an output file                                                                             |
-+--------------------------------+-----------------------+----------------------------------------------------------------------------------------------------+
-| ``--public-address``           |                       | Specify a custom public address to use for dialing the controller.                                 |
-+--------------------------------+-----------------------+----------------------------------------------------------------------------------------------------+
-| ``--tls-hostname``             |                       | Specify the hostname for TLS verification.                                                         |
-+--------------------------------+-----------------------+----------------------------------------------------------------------------------------------------+
++--------------------------------+-----------------------+------------------------------------------------------------------------------------------------------+
+| Flag                           | Default               | Usage                                                                                                |
++================================+=======================+======================================================================================================+
+| ``-B``, ``--no-browser-login`` | false                 | Do not use web browser for authentication                                                            |
++--------------------------------+-----------------------+------------------------------------------------------------------------------------------------------+
+| ``--dry-run``                  | false                 | Dry-run enabled will only print the controller details.                                              |
++--------------------------------+-----------------------+------------------------------------------------------------------------------------------------------+
+| ``--file``                     |                       | Specify a file-path for controller details, use ‘-’ to read from stdin.                              |
++--------------------------------+-----------------------+------------------------------------------------------------------------------------------------------+
+| ``--format``                   | yaml                  | Specify output format (json|yaml)                                                                    |
++--------------------------------+-----------------------+------------------------------------------------------------------------------------------------------+
+| ``--local``                    | false                 | If local flag is specified, then the local API addresses and CA cert of the controller will be used. |
++--------------------------------+-----------------------+------------------------------------------------------------------------------------------------------+
+| ``-o``, ``--output``           |                       | Specify an output file                                                                               |
++--------------------------------+-----------------------+------------------------------------------------------------------------------------------------------+
+| ``--public-address``           |                       | Specify a custom public address to use for dialing the controller.                                   |
++--------------------------------+-----------------------+------------------------------------------------------------------------------------------------------+
+| ``--tls-hostname``             |                       | Specify the hostname for TLS verification.                                                           |
++--------------------------------+-----------------------+------------------------------------------------------------------------------------------------------+
 
 .. _examples-24:
 
@@ -1456,7 +1456,7 @@ Note that by default, this command assumes the controller has the public-hostnam
 
 Use the –local flag if the server is not configured with a public address or to ignore the controller’s public-hostname and use the custom CA of the controller.
 
-A yaml formatted file can also be used as input for cases where the controller is not available on the client. Using the –file will validate that the provided controller name matches the name in the yaml file. Using –file will ignore other flags like –public-address.
+A yaml formatted file can also be used as input for cases where the controller is not available on the client. Using the –file will validate that the provided controller name matches the name in the yaml file. Using –file will ignore other flags like –public-address and –local.
 
 Use the –dry-run flag to generate a sample file without registering the controller. This can be used later as input to register-controller.
 
@@ -1675,11 +1675,11 @@ Certain constraints apply when creating/removing permissions, namely: Object may
 
 ::
 
-   user tag                = "user-&lt;name&gt;"
-   group tag               = "group-&lt;name&gt;"
-   controller tag          = "controller-&lt;name&gt;"
-   model tag               = "model-&lt;name&gt;"
-   application offer tag   = "offer-&lt;name&gt;"
+   user tag                = "user-<name>"
+   group tag               = "group-<name>"
+   controller tag          = "controller-<name>"
+   model tag               = "model-<name>"
+   application offer tag   = "offer-<name>"
 
 If target_object is a group, the relation can only be:
 
