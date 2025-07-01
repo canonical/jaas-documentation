@@ -247,6 +247,8 @@ extensions = [
     'sphinxcontrib.lightbox2',
 ]
 
+new_tab_link_show_external_link_icon = True
+
 # Excludes files or directories from processing
 
 exclude_patterns = [
