@@ -101,62 +101,37 @@ ogp_image = "https://assets.ubuntu.com/v1/253da317-image-document-ubuntudocs.svg
 
 html_context = {
     # Product page URL; can be different from product docs URL
-    #
-    # TODO: Change to your product website URL,
-    #       dropping the 'https://' prefix, e.g. 'ubuntu.com/lxd'.
-    #
-    # TODO: If there's no such website,
-    #       remove the {{ product_page }} link from the page header template
-    #       (usually .sphinx/_templates/header.html; also, see README.rst).
     "product_page": "juju.is/docs",
     # Product tag image; the orange part of your logo, shown in the page header
-    #
-    # TODO: To add a tag image, uncomment and update as needed.
-    # _static is no longer in .sphinx.
-    # For this to work, .sphinx/templates must have base.html defining product_tag.
-    # 'product_tag': '_static/tag.png',
+    # Assumes the current directory is .sphinx.
     'product_tag': '_static/logos/juju-logo-no-text.png',
     # Your Discourse instance URL
-    #
-    # TODO: Change to your Discourse instance URL or leave empty.
-    #
-    # NOTE: If set, adding ':discourse: 123' to an .rst file
-    #       will add a link to Discourse topic 123 at the bottom of the page.
     "discourse": "https://discourse.charmhub.io",
-    # Your Mattermost channel URL
-    #
-    # TODO: Change to your Mattermost channel URL or leave empty.
+    # # Your Mattermost channel URL
     # "mattermost": "",
     # Your Matrix channel URL
-    #
-    # TODO: Change to your Matrix channel URL or leave empty.
     "matrix": "https://matrix.to/#/#jimm:ubuntu.com",
     # Your documentation GitHub repository URL
-    #
-    # TODO: Change to your documentation GitHub repository URL or leave empty.
-    #
-    # NOTE: If set, links for viewing the documentation source files
-    #       and creating GitHub issues are added at the bottom of each page.
     "github_url": "https://github.com/canonical/jaas-documentation",
-    # Docs branch in the repo; used in links for viewing the source files
-    #
-    # TODO: To customise the branch, uncomment and update as needed.
-    'repo_default_branch': 'v3',
+    # Your documentation GitHub issues URL. Required for the Give feedback button.
+    "github_issues": "https://github.com/canonical/jaas-documentation/issues",
+    # 'github_issues': 'enabled',
     # Docs location in the repo; used in links for viewing the source files
-    #
-
-
-    # TODO: To customise the directory, uncomment and update as needed.
     "repo_folder": "/",
-    # TODO: To enable or disable the Previous / Next buttons at the bottom of pages
-    # Valid options: none, prev, next, both
-    # "sequential_nav": "both",
-    # TODO: To enable listing contributors on individual pages, set to True
-    "display_contributors": False,
-
-    # Required for feedback button
-    'github_issues': 'enabled',
+    # Docs branch in the repo; used in links for viewing the source files
+    'repo_default_branch': 'v3',
 }
+
+# TODO: To enable the edit button on pages, uncomment and change the link to a
+# public repository on GitHub or Launchpad. Any of the following link domains
+# are accepted:
+# - https://github.com/example-org/example"
+# - https://launchpad.net/example
+# - https://git.launchpad.net/example
+#
+# html_theme_options = {
+# 'source_edit_link': 'https://github.com/canonical/sphinx-docs-starter-pack',
+# }
 
 # TODO: To enable the edit button on pages, uncomment and change the link to a
 # public repository on GitHub or Launchpad. Any of the following link domains
@@ -179,8 +154,8 @@ html_context = {
 
 # Template and asset locations
 
-html_static_path = ["_static"]
-templates_path = [".sphinx/_templates"]
+# html_static_path = ["_static"]
+# templates_path = [".sphinx/_templates"]
 
 
 #############
