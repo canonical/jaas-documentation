@@ -13,6 +13,19 @@ These standards define how services can access your resources on your behalf and
 When logging into a web application that employs OIDC you will commonly be asked to login via a different website or provider,
 like your email or social media provider and this information is then securely passed onto the original application.
 
+## Users
+
+Users in Juju and JAAS have important differences.
+
+When operating a standalone Juju controller, users are created and stored locally in the controller's database.
+These are referred to as "local users", the most common local user is the initial "admin" user created on bootstrap.
+
+In JAAS, local users are replaced by "external users" i.e., users that come from an external
+identity provider which can represent people or service accounts. In JAAS there is no initial administator, instead
+an initial admin must be {doc}`provisioned ../howto/manage-your-jaas-deployment` .
+
+The username for external users in JAAS is either an email address or a service account ID with the suffix `@serviceaccount`.
+
 ## Login providers
 
 Because JAAS uses the OAuth 2.0/OIDC standard, theoretically various providers can be connected to JAAS and used as a login provider.
