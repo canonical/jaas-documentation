@@ -88,13 +88,13 @@ Run the following commands to bootstrap a LXD based controller:
 CLOUDINIT_FILE="cloudinit-tweak.temp.yaml"
 CONTROLLER_NAME="workload-lxd"
 CLOUDINIT_TEMPLATE=$'cloudinit-userdata: |
-preruncmd:
-    - echo "%s    test-jimm.localhost" >> /etc/hosts
-ca-certs:
+  preruncmd:
+    - echo "%s    test-jimm.domain" >> /etc/hosts
+  ca-certs:
     trusted:
-    - |\n%s'
-printf "$CLOUDINIT_TEMPLATE" "$(lxc network get lxdbr0 ipv4.address | cut -f1 -d/)" "(cat /usr/local/share/ca-certificates/jimm-test.crt | sed -e 's/^/      /')" > "{CLOUDINIT_FILE}"
-juju bootstrap lxd "${CONTROLLER_NAME}" --config "${CLOUDINIT_FILE}" --configlogin-token-refresh-url=https://test-jimm.localhost/.well-known/jwks.json --debug
+      - |\n%s'
+printf "$CLOUDINIT_TEMPLATE" "$(lxc network get lxdbr0 ipv4.address | cut -f1 -d/)" "$(cat /usr/local/share/ca-certificates/jimm-test.crt | sed -e 's/^/      /')" > "${CLOUDINIT_FILE}"
+juju bootstrap lxd "${CONTROLLER_NAME}" --config "${CLOUDINIT_FILE}" --config login-token-refresh-url=https://test-jimm.domain/.well-known/jwks.json --debug
 ```
 
 The set of commands will do the following:
