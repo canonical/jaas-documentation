@@ -1,10 +1,10 @@
 (manage-models)=
 # Manage models
 
-(migrate-a-model-to-jimm)=
-## Migrate a model to JIMM
+(migrate-a-model-to-jaas)=
+## Migrate a model to JAAS
 
-In many scenarios it is necessary to migrate models to and from an environment that includes JAAS.
+This section describes how to migrate a model to JAAS from an existing Juju controller.
 
 ### Prerequisites
 
@@ -16,80 +16,107 @@ In many scenarios it is necessary to migrate models to and from an environment t
 ### 1. Create a new Juju controller
 
 This is only necessary if you have a Juju controller that does not have the `login-token-refresh-url` config option set to point
-at a running JIMM instance. Use the following command to check if your controller is configured.
+to JIMM. Use the following command to check if your controller is already using JAAS.
 
 ```text
 juju switch <controller-name>
 juju controller-config login-token-refresh-url
 ```
 
-If the value is empty, the bootstrapping of a new controller with this configuration value
-is required.
+If the value is empty, we must first bootstrap a new Juju controller.
+
 In order to use models with JAAS, the models must be running on a Juju controller that is properly configured. The
 necessary config values cannot be set after bootstrap time, so any existing models must be migrated to a new controller.
 
-The process of creating a local Juju controller that is properly configured is described in {ref}`add-a-juju-controller`.
+The process of creating a Juju controller that is properly configured is described in {ref}`add-a-juju-controller`.
 
-Once a Juju controller that is configured to communicate with JIMM has been created, move onto the next step.
+Once a Juju controller configured to communicate with JAAS has been created, move onto the next step.
 
-### 2. Migrate desired models
+### 2. Create user mapping file
 
-Once you have identified which models to migrate, we will begin the process of model migration.
+When migrating a model to JAAS, local users are replaced with external users. 
 
-We will assume a model called `my-model` is currently hosted on a controller called `my-controller` and moving to a new controller
-called `workload-lxd` (`workload-lxd` should be connected to JIMM).
+What this means is clearer if we take a look at a model's full name with `juju show-model`. 
+The full model name is `<model-owner>/<model-name>` where `<model-owner>` represents a Juju user like "admin". 
+In order to migrate a model to JAAS, we must create a yaml file where we provide a mapping of local users to 
+external users (users that come from an identity provider). This is important for 2 reasons:
+
+1. Across controllers, multiple models can exist with the same name.
+By changing the model owner during import, we avoid conflicts importing many models with 
+the same name, owned by the same user, e.g. the "admin" user.
+
+2. When a controller is connected to JAAS, all application-offers are authorised by JAAS - see our {doc}`authorization doc <../explanation/jaas-authorization>` for more details on how JAAS authorises access to resources. This impacts any
+existing cross-model relations.
+
+An example mapping is below:
+
+```yaml
+admin: my-user@canonical.com
+alice: alice@canonical.com
+```
+
+The file must provide, **at minimum**, an entry mapping the existing model owner to a new external user.
+
+The mapping is also consulted when Juju relations are periodically validated.
+
+I.e. if an offer was previously consumed by the local Juju user "alice", when JIMM validates the relation it 
+will map user "alice" to "alice@canonical.com" to authorise access to the offer.
+Revoking access from "alice@canonical.com" will result in the relation encountering an error.
+
+It may not be possible to know all users that have have consumed offers when you wish to migrate a model, but 
+using [juju show-offer](https://documentation.ubuntu.com/juju/3.6/howto/manage-offers/#view-an-offers-details)
+will help to see all users that currently have access to an offer. This list should help determine which users
+to specify in the user mapping file.
+
+With a user mapping created, we can move onto the next step.
+
+### 3. Validate cloud-credentials
+
+Next we must check that we have a valid cloud-credential for the incoming model.
+Run `juju show-model` and look for the `credential` field which should resemble the below:
+```yaml
+  credential:
+    name: lxd-creds
+    owner: admin
+    cloud: localhost
+    validity-check: valid
+```
+
+The new model owner must have a cloud-credential with the same name and for the same cloud. 
+
+Using the credential details above as an example - if model `admin/foo` is being migrated
+and the user mapping contains the row `admin: joe@canonical` then `joe@canonical` must have a 
+credential (`juju show-credentials --controller`) named `lxd-creds` for cloud `localhost` in JIMM.
+
+If you do not see a matching cloud-credential, you can add one by following the instructions in [managing cloud-credentials](https://juju.is/docs/juju/manage-credentials).
+
+### 3. Migrate desired models
+
+Once you have identified which models to migrate, created a user mapping file and validated that 
+the new owner has a valid cloud-credential, we can begin the process of model migration.
+
+We will assume a model called `admin/my-model` is currently hosted on a controller called `my-controller` and a controller
+called `workload-lxd` is connected to JIMM, where JIMM is known to the CLI as `jimm`.
+
+A user mapping file called `test-mapping.yaml` is created and placed in `~/snap/juju/common/` to avoid Snap permission issues.
 
 ```text
-juju switch my-controller:my-model
-juju migrate my-model workload-lxd
+juju switch my-controller:admin/my-model
+juju jaas migrate admin/my-model jimm --backing-controller=workload-lxd --user-mapping="/home/user/snap/juju/common/test-mapping.yaml"
 juju status --watch 2s
 # Wait for model migration to complete.
-juju switch workload-lxd
-juju models
-```
-
-At this point we should see the model has been migrated.
-
-### 3. Import the model into JIMM
-
-Finally we will import the model into JIMM.
-
-First we must check that we have a cloud-credential for the cloud where the desired model is running.
-This is simply a pre-check performed when importing a model to ensure that the user has credentials for the cloud.
-
-Check with the following,
-
-```text
 juju switch jimm
-juju list-credentials --controller
-```
-
-If you do not see a cloud-credential for the desired cloud, you can add one by following the instructions in [managing cloud-credentials](https://juju.is/docs/juju/manage-credentials).
-
-We then need the model UUID to import the model.
-
-```text
-MODEL_NAME="my-model"
-juju switch workload-lxd:$MODEL_NAME
-MODEL_UUID=$(juju show-model $MODEL_NAME --format yaml | yq .$MODEL_NAME.model-uuid)
-juju switch jimm-k8s
-# Replace <user-email> below with your email address
-juju import-model workload-lxd $MODEL_UUID --owner <username>
 juju models
-# The new model should now be visible
 ```
 
-With that the model should now be visible in JIMM. The purpose of the `--owner` flag is to tell JIMM who
-the new model owner should be. Models created on Juju controllers use local users while JIMM requires external
-identities for all users.
+At this point we should see the model has been migrated. If the model migration fails, `juju debug-log` should contain more info
+and the migration will be aborted, leaving the model on the original controller.
 
-At this point you can grant other users access to the model. See Juju documentation for [more info](https://juju.is/docs/juju/user-permissions).
+After a successful migration, it is now possible to grant other users access to the model. 
+See Juju documentation for [more info](https://juju.is/docs/juju/user-permissions).
 
-Migrating the model back to the original controller is also possible using the same migrate command as used in step 2.
-Switch to the `workload-lxd` controller where the model now lives and run the same steps to migrate back to `my-controller`.
-
-(migrate-a-model-within-jimm)=
-## Migrate a model within JIMM
+(migrate-a-model-within-jaas)=
+## Migrate a model within JAAS
 
 This document briefly covers how to migrate a model between two controllers within JAAS.
 
