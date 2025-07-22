@@ -45,12 +45,3 @@ manage-roles
 manage-groups
 manage-permissions
 ```
-
-## JAAS with Terraform
-
-```{toctree}
-:titlesonly:
-:glob:
-
-use_terraform
-```
