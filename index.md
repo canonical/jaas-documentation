@@ -21,7 +21,7 @@ JAAS provides:
 
 * the {doc}`jaas plugin <./reference/jaas>` which enhances the [`juju` CLI](https://canonical-juju.readthedocs-hosted.com/en/latest/user/reference/juju-cli/),
 
-* the [Juju dashboard](https://canonical-juju.readthedocs-hosted.com/en/latest/user/reference/juju-dashboard/) (and its [backing charm](https://charmhub.io/juju-dashboard), and
+* the [Juju dashboard](https://canonical-juju.readthedocs-hosted.com/en/latest/user/reference/juju-dashboard/) (with its [backing charm](https://charmhub.io/juju-dashboard)), and
 
 * the [Terraform Provider for Juju](https://canonical-terraform-provider-juju.readthedocs-hosted.com/en/latest/).
 
