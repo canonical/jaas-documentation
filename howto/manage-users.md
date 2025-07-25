@@ -2,6 +2,7 @@
 # Manage users
 > See first: {ref}`user`
 
+(set-up-a-new-user)=
 ## Set up a new user
 
 Configure your JIMM controller to have a DNS address and share it with the user.
@@ -20,7 +21,9 @@ Assuming the user already has the `juju` CLI client installed, get the user to l
 juju login test-jimm.localhost:443 -c jaas
 ```
 
-At this point `juju controllers` should show the `jaas` controller and commands like `juju models` should work work. However, to perform any meaningful operations, the user will also need access to a cloud by adding a cloud (or being granted access to one via `juju grant-cloud`), adding cloud credentials, and using `juju update-credentials` with the `--controller jimm` flag to make their credentials available to JIMM (which will store them in Vault). For example, assuming the `localhost` cloud:
+This will print a string that includes a link to the identity provider connected to the JIMM controller. The user can use this to log in.
+
+Once that's done, if the user runs `juju controllers`, they should be able to see the `jaas` controller, and commands like `juju models` should work work. However, to perform any meaningful operations, the user will also need access to a cloud by adding a cloud (or being granted access to one via `juju grant-cloud`), adding cloud credentials, and using `juju update-credentials` with the `--controller jimm` flag to make their credentials available to JIMM (which will store them in Vault). For example, assuming the `localhost` cloud:
 
 ```text
 juju update-credentials localhost --controller jimm

@@ -37,6 +37,10 @@ If you are a site reliability engineer looking to take Juju to the enterprise le
 
 ## In this documentation
 
+- **Set up JAAS:** {ref}`Deploy JAAS <tutorial>`, {ref}`Connect a Juju controller <add-a-juju-controller>`
+- **Handle authentication and authorization:** {ref}`Set up a new user <manage-users>`, {ref}`manage-permissions`
+- **Deploy infrastructure and applications:** Use {external+juju:ref}`the juju CLI <juju-cli>` or [the Terraform Provider for Juju](https://canonical-terraform-provider-juju.readthedocs-hosted.com).
+
 ````{grid} 1 1 2 2
 
 ```{grid-item-card} [Tutorial](tutorial)
