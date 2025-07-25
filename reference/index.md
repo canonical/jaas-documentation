@@ -11,6 +11,11 @@
 *
 ```
 
+## JAAS Tools
+
+- {doc}`jaas plugin <./jaas-plugin>`
+- {ref}`audit-logs`
+
 ## JAAS Entities
 
 Items marked with an asterisk are Juju entities enhanced in JAAS. <br>
@@ -23,12 +28,6 @@ Unmarked items are JAAS-specific.
 - {ref}`offer`*
 - {ref}`role`
 - {ref}`user`*
-
-## JAAS Tools
-
-- {doc}`jaas plugin <./jaas-plugin>`
-- {ref}`audit-logs`
-
 
 ## JAAS as a whole
 
