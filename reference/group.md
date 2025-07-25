@@ -2,7 +2,7 @@
 # Group
 > See also: {ref}`manage-groups`
 
-In JAAS, a group is a collection of users or groups.
+In JAAS, a group is a collection of users, service accounts, and/or groups.
 
 A group is referenced by name (which is internally matched to a unique ID).
 
