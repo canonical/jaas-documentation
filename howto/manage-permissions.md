@@ -40,10 +40,6 @@ For any given resource, permissions are currently hierarchical and some permissi
 
 > See more: {doc}`juju add-permission <../reference/jaas-plugin>`
 
-<!--
-> - {ref}`user-tag`, {ref}`service-account-tag`, {ref}`role-tag`, {ref}`group-tag`, {ref}`controller-tag`, {ref}`cloud-tag`, {ref}`model-tag`, {ref}`offer-tag`
-> - {ref}`list-of-service-account-permissions`, {ref}`list-of-role-permissions`, {ref}`list-of-group-permissions`, {ref}`list-of-controller-permissions`, {ref}`list-of-cloud-permissions`, {ref}`list-of-model-permissions`, {ref}`list-of-offer-permissions`
--->
 
 (verify-a-permission)=
 ## Verify a permission

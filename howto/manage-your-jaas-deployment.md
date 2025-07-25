@@ -135,7 +135,7 @@ For this how-to you will need the following:
 
 In order to create an initial admin user we must use the config option `controller-admins`.
 
-The format for `controller-admins` is a space separated list of email addresses or service accounts. This means
+The format for `controller-admins` is a space separated list of email addresses. This means
 that entries can be of the form `name@domain.com` or `client-id@serviceaccount`.
 
 Run the following command replacing the contents with your email address to configure your user as a JIMM admin.

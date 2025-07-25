@@ -27,7 +27,7 @@ JAAS provides:
 
 When you use an existing Juju on Kubernetes controller to deploy JIMM and its dependencies, and then connect your Juju controllers to JIMM, you gain the ability to:
 
-- use OIDC authentication for integration with your existing identity provider for federated login, service accounts and other features offered by identity providers;
+- use OIDC authentication for integration with your existing identity provider for federated login and other features offered by identity providers;
 - use ReBAC for authorisation;
 - use the Juju CLI, Juju Dashboard, and the Terraform Provider for Juju to interact with multiple Juju controllers from a single point of contact.
 

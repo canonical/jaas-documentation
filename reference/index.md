@@ -21,9 +21,7 @@ Unmarked items are JAAS-specific.
 - {ref}`group`
 - {ref}`model`*
 - {ref}`offer`*
-- {ref}`relation`
 - {ref}`role`
-- {ref}`service-account`
 - {ref}`user`*
 
 ## JAAS Tools
