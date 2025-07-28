@@ -154,9 +154,27 @@ slug = 'jaas'
 
 # Template and asset locations
 
-html_static_path = ["_static"]
+html_static_path = [".sphinx/_static"]
 templates_path = [".sphinx/_templates"]
 
+#######################
+# Sitemap configuration: https://sphinx-sitemap.readthedocs.io/
+#######################
+
+# Base URL of RTD hosted project
+
+html_baseurl = 'https://documentation.ubuntu.com/jaas/'
+
+# URL scheme. Add language and version scheme elements.
+# When configured with RTD variables, check for RTD environment so manual runs succeed:
+
+if 'READTHEDOCS_VERSION' in os.environ:
+    version = os.environ["READTHEDOCS_VERSION"]
+    sitemap_url_scheme = '{version}{link}'
+else:
+    sitemap_url_scheme = 'MANUAL/{link}'
+
+sitemap_show_lastmod = True
 
 #############
 # Redirects #
@@ -249,6 +267,7 @@ extensions = [
     # new_tab_link_show_external_link_icon must also be set to True
     'sphinx_new_tab_link',
     'sphinxcontrib.lightbox2',
+    'sphinx_sitemap',
 ]
 
 new_tab_link_show_external_link_icon = True
@@ -270,15 +289,15 @@ exclude_patterns.extend(
     ],
 )
 
-# Adds custom CSS files, located under 'html_static_path'
+# Add CSS files (located in .sphinx/_static/)
+html_css_files = [
+	'css/cookie-banner.css'
+]
 
-# html_css_files = []
-
-
-# Adds custom JavaScript files, located under 'html_static_path'
-
-# html_js_files = []
-
+# Add JavaScript files (located in .sphinx/_static/)
+html_js_files = [
+	'js/bundle.js',
+]
 
 # Specifies a reST snippet to be appended to each .rst file
 
