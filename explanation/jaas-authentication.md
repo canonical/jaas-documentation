@@ -21,7 +21,7 @@ When operating a standalone Juju controller, users are created and stored locall
 These are referred to as "local users", the most common local user is the initial "admin" user created on bootstrap.
 
 In JAAS, local users are replaced by "external users" i.e., users that come from an external
-identity provider which can represent people or service accounts. In JAAS there is no initial administrator, instead
+identity provider, which can represent people or service accounts. In JAAS there is no initial administrator, instead
 an initial admin must be {doc}`provisioned <../howto/manage-your-jaas-deployment>`.
 
 The username for external users in JAAS is either an email address or a service account ID with the suffix `@serviceaccount`.

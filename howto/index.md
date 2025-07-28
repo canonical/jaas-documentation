@@ -40,17 +40,7 @@ manage-offers
 :glob:
 
 manage-users
-manage-service-accounts
 manage-roles
 manage-groups
 manage-permissions
-```
-
-## JAAS with Terraform
-
-```{toctree}
-:titlesonly:
-:glob:
-
-use_terraform
 ```

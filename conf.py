@@ -149,7 +149,7 @@ html_context = {
 # TODO: If your documentation is hosted on https://docs.ubuntu.com/,
 #       uncomment and update as needed.
 
-# slug = ''
+slug = 'jaas'
 
 
 # Template and asset locations
@@ -171,8 +171,12 @@ templates_path = [".sphinx/_templates"]
 # NOTE: If undefined, set to None, or empty,
 #       the sphinx_reredirects extension will be disabled.
 
-redirects = {}
-
+redirects = {
+"how-to/use_terraform": "https://canonical-terraform-provider-juju.readthedocs-hosted.com/latest/howto/manage-the-terraform-provider-for-juju/",
+"howto/use_terraform": "https://canonical-terraform-provider-juju.readthedocs-hosted.com/latest/howto/manage-the-terraform-provider-for-juju/",
+"howto/manage-service-accounts": "https://canonical-terraform-provider-juju.readthedocs-hosted.com/latest/howto/manage-service-accounts/",
+"reference/service-account": "https://canonical-terraform-provider-juju.readthedocs-hosted.com/latest/howto/manage-service-accounts/",
+}
 
 ###########################
 # Link checker exceptions #

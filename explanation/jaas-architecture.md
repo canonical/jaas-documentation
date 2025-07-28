@@ -23,7 +23,7 @@ which under the hood proxies operations to underlying controllers. This enables
 other tools, like the Juju Dashboard or Juju CLI, that communicate with a
 Juju Controller to work seamlessly with JIMM.
 
-For authentication of users or service accounts, JAAS requires an *OIDC Provider*
+For authentication, JAAS requires an *OIDC Provider*
 (Hydra) that handles the standard OAuth2.0 flows including browser flow, device flow,
 and client credentials.
 
