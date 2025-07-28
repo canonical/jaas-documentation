@@ -157,6 +157,24 @@ slug = 'jaas'
 html_static_path = ["_static"]
 templates_path = [".sphinx/_templates"]
 
+#######################
+# Sitemap configuration: https://sphinx-sitemap.readthedocs.io/
+#######################
+
+# Base URL of RTD hosted project
+
+html_baseurl = 'https://documentation.ubuntu.com/jaas/'
+
+# URL scheme. Add language and version scheme elements.
+# When configured with RTD variables, check for RTD environment so manual runs succeed:
+
+if 'READTHEDOCS_VERSION' in os.environ:
+    version = os.environ["READTHEDOCS_VERSION"]
+    sitemap_url_scheme = '{version}{link}'
+else:
+    sitemap_url_scheme = 'MANUAL/{link}'
+
+sitemap_show_lastmod = True
 
 #############
 # Redirects #
@@ -249,6 +267,7 @@ extensions = [
     # new_tab_link_show_external_link_icon must also be set to True
     'sphinx_new_tab_link',
     'sphinxcontrib.lightbox2',
+    'sphinx_sitemap',
 ]
 
 new_tab_link_show_external_link_icon = True
