@@ -36,7 +36,7 @@ Once a Juju controller configured to communicate with JAAS has been created, mov
 
 When migrating a model to JAAS, local users are replaced with external users. 
 
-What this means is clearer if we take a look at a model's full name with `juju show-model`. 
+What this means is clearer if we take a look at a model's fully qualified name with `juju show-model`. 
 The full model name is `<model-owner>/<model-name>` where `<model-owner>` represents a Juju user like "admin". 
 In order to migrate a model to JAAS, we must create a yaml file where we provide a mapping of local users to 
 external users (users that come from an identity provider). This is important for 2 reasons:
@@ -55,18 +55,33 @@ admin: my-user@canonical.com
 alice: alice@canonical.com
 ```
 
-The file must provide, **at minimum**, an entry mapping the existing model owner to a new external user.
+The file must include entries for the existing model owner, any users with model access and
+any users with access to offers hosted within the model. If any entries are missing the
+migration process will return an error indicating the missing users.
 
-The mapping is also consulted when Juju relations are periodically validated.
+You can use the `juju show-model <model-name>` command to see the users that have access to
+the model.
+You can also use the `juju list-offers` command alongside `juju show-offer <offer-name>`
+to see the users that have access to any offers hosted within the model.
+
+Any users that you do not wish to map must still be included with a null value or empty
+string in place of the external user. This indicates that you are intentionally skipping this
+local user, for example:
+'''
+alice: alice@canonical.com
+bob: null # or ""
+'''
+
+The mapping is consulted when Juju relations are periodically validated.
 
 I.e. if an offer was previously consumed by the local Juju user "alice", when JIMM validates the relation it 
 will map user "alice" to "alice@canonical.com" to authorise access to the offer.
 Revoking access from "alice@canonical.com" will result in the relation encountering an error.
 
-It may not be possible to know all users that have have consumed offers when you wish to migrate a model, but 
-using [juju show-offer](https://documentation.ubuntu.com/juju/3.6/howto/manage-offers/#view-an-offers-details)
-will help to see all users that currently have access to an offer. This list should help determine which users
-to specify in the user mapping file.
+It may not be possible to know all users that have have consumed offers when you wish to migrate a model, 
+especially if the `everyone@external` user was granted consume acccess but, using 
+[juju show-offer](https://documentation.ubuntu.com/juju/3.6/howto/manage-offers/#view-an-offers-details) 
+will help you to see all users that currently have access to an offer.
 
 With a user mapping created, we can move onto the next step.
 
