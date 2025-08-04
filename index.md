@@ -23,7 +23,7 @@ JAAS provides:
 
 * the [Juju dashboard](https://canonical-juju.readthedocs-hosted.com/en/latest/user/reference/juju-dashboard/) (with its [backing charm](https://charmhub.io/juju-dashboard)), and
 
-* the [Terraform Provider for Juju](https://canonical-terraform-provider-juju.readthedocs-hosted.com/en/latest/).
+* the [Terraform Provider for Juju](https://canonical-terraform-provider-juju.readthedocs-hosted.com/latest/).
 
 When you use an existing Juju on Kubernetes controller to deploy JIMM and its dependencies, and then connect your Juju controllers to JIMM, you gain the ability to:
 
