@@ -56,7 +56,7 @@ alice: alice@canonical.com
 ```
 
 The file must include entries for the existing model owner, any users with model access and
-any users with access to offers hosted within the model. If any entries are missing the
+any users with access to offers hosted within the model. If any entries are missing, the
 migration process will return an error indicating the missing users.
 
 You can use the `juju show-model <model-name>` command to see the users that have access to
@@ -79,7 +79,7 @@ will map user "alice" to "alice@canonical.com" to authorise access to the offer.
 Revoking access from "alice@canonical.com" will result in the relation encountering an error.
 
 It may not be possible to know all users that have have consumed offers when you wish to migrate a model, 
-especially if the `everyone@external` user was granted consume acccess but, using 
+especially if the `everyone@external` user was granted consume access but, using 
 [juju show-offer](https://documentation.ubuntu.com/juju/3.6/howto/manage-offers/#view-an-offers-details) 
 will help you to see all users that currently have access to an offer.
 

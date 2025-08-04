@@ -361,7 +361,7 @@ rediraffe_redirects = "redirects.txt"
 
 intersphinx_mapping = {
     'juju': ('https://canonical-juju.readthedocs-hosted.com/3.6/', None),
-    'tfjuju': ('https://canonical-terraform-provider-juju.readthedocs-hosted.com/en/latest/', None),
+    'tfjuju': ('https://canonical-terraform-provider-juju.readthedocs-hosted.com/latest/', None),
     'pyjuju': ('https://pythonlibjuju.readthedocs.io/en/latest/', None),
     'charmcraft': ('https://canonical-charmcraft.readthedocs-hosted.com/en/latest/', None),
     'ops': ('https://ops.readthedocs.io/en/latest/', None),
