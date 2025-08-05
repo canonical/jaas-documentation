@@ -15,7 +15,7 @@ reference/index
 explanation/index
 ```
 
-JAAS is an enterprise layer on top of [Juju](https://canonical-juju.readthedocs-hosted.com/en/latest/).
+JAAS is an enterprise layer on top of [Juju](https://documentation.ubuntu.com/juju/).
 
 JAAS provides:
 
@@ -23,11 +23,11 @@ JAAS provides:
 
 - JIMM-specific extensions to existing Juju machinery, including
 
-* the {doc}`jaas plugin <./reference/jaas>` which enhances the [`juju` CLI](https://canonical-juju.readthedocs-hosted.com/en/latest/user/reference/juju-cli/),
+* the {doc}`jaas plugin <./reference/jaas>` which enhances the [`juju` CLI](https://documentation.ubuntu.com/juju/3.6/reference/juju-cli/),
 
-* the [Juju dashboard](https://canonical-juju.readthedocs-hosted.com/en/latest/user/reference/juju-dashboard/) (with its [backing charm](https://charmhub.io/juju-dashboard)), and
+* the [Juju dashboard](https://documentation.ubuntu.com/juju/3.6/reference/juju-dashboard/) (with its [backing charm](https://charmhub.io/juju-dashboard)), and
 
-* the [Terraform Provider for Juju](https://canonical-terraform-provider-juju.readthedocs-hosted.com/latest/).
+* the [Terraform Provider for Juju](https://documentation.ubuntu.com/terraform-provider-juju/).
 
 When you use an existing Juju on Kubernetes controller to deploy JIMM and its dependencies, and then connect your Juju controllers to JIMM, you gain the ability to:
 
@@ -40,7 +40,7 @@ If you are a site reliability engineer looking to take Juju to the enterprise le
 ---------
 
 ## In this documentation
-
+- **Learn more about JAAS:** {ref}`Architecture <jaas-architecture>`, {ref}`Security <jaas-security-overview>`
 - **Set up JAAS:** {ref}`Deploy JAAS <tutorial>`, {ref}`Connect a Juju controller <add-a-juju-controller>`
 - **Handle authentication and authorization:** {ref}`Set up a new user <manage-users>`, {ref}`manage-permissions`
 - **Deploy infrastructure and applications:** Use {external+juju:ref}`the juju CLI <juju-cli>` or [the Terraform Provider for Juju](https://canonical-terraform-provider-juju.readthedocs-hosted.com).

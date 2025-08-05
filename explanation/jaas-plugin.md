@@ -26,7 +26,10 @@ Plugin commands can either be executed with the `jaas` subcommand or directly, a
 
 ```text
 $ juju jaas <command>
+```
 or
+
+```text
 $ juju <command>
 ```
 
