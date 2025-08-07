@@ -1,9 +1,10 @@
 canonical-sphinx[full]
+packaging    
 sphinxcontrib-svg2pdfconverter[CairoSVG]
 sphinx-last-updated-by-git
-sphinx-autobuild
-sphinx-tabs
+sphinx-sitemap
+# specific to this project:
 sphinxext-rediraffe
 sphinx-new-tab-link
 sphinxcontrib.lightbox2
-sphinx-sitemap
+    

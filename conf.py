@@ -133,17 +133,6 @@ html_context = {
 # 'source_edit_link': 'https://github.com/canonical/sphinx-docs-starter-pack',
 # }
 
-# TODO: To enable the edit button on pages, uncomment and change the link to a
-# public repository on GitHub or Launchpad. Any of the following link domains
-# are accepted:
-# - https://github.com/example-org/example"
-# - https://launchpad.net/example
-# - https://git.launchpad.net/example
-#
-# html_theme_options = {
-# 'source_edit_link': 'https://github.com/canonical/sphinx-docs-starter-pack',
-# }
-
 # Project slug; see https://meta.discourse.org/t/what-is-category-slug/87897
 #
 # TODO: If your documentation is hosted on https://docs.ubuntu.com/,
@@ -255,7 +244,6 @@ extensions = [
     "sphinxcontrib.cairosvgconverter",
     "sphinx_last_updated_by_git",
     # further extensions that jaas already had:
-    'sphinx_design',
     # 'sphinx_copybutton',
     # 'sphinxcontrib.jquery'
     # further extensions that we also enable in juju:
@@ -275,19 +263,9 @@ new_tab_link_show_external_link_icon = True
 # Excludes files or directories from processing
 
 exclude_patterns = [
-    '_build',
-    'Thumbs.db',
-    '.DS_Store',
-    '.sphinx',
+  'TODO.md',
+  'README.md'
 ]
-exclude_patterns.extend(
-    [
-    'doc-cheat-sheet*',
-    'README.md',
-    'starter-guide.rst',
-    'TODO.md'
-    ],
-)
 
 # Add CSS files (located in .sphinx/_static/)
 html_css_files = [
