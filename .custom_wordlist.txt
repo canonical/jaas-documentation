@@ -1,6 +1,7 @@
 # Leave a blank line at the end of this file to support concatenation
 addmodel
 addons
+Alertmanager
 alice
 API
 APIs
@@ -12,8 +13,10 @@ backend
 backend
 backends
 balancer
+balancers
 Charmcraft
 Charmhub
+CIdP
 cjk
 CLI
 CN
@@ -25,6 +28,7 @@ cryptographic
 cryptographically
 cryptographically
 CSRF
+deduplicates
 Deregisters
 dev
 Dev
@@ -35,6 +39,7 @@ dvipng
 EBS
 EKS
 enablement
+entrypoint
 favicon
 filesystem
 fonts
@@ -49,11 +54,13 @@ gyre
 HMAC
 hostname
 hostnames
+http
 https
 IAM
 IdP
 installable
 Integrations
+integrations
 Intersphinx
 IP
 IPs
@@ -76,6 +83,7 @@ lang
 LaTeX
 latexmk
 Launchpad
+lifecycle
 localhost
 LTS
 Makefile
@@ -88,6 +96,7 @@ MyST
 namespace
 namespaces
 NodePort
+NTP
 OAuth
 objectname
 observability
@@ -118,17 +127,23 @@ RSA
 rst
 RTD
 scalability
+scalable
+schema
+schemas
 SHA
 SSL
 stateful
 stdin
 subcommand
 subdirectories
+subnet
+subnets
 subfolders
 subtree
 superset
 SVG
 TeamA
+TCP
 tex
 texlive
 TOC
@@ -151,6 +166,7 @@ VM
 VMs
 WCAG
 websocket
+websockets
 whitespace
 whitespaces
 wordlist

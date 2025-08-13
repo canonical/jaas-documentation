@@ -12,6 +12,7 @@
 
 ## JAAS at a glance
 
+- {ref}`Reference architecture <reference-architecture>`
 - {ref}`Architecture <jaas-architecture>`
 - {ref}`Authentication <jaas-authentication>`
 - {ref}`Authorization <jaas-authorization>`

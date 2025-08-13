@@ -120,6 +120,9 @@ html_context = {
     "repo_folder": "/",
     # Docs branch in the repo; used in links for viewing the source files
     'repo_default_branch': 'v3',
+    # TODO: To enable or disable the Previous / Next buttons at the bottom of pages
+    # Valid options: none, prev, next, both
+    "sequential_nav": "both",
 }
 
 # TODO: To enable the edit button on pages, uncomment and change the link to a
