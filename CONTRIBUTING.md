@@ -25,12 +25,9 @@ submit the issue.
 
 ### Open an issue for code
 
-Go to https://github.com/canonical/jaas-documentation/issues  click on **New issue** (top right
+Go to https://github.com/canonical/jimm/issues click on **New issue** (top right
 corner of the page), select whatever is appropriate, then fill out the issue
 template and submit the issue.
-
-> Note: For feature requests please use
-https://matrix.to/#/#jimm:ubuntu.com
 
 ## Make your first contribution
 
