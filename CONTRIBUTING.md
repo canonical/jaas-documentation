@@ -1,3 +1,5 @@
+# How to contribute to JAAS documentation
+
 Thanks for your interest in JAAS documentation -- contributions like yours make good projects
 great!
 
