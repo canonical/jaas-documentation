@@ -266,8 +266,9 @@ new_tab_link_show_external_link_icon = True
 # Excludes files or directories from processing
 
 exclude_patterns = [
+  'CONTRIBUTING.md',
   'TODO.md',
-  'README.md'
+  'README.md',
 ]
 
 # Add CSS files (located in .sphinx/_static/)
