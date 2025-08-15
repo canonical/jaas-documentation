@@ -120,6 +120,7 @@ QEMU
 Quickstart
 ReadMe
 ReBAC
+repo
 reST
 reStructuredText
 Rockcraft
