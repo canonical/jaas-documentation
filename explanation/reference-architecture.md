@@ -194,7 +194,7 @@ In case of data loss or outage, restore things as follows:
 
 When a new stable version of Juju is released, you should upgrade all your managed models to the new version.
 
-For patch version upgrades you can follow Juju’s in-place upgrade procedure to upgrade individual controllers followed by upgrades of individual models. [See more.](https://documentation.ubuntu.com/juju/3.6/howto/manage-your-deployment/#upgrade-your-deployment)
+For patch version upgrades you can follow Juju’s in-place upgrade procedure to upgrade individual controllers followed by upgrades of individual models. {external+juju:ref}`See more. <upgrade-your-deployment>`
 
 Minor and major version upgrades of Juju controllers are not supported -- instead you must bootstrap a new Juju controller of a specific version, add it to JIMM, and migrate all your existing models to this controller. [See more.](https://documentation.ubuntu.com/jaas/v3/howto/manage-models/#migrate-a-model-within-jaas)
 
