@@ -1,5 +1,5 @@
 (jaas-security-overview)=
-# Security overview
+# JAAS security
 
 This document provides an overview of JAAS security measures, focusing on areas related to
 sensitive data storage, transmission, and cryptographic technologies.
@@ -234,3 +234,19 @@ these requests will be available in a future how-to guide.
 The following Go package is used to validate CORS requests:
 
 - `github.com/rs/cors`
+
+
+## Access control and authentication
+
+JAAS provides an abstraction layer of access control on top of Juju. JAAS does this by backing its users
+with an IdP (Identity Provider). Various identity providers can be used for this purpose (e.g. Google or Microsoft).
+We recommend the [Canonical identity platform](https://charmhub.io/topics/canonical-identity-platform) as the preferred IdP for JAAS. The IdP will handle user
+authentication on behalf of JAAS using OAuth 2.0 and OIDC. For authorisation, JAAS provides this by means
+of tags and ReBAC (Relation-Based Access Control).
+
+See the following pages for more details on how JAAS provides {ref}`jaas-authentication` and {ref}`jaas-authorization`.
+
+## Auditing and logging
+
+JAAS provides audit logs of all access to each model managed by JAAS, including information on which user
+performed the action. Currently, JAAS does not provide a way to view the logs of applications within models.
