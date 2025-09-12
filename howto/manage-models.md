@@ -13,6 +13,28 @@ This section describes how to migrate a model to JAAS from an existing Juju cont
 - A running JAAS, see the {doc}`the tutorial <../tutorial/index>`.
 - Administrator permissions for JAAS, see our {doc}`how-to <./manage-your-jaas-deployment>`.
 
+### Changes caused by model migration
+
+When migrating a model to JAAS, local users are replaced with external users. 
+
+What this means is clearer if we take a look at a model's fully qualified name using the command `juju show-model`.
+The full model name is `<model-owner>/<model-name>` where `<model-owner>` represents a Juju user like "admin". 
+When we migrate a model to JAAS we will create a yaml file where we provide a mapping of local users to 
+external users (users that come from an identity provider). This is important for 2 reasons:
+
+1. Across controllers, multiple models can exist with the same name. E.g. Controller A hosts model `admin/foo`
+and controller B hosts `admin/foo`.
+By changing the model owner during import, we avoid conflicts importing many models with 
+the same name, owned by the same user.
+
+2. When a controller is connected to JAAS, all application-offers are authorised by JAAS - see our {doc}`authorization doc <../explanation/jaas-authorization>` for more details on how JAAS authorises access to resources. This impacts any
+existing cross-model relations and the user mapping defines who can continue to access these offers.
+
+Once the model migration is complete the model's full name will change, e.g. from `admin/myModel` to `external@domain.com/myModel`.
+Any offers the model hosts will have a new offer URL, e.g. from `admin/db.mysql` to `external@domain/db.mysql`.
+
+Existing consumers of these offers will continue to function but new integrations must use the new URL.
+
 ### 1. Create a new Juju controller
 
 This is only necessary if you have a Juju controller that does not have the `login-token-refresh-url` config option set to point
@@ -34,20 +56,6 @@ Once a Juju controller configured to communicate with JAAS has been created, mov
 
 ### 2. Create user mapping file
 
-When migrating a model to JAAS, local users are replaced with external users. 
-
-What this means is clearer if we take a look at a model's fully qualified name with `juju show-model`. 
-The full model name is `<model-owner>/<model-name>` where `<model-owner>` represents a Juju user like "admin". 
-In order to migrate a model to JAAS, we must create a yaml file where we provide a mapping of local users to 
-external users (users that come from an identity provider). This is important for 2 reasons:
-
-1. Across controllers, multiple models can exist with the same name.
-By changing the model owner during import, we avoid conflicts importing many models with 
-the same name, owned by the same user, e.g. the "admin" user.
-
-2. When a controller is connected to JAAS, all application-offers are authorised by JAAS - see our {doc}`authorization doc <../explanation/jaas-authorization>` for more details on how JAAS authorises access to resources. This impacts any
-existing cross-model relations.
-
 An example mapping is below:
 
 ```yaml
@@ -55,9 +63,13 @@ admin: my-user@canonical.com
 alice: alice@canonical.com
 ```
 
-The file must include entries for the existing model owner, any users with model access and
-any users with access to offers hosted within the model. If any entries are missing, the
-migration process will return an error indicating the missing users.
+The file must include entries for:
+1. The existing model owner
+2. Any users with model access
+3. any users with access to offers hosted within the model
+
+If any entries are missing, the migration process will return an error indicating the missing users.
+The special string `everyone@external`, representing all users, should not be included in the mapping.
 
 You can use the `juju show-model <model-name>` command to see the users that have access to
 the model.
@@ -105,7 +117,7 @@ credential (`juju show-credentials --controller`) named `lxd-creds` for cloud `l
 
 If you do not see a matching cloud-credential, you can add one by following the instructions in [managing cloud-credentials](https://juju.is/docs/juju/manage-credentials).
 
-### 3. Migrate desired models
+### 4. Migrate desired models
 
 Once you have identified which models to migrate, created a user mapping file and validated that 
 the new owner has a valid cloud-credential, we can begin the process of model migration.

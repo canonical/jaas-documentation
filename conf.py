@@ -202,6 +202,8 @@ linkcheck_ignore = [
     "https://matrix.to/#",
     "https://github.com/.*",
     "https://jwt.io/introduction",
+    "https://developer.hashicorp.com/*",
+    "https://www.vaultproject.io/*"
     ]
 
 # A regex list of URLs where anchors are ignored by 'make linkcheck'
