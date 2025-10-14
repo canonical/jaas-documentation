@@ -95,7 +95,7 @@ JAAS is a member of the Ubuntu family and warmly welcomes community contribution
 * [Join our forum](https://discourse.charmhub.io/)
 * [Report a bug](https://github.com/canonical/jimm/issues)
 * [Contribute](https://github.com/canonical/jimm/blob/v3/CONTRIBUTING.md)
-* [Visit our careers page](https://juju.is/careers)
+* [Visit our careers page](https://canonical.com/careers/engineering)
 
 Thinking about using Juju for your next project? [Get in touch!](https://canonical.com/contact-us)
 
