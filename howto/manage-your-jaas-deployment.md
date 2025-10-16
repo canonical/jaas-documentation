@@ -176,12 +176,12 @@ This document shows how to integrate the different components of JAAS with the
 The Canonical Observability Stack is a Juju bundle that includes a series of
 open source observability applications and related automation.
 For the complete list of components in COS, read the
-[Stack variants](https://documentation.ubuntu.com/observability/explanation/stack-variants/).
+[Stack variants](https://documentation.ubuntu.com/observability/latest/explanation/stack-variants/).
 
 ### Prerequisites
 
 - A running `COS-Lite` bundle.
-  You can follow the [COS tutorial](https://documentation.ubuntu.com/observability/tutorial/) guide.
+  You can follow the [COS tutorial](https://documentation.ubuntu.com/observability/latest/tutorial/) guide.
   tutorial to get you started. Make sure to follow the section **Deploy the COS Lite bundle with overlays** section to create offers.
 - A running JAAS. Please refer to the deployment {doc}`the tutorial <../tutorial/index>`.
 

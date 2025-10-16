@@ -30,7 +30,7 @@ a JIMM controller.
 
 ### Prerequisites
 
-For this tutorial you will need the following:
+For this how-to you will need the following:
 
 - Basic knowledge of Juju
 - A JIMM controller deployed in MicroK8s, see {doc}`the tutorial <../tutorial/index>`.
@@ -39,11 +39,10 @@ For this tutorial you will need the following:
 
 ### Prelude
 
-In order for a Juju controller to trust a JIMM controller, the `login-token-refresh-url` config option must
-be specified when bootstrapping the Juju controller.
-
-This config option is set to a specific URL path that serves JIMM's public key, which is used to verify signed
+In order for a Juju controller to trust a JIMM controller, the `login-token-refresh-url` config option must be set to a specific URL path that serves JIMM's public key, which is used to verify signed
 requests when they reach the Juju controller.
+
+This can be specified manually when bootstrapping the Juju controller directly or is set automatically when bootstrapping through JIMM
 
 ### MicroK8s Controller
 
@@ -52,6 +51,7 @@ The following section provides guidance on how to connect a controller bootstrap
 We will name this controller `workload-microk8s` as it will be running our workloads
 as opposed to our original controller which only deploys JAAS.
 
+#### Juju bootstrap and add
 ```text
 juju bootstrap microk8s workload-microk8s --config login-token-refresh-url=http://jimm-endpoints.jimm.svc.cluster.local:8080/.well-known/jwks.json
 ```
@@ -63,7 +63,7 @@ Once this process is complete we will switch back to JIMM and add the controller
 
 ```text
 juju switch jimm
-juju register-controller workload-microk8s --local --tls-hostname juju-apiserver
+juju jaas register-controller workload-microk8s --local --tls-hostname juju-apiserver
 ```
 
 The `register-controller` command sends information about the controller to JIMM, which then connects to the new controller.
@@ -77,10 +77,21 @@ The use of the `--local` flag avoids the need to provide a public DNS address an
 hostname used in TLS, a useful way of handling TLS issues during local development. These config options are normally not needed
 in a production environment.
 
+#### JIMM bootstrap
+```text
+juju switch jimm
+juju jaas boostrap microk8s workload-microk8s 3.6.8
+```
+
+```{note}
+The desired controller version is passed to JIMM bootstrap, as opposed to needing that specific version installed locally. 
+```
 
 ### LXD Controller
 
 The following section provides guidance on how to connect a controller bootstrapped on LXD to your JIMM running in MicroK8s.
+
+#### Juju bootstrap and add
 
 Run the following commands to bootstrap a LXD based controller:
 
@@ -108,13 +119,11 @@ Next, it is helpful to understand that we are traversing from the isolated netwo
 the host's network and to the LXD container where our Juju controller resides. This is possible thanks to the `host-access`
 add-on in MicroK8s which allows containers to access the host network through a fixed IP address.
 
-Connect our new controller to JIMM.
-
+Connect our new controller to JIMM:
 ```text
 juju switch jimm
-juju register-controller workload-lxd --local --tls-hostname juju-apiserver
+juju jaas register-controller "${CONTROLLER_NAME}" --local --tls-hostname juju-apiserver
 ```
-
 
 (control-user-access-to-a-juju-controller)=
 ## Control user access to a Juju controller
@@ -128,3 +137,26 @@ juju add-permission user-alice@canonical.com administrator controller-mycontroll
 ```
 
 > See more: {ref}`manage-permissions`
+
+
+## Remove a Juju controller
+
+### Juju remove and destroy
+
+Switch to the JIMM controller and unregister your controller from JIMM:
+```text
+juju switch jimm
+juju jaas unregister-controller mycontroller
+
+Then switch to any non-JIMM controller and destroy your controller:
+```text
+juju switch mycontroller
+juju destroy-controller mycontroller
+```
+
+### JIMM destroy
+
+```text
+juju switch jimm
+juju jaas destroy-controller mycontroller
+```
