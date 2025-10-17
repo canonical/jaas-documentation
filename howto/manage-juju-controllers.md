@@ -39,10 +39,14 @@ For this how-to you will need the following:
 
 ### Prelude
 
-In order for a Juju controller to trust a JIMM controller, the `login-token-refresh-url` config option must be set to a specific URL path that serves JIMM's public key, which is used to verify signed
-requests when they reach the Juju controller.
+There are 2 ways to add controllers to JAAS/JIMM:
+1. Use the traditional `juju bootstrap` command and then register the controller with JAAS.
+2. Use the `jaas` CLI tool to have JIMM bootstrap a controller. Your client does not need to
+access the cloud provider (AWS, Openstack, etc.) only JIMM requires access to the provider.
 
-This can be specified manually when bootstrapping the Juju controller directly or is set automatically when bootstrapping through JIMM
+In order for a Juju controller to trust a JIMM controller, the `login-token-refresh-url` config option must be set to a specific URL path that serves JIMM's public key, which is used to verify signed requests when they reach the Juju controller.
+
+This can be specified manually when bootstrapping the Juju controller directly or is set automatically when bootstrapping through JIMM.
 
 ### MicroK8s Controller
 
@@ -51,7 +55,8 @@ The following section provides guidance on how to connect a controller bootstrap
 We will name this controller `workload-microk8s` as it will be running our workloads
 as opposed to our original controller which only deploys JAAS.
 
-#### Juju bootstrap and add
+````{dropdown} Juju bootstrap and add
+
 ```text
 juju bootstrap microk8s workload-microk8s --config login-token-refresh-url=http://jimm-endpoints.jimm.svc.cluster.local:8080/.well-known/jwks.json
 ```
@@ -77,21 +82,27 @@ The use of the `--local` flag avoids the need to provide a public DNS address an
 hostname used in TLS, a useful way of handling TLS issues during local development. These config options are normally not needed
 in a production environment.
 
-#### JIMM bootstrap
+````
+
+````{dropdown} JIMM bootstrap
 ```text
 juju switch jimm
-juju jaas boostrap microk8s workload-microk8s 3.6.8
+juju jaas boostrap microk8s workload-microk8s 3.6.8 --config controller-service-type=loadbalancer
 ```
 
 ```{note}
-The desired controller version is passed to JIMM bootstrap, as opposed to needing that specific version installed locally. 
+The desired controller version is passed to JIMM, as opposed to needing that specific version installed locally. 
 ```
+
+See the `jaas` plugin's {doc}`docs <../reference/jaas-plugin>` for more details on how to bootstrap a controller on Kubernetes.
+
+````
 
 ### LXD Controller
 
 The following section provides guidance on how to connect a controller bootstrapped on LXD to your JIMM running in MicroK8s.
 
-#### Juju bootstrap and add
+````{dropdown} Juju bootstrap and add
 
 Run the following commands to bootstrap a LXD based controller:
 
@@ -125,6 +136,19 @@ juju switch jimm
 juju jaas register-controller "${CONTROLLER_NAME}" --local --tls-hostname juju-apiserver
 ```
 
+````
+
+
+````{dropdown} JIMM bootstrap
+
+Bootstrapping a controller to LXD via JIMM faces additional networking hurdles because JIMM needs
+to communicate with the LXD server to bootstrap a controller. 
+
+We suggest consulting the `jaas` CLI bootstrap command {doc}`reference <../reference/jaas-plugin>` docs to better understand how to
+use the command in your desired use-case.
+
+````
+
 (control-user-access-to-a-juju-controller)=
 ## Control user access to a Juju controller
 
@@ -141,12 +165,19 @@ juju add-permission user-alice@canonical.com administrator controller-mycontroll
 
 ## Remove a Juju controller
 
-### Juju remove and destroy
+As with bootstrap there are 2 ways to remove a Juju controller attached to JIMM.
+
+These options include:
+1. Use the `jaas` plugin to first unregister the controller then use the `juju` CLI to destroy it.
+2. Use the `jaas` plugin destroy the controller via an API call to JIMM, allowing for greater automation.
+
+````{dropdown} Unregister and destroy
 
 Switch to the JIMM controller and unregister your controller from JIMM:
 ```text
 juju switch jimm
 juju jaas unregister-controller mycontroller
+```
 
 Then switch to any non-JIMM controller and destroy your controller:
 ```text
@@ -154,9 +185,16 @@ juju switch mycontroller
 juju destroy-controller mycontroller
 ```
 
-### JIMM destroy
+````
 
+````{dropdown} JIMM destroy
+Switch to the JIMM controller and destroy the controller.
+
+Note that this command will return an error if the controller is still hosting
+any models. Migrate or destroy these models before destroying the controller.
 ```text
 juju switch jimm
 juju jaas destroy-controller mycontroller
 ```
+
+````
