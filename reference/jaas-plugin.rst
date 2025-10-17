@@ -247,55 +247,43 @@ Details
 
 Adds a role.
 
-jaas audit-events
-=================
-
-**Aliases:** audit-events
+jaas bootstrap
+==============
 
 .. _summary-4:
 
 Summary
 -------
 
-Displays audit events
+Bootstrap a Juju controller via JIMM
 
 .. _usage-4:
 
 Usage
 -----
 
-``jaas list-audit-events [options]``
+``jaas bootstrap [options] <cloud name>[/region] <controller name> <juju version>``
 
 .. _options-4:
 
 Options
 ~~~~~~~
 
-+--------------------------------+-----------------------+---------------------------------------------------------------------------+
-| Flag                           | Default               | Usage                                                                     |
-+================================+=======================+===========================================================================+
-| ``-B``, ``--no-browser-login`` | false                 | Do not use web browser for authentication                                 |
-+--------------------------------+-----------------------+---------------------------------------------------------------------------+
-| ``--after``                    |                       | display events that happened after a specified time, formatted as RFC3339 |
-+--------------------------------+-----------------------+---------------------------------------------------------------------------+
-| ``--before``                   |                       | display events that happened before specified time, formatted as RFC3339  |
-+--------------------------------+-----------------------+---------------------------------------------------------------------------+
-| ``--format``                   | yaml                  | Specify output format (json|tabular|yaml)                                 |
-+--------------------------------+-----------------------+---------------------------------------------------------------------------+
-| ``--limit``                    | 0                     | limit the maximum number of returned audit events                         |
-+--------------------------------+-----------------------+---------------------------------------------------------------------------+
-| ``--method``                   |                       | display events for a specific method call                                 |
-+--------------------------------+-----------------------+---------------------------------------------------------------------------+
-| ``--model``                    |                       | display events for a specific model (model name is controller/model)      |
-+--------------------------------+-----------------------+---------------------------------------------------------------------------+
-| ``-o``, ``--output``           |                       | Specify an output file                                                    |
-+--------------------------------+-----------------------+---------------------------------------------------------------------------+
-| ``--offset``                   | 0                     | offset the set of returned audit events                                   |
-+--------------------------------+-----------------------+---------------------------------------------------------------------------+
-| ``--reverse``                  | false                 | reverse the order of logs, showing the most recent first                  |
-+--------------------------------+-----------------------+---------------------------------------------------------------------------+
-| ``--user-tag``                 |                       | display events performed by authenticated user                            |
-+--------------------------------+-----------------------+---------------------------------------------------------------------------+
++--------------------------------+-----------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+| Flag                           | Default               | Usage                                                                                                                             |
++================================+=======================+===================================================================================================================================+
+| ``-B``, ``--no-browser-login`` | false                 | Do not use web browser for authentication                                                                                         |
++--------------------------------+-----------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+| ``--config``                   |                       | Specify a configuration file, or one or more configuration options. (``--config config.yaml [--config key=value ...])``           |
++--------------------------------+-----------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+| ``--credential``               |                       | The name of the cloud credential to use for bootstrapping. Only required if more than one credential is available for the cloud.  |
++--------------------------------+-----------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+| ``--detach``                   | false                 | If set, the command will start the bootstrap job and return immediately with the job ID, without waiting for the job to complete. |
++--------------------------------+-----------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+| ``--format``                   | json                  | Specify output format (json|yaml)                                                                                                 |
++--------------------------------+-----------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+| ``-o``, ``--output``           |                       | Specify an output file                                                                                                            |
++--------------------------------+-----------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
 .. _examples-4:
 
@@ -304,18 +292,38 @@ Examples
 
 ::
 
-   juju list-audit-events --after 2020-01-01T15:00:00 --before 2020-01-01T15:00:00 --user-tag user@canonical.com --limit 50
-   juju list-audit-events --method CreateModel
-   juju audit-events --after 2020-01-01T15:00:00 --format yaml
+   juju [jaas] bootstrap <cloud[/region]> <controller name> <controller version>
+   juju [jaas] bootstrap mycloud/region mycontroller 3.6.8
+   juju [jaas] bootstrap mycloud/region mycontroller 3.6.8 --config controller-service-type=loadbalancer
 
 .. _details-4:
 
 Details
 -------
 
-Returns audit log events.
+Requests the JIMM server to bootstrap a Juju controller. The controller will be created asychronously on the specificed cloud and region.
 
-jaas bootstrap-status
+By default the command will wait for the bootstrap job to complete while printing the job logs. Note that the logs will not follow the –output flag and will always be printed to stdout. This can allow you to send the initial output with the job ID to a file, while the logs are streamed to stdout.
+
+Use the –detach flag to start the bootstrap job and return immediately, printing only the job ID, without waiting for the job to complete.
+
+The final argument, version, denotes the Juju controller to be bootstrapped.
+
+Config options for the bootstrap process can be specified via one or more –config options. Each –config option can either be a path to a YAML file containing config options, or a key=value pair. If multiple –config options are specified, they will be merged together, with later options taking precedence over earlier ones. Key=value pairs will take precedence over file contents.
+
+These config options must match the config options supported by the Juju CLI for the version of Juju being bootstrapped. See the Juju documentation for the version specified for the full list of supported bootstrap config options.
+
+Note that some config options may not be specified as they will automatically be set. These are:
+
+- login-token-refresh-url
+
+Bootstrapping to a k8s cluster requires that the service set up to handle requests to the controller be accessible outside the cluster. Typically this means a service type of LoadBalancer is needed, and Juju does create such a service if it knows it is supported by the cluster. This is performed by interrogating the cluster for a well known managed deployment such as microk8s, GKE or EKS.
+
+See the Juju bootstrap documentation for more details and how to configure bootstrap for a Kubernetes cluster Juju does not recognise.
+
+Note that JIMM will internally do the following: - download the juju CLI matching the desired controller version - bootstrap a new controller - register the controller with JIMM
+
+jaas check-permission
 =====================
 
 .. _summary-5:
@@ -323,62 +331,16 @@ jaas bootstrap-status
 Summary
 -------
 
-Displays logs for a bootstrap job
+Check access to a resource.
 
 .. _usage-5:
 
 Usage
 -----
 
-``jaas bootstrap-status [options] <job uuid>``
-
-.. _options-5:
-
-Options
-~~~~~~~
-
-+--------------------------------+-----------------------+-------------------------------------------+
-| Flag                           | Default               | Usage                                     |
-+================================+=======================+===========================================+
-| ``-B``, ``--no-browser-login`` | false                 | Do not use web browser for authentication |
-+--------------------------------+-----------------------+-------------------------------------------+
-| ``-f``                         | false                 | follow the logs of the bootstrap job      |
-+--------------------------------+-----------------------+-------------------------------------------+
-
-.. _examples-5:
-
-Examples
---------
-
-::
-
-   juju bootstrap-status 2cb433a6-04eb-4ec4-9567-90426d20a004 
-
-.. _details-5:
-
-Details
--------
-
-Displays logs for a bootstrap job.
-
-jaas check-permission
-=====================
-
-.. _summary-6:
-
-Summary
--------
-
-Check access to a resource.
-
-.. _usage-6:
-
-Usage
------
-
 ``jaas check-permission [options] <object> <relation> <target_object>``
 
-.. _options-6:
+.. _options-5:
 
 Options
 ~~~~~~~
@@ -393,7 +355,7 @@ Options
 | ``-o``, ``--output``           |                       | Specify an output file                    |
 +--------------------------------+-----------------------+-------------------------------------------+
 
-.. _examples-6:
+.. _examples-5:
 
 Examples
 --------
@@ -402,7 +364,7 @@ Examples
 
    juju check-permission user-alice@canonical.com administrator controller-aws-controller-1
 
-.. _details-6:
+.. _details-5:
 
 Details
 -------
@@ -414,21 +376,21 @@ jaas controllers
 
 **Aliases:** list-controllers
 
-.. _summary-7:
+.. _summary-6:
 
 Summary
 -------
 
 Lists all controllers known to JIMM.
 
-.. _usage-7:
+.. _usage-6:
 
 Usage
 -----
 
 ``jaas controllers [options]``
 
-.. _options-7:
+.. _options-6:
 
 Options
 ~~~~~~~
@@ -443,7 +405,7 @@ Options
 | ``-o``, ``--output``           |                       | Specify an output file                    |
 +--------------------------------+-----------------------+-------------------------------------------+
 
-.. _examples-7:
+.. _examples-6:
 
 Examples
 --------
@@ -453,12 +415,76 @@ Examples
    juju controllers 
    juju controllers --format json
 
-.. _details-7:
+.. _details-6:
 
 Details
 -------
 
 Displays controller information for all controllers known to JIMM.
+
+jaas destroy-controller
+=======================
+
+.. _summary-7:
+
+Summary
+-------
+
+Destroy a Juju controller via JIMM
+
+.. _usage-7:
+
+Usage
+-----
+
+``jaas destroy-controller [options] <controller name>``
+
+.. _options-7:
+
+Options
+~~~~~~~
+
++--------------------------------+-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| Flag                           | Default               | Usage                                                                                                                                      |
++================================+=======================+============================================================================================================================================+
+| ``-B``, ``--no-browser-login`` | false                 | Do not use web browser for authentication                                                                                                  |
++--------------------------------+-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``--detach``                   | false                 | If set, the command will start the destroy-controller job and return immediately with the job ID, without waiting for the job to complete. |
++--------------------------------+-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``--format``                   | yaml                  | Specify output format (json|yaml)                                                                                                          |
++--------------------------------+-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``--no-prompt``                | false                 | If set, the command will not prompt the user for the controller name before proceeding                                                     |
++--------------------------------+-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ``-o``, ``--output``           |                       | Specify an output file                                                                                                                     |
++--------------------------------+-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+
+.. _examples-7:
+
+Examples
+--------
+
+::
+
+   juju [jaas] destroy-controller <controller name>
+   juju [jaas] destroy-controller mycontroller
+   juju [jaas] destroy-controller mycontorller --no-prompt
+
+.. _details-7:
+
+Details
+-------
+
+Requests the JIMM server to destroy a Juju controller. The controller will be destroyed asynchronously.
+
+By default the command will wait for the destroy-controller job to complete while printing the job logs. Note that the logs will not follow the –output flag and will always be printed to stdout. This can allow you to send the initial output with the job ID to a file, while the logs are streamed to stdout.
+
+Use the –detach flag to start the bootstrap job and return immediately, printing only the job ID, without waiting for the job to complete.
+
+The argument denotes the name of the Juju controller to be destroyed.
+
+Note that JIMM will internally do the following: - download the juju CLI matching the controller version - destroy the controller - unregister the controller from JIMM
+
+Destroying controllers on k8s clouds will only work on uju 3.6.10 or newer. As a workaround, you can first unregister the controller and then destroy it separately.
 
 jaas documentation
 ==================
@@ -580,78 +606,24 @@ Details
 
 Grants a user access to read audit logs.
 
-jaas groups
-===========
-
-**Aliases:** groups
+jaas help
+=========
 
 .. _summary-10:
 
 Summary
 -------
 
-List all groups.
+Show help on a command or other topic.
 
 .. _usage-10:
 
 Usage
 -----
 
-``jaas list-groups [options]``
-
-.. _options-10:
-
-Options
-~~~~~~~
-
-+--------------------------------+-----------------------+-------------------------------------------+
-| Flag                           | Default               | Usage                                     |
-+================================+=======================+===========================================+
-| ``-B``, ``--no-browser-login`` | false                 | Do not use web browser for authentication |
-+--------------------------------+-----------------------+-------------------------------------------+
-| ``--format``                   | yaml                  | Specify output format (json|yaml)         |
-+--------------------------------+-----------------------+-------------------------------------------+
-| ``--limit``                    | 0                     | The maximum number of groups to return    |
-+--------------------------------+-----------------------+-------------------------------------------+
-| ``-o``, ``--output``           |                       | Specify an output file                    |
-+--------------------------------+-----------------------+-------------------------------------------+
-| ``--offset``                   | 0                     | The offset to use when requesting groups  |
-+--------------------------------+-----------------------+-------------------------------------------+
-
-.. _examples-10:
-
-Examples
---------
-
-::
-
-   juju list-groups
-
-.. _details-10:
-
-Details
--------
-
-Lists all groups.
-
-jaas help
-=========
-
-.. _summary-11:
-
-Summary
--------
-
-Show help on a command or other topic.
-
-.. _usage-11:
-
-Usage
------
-
 ``jaas help [flags] [topic]``
 
-.. _details-11:
+.. _details-10:
 
 Details
 -------
@@ -663,21 +635,21 @@ jaas import-model
 
 **Aliases:** register-model
 
-.. _summary-12:
+.. _summary-11:
 
 Summary
 -------
 
 Import a model to jimm
 
-.. _usage-12:
+.. _usage-11:
 
 Usage
 -----
 
 ``jaas import-model [options] <controller name> <model uuid>``
 
-.. _options-11:
+.. _options-10:
 
 Options
 ~~~~~~~
@@ -690,7 +662,7 @@ Options
 | ``--owner``                    |                       | switch the model owner to the desired user |
 +--------------------------------+-----------------------+--------------------------------------------+
 
-.. _examples-11:
+.. _examples-10:
 
 Examples
 --------
@@ -700,7 +672,7 @@ Examples
    juju import-model mycontroller ac30d6ae-0bed-4398-bba7-75d49e39f189
    juju import-model mycontroller ac30d6ae-0bed-4398-bba7-75d49e39f189 --owner user@canonical.com
 
-.. _details-12:
+.. _details-11:
 
 Details
 -------
@@ -711,26 +683,116 @@ When importing, it is necessary for JIMM to contain a set of cloud credentials t
 
 The –owner command is necessary when importing a model created by a local user and it will switch the model owner to the desired external user.
 
-jaas list-audit-events
-======================
+jaas job-status
+===============
 
-**Aliases:** audit-events
+.. _summary-12:
+
+Summary
+-------
+
+Displays logs for a job
+
+.. _usage-12:
+
+Usage
+-----
+
+``jaas job-status [options] <job uuid>``
+
+.. _options-11:
+
+Options
+~~~~~~~
+
++--------------------------------+-----------------------+-------------------------------------------+
+| Flag                           | Default               | Usage                                     |
++================================+=======================+===========================================+
+| ``-B``, ``--no-browser-login`` | false                 | Do not use web browser for authentication |
++--------------------------------+-----------------------+-------------------------------------------+
+| ``-f``                         | false                 | follow the logs of the job                |
++--------------------------------+-----------------------+-------------------------------------------+
+
+.. _examples-11:
+
+Examples
+--------
+
+::
+
+   juju job-status 2cb433a6-04eb-4ec4-9567-90426d20a004 
+
+.. _details-12:
+
+Details
+-------
+
+Displays logs for a job.
+
+jaas job-stop
+=============
 
 .. _summary-13:
 
 Summary
 -------
 
-Displays audit events
+Stop a job
 
 .. _usage-13:
 
 Usage
 -----
 
-``jaas list-audit-events [options]``
+``jaas job-stop [options] <job uuid>``
 
 .. _options-12:
+
+Options
+~~~~~~~
+
++--------------------------------+-----------------------+-------------------------------------------+
+| Flag                           | Default               | Usage                                     |
++================================+=======================+===========================================+
+| ``-B``, ``--no-browser-login`` | false                 | Do not use web browser for authentication |
++--------------------------------+-----------------------+-------------------------------------------+
+
+.. _examples-12:
+
+Examples
+--------
+
+::
+
+   juju job-stop 2cb433a6-04eb-4ec4-9567-90426d20a004 
+
+.. _details-13:
+
+Details
+-------
+
+Stop a job.
+
+jaas list-audit-events
+======================
+
+**Aliases:** audit-events
+
+.. _summary-14:
+
+Summary
+-------
+
+Displays audit events
+
+.. _usage-14:
+
+Usage
+-----
+
+``jaas list-audit-events [options]``
+
+.. _options-13:
 
 Options
 ~~~~~~~
@@ -761,7 +823,7 @@ Options
 | ``--user-tag``                 |                       | display events performed by authenticated user                            |
 +--------------------------------+-----------------------+---------------------------------------------------------------------------+
 
-.. _examples-12:
+.. _examples-13:
 
 Examples
 --------
@@ -772,63 +834,12 @@ Examples
    juju list-audit-events --method CreateModel
    juju audit-events --after 2020-01-01T15:00:00 --format yaml
 
-.. _details-13:
-
-Details
--------
-
-Returns audit log events.
-
-jaas list-controllers
-=====================
-
-**Aliases:** list-controllers
-
-.. _summary-14:
-
-Summary
--------
-
-Lists all controllers known to JIMM.
-
-.. _usage-14:
-
-Usage
------
-
-``jaas controllers [options]``
-
-.. _options-13:
-
-Options
-~~~~~~~
-
-+--------------------------------+-----------------------+-------------------------------------------+
-| Flag                           | Default               | Usage                                     |
-+================================+=======================+===========================================+
-| ``-B``, ``--no-browser-login`` | false                 | Do not use web browser for authentication |
-+--------------------------------+-----------------------+-------------------------------------------+
-| ``--format``                   | yaml                  | Specify output format (json|yaml)         |
-+--------------------------------+-----------------------+-------------------------------------------+
-| ``-o``, ``--output``           |                       | Specify an output file                    |
-+--------------------------------+-----------------------+-------------------------------------------+
-
-.. _examples-13:
-
-Examples
---------
-
-::
-
-   juju controllers 
-   juju controllers --format json
-
 .. _details-14:
 
 Details
 -------
 
-Displays controller information for all controllers known to JIMM.
+Returns audit log events.
 
 jaas list-groups
 ================
@@ -884,26 +895,76 @@ Details
 
 Lists all groups.
 
-jaas list-permissions
-=====================
-
-**Aliases:** permissions
+jaas list-migration-targets
+===========================
 
 .. _summary-16:
 
 Summary
 -------
 
-List relations.
+List migration targets for internal model migration.
 
 .. _usage-16:
 
 Usage
 -----
 
-``jaas list-permissions [options]``
+``jaas list-migration-targets [options] <model uuid>``
 
 .. _options-15:
+
+Options
+~~~~~~~
+
++--------------------------------+-----------------------+-------------------------------------------+
+| Flag                           | Default               | Usage                                     |
++================================+=======================+===========================================+
+| ``-B``, ``--no-browser-login`` | false                 | Do not use web browser for authentication |
++--------------------------------+-----------------------+-------------------------------------------+
+| ``--format``                   | yaml                  | Specify output format (json|yaml)         |
++--------------------------------+-----------------------+-------------------------------------------+
+| ``-o``, ``--output``           |                       | Specify an output file                    |
++--------------------------------+-----------------------+-------------------------------------------+
+
+.. _examples-15:
+
+Examples
+--------
+
+::
+
+   juju list-migration-targets bb933db6-b151-417f-9a62-e3e80b4ebc9b
+
+.. _details-16:
+
+Details
+-------
+
+Requests a list of controllers connected to JIMM that are valid migration targets for the specified model.
+
+This is useful to obtain a filtered list of controllers that meets the following criteria: - The controller is not the current controller for the model. - The controller can deploy to the the same cloud/region as the current controller. - The controller is running a compatible Juju version i.e. newer than or equal to the current controller.
+
+jaas list-permissions
+=====================
+
+**Aliases:** permissions
+
+.. _summary-17:
+
+Summary
+-------
+
+List relations.
+
+.. _usage-17:
+
+Usage
+-----
+
+``jaas list-permissions [options]``
+
+.. _options-16:
 
 Options
 ~~~~~~~
@@ -926,7 +987,7 @@ Options
 | ``--target``                   |                       | relation target object                    |
 +--------------------------------+-----------------------+-------------------------------------------+
 
-.. _examples-15:
+.. _examples-16:
 
 Examples
 --------
@@ -949,7 +1010,7 @@ List permissions where the target object and relation match
 
    juju list-permissions --target model-mymodel  --relation admin
 
-.. _details-16:
+.. _details-17:
 
 Details
 -------
@@ -961,21 +1022,21 @@ jaas list-roles
 
 **Aliases:** roles
 
-.. _summary-17:
+.. _summary-18:
 
 Summary
 -------
 
 List all roles.
 
-.. _usage-17:
+.. _usage-18:
 
 Usage
 -----
 
 ``jaas list-roles [options]``
 
-.. _options-16:
+.. _options-17:
 
 Options
 ~~~~~~~
@@ -994,7 +1055,7 @@ Options
 | ``--offset``                   | 0                     | The offset to use when requesting roles   |
 +--------------------------------+-----------------------+-------------------------------------------+
 
-.. _examples-16:
+.. _examples-17:
 
 Examples
 --------
@@ -1003,7 +1064,7 @@ Examples
 
    juju list-roles list
 
-.. _details-17:
+.. _details-18:
 
 Details
 -------
@@ -1013,21 +1074,21 @@ Lists all roles.
 jaas migrate
 ============
 
-.. _summary-18:
+.. _summary-19:
 
 Summary
 -------
 
 Migrate models to JAAS, targetting the desired managed controller.
 
-.. _usage-18:
+.. _usage-19:
 
 Usage
 -----
 
 ``jaas migrate [options] <model-name> <jaas-name>``
 
-.. _options-17:
+.. _options-18:
 
 Options
 ~~~~~~~
@@ -1046,7 +1107,7 @@ Options
 | ``--user-mapping``             |                       | Specify a comma-separated user mapping of local users to external users |
 +--------------------------------+-----------------------+-------------------------------------------------------------------------+
 
-.. _examples-17:
+.. _examples-18:
 
 Examples
 --------
@@ -1055,7 +1116,7 @@ Examples
 
    juju migrate alice/my-model my-jaas --backing-controller=controller-1 --user-mapping=./user-mapping.yaml
 
-.. _details-18:
+.. _details-19:
 
 Details
 -------
@@ -1081,71 +1142,19 @@ Any tools/scripts that refer to models by their full name (owner/name) will need
 jaas migrate-internal
 =====================
 
-.. _summary-19:
+.. _summary-20:
 
 Summary
 -------
 
 migrate models to another controller within JAAS
 
-.. _usage-19:
-
-Usage
------
-
-``jaas migrate-internal [options] <controller name> <model uuid> [<model uuid>...]``
-
-.. _options-18:
-
-Options
-~~~~~~~
-
-+--------------------------------+-----------------------+-------------------------------------------+
-| Flag                           | Default               | Usage                                     |
-+================================+=======================+===========================================+
-| ``-B``, ``--no-browser-login`` | false                 | Do not use web browser for authentication |
-+--------------------------------+-----------------------+-------------------------------------------+
-| ``--format``                   | yaml                  | Specify output format (json|yaml)         |
-+--------------------------------+-----------------------+-------------------------------------------+
-| ``-o``, ``--output``           |                       | Specify an output file                    |
-+--------------------------------+-----------------------+-------------------------------------------+
-
-.. _examples-18:
-
-Examples
---------
-
-::
-
-   juju migrate-internal mycontroller 2cb433a6-04eb-4ec4-9567-90426d20a004 fd469983-27c2-423b-bebf-84f616fb036b ...
-   juju migrate-internal mycontroller user@domain.com/model-a user@domain.com/model-b ...
-   juju migrate-internal mycontroller user@domain.com/model-a fd469983-27c2-423b-bebf-84f616fb036b ...
-
-.. _details-19:
-
-Details
--------
-
-The migrate-internal command migrates a model(s) between two controllers in your JAAS system. This performs a model migration, but is named “migrate-internal” to avoid confusion with the “migrate” command which migrates a model to JAAS.
-
-You may specify a model name (of the form owner/name) or model UUID.
-
-jaas model-status
-=================
-
-.. _summary-20:
-
-Summary
--------
-
-Displays full model status
-
 .. _usage-20:
 
 Usage
 -----
 
-``jaas model-status [options] <model uuid>``
+``jaas migrate-internal [options] <controller name> <model uuid> [<model uuid>...]``
 
 .. _options-19:
 
@@ -1169,34 +1178,35 @@ Examples
 
 ::
 
-   juju model-status 2cb433a6-04eb-4ec4-9567-90426d20a004 
-   juju model-status 2cb433a6-04eb-4ec4-9567-90426d20a004 --format yaml
+   juju migrate-internal mycontroller 2cb433a6-04eb-4ec4-9567-90426d20a004 fd469983-27c2-423b-bebf-84f616fb036b ...
+   juju migrate-internal mycontroller user@domain.com/model-a user@domain.com/model-b ...
+   juju migrate-internal mycontroller user@domain.com/model-a fd469983-27c2-423b-bebf-84f616fb036b ...
 
 .. _details-20:
 
 Details
 -------
 
-Displays full model status.
+The migrate-internal command migrates a model(s) between two controllers in your JAAS system. This performs a model migration, but is named “migrate-internal” to avoid confusion with the “migrate” command which migrates a model to JAAS.
 
-jaas permissions
-================
+You may specify a model name (of the form owner/name) or model UUID.
 
-**Aliases:** permissions
+jaas model-status
+=================
 
 .. _summary-21:
 
 Summary
 -------
 
-List relations.
+Displays full model status
 
 .. _usage-21:
 
 Usage
 -----
 
-``jaas list-permissions [options]``
+``jaas model-status [options] <model uuid>``
 
 .. _options-20:
 
@@ -1208,17 +1218,9 @@ Options
 +================================+=======================+===========================================+
 | ``-B``, ``--no-browser-login`` | false                 | Do not use web browser for authentication |
 +--------------------------------+-----------------------+-------------------------------------------+
-| ``--format``                   | yaml                  | Specify output format (json|tabular|yaml) |
+| ``--format``                   | yaml                  | Specify output format (json|yaml)         |
 +--------------------------------+-----------------------+-------------------------------------------+
 | ``-o``, ``--output``           |                       | Specify an output file                    |
-+--------------------------------+-----------------------+-------------------------------------------+
-| ``--object``                   |                       | relation object                           |
-+--------------------------------+-----------------------+-------------------------------------------+
-| ``--relation``                 |                       | relation name                             |
-+--------------------------------+-----------------------+-------------------------------------------+
-| ``--resolve``                  | true                  | resolves UUIDs to human readable tags     |
-+--------------------------------+-----------------------+-------------------------------------------+
-| ``--target``                   |                       | relation target object                    |
 +--------------------------------+-----------------------+-------------------------------------------+
 
 .. _examples-20:
@@ -1226,30 +1228,17 @@ Options
 Examples
 --------
 
-List all permissions
-
 ::
 
-   juju list-permissions
-
-List permissions where the target object match
-
-::
-
-   juju list-permissions --target model-mymodel
-
-List permissions where the target object and relation match
-
-::
-
-   juju list-permissions --target model-mymodel  --relation admin
+   juju model-status 2cb433a6-04eb-4ec4-9567-90426d20a004 
+   juju model-status 2cb433a6-04eb-4ec4-9567-90426d20a004 --format yaml
 
 .. _details-21:
 
 Details
 -------
 
-List permissions known to JIMM. Using the “target”, “relation” and “object” flags, only those permissions matching the filter will be returned.
+Displays full model status.
 
 jaas purge-audit-logs
 =====================
@@ -1424,77 +1413,24 @@ A yaml formatted file can also be used as input for cases where the controller i
 
 Use the –dry-run flag to generate a sample file without registering the controller. This can be used later as input to register-controller.
 
-jaas register-model
-===================
-
-**Aliases:** register-model
+jaas remove-cloud
+=================
 
 .. _summary-25:
 
 Summary
 -------
 
-Import a model to jimm
+Remove cloud from specific controller in jimm
 
 .. _usage-25:
 
 Usage
 -----
 
-``jaas import-model [options] <controller name> <model uuid>``
-
-.. _options-24:
-
-Options
-~~~~~~~
-
-+--------------------------------+-----------------------+--------------------------------------------+
-| Flag                           | Default               | Usage                                      |
-+================================+=======================+============================================+
-| ``-B``, ``--no-browser-login`` | false                 | Do not use web browser for authentication  |
-+--------------------------------+-----------------------+--------------------------------------------+
-| ``--owner``                    |                       | switch the model owner to the desired user |
-+--------------------------------+-----------------------+--------------------------------------------+
-
-.. _examples-24:
-
-Examples
---------
-
-::
-
-   juju import-model mycontroller ac30d6ae-0bed-4398-bba7-75d49e39f189
-   juju import-model mycontroller ac30d6ae-0bed-4398-bba7-75d49e39f189 --owner user@canonical.com
-
-.. _details-25:
-
-Details
--------
-
-Imports a model running on a controller into JIMM’s state.
-
-When importing, it is necessary for JIMM to contain a set of cloud credentials that represent a user’s access to the incoming model’s cloud.
-
-The –owner command is necessary when importing a model created by a local user and it will switch the model owner to the desired external user.
-
-jaas remove-cloud
-=================
-
-.. _summary-26:
-
-Summary
--------
-
-Remove cloud from specific controller in jimm
-
-.. _usage-26:
-
-Usage
------
-
 ``jaas remove-cloud [options] <controller_name> <cloud_name>``
 
-.. _options-25:
+.. _options-24:
 
 Options
 ~~~~~~~
@@ -1509,7 +1445,7 @@ Options
 | ``-o``, ``--output``           |                       | Specify an output file                    |
 +--------------------------------+-----------------------+-------------------------------------------+
 
-.. _examples-25:
+.. _examples-24:
 
 Examples
 --------
@@ -1518,7 +1454,7 @@ Examples
 
    juju remove-cloud mycontroller mycloud
 
-.. _details-26:
+.. _details-25:
 
 Details
 -------
@@ -1528,21 +1464,21 @@ Removes the specified cloud from the specified controller in JIMM.
 jaas remove-group
 =================
 
-.. _summary-27:
+.. _summary-26:
 
 Summary
 -------
 
 Remove a group.
 
-.. _usage-27:
+.. _usage-26:
 
 Usage
 -----
 
 ``jaas remove-group [options] <name>``
 
-.. _options-26:
+.. _options-25:
 
 Options
 ~~~~~~~
@@ -1559,7 +1495,7 @@ Options
 | ``-y``                         | false                 | delete group without prompt               |
 +--------------------------------+-----------------------+-------------------------------------------+
 
-.. _examples-26:
+.. _examples-25:
 
 Examples
 --------
@@ -1568,7 +1504,7 @@ Examples
 
    juju remove-group mygroup
 
-.. _details-27:
+.. _details-26:
 
 Details
 -------
@@ -1578,21 +1514,21 @@ Removes a group.
 jaas remove-permission
 ======================
 
-.. _summary-28:
+.. _summary-27:
 
 Summary
 -------
 
 Remove relation from JIMM.
 
-.. _usage-28:
+.. _usage-27:
 
 Usage
 -----
 
 ``jaas remove-permission [options] <object> <relation> <target_object>``
 
-.. _options-27:
+.. _options-26:
 
 Options
 ~~~~~~~
@@ -1609,7 +1545,7 @@ Options
 | ``-o``, ``--output``           |                       | Specify an output file                    |
 +--------------------------------+-----------------------+-------------------------------------------+
 
-.. _examples-27:
+.. _examples-26:
 
 Examples
 --------
@@ -1620,7 +1556,7 @@ Examples
    juju remove-permission group-MyTeam#member admin model-mymodel
    juju remove-permission -f /path/to/file.yaml
 
-.. _details-28:
+.. _details-27:
 
 Details
 -------
@@ -1683,21 +1619,21 @@ Additionally, if the object is a group, a userset can be applied by adding #memb
 jaas remove-role
 ================
 
-.. _summary-29:
+.. _summary-28:
 
 Summary
 -------
 
 Remove a role.
 
-.. _usage-29:
+.. _usage-28:
 
 Usage
 -----
 
 ``jaas remove-role [options] <role name>``
 
-.. _options-28:
+.. _options-27:
 
 Options
 ~~~~~~~
@@ -1714,7 +1650,7 @@ Options
 | ``-y``                         | false                 | delete role without prompt                |
 +--------------------------------+-----------------------+-------------------------------------------+
 
-.. _examples-28:
+.. _examples-27:
 
 Examples
 --------
@@ -1723,7 +1659,7 @@ Examples
 
    juju remove-role remove myrole
 
-.. _details-29:
+.. _details-28:
 
 Details
 -------
@@ -1733,19 +1669,63 @@ Removes a role.
 jaas rename-group
 =================
 
-.. _summary-30:
+.. _summary-29:
 
 Summary
 -------
 
 Rename a group.
 
-.. _usage-30:
+.. _usage-29:
 
 Usage
 -----
 
 ``jaas rename-group [options] <name> <new name>``
+
+.. _options-28:
+
+Options
+~~~~~~~
+
++--------------------------------+-----------------------+-------------------------------------------+
+| Flag                           | Default               | Usage                                     |
++================================+=======================+===========================================+
+| ``-B``, ``--no-browser-login`` | false                 | Do not use web browser for authentication |
++--------------------------------+-----------------------+-------------------------------------------+
+
+.. _examples-28:
+
+Examples
+--------
+
+::
+
+   juju rename-group mygroup newgroup
+
+.. _details-29:
+
+Details
+-------
+
+Renames a group.
+
+jaas rename-role
+================
+
+.. _summary-30:
+
+Summary
+-------
+
+Rename a role.
+
+.. _usage-30:
+
+Usage
+-----
+
+``jaas rename-role [options] <role name> <new role name>``
 
 .. _options-29:
 
@@ -1765,31 +1745,31 @@ Examples
 
 ::
 
-   juju rename-group mygroup newgroup
+   juju rename-role myrole newrolename
 
 .. _details-30:
 
 Details
 -------
 
-Renames a group.
+Renames a role.
 
-jaas rename-role
-================
+jaas revoke-audit-log
+=====================
 
 .. _summary-31:
 
 Summary
 -------
 
-Rename a role.
+revokes access to audit logs.
 
 .. _usage-31:
 
 Usage
 -----
 
-``jaas rename-role [options] <role name> <new role name>``
+``jaas revoke-audit-log [options] <user>``
 
 .. _options-30:
 
@@ -1809,31 +1789,31 @@ Examples
 
 ::
 
-   juju rename-role myrole newrolename
+   juju revoke-audit-log user@canonical.com
 
 .. _details-31:
 
 Details
 -------
 
-Renames a role.
+Revokes user access to audit logs.
 
-jaas revoke-audit-log
-=====================
+jaas set-controller-deprecated
+==============================
 
 .. _summary-32:
 
 Summary
 -------
 
-revokes access to audit logs.
+Sets controller deprecated status.
 
 .. _usage-32:
 
 Usage
 -----
 
-``jaas revoke-audit-log [options] <user>``
+``jaas set-controller-deprecated [options] <controller name>``
 
 .. _options-31:
 
@@ -1845,6 +1825,10 @@ Options
 +================================+=======================+===========================================+
 | ``-B``, ``--no-browser-login`` | false                 | Do not use web browser for authentication |
 +--------------------------------+-----------------------+-------------------------------------------+
+| ``--format``                   | yaml                  | Specify output format (json|yaml)         |
++--------------------------------+-----------------------+-------------------------------------------+
+| ``-o``, ``--output``           |                       | Specify an output file                    |
++--------------------------------+-----------------------+-------------------------------------------+
 
 .. _examples-31:
 
@@ -1853,111 +1837,9 @@ Examples
 
 ::
 
-   juju revoke-audit-log user@canonical.com
-
-.. _details-32:
-
-Details
--------
-
-Revokes user access to audit logs.
-
-jaas roles
-==========
-
-**Aliases:** roles
-
-.. _summary-33:
-
-Summary
--------
-
-List all roles.
-
-.. _usage-33:
-
-Usage
------
-
-``jaas list-roles [options]``
-
-.. _options-32:
-
-Options
-~~~~~~~
-
-+--------------------------------+-----------------------+-------------------------------------------+
-| Flag                           | Default               | Usage                                     |
-+================================+=======================+===========================================+
-| ``-B``, ``--no-browser-login`` | false                 | Do not use web browser for authentication |
-+--------------------------------+-----------------------+-------------------------------------------+
-| ``--format``                   | yaml                  | Specify output format (json|yaml)         |
-+--------------------------------+-----------------------+-------------------------------------------+
-| ``--limit``                    | 0                     | The maximum number of roles to return     |
-+--------------------------------+-----------------------+-------------------------------------------+
-| ``-o``, ``--output``           |                       | Specify an output file                    |
-+--------------------------------+-----------------------+-------------------------------------------+
-| ``--offset``                   | 0                     | The offset to use when requesting roles   |
-+--------------------------------+-----------------------+-------------------------------------------+
-
-.. _examples-32:
-
-Examples
---------
-
-::
-
-   juju list-roles list
-
-.. _details-33:
-
-Details
--------
-
-Lists all roles.
-
-jaas set-controller-deprecated
-==============================
-
-.. _summary-34:
-
-Summary
--------
-
-Sets controller deprecated status.
-
-.. _usage-34:
-
-Usage
------
-
-``jaas set-controller-deprecated [options] <controller name>``
-
-.. _options-33:
-
-Options
-~~~~~~~
-
-+--------------------------------+-----------------------+-------------------------------------------+
-| Flag                           | Default               | Usage                                     |
-+================================+=======================+===========================================+
-| ``-B``, ``--no-browser-login`` | false                 | Do not use web browser for authentication |
-+--------------------------------+-----------------------+-------------------------------------------+
-| ``--format``                   | yaml                  | Specify output format (json|yaml)         |
-+--------------------------------+-----------------------+-------------------------------------------+
-| ``-o``, ``--output``           |                       | Specify an output file                    |
-+--------------------------------+-----------------------+-------------------------------------------+
-
-.. _examples-33:
-
-Examples
---------
-
-::
-
    juju set-controller-deprecated mycontroller
 
-.. _details-34:
+.. _details-32:
 
 Details
 -------
@@ -1967,21 +1849,21 @@ Sets the deprecated status of a controller.
 jaas unregister-controller
 ==========================
 
-.. _summary-35:
+.. _summary-33:
 
 Summary
 -------
 
 Remove controller from jimm
 
-.. _usage-35:
+.. _usage-33:
 
 Usage
 -----
 
 ``jaas unregister-controller [options] <name>``
 
-.. _options-34:
+.. _options-32:
 
 Options
 ~~~~~~~
@@ -1998,7 +1880,7 @@ Options
 | ``-o``, ``--output``           |                       | Specify an output file                    |
 +--------------------------------+-----------------------+-------------------------------------------+
 
-.. _examples-34:
+.. _examples-32:
 
 Examples
 --------
@@ -2008,7 +1890,7 @@ Examples
    juju unregister-controller mycontroller 
    juju unregister-controller mycontroller --force
 
-.. _details-35:
+.. _details-33:
 
 Details
 -------
@@ -2018,21 +1900,21 @@ Deregisters a controller from JIMM.
 jaas update-migrated-model
 ==========================
 
-.. _summary-36:
+.. _summary-34:
 
 Summary
 -------
 
 Update the controller running a model.
 
-.. _usage-36:
+.. _usage-34:
 
 Usage
 -----
 
 ``jaas update-migrated-model [options] <controller name> <model uuid>``
 
-.. _options-35:
+.. _options-33:
 
 Options
 ~~~~~~~
@@ -2043,7 +1925,7 @@ Options
 | ``-B``, ``--no-browser-login`` | false                 | Do not use web browser for authentication |
 +--------------------------------+-----------------------+-------------------------------------------+
 
-.. _examples-35:
+.. _examples-33:
 
 Examples
 --------
@@ -2052,7 +1934,7 @@ Examples
 
    juju update-migrated-model mycontroller e0bf3abf-7029-4e48-9c26-68a7b6e02947
 
-.. _details-36:
+.. _details-34:
 
 Details
 -------
