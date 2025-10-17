@@ -41,8 +41,8 @@ For this how-to you will need the following:
 
 There are 2 ways to add controllers to JAAS/JIMM:
 1. Use the traditional `juju bootstrap` command and then register the controller with JAAS.
-2. Use the `jaas` CLI tool to have JIMM bootstrap a controller without any client-side logic,
-allowing for greater automation. 
+2. Use the `jaas` CLI tool to have JIMM bootstrap a controller. Your client does not need to
+access the cloud provider (AWS, Openstack, etc.) only JIMM requires access to the provider.
 
 In order for a Juju controller to trust a JIMM controller, the `login-token-refresh-url` config option must be set to a specific URL path that serves JIMM's public key, which is used to verify signed requests when they reach the Juju controller.
 
@@ -139,7 +139,7 @@ juju jaas register-controller "${CONTROLLER_NAME}" --local --tls-hostname juju-a
 ````
 
 
-````{dropdown} JIMM Bootstrap
+````{dropdown} JIMM bootstrap
 
 Bootstrapping a controller to LXD via JIMM faces additional networking hurdles because JIMM needs
 to communicate with the LXD server to bootstrap a controller. 
