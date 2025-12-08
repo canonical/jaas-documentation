@@ -282,6 +282,7 @@ exclude_patterns = [
   'README.md',
   'sp-updated',
   'upgrade_prompt.md',
+  'upgrade_report.md',
 ]
 
 # Adds custom CSS files, located under 'html_static_path'

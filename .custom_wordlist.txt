@@ -14,6 +14,7 @@ backend
 backends
 balancer
 balancers
+Canonical's
 Charmcraft
 Charmhub
 CIdP
@@ -135,6 +136,7 @@ SHA
 SSL
 stateful
 stdin
+stdout
 subcommand
 subdirectories
 subnet
@@ -175,3 +177,4 @@ xetex
 xindy
 yaml
 YAML
+Makefiles
