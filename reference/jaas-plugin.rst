@@ -1940,3 +1940,51 @@ Details
 -------
 
 Updates a model known to JIMM that has been migrated externally to a different JAAS controller.
+
+jaas upgrade-to
+===============
+
+.. _summary-35:
+
+Summary
+-------
+
+Upgrades a controller to a specified version
+
+.. _usage-35:
+
+Usage
+-----
+
+``jaas upgrade-to [options] <version> <model-uuid>``
+
+.. _options-34:
+
+Options
+~~~~~~~
+
++--------------------------------+-----------------------+-------------------------------------------+
+| Flag                           | Default               | Usage                                     |
++================================+=======================+===========================================+
+| ``-B``, ``--no-browser-login`` | false                 | Do not use web browser for authentication |
++--------------------------------+-----------------------+-------------------------------------------+
+| ``--format``                   | yaml                  | Specify output format (json|yaml)         |
++--------------------------------+-----------------------+-------------------------------------------+
+| ``-o``, ``--output``           |                       | Specify an output file                    |
++--------------------------------+-----------------------+-------------------------------------------+
+
+.. _examples-34:
+
+Examples
+--------
+
+::
+
+   juju upgrade-to 3.6.11 2cb433a6-04eb-4ec4-9567-90426d20a004
+
+.. _details-35:
+
+Details
+-------
+
+Upgrades a controller to a specified version.
