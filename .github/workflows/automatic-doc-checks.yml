@@ -18,3 +18,4 @@ jobs:
     with:
       working-directory: "."
       fetch-depth: 0
+      spelling-target: "help"
