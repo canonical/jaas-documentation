@@ -1,94 +1,59 @@
 (manage-models)=
 # Manage models
 
-(creating-a-model)=
-## Creating a model
-
-Creating a model with JAAS is similar to creating one with Juju.
-
-This section will cover:
-- How permissions for model creation are defined.
-- How controller selection is performed.
-- How to specify a specific controller to host your model.
-
-### Add-model permissions
-
-Permissions to add a model are based on a user's access to the desired
-cloud and controllers.
-
-Creating a model requires access to two things:
-- The `can_addmodel` permission on the target cloud.
-- The `can_addmodel` permission on one or more controllers that support that cloud.
-
-By default, all users have add-model access to all clouds in JAAS.
-Inversely, users are granted no default access to any controllers.
-
-See our {doc}`permission management doc <./manage-permissions>` for more details.
-
-### Controller selection
-
-Keeping in mind that JAAS is a manager of multiple controllers,
-the Juju `add-model` command will create a model on any controller
-your user can access that supports the specified cloud. JAAS will 
-prioritise controllers within that cloud to reduce latency and select
-randomly when there are multiple valid options.
-
-Consider the example below:
-
-
-```text
-juju add-model openstack my-model
-```
+(create-a-model)=
+## Create a model
 
 ```{mermaid}
 flowchart LR
     U["User </br> (limited controller access)"]
-
     subgraph Controllers
         C1["Controller A</br>(supports openstack)"]
         C2["Controller B</br>(supports openstack)"]
         C3["Controller C</br>(does NOT support openstack)"]
         C4["Controller D</br>(supports openstack)"]
     end
-
     U -- access --> C2
     U -. no access .-> C1
     U -. no access .-> C4
     U -. no access .-> C3
-
     classDef ok fill:#b3e6b3,stroke:#2d662d,stroke-width:1px;
     classDef no fill:#f2b3b3,stroke:#662d2d,stroke-width:1px;
-
     class C1,C2,C4 ok;
     class C3 no;
-
     %% Model placement result
     subgraph Result
         M[(my-model)]
     end
-
     C2 -- selected for model --> M
 ```
-In the diagram above, multiple controllers shown in green support the `openstack`
-cloud while controller C (in red) does not. The dotted lines show that user does
-not have access to any controller except controller B.
-Based on these 2 factors the only valid placement is controller B.
+_Adding a model in JAAS requires permissions on a cloud as well as a controller. In this example multiple controllers (in green) support the `openstack` cloud while controller C (in red) does not. The dotted lines show that user does not have access to any controller except controller B. Based on these 2 factors the only valid placement is controller B._
 
-### Specifying a target-controller
+To create a model:
 
-To specify the target controller that will host a model, there are 2 suggested
-approaches.
-1. Limit the controllers a user can access.
-2. Use the `jaas` plugin.
+1. Make sure you have the necessary permissions:
 
-Following option 1 allows a user to continue to use the standalone `juju` CLI
-and, provided that a user can only access a single controller for their desired cloud,
-all models they create will be hosted on this controller.
+- `can_addmodel` permission on the target cloud
+- `can_addmodel` permission on one or more controllers that support that cloud
 
-For finer-grained access, use the `jaas` plugin's `add-model` command which exposes
-the `--target-controller` flag to override standard controller selection.
-Use the `juju jaas list-controllers` command to list the controllers you have
-access to.
+> See more: {ref}`verify-a-permission`
+
+1. Add the model using the `jaas add-model` command, optionally specifying a target controller:
+For example:
+
+```
+# View all the controllers you have access to:
+juju jaas list-controllers
+# Add your model to the controller of your choice:
+juju jaas add-model --target-controller <mytargetcontroller>
+```
+
+> See more: [ADD REF TO JAAS ADD-MODEL COMMAND]
+
+Note: If you don't specify a controller: 
+a. If you only have access to one controller, JIMM will automatically add the model to that controller.  
+b. If you have access to multiple controllers, JIMM will randomly choose one for you, prioritizing controllers within the cloud so as to reduce latency.
+
 
 (migrate-a-model-to-jaas)=
 ## Migrate a model to JAAS

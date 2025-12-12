@@ -25,6 +25,7 @@ juju add-permission group-mygroup#member can-addmodel cloud-mycloud
 |-|-|-|
 |{ref}`user tag or alternatives except for role assignee <user-tag>` |{ref}`role-permission-assignee`|{ref}`role tag <role-tag>`|
 |{ref}`user tag or alternatives <user-tag>` |{ref}`group-permission-member`| {ref}`group tag <group-tag>`|
+|{ref}`user tag or alternatives <user-tag>` |{ref}`controller-permission-can-addmodel`| {ref}`controller tag <controller-tag>`|
 |{ref}`user tag or alternatives <user-tag>` |{ref}`controller-permission-audit-log-viewer`| {ref}`controller tag <controller-tag>`|
 |{ref}`user tag or alternatives <user-tag>` |{ref}`controller-permission-administrator`| {ref}`controller tag <controller-tag>`|{ref}<-permission-
 |{ref}`user tag or alternatives <user-tag>` |{ref}`cloud-permission-can-addmodel`| {ref}`cloud tag <cloud-tag>`|
