@@ -1,6 +1,95 @@
 (manage-models)=
 # Manage models
 
+(creating-a-model)=
+## Creating a model
+
+Creating a model with JAAS is similar to creating one with Juju.
+
+This section will cover:
+- How permissions for model creation are defined.
+- How controller selection is performed.
+- How to specify a specific controller to host your model.
+
+### Add-model permissions
+
+Permissions to add a model are based on a user's access to the desired
+cloud and controllers.
+
+Creating a model requires access to two things:
+- The `can_addmodel` permission on the target cloud.
+- The `can_addmodel` permission on one or more controllers that support that cloud.
+
+By default, all users have add-model access to all clouds in JAAS.
+Inversely, users are granted no default access to any controllers.
+
+See our {doc}`permission management doc <./manage-permissions>` for more details.
+
+### Controller selection
+
+Keeping in mind that JAAS is a manager of multiple controllers,
+the Juju `add-model` command will create a model on any controller
+your user can access that supports the specified cloud. JAAS will 
+prioritise controllers within that cloud to reduce latency and select
+randomly when there are multiple valid options.
+
+Consider the example below:
+
+
+```text
+juju add-model openstack my-model
+```
+
+```{mermaid}
+flowchart LR
+    U["User </br> (limited controller access)"]
+
+    subgraph Controllers
+        C1["Controller A</br>(supports openstack)"]
+        C2["Controller B</br>(supports openstack)"]
+        C3["Controller C</br>(does NOT support openstack)"]
+        C4["Controller D</br>(supports openstack)"]
+    end
+
+    U -- access --> C2
+    U -. no access .-> C1
+    U -. no access .-> C4
+    U -. no access .-> C3
+
+    classDef ok fill:#b3e6b3,stroke:#2d662d,stroke-width:1px;
+    classDef no fill:#f2b3b3,stroke:#662d2d,stroke-width:1px;
+
+    class C1,C2,C4 ok;
+    class C3 no;
+
+    %% Model placement result
+    subgraph Result
+        M[(my-model)]
+    end
+
+    C2 -- selected for model --> M
+```
+In the diagram above, multiple controllers shown in green support the `openstack`
+cloud while controller C (in red) does not. The dotted lines show that user does
+not have access to any controller except controller B.
+Based on these 2 factors the only valid placement is controller B.
+
+### Specifying a target-controller
+
+To specify the target controller that will host a model, there are 2 suggested
+approaches.
+1. Limit the controllers a user can access.
+2. Use the `jaas` plugin.
+
+Following option 1 allows a user to continue to use the standalone `juju` CLI
+and, provided that a user can only access a single controller for their desired cloud,
+all models they create will be hosted on this controller.
+
+For finer-grained access, use the `jaas` plugin's `add-model` command which exposes
+the `--target-controller` flag to override standard controller selection.
+Use the `juju jaas list-controllers` command to list the controllers you have
+access to.
+
 (migrate-a-model-to-jaas)=
 ## Migrate a model to JAAS
 
@@ -147,16 +236,13 @@ See Juju documentation for [more info](https://juju.is/docs/juju/user-permission
 
 This document briefly covers how to migrate a model between two controllers within JAAS.
 
-JIMM can have multiple controllers connected to it, where more than 1 controller has access to the same cloud.
-When a model is requested on such a cloud, JIMM will randomly select an appropriate controller.
-
-The below is useful if you want to move the model to a specific controller.
+The below is also useful if you want to move a model to a specific controller.
 
 ### Prerequisites
 
 - A basic understanding of Juju model migrations, see the [docs](https://juju.is/docs/juju/manage-models).
 - A running JAAS with with multiple controllers attached, see the {doc}`the tutorial <../tutorial/index>` for deploying JAAS.
-- Administrator permissions for JAAS, so our {ref}`add-a-juju-controller`.
+- Administrator permissions for JAAS, see {ref}`add-a-juju-controller`.
 
 Connecting multiple controllers to JAAS can be accomplished adding LXD controllers as described in {ref}`add-a-juju-controller`.
 

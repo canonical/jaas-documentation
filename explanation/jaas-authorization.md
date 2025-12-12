@@ -43,8 +43,8 @@ model
 type user
 
 type role
-  relations
-    define assignee: [user, user:*, group#member]
+ relations
+   define assignee: [user, user:*, group#member]
 
 type group
   relations
@@ -52,33 +52,31 @@ type group
 
 type controller
   relations
+    define controller: [controller]
     define administrator: [user, user:*, group#member, role#assignee] or administrator from controller
     define audit_log_viewer: [user, user:*, group#member, role#assignee] or administrator
-    define controller: [controller]
+    define can_addmodel: [user, user:*, group#member, role#assignee] or administrator
 
 type model
   relations
-    define administrator: [user, user:*, group#member, role#assignee] or administrator from controller
     define controller: [controller]
+    define administrator: [user, user:*, group#member, role#assignee] or administrator from controller
     define reader: [user, user:*, group#member, role#assignee] or writer
     define writer: [user, user:*, group#member, role#assignee] or administrator
 
 type applicationoffer
   relations
+    define model: [model]
     define administrator: [user, user:*, group#member, role#assignee] or administrator from model
     define consumer: [user, user:*, group#member, role#assignee] or administrator
-    define model: [model]
     define reader: [user, user:*, group#member, role#assignee] or consumer
 
 type cloud
   relations
+    define controller: [controller]
     define administrator: [user, user:*, group#member, role#assignee] or administrator from controller
     define can_addmodel: [user, user:*, group#member, role#assignee] or administrator
-    define controller: [controller]
 
-type serviceaccount
-  relations
-    define administrator: [user, user:*, group#member, role#assignee]
 
 ```
 ````
