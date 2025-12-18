@@ -152,17 +152,21 @@ Permissions in JIMM consist of an object, a relation and a target object. These 
 
 The object and target object must be of the form <tag>-<objectname> or <tag>-<object-uuid> E.g. “user-Alice” or “controller-MyController”
 
+Certain reserved tags exist to denote specific resource types: - The user-everyone@external tag represents all users. - The controller-jimm tag represents the JIMM controller itself.
+
 -f Read from a file where filename is the location of a JSON encoded file of the form: [ { “object”:“user-mike”, “relation”:“member”, “target_object”:“group-yellow” }, { “object”:“user-alice”, “relation”:“member”, “target_object”:“group-yellow” } ]
 
-Certain constraints apply when creating/removing permissions, namely: Object may be one of:
+Certain constraints apply when creating/removing permissions, namely: Resources may be one of:
 
 ::
 
    user tag                = "user-<name>"
    group tag               = "group-<name>"
+   role tag                = "role-&lt;name&gt;"
    controller tag          = "controller-<name>"
    model tag               = "model-<name>"
-   application offer tag   = "offer-<name>"
+   cloud tag               = "cloud-&lt;name&gt;"
+   application-offer tag   = "applicationoffer-<name>"
 
 If target_object is a group, the relation can only be:
 
@@ -170,11 +174,18 @@ If target_object is a group, the relation can only be:
 
    member
 
+If target_object is a role, the relation can only be:
+
+::
+
+   assignee
+
 If target_object is a controller, the relation can be one of:
 
 ::
 
-   loginer
+   audit_log_viewer (only relevent for the JIMM controller)
+   can_addmodel
    administrator
 
 If target_object is a model, the relation can be one of:
@@ -185,6 +196,13 @@ If target_object is a model, the relation can be one of:
    writer
    administrator
 
+If target_object is a cloud, the relation can be one of:
+
+::
+
+   administrator
+   can_addmodel
+
 If target_object is an application offer, the relation can be one of:
 
 ::
@@ -193,11 +211,17 @@ If target_object is an application offer, the relation can be one of:
    consumer
    administrator
 
-Additionally, if the object is a group, a userset can be applied by adding #member as follows. This will grant/revoke access to all users within TeamA:
+If the object is a group, a userset must be applied by adding #member as follows. This will grant/revoke access to all users within TeamA:
 
 ::
 
    group-TeamA#member administrator controller-MyController
+
+Similarly if the object is a role, a userset must be applied by adding #member as follows.
+
+::
+
+   role-Auditor#assignee audit_log_viewer controller-MyController
 
 jaas add-role
 =============
@@ -1569,17 +1593,21 @@ Permissions in JIMM consist of an object, a relation and a target object. These 
 
 The object and target object must be of the form <tag>-<objectname> or <tag>-<object-uuid> E.g. “user-Alice” or “controller-MyController”
 
+Certain reserved tags exist to denote specific resource types: - The user-everyone@external tag represents all users. - The controller-jimm tag represents the JIMM controller itself.
+
 -f Read from a file where filename is the location of a JSON encoded file of the form: [ { “object”:“user-mike”, “relation”:“member”, “target_object”:“group-yellow” }, { “object”:“user-alice”, “relation”:“member”, “target_object”:“group-yellow” } ]
 
-Certain constraints apply when creating/removing permissions, namely: Object may be one of:
+Certain constraints apply when creating/removing permissions, namely: Resources may be one of:
 
 ::
 
    user tag                = "user-<name>"
    group tag               = "group-<name>"
+   role tag                = "role-&lt;name&gt;"
    controller tag          = "controller-<name>"
    model tag               = "model-<name>"
-   application offer tag   = "offer-<name>"
+   cloud tag               = "cloud-&lt;name&gt;"
+   application-offer tag   = "applicationoffer-<name>"
 
 If target_object is a group, the relation can only be:
 
@@ -1587,11 +1615,18 @@ If target_object is a group, the relation can only be:
 
    member
 
+If target_object is a role, the relation can only be:
+
+::
+
+   assignee
+
 If target_object is a controller, the relation can be one of:
 
 ::
 
-   loginer
+   audit_log_viewer (only relevent for the JIMM controller)
+   can_addmodel
    administrator
 
 If target_object is a model, the relation can be one of:
@@ -1602,6 +1637,13 @@ If target_object is a model, the relation can be one of:
    writer
    administrator
 
+If target_object is a cloud, the relation can be one of:
+
+::
+
+   administrator
+   can_addmodel
+
 If target_object is an application offer, the relation can be one of:
 
 ::
@@ -1610,11 +1652,17 @@ If target_object is an application offer, the relation can be one of:
    consumer
    administrator
 
-Additionally, if the object is a group, a userset can be applied by adding #member as follows. This will grant/revoke access to all users within TeamA:
+If the object is a group, a userset must be applied by adding #member as follows. This will grant/revoke access to all users within TeamA:
 
 ::
 
    group-TeamA#member administrator controller-MyController
+
+Similarly if the object is a role, a userset must be applied by adding #member as follows.
+
+::
+
+   role-Auditor#assignee audit_log_viewer controller-MyController
 
 jaas remove-role
 ================
@@ -1940,3 +1988,51 @@ Details
 -------
 
 Updates a model known to JIMM that has been migrated externally to a different JAAS controller.
+
+jaas upgrade-to
+===============
+
+.. _summary-35:
+
+Summary
+-------
+
+Upgrades a controller to a specified version
+
+.. _usage-35:
+
+Usage
+-----
+
+``jaas upgrade-to [options] <version> <model-uuid>``
+
+.. _options-34:
+
+Options
+~~~~~~~
+
++--------------------------------+-----------------------+-------------------------------------------+
+| Flag                           | Default               | Usage                                     |
++================================+=======================+===========================================+
+| ``-B``, ``--no-browser-login`` | false                 | Do not use web browser for authentication |
++--------------------------------+-----------------------+-------------------------------------------+
+| ``--format``                   | yaml                  | Specify output format (json|yaml)         |
++--------------------------------+-----------------------+-------------------------------------------+
+| ``-o``, ``--output``           |                       | Specify an output file                    |
++--------------------------------+-----------------------+-------------------------------------------+
+
+.. _examples-34:
+
+Examples
+--------
+
+::
+
+   juju upgrade-to 3.6.11 2cb433a6-04eb-4ec4-9567-90426d20a004
+
+.. _details-35:
+
+Details
+-------
+
+Upgrades a controller to a specified version.
